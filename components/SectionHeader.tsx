@@ -3,6 +3,7 @@ interface SectionHeaderProps {
   headline: string;
   subtext?: string;
   centered?: boolean;
+  accentWarm?: boolean;
 }
 
 export default function SectionHeader({
@@ -10,6 +11,7 @@ export default function SectionHeader({
   headline,
   subtext,
   centered = false,
+  accentWarm = false,
 }: SectionHeaderProps) {
   return (
     <div style={{ textAlign: centered ? "center" : "left", marginBottom: "3rem" }}>
@@ -18,9 +20,9 @@ export default function SectionHeader({
           style={{
             fontFamily: "'DM Mono', monospace",
             fontSize: "0.65rem",
-            letterSpacing: "0.12em",
+            letterSpacing: "0.14em",
             textTransform: "uppercase",
-            color: "#d4a853",
+            color: accentWarm ? "#d4a853" : "#7db0ff",
             marginBottom: "0.75rem",
           }}
         >
@@ -31,7 +33,9 @@ export default function SectionHeader({
         style={{
           width: "48px",
           height: "2px",
-          background: "linear-gradient(90deg, #d4a853, transparent)",
+          background: accentWarm
+            ? "linear-gradient(90deg, #d4a853, transparent)"
+            : "linear-gradient(90deg, #4f8ef7, transparent)",
           marginBottom: "1rem",
           marginLeft: centered ? "auto" : 0,
           marginRight: centered ? "auto" : 0,
@@ -39,11 +43,12 @@ export default function SectionHeader({
       />
       <h2
         style={{
-          fontFamily: "'Cormorant Garamond', Georgia, serif",
+          fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
           fontSize: "clamp(1.75rem, 4vw, 2.6rem)",
-          fontWeight: 500,
-          color: "#f8f5f0",
-          lineHeight: 1.15,
+          fontWeight: 800,
+          color: "#f0f4fc",
+          lineHeight: 1.12,
+          letterSpacing: "-0.02em",
           marginBottom: subtext ? "1rem" : 0,
         }}
       >
@@ -52,7 +57,7 @@ export default function SectionHeader({
       {subtext && (
         <p
           style={{
-            fontFamily: "'DM Sans', sans-serif",
+            fontFamily: "'DM Sans', system-ui, sans-serif",
             fontSize: "1rem",
             color: "#94a3b8",
             lineHeight: 1.7,

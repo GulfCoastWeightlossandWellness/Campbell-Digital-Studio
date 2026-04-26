@@ -23,8 +23,8 @@ export default function Header() {
         left: 0,
         right: 0,
         zIndex: 100,
-        background: "rgba(11,17,32,0.95)",
-        backdropFilter: "blur(16px)",
+        background: "rgba(5,12,26,0.96)",
+        backdropFilter: "blur(20px)",
         borderBottom: "1px solid rgba(255,255,255,0.06)",
       }}
     >
@@ -61,8 +61,8 @@ export default function Header() {
               height: "clamp(34px, 4.5vw, 40px)",
               objectFit: "contain",
               borderRadius: "10px",
-              background: "rgba(255,255,255,0.02)",
-              border: "1px solid rgba(255,255,255,0.08)",
+              background: "rgba(79,142,247,0.06)",
+              border: "1px solid rgba(79,142,247,0.15)",
               padding: "2px",
               flexShrink: 0,
             }}
@@ -70,15 +70,25 @@ export default function Header() {
           <span
             className="brand-wordmark"
             style={{
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: "1.25rem",
-              fontWeight: 500,
-              color: "#f8f5f0",
-              letterSpacing: "0.01em",
+              fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
+              fontSize: "1.1rem",
+              fontWeight: 700,
+              color: "#f0f4fc",
+              letterSpacing: "-0.01em",
               lineHeight: 1,
             }}
           >
-            Campbell Digital <span style={{ color: "#d4a853" }}>Studio</span>
+            Campbell Digital{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg, #7db0ff, #4f8ef7)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Studio
+            </span>
           </span>
         </Link>
 
@@ -97,7 +107,7 @@ export default function Header() {
               key={link.href}
               href={link.href}
               style={{
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: "'DM Sans', system-ui, sans-serif",
                 fontSize: "0.875rem",
                 fontWeight: 400,
                 color: "#94a3b8",
@@ -105,7 +115,7 @@ export default function Header() {
                 letterSpacing: "0.01em",
                 transition: "color 0.2s",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#f8f5f0")}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#f0f4fc")}
               onMouseLeave={(e) => (e.currentTarget.style.color = "#94a3b8")}
             >
               {link.label}
@@ -115,16 +125,16 @@ export default function Header() {
           <Link
             href="/website-review"
             style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'DM Sans', system-ui, sans-serif",
               fontSize: "0.875rem",
               fontWeight: 400,
-              color: "#d4a853",
+              color: "#7db0ff",
               textDecoration: "none",
               letterSpacing: "0.01em",
               transition: "color 0.2s",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#e8c07a")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#d4a853")}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#a8c8ff")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "#7db0ff")}
           >
             Website Review
           </Link>
@@ -132,19 +142,26 @@ export default function Header() {
           <Link
             href="/contact"
             style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: "0.8rem",
-              fontWeight: 500,
-              color: "#0b1120",
-              background: "#d4a853",
-              padding: "0.45rem 1.1rem",
-              borderRadius: "6px",
+              fontFamily: "'DM Sans', system-ui, sans-serif",
+              fontSize: "0.82rem",
+              fontWeight: 600,
+              color: "#ffffff",
+              background: "linear-gradient(135deg, #4f8ef7 0%, #3b7de8 100%)",
+              padding: "0.45rem 1.15rem",
+              borderRadius: "7px",
               textDecoration: "none",
-              letterSpacing: "0.02em",
-              transition: "background 0.2s",
+              letterSpacing: "0.01em",
+              transition: "opacity 0.2s, box-shadow 0.2s",
+              boxShadow: "0 2px 10px rgba(79,142,247,0.25)",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "#e8c07a")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "#d4a853")}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.opacity = "0.88";
+              e.currentTarget.style.boxShadow = "0 4px 18px rgba(79,142,247,0.4)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.opacity = "1";
+              e.currentTarget.style.boxShadow = "0 2px 10px rgba(79,142,247,0.25)";
+            }}
           >
             Contact
           </Link>
@@ -160,7 +177,7 @@ export default function Header() {
             border: "none",
             cursor: "pointer",
             padding: "0.25rem",
-            color: "#f8f5f0",
+            color: "#f0f4fc",
           }}
           className="mobile-menu-btn"
         >
@@ -183,7 +200,7 @@ export default function Header() {
         <nav
           aria-label="Mobile navigation"
           style={{
-            background: "#111827",
+            background: "#0d1728",
             borderTop: "1px solid rgba(255,255,255,0.06)",
             padding: "1.5rem",
             display: "flex",
@@ -197,9 +214,9 @@ export default function Header() {
               href={link.href}
               onClick={() => setOpen(false)}
               style={{
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: "'DM Sans', system-ui, sans-serif",
                 fontSize: "1rem",
-                color: link.label === "Website Review" ? "#d4a853" : "#f8f5f0",
+                color: link.label === "Website Review" ? "#7db0ff" : "#f0f4fc",
                 textDecoration: "none",
               }}
             >
