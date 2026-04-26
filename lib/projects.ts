@@ -261,7 +261,7 @@ export const projects: Project[] = [
     title: "Collective Counseling",
     label: "Original Build",
     category: "Therapy Practice / Counseling / ADHD Testing",
-    coverImage: "/images/case-studies/covers/collective-1-home.png",
+    coverImage: "/images/case-studies/covers/collective-1-homepage-hero.png",
     shortSummary:
       "A professional therapy practice website for Collective Counseling in Daphne, Alabama — focused on counseling services and adult ADHD testing.",
     summary:
@@ -297,18 +297,20 @@ export const projects: Project[] = [
     businessValue:
       "Gives Collective Counseling a professional web presence that makes potential clients feel understood before they call — reducing no-shows and improving inquiry quality by filtering for the right fit from the start.",
     screenshotLabels: [
-      "Homepage — welcome and services overview",
-      "Counseling services page",
-      "ADHD testing page — cash-pay positioning",
-      "Insurance and payment information",
-      "Client inquiry and contact flow",
+      "Homepage hero — therapy and adult ADHD testing",
+      "Service split — therapy and ADHD evaluation",
+      "Meet the therapist — credibility and trust",
+      "Fees and insurance transparency",
+      "Contact and appointment request flow",
+      "Adult ADHD testing page detail",
     ],
     screenshotImages: [
-      "/images/case-studies/covers/collective-1-home.png",
-      "/images/case-studies/covers/collective-2-services.png",
-      "/images/case-studies/covers/collective-3-adhd.png",
-      "/images/case-studies/covers/collective-4-fees.png",
-      "/images/case-studies/covers/collective-5-contact.png",
+      "/images/case-studies/covers/collective-1-homepage-hero.png",
+      "/images/case-studies/covers/collective-2-services-split.png",
+      "/images/case-studies/covers/collective-3-about-therapist.png",
+      "/images/case-studies/covers/collective-4-fees-insurance.png",
+      "/images/case-studies/covers/collective-5-contact-form.png",
+      "/images/case-studies/covers/collective-6-adhd-page.png",
     ],
   },
 
