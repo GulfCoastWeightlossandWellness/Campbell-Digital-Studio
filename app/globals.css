@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme inline {
+  --color-navy: #0b1120;
+  --color-navy-card: #161f2e;
+  --color-amber: #d4a853;
+  --color-cream: #f8f5f0;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #0b1120;
+  color: #f8f5f0;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0b1120; }
+::-webkit-scrollbar-thumb { background: #d4a853; border-radius: 3px; }
+::selection { background: rgba(212,168,83,0.25); color: #f8f5f0; }
+:focus-visible { outline: 2px solid #d4a853; outline-offset: 3px; }
+
+.tag-pill {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.65rem;
+  border-radius: 99px;
+  border: 1px solid rgba(212,168,83,0.25);
+  color: #d4a853;
+  background: rgba(212,168,83,0.07);
+}
+
+.label-concept {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.7rem;
+  border-radius: 99px;
+  background: rgba(212,168,83,0.12);
+  color: #d4a853;
+  border: 1px solid rgba(212,168,83,0.3);
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.label-build {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.7rem;
+  border-radius: 99px;
+  background: rgba(99,190,150,0.1);
+  color: #6ec99a;
+  border: 1px solid rgba(99,190,150,0.25);
+}
+
+.label-product {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.7rem;
+  border-radius: 99px;
+  background: rgba(100,160,220,0.1);
+  color: #7ab4e0;
+  border: 1px solid rgba(100,160,220,0.25);
+}
+
+.card-hover {
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.card-hover:hover {
+  border-color: rgba(212,168,83,0.3) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+.nav-link-hover:hover { color: #f8f5f0 !important; }
+.amber-link-hover:hover { color: #e8c07a !important; }
+.service-card-hover:hover { border-color: rgba(212,168,83,0.25) !important; }
+
+/* ── Hero grid ─────────────────────────────────────────────────────────── */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-visual {
+  /* shown on desktop */
+}
+
+@media (max-width: 860px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 3rem !important;
+  }
+
+  /* On mobile, image goes below the copy */
+  .hero-visual {
+    order: 2;
+  }
+}
+
+/* ── Responsive grid utilities ─────────────────────────────────────────── */
+
+/* Two equal columns → single column on mobile */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Two equal columns, vertically centered */
+.grid-2-center {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* Main content + narrow sidebar (320px) */
+.grid-sidebar {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Main content + contact card (420px) */
+.grid-contact {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 5rem;
+  align-items: start;
+}
+
+/* Main content + about sidebar (380px) */
+.grid-about-hero {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 5rem;
+  align-items: start;
+}
+
+@media (max-width: 920px) {
+  .grid-2,
+  .grid-2-center,
+  .grid-sidebar,
+  .grid-contact,
+  .grid-about-hero {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+  }
+
+  /* Un-sticky the sidebar on mobile so it doesn't float awkwardly */
+  .grid-sidebar aside,
+  .grid-sidebar > aside {
+    position: static !important;
+  }
+
+  /* Reorder sidebar below main content on mobile */
+  .sidebar-last {
+    order: 2;
+  }
+}
+
+/* Section padding responsive */
+@media (max-width: 640px) {
+  .section-pad {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+/* Mobile menu helper */
+@media (max-width: 768px) {
+  .hide-mobile { display: none !important; }
+  .show-mobile { display: block !important; }
+  .desktop-nav { display: none !important; }
+  .mobile-menu-btn { display: block !important; }
+}
+
+@media (max-width: 430px) {
+  .brand-wordmark { display: none !important; }
+}
+
+/* Prev/next navigation on mobile */
+@media (max-width: 640px) {
+  .prev-next-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .label-concept {
+    font-size: 0.58rem;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.5rem;
+  }
+}
