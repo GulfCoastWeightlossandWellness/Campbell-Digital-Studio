@@ -9,7 +9,7 @@ export default function Footer() {
         <div>
           <div style={{ display: "inline-flex", alignItems: "center", gap: "0.65rem", marginBottom: "0.65rem" }}>
             <Image
-              src="/images/brand/campbell-digital-studio-icon.png"
+              src="/images/brand/campbell-digital-studio-icon-transparent.png"
               alt=""
               aria-hidden="true"
               width={40}
@@ -20,6 +20,9 @@ export default function Footer() {
                 height: "40px",
                 objectFit: "contain",
                 borderRadius: "10px",
+                background: "rgba(255,255,255,0.02)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                padding: "2px",
                 flexShrink: 0,
               }}
             />
