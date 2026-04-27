@@ -155,20 +155,20 @@ export const projects: Project[] = [
     filterTags: ["platform", "full-stack", "medical"],
     pricingTier: "agency",
     pricing: {
-      agency: "$120,000 – $200,000+",
-      highFreelance: "$45,000 – $85,000",
-      lowFreelance: "$8,000 – $15,000",
+      agency: "$650,000 – $1,200,000",
+      highFreelance: "$500,000 – $750,000",
+      lowFreelance: "$120,000 – $250,000",
     },
     pricingNotes: {
-      agency: "A B2B healthcare SaaS agency would scope this in phases over 8–12 months: product architecture, content operations, marketing site, dashboard build, demo system, commercial licensing logic, and QA. VC-funded digital health startups spend $400K–$800K building less.",
-      highFreelance: "Finding a senior full-stack developer who understands B2B SaaS, clinical content taxonomy, commercial licensing architecture, and healthcare buyer psychology in the same person is nearly impossible. This project required all four.",
-      lowFreelance: "A generalist could build a React app that displays a list of apps. The commercial bundle policy engine, the demo mode gating system, the curated collections architecture, and the 11-bundle licensing layer — none of that would exist.",
+      agency: "Replacement-cost benchmark from the valuation report: rebuilding the full platform in 2026 market conditions (dashboard wrapper + 144+ modules + packaging/QA) is estimated at roughly $650K-$1.2M.",
+      highFreelance: "Risk-adjusted current strategic value benchmark from the report: approximately $500K-$750K after accounting for commercialization risk, remaining polish work, and go-to-market traction.",
+      lowFreelance: "Represents a significantly reduced rebuild scope (partial library + lighter productization). This does not reflect full parity with the current IHE platform architecture.",
     },
     valueExplainer: "This is two fully distinct production systems: a B2B marketing site targeting healthcare buyers with dedicated landing pages, an ROI calculator, and a live demo flow — and a 145-app patient education platform with a commercial licensing engine, demo mode, and policy-governed catalog. Most patient education tools are outdated PDFs locked inside EHR systems. This is a deployable, no-PHI, licensable product that removes the compliance barrier that stops most clinic software deals.",
     shortSummary:
-      "A physician-built digital health platform with two distinct surfaces: a B2B marketing site with 10+ buyer-persona SEO landing pages, and a React SPA dashboard housing 145 interactive patient education apps organized into 11 commercial licensing bundles across 21 clinical categories.",
+      "A physician-designed digital health platform with two distinct surfaces: a B2B marketing site and a React SPA dashboard delivering 144+ patient-facing interactive modules across 21 clinical categories and 11 commercial licensing bundles.",
     summary:
-      "Interactive Health Education is a physician-designed patient education platform built as two distinct surfaces. The marketing site (interactivehealtheducation.com) is a buyer-facing multi-page site targeting clinics, health systems, and digital health companies with SEO landing pages, solution verticals, ROI calculator, demo flow, and tiered licensing. The dashboard (dashboard.interactivehealtheducation.com) is the product itself: a React SPA with 145 interactive patient education apps — each a fully functioning clinical education module — organized by 21 clinical categories, packaged into 11 commercial licensing bundles, and accessible via a smart demo mode for prospective buyers.",
+      "Interactive Health Education is a physician-designed patient education platform built as two distinct surfaces. The marketing site (interactivehealtheducation.com) is a buyer-facing multi-page site targeting clinics, health systems, and digital health companies with SEO landing pages, solution verticals, ROI calculator, demo flow, and tiered licensing. The dashboard (dashboard.interactivehealtheducation.com) is the product itself: a React SPA with 144+ interactive patient education apps designed for eighth-grade readability — each a self-contained clinical education module with calculators, symptom scorers, and visual aids — organized by 21 clinical categories, packaged into 11 commercial licensing bundles, and deployable via link, QR code, iframe, or kiosk with no PHI collection in standard use.",
     liveUrl: "https://dashboard.interactivehealtheducation.com/",
     marketingUrl: "https://interactivehealtheducation.com",
     dashboardUrl: "https://dashboard.interactivehealtheducation.com/",
@@ -194,8 +194,10 @@ export const projects: Project[] = [
       "Obfuscated admin dashboard for platform management",
       "Custom JS modules: analytics.js, forms.js, home.js, demo-config.js",
       "Full SEO: sitemap.xml, robots.txt, Open Graph, Twitter Cards, structured data",
-      "145 physician-authored interactive patient education apps — single source of truth in AppList.ts",
+      "144+ physician-authored interactive patient education apps — single source of truth in AppList.ts",
       "React SPA with Vite — lazy-loaded routes for all 145 apps via lazyAppPages.tsx",
+      "Module UX standards target patient comprehension at approximately an eighth-grade reading level",
+      "Flexible deployment options: link, QR code, iframe embedding, or kiosk mode",
       "21 canonical clinical categories (Cancer & Oncology, Cardiovascular, Mental Health & Behavior, Women's Health, Surgery, etc.)",
       "11 commercial licensing bundles auto-generated from source JSON (Cardiometabolic, Mental Health Core, Women's Reproductive, MSK Pain, Oncology, Respiratory, GI/Liver, Neuro/Derm, Kidney, Men's Urology, Prevention/Utilities)",
       "App type taxonomy: flagship, standard, calculator, micro, pathway, caregiver, procedure",
@@ -206,13 +208,15 @@ export const projects: Project[] = [
       "Clinical calculators: Wells DVT/PE, PERC, eGFR, Framingham 10-yr risk, ABI, IPSS, AUDIT-C, Child-Pugh/MELD",
     ],
     valuePoints: [
-      "145 fully functioning clinical apps — not a demo, not a mockup, a deployable product",
+      "144+ fully functioning clinical apps — not a demo, not a mockup, a deployable product",
       "Commercial bundle architecture allows clinics to license exactly the specialty modules they need",
       "Demo mode lets buyers experience the product before signing — reducing sales friction",
       "No PHI means zero compliance overhead for clinic partners",
       "Policy engines with unit tests — the catalog logic is tested, not just built",
       "Tiered pricing from $1K/year (small clinic) to enterprise custom",
       "Physician-authored content — the clinical accuracy is part of the product value",
+      "Replacement-cost valuation benchmark: approximately $650k-$1.2M to rebuild in 2026 market conditions",
+      "Current risk-adjusted strategic value benchmark: approximately $500k-$750k with upside from pilots and licensing traction",
     ],
     stack:
       "Marketing Site: HTML5, Tailwind CSS, Vanilla JS, Vercel | Dashboard: React, TypeScript, Vite, Vercel, React Router, Lazy Loading, Policy Engines, Unit Tests",
@@ -223,7 +227,7 @@ export const projects: Project[] = [
     seoConversion:
       "The marketing site is structured around B2B buyer-persona discovery: 10+ dedicated landing pages targeting specific clinical use cases. Each page targets a distinct buyer context and search intent. The ROI calculator gives buyers a quantified justification for the purchase. The live demo reduces the friction of a sales call by letting buyers self-explore.",
     businessValue:
-      "Interactive Health Education demonstrates product-level thinking that goes far beyond website work. The dashboard is a physician-designed library of 145 interactive patient education tools organized into 11 commercial licensing bundles, with a policy engine that governs access, a demo mode built for sales, and a no-PHI architecture that removes the compliance barrier. The platform supports four business models simultaneously: direct clinic licensing, health system enterprise contracts, digital health SaaS partnerships, and white-label distribution.",
+      "Interactive Health Education demonstrates product-level thinking that goes far beyond website work. The dashboard is a physician-designed library of 144+ interactive patient education tools organized into 11 commercial licensing bundles, with a policy engine that governs access, a demo mode built for sales, and a no-PHI architecture that removes the compliance barrier. The platform supports four business models simultaneously: direct clinic licensing, health system enterprise contracts, digital health SaaS partnerships, and white-label distribution. Based on 2026 healthcare app replacement-cost benchmarks, the platform is credibly positioned as a high-value digital health IP asset with seven-figure upside as pilots and licensing maturity increase.",
     screenshotLabels: [
       "Marketing site — homepage and value proposition",
       "Marketing site — use cases and buyer positioning",
