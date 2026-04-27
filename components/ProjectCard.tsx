@@ -224,6 +224,8 @@ export default function ProjectCard({ project }: { project: Project }) {
       <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}>
         <button
           onClick={() => setPricingOpen(!pricingOpen)}
+          aria-expanded={pricingOpen}
+          aria-controls={`pricing-panel-${project.slug}`}
           style={{
             width: "100%",
             background: pricingOpen ? "rgba(79,142,247,0.06)" : "transparent",
@@ -258,9 +260,11 @@ export default function ProjectCard({ project }: { project: Project }) {
 
         {/* Panel content */}
         <div
+          id={`pricing-panel-${project.slug}`}
           style={{
-            maxHeight: pricingOpen ? "600px" : "0",
-            overflow: "hidden",
+            maxHeight: pricingOpen ? "70vh" : "0",
+            overflowY: pricingOpen ? "auto" : "hidden",
+            overflowX: "hidden",
             transition: "max-height 0.35s ease",
           }}
         >
