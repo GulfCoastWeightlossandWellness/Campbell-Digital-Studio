@@ -19,9 +19,14 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+}
 
 body {
+  overflow-x: hidden;
   background-color: #050c1a;
   color: #f0f4fc;
   font-family: 'DM Sans', system-ui, sans-serif;

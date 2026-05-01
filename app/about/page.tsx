@@ -7,14 +7,14 @@ import CTASection from "@/components/CTASection";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Peyton Campbell is a family medicine resident physician who builds custom medical and local-business websites using modern AI-assisted development workflows.",
+    "Peyton Campbell is a family medicine resident physician who builds custom medical and local-business websites with a focus on clinical accuracy, local SEO, and conversion.",
 };
 
 const facts = [
   { label: "Role", value: "PGY-1 Family Medicine Resident" },
   { label: "Location", value: "Baldwin County, Alabama" },
   { label: "Focus", value: "Medical, wellness, therapy, and local service websites" },
-  { label: "Workflow", value: "Modern AI-assisted development with clean, production-ready output" },
+  { label: "Workflow", value: "Next.js, TypeScript, Tailwind, Vercel — clean, fast, production-ready builds" },
   { label: "Background", value: "Clinical training + business perspective + technical execution" },
 ];
 
@@ -29,7 +29,7 @@ const differentiators = [
   },
   {
     title: "Modern Development Workflow",
-    body: "I build with Next.js, React, TypeScript, and Tailwind — deployed on Vercel — using an AI-assisted workflow that allows fast, clean builds without the overhead of a traditional agency. No bloated site builders. No template packs. No extra layers of account management.",
+    body: "I build with Next.js, React, TypeScript, and Tailwind — deployed on Vercel. Fast, clean production builds without the overhead of a traditional agency. No bloated site builders. No template packs. No extra layers of account management.",
   },
   {
     title: "Practical Execution",

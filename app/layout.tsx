@@ -11,14 +11,14 @@ export const metadata: Metadata = {
     template: "%s | Campbell Digital Studio",
   },
   description:
-    "Custom websites, local SEO, and digital assets for medical practices and local businesses. Built by a physician in training using modern AI-assisted development workflows.",
+    "Custom websites, local SEO, and digital assets for medical practices and local businesses. Built by a physician in training with a focus on clinical accuracy, conversion, and local search.",
   metadataBase: new URL("https://peytoncampbell.studio"),
   openGraph: {
     type: "website",
     siteName: "Campbell Digital Studio",
     title: "Campbell Digital Studio | Medical & Local Business Websites",
     description:
-      "Custom websites, local SEO, and digital assets for medical practices and local businesses. Built by a physician in training using modern AI-assisted development workflows.",
+      "Custom websites, local SEO, and digital assets for medical practices and local businesses. Built by a physician in training with a focus on clinical accuracy, conversion, and local search.",
     images: [
       {
         url: "/images/og/campbell-digital-studio-og-image.png",

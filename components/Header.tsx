@@ -10,7 +10,6 @@ const caseStudies = [
   { label: "Interactive Health Education", slug: "interactive-health-education", category: "SaaS Platform · Digital Health" },
   { label: "Collective Counseling", slug: "collective-counseling", category: "Therapy Practice" },
   { label: "Blessed Barbershop", slug: "blessed-barbershop", category: "Local Business" },
-  { label: "Gulf Coast Weight & Wellness", slug: "gulf-coast-weight-wellness", category: "Medical Wellness" },
 ];
 
 export default function Header() {

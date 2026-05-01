@@ -109,7 +109,7 @@ export default function Footer() {
               { label: "Revitalize Aesthetics", href: "/work/revitalize" },
               { label: "ACExperts251", href: "/work/acexperts" },
               { label: "Collective Counseling", href: "/work/collective-counseling" },
-              { label: "Gulf Coast W&W", href: "/work/gulf-coast-weight-wellness" },
+              { label: "Blessed Barbershop", href: "/work/blessed-barbershop" },
               { label: "Interactive Health Ed.", href: "/work/interactive-health-education" },
             ].map((link) => (
               <Link

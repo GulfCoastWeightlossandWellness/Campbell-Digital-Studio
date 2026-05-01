@@ -10,7 +10,7 @@ import PricingPhilosophy from "@/components/PricingPhilosophy";
 export const metadata: Metadata = {
   title: "Campbell Digital Studio | Medical & Local Business Websites",
   description:
-    "Custom websites, local SEO, and digital assets for medical practices and local businesses. Built by a physician in training using modern AI-assisted development workflows.",
+    "Custom websites, local SEO, and digital assets for medical practices and local businesses. Built by a physician in training with a focus on clinical accuracy, conversion, and local search.",
 };
 
 const metrics = [
@@ -22,7 +22,7 @@ const metrics = [
 
 const trustPillars = [
   { label: "Physician-in-Training Perspective", desc: "I understand the clinical side, the patient journey, and the business model." },
-  { label: "AI-Assisted Development", desc: "Modern workflows that produce clean, fast, production-ready builds." },
+  { label: "Modern Development Stack", desc: "Next.js, TypeScript, Tailwind, and Vercel — clean, fast, production-ready builds." },
   { label: "Local SEO and Conversion Focus", desc: "Sites structured to be found, trusted, and acted on." },
   { label: "Medical and Local-Service Experience", desc: "Clinics, medspas, therapy practices, and local trades." },
 ];

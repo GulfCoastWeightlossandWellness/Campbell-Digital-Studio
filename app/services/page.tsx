@@ -130,7 +130,7 @@ const digitalAssetGroups = [
   {
     category: "Brand & Identity",
     items: [
-      "Logo concepts using AI-assisted workflows",
+      "Logo concepts and brand mark development",
       "Simple brand kits (colors, fonts, mark)",
       "Business card design",
       "QR code cards for reviews, booking, menus, or contact",
