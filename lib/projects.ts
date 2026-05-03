@@ -63,31 +63,126 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  // ── Air Solutions Heating & Cooling ───────────────────────────────────────
+  {
+    slug: "air-solutions",
+    title: "Air Solutions Heating & Cooling",
+    label: "Original Build",
+    category: "HVAC / Local Service Business · 24-Month Engagement",
+    isFlagship: true,
+    coverImage: "/images/case-studies/covers/acexperts-1-hero.png", // TODO: swap for Air Solutions cover when image exists
+    filterTags: ["full-stack", "local"],
+    pricingTier: "agency",
+    pricing: {
+      agency: "$480,000 – $615,000",
+      highFreelance: "$314,000",
+      lowFreelance: "$8,000 – $20,000",
+    },
+    pricingNotes: {
+      agency:
+        "A national HVAC-vertical agency — Scorpion, Blue Corona, WebFX — would scope this build at $480K–$615K for the identical 24-month engagement. That figure was independently verified by component-by-component audit against the live codebase: 249 launch pages, 441-post content library, native scheduling system, programmatic SEO matrix, 9-type Schema.org architecture, three custom interactive tools, and 24 months of operating retainer.",
+      highFreelance:
+        "Senior independent developer market rate — verified against the same component audit — comes to $314,000 for the full 24-month engagement. Building this scope requires senior Next.js development, programmatic SEO architecture, a custom data pipeline for automated content scheduling, TypeScript across hundreds of unique page types, and the domain knowledge to write what an HVAC customer in Baldwin County actually searches for.",
+      lowFreelance:
+        "A generalist freelancer would deliver a 30–40 page WordPress theme with a contact form, basic local SEO, and one or two service pages. No programmatic SEO matrix. No content engine. No interactive tools. No NWS hurricane alert integration. The outcome looks similar at first glance and performs in an entirely different category in search.",
+    },
+    valueExplainer:
+      "The methodology at the core of this platform is programmatic SEO — the same architectural pattern Airbnb uses for “apartments in [every city on earth],” Zapier uses for “[App A] integration with [App B],” and Tripadvisor uses for “[restaurant type] in [every neighborhood].” Applied to a single Baldwin County HVAC contractor, it produces 135 city × service intersection pages, a 441-post content engine that publishes automatically through May 2028, and a category of digital asset no competitor in the market currently occupies. By month 18 the moat is structural — replication cost is $285K and 9–12 months of full-time work.",
+    shortSummary:
+      "A 24-Month Market Dominance Program: 249 launch pages growing to 650+ URLs through May 2028. Programmatic SEO across 15 cities × 9 services, a native automated content engine publishing 4 posts a week, three custom interactive tools, and a 12-section GBP operating manual.",
+    summary:
+      "Air Solutions Heating & Cooling commissioned a build replacing a 36-page WordPress brochure with a 24-month engagement built on programmatic SEO, native automated publishing, and a 9-type Schema.org architecture. The platform launched with 249 indexed pages — 11.8× the old site — and is on a content schedule that will reach 650+ URLs and 3,280 keyword targets by May 2028. The same architectural pattern Netflix and Vercel use for production applications, applied to a local HVAC contractor in Baldwin County, Alabama.",
+    liveUrl: "https://airsolutionspros.com",
+    tags: ["HVAC", "Programmatic SEO", "Baldwin County", "Next.js", "24-Month Retainer", "Content Engine"],
+    features: [
+      "249 indexed pages at launch — 11.8× the old WordPress site",
+      "650+ URLs by May 2028 with automated content publishing",
+      "Programmatic SEO matrix: 15 Baldwin County cities × 9 HVAC services = 135 intersection pages",
+      "9 service hub pages — AC repair, install, heating, heat pump, mini-split, IAQ, commercial, emergency, maintenance",
+      "15 city hub pages — Daphne, Fairhope, Foley, Gulf Shores, Orange Beach, and the rest of the county",
+      "3 commercial vertical pages — restaurants, vacation rentals, property managers",
+      "4 seasonal landing pages — spring, summer, fall, winter campaigns",
+      "2 cost-guide pages targeting purchase-decision keyword queries",
+      "441-post content library — 50 live at launch, 391 scheduled and queued through May 2028",
+      "Native date-gated publishing engine — Vercel cron, no plugin, no CMS subscription",
+      "Tuesday and Thursday 6 AM CT publishing schedule, fully automated",
+      "Live NWS hurricane alert API integration — non-dismissable banner across every page during severe alerts",
+      "4-tier seasonal banner system: manual override → NWS alert → scheduled banner → nothing",
+      "3D AC Explorer — 1,281 lines of custom Three.js, interactive component visualization",
+      "HVAC Diagnostic Quiz — 617 lines of typed TypeScript, decision-tree symptom triage",
+      "Repair vs. Replace ROI Calculator — live financial modeling tool",
+      "9-type Schema.org architecture — HVACBusiness subtype, OfferCatalog, per-city postalCode arrays",
+      "Single source of truth data architecture — one edit propagates across all 249 pages, schema, and metadata",
+      "6 branded Open Graph image generators rendering social cards at request time",
+      "Smart form pipeline — Zod validation, Cloudflare Turnstile, Resend, 5-type intent routing",
+      "Cool Club maintenance program page with member benefits",
+      "Financing partner program page",
+      "2,961-line keyword-coverage map maintained inside the project at /docs/seo/keyword-map.md",
+      "12-section Google Business Profile operating manual delivered at launch",
+      "24-month retainer: monthly Search Console, quarterly Local Falcon, bi-annual keyword optimization",
+    ],
+    valuePoints: [
+      "Replacement-cost valuation: $314K senior independent / $480K–$615K national agency",
+      "From 100 keyword targets on 36 URLs to 3,280 keyword targets on 650+ URLs by month 24",
+      "Conservative GBP Prominence lift estimate: +18–22%. Realistic: +25–30%",
+      "Live ranking moves from 0% Share of Local Voice in south Baldwin to top-3 by month 12 (projected)",
+      "By month 18 the content moat is structural — competitor replication cost: $285K and 9–12 months",
+      "Pays back in under 6 months at one extra AC install per month at $8,000",
+    ],
+    stack:
+      "Next.js, TypeScript, Tailwind CSS, Vercel, App Router, Three.js / WebGL, Vercel Cron, Cloudflare Turnstile, Resend, Zod, NWS Public Alert API, 9-Type Schema.org, Custom Date-Gated Publishing Engine",
+    challenge:
+      "The previous airsolutionspros.com site was a 36-page WordPress brochure being maintained, not built to compete. Despite Air Solutions holding the strongest review velocity in Baldwin County, the business showed 0% Share of Local Voice in south Baldwin markets — Foley, Gulf Shores, Orange Beach — where its trucks operate daily. Distance to the home address is fixed; relevance is improvable. The platform’s job was to close the relevance gap with 135 dedicated city × service pages, then sustain that advantage with a content engine that publishes through May 2028 without manual intervention.",
+    whatIBuilt:
+      "A 249-page Next.js application with a 9-type Schema.org architecture, a 135-page programmatic SEO matrix covering every Baldwin County city × every HVAC service, a 441-post content library with 50 posts live at launch and 391 scheduled through May 2028, a native date-gated publishing engine running on Vercel cron with no plugin or CMS dependency, a 4-tier seasonal banner system including a live National Weather Service hurricane alert integration, three custom interactive tools (a 1,281-line Three.js 3D AC Explorer, a 617-line typed diagnostic quiz, a Repair vs. Replace ROI calculator), a smart form pipeline with Zod validation and Cloudflare Turnstile, a single source of truth data architecture, and a 12-section GBP operating manual delivered at launch. The 2,961-line keyword-coverage map lives inside the project codebase and is updated every six months as part of the retainer.",
+    seoConversion:
+      "Built around the programmatic-SEO methodology used at the enterprise level by Airbnb, Zapier, Tripadvisor, and Zillow — applied to a single county. Every city × service combination is a standalone indexed page with unique local content, proper metadata, schema markup, and internal links. The 9-type Schema.org architecture includes the HVACBusiness subtype, OfferCatalog with all 9 services listed, and per-city postalCode arrays across all 15 Baldwin County cities — enterprise-level structured data implementation at a local-contractor scale. The retainer includes monthly Google Search Console monitoring, quarterly Local Falcon grid reports across the service area, and bi-annual keyword-optimization audits comparing live Search Console performance against the project’s keyword map.",
+    businessValue:
+      "Gives Air Solutions the strongest technical local-search platform in Baldwin County HVAC — 11.8× the old site’s indexed surface area at launch, growing to 32.8× by month 24. The GBP Prominence lift from 135 city-specific Relevance signals projects at +25–30%. Edge markets (Bay Minette, Loxley, Silverhill, Fort Morgan, Magnolia Springs, Lillian) where no competitor has even one dedicated page now have 9 service pages each. The content engine compounds: every post that indexes adds an authority signal Google reads as active business, on a publishing cadence (4 posts a week) that competitors publishing 0–2 posts a month cannot match. By month 18 the moat is structural and the cost to replicate is $285K and 9–12 months of senior development time.",
+    screenshotLabels: [
+      "Homepage — hero, services overview, NWS alert banner",
+      "Service hub — HVAC services, with city-level intersection links",
+      "City hub — Daphne with all 9 service pages",
+      "City × service intersection — AC repair Fairhope",
+      "3D AC Explorer — interactive Three.js component model",
+      "Diagnostic quiz — typed decision-tree symptom triage",
+      "Cost guide — purchase-decision keyword targeting",
+      "Seasonal landing — hurricane prep / vacation rental campaign",
+    ],
+    screenshotImages: [
+      "/images/case-studies/covers/acexperts-1-hero.png", // TODO: swap for Air Solutions screens
+    ],
+  },
+
   // ── Revitalize ────────────────────────────────────────────────────────────
   {
     slug: "revitalize",
     title: "Revitalize Aesthetics & Wellness",
-    label: "Strategic Rebuild Concept",
-    category: "Medical Wellness / Medspa / Multi-Location Clinic",
+    label: "Original Build",
+    category: "Medical Wellness / Medspa / Multi-Location · 24-Month Engagement",
     isFlagship: true,
     coverImage: "/images/case-studies/covers/revitalize-1-hero.png",
     filterTags: ["full-stack", "medical"],
     pricingTier: "agency",
     pricing: {
-      agency: "$60,000 – $95,000",
-      highFreelance: "$20,000 – $40,000",
+      agency: "$140,000 – $220,000",
+      highFreelance: "$104,000 – $180,000",
       lowFreelance: "$4,000 – $8,500",
     },
     pricingNotes: {
-      agency: "A medical marketing agency scopes this as a 5–6 month engagement — strategist, medical copywriter, designer, developer, and QA. Eighteen service pages with clinical copy alone is a separate content sprint.",
-      highFreelance: "Medical marketing specialists who understand hormone therapy, aesthetics, and wellness service language are a small pool. Most freelancers would underprice this and realize three months in that they don't know how to write a service page for PRP or bioidentical hormones.",
-      lowFreelance: "A generalist delivers 4–5 static pages. No service hub, no JSON-LD medical schema, no city-specific landing pages, no RSS feed, no JaneApp integration. The site looks okay and ranks nowhere.",
+      agency:
+        "A medical marketing agency scopes the 24-month engagement at $140K–$220K — clinical strategist, medical copywriter, designer, developer, QA, plus the 200+ scheduled blog posts published twice weekly across the two-year content schedule. Eighteen service pages with clinical copy alone is a separate content sprint at agency rates.",
+      highFreelance:
+        "Senior independent replacement-cost valuation: $104K–$180K for the platform plus 24 months of content engine and operating retainer. Medical marketing specialists who can write a service page for PRP, bioidentical hormones, GLP-1, and hormone replacement at clinical accuracy are a small pool — and almost none of them ship the surrounding architecture.",
+      lowFreelance:
+        "A generalist delivers 4–5 static pages. No service hub, no JSON-LD medical schema, no city-specific landing pages, no RSS feed, no JaneApp integration, no content engine. The site looks okay and ranks nowhere.",
     },
-    valueExplainer: "Patients choosing a medspa or hormone clinic are making a trust-sensitive, often expensive decision. A site that reads like it was written by someone who doesn't understand the medicine loses that patient before the first phone call. Eighteen individual service pages, city-specific SEO landing pages, a searchable Learning Hub, and a JaneApp booking flow built per location — this is the infrastructure a growing two-location clinic needs to compete online.",
+    valueExplainer:
+      "Patients choosing a medspa or hormone clinic are making a trust-sensitive, often expensive decision. A site that reads like it was written by someone who doesn’t understand the medicine loses that patient before the first phone call. Eighteen individual service pages, city-specific SEO landing pages, a searchable Learning Hub, JaneApp booking per location, plus a 24-month content engine publishing two clinical articles a week — this is the infrastructure a growing two-location clinic needs to compete online.",
     shortSummary:
-      "A proactive strategic rebuild turning a template medspa site into a 50+ route clinical marketing platform with 18 service pages, two-location SEO, a searchable Learning Hub, interactive tools, and JaneApp booking flows.",
+      "A 24-month engagement: a 50+ route clinical marketing platform with 18 service pages, two-location SEO, a searchable Learning Hub, JaneApp booking flows, and a content engine publishing two physician-written clinical articles every week through 2028.",
     summary:
-      "Revitalize was rebuilt as a strategic concept to demonstrate how an existing medical wellness website could become a more complete patient conversion and education platform — replacing a template-style brochure site with a launch-ready clinical marketing system spanning 50+ pages across two active locations.",
+      "Revitalize Aesthetics & Wellness commissioned a build replacing a template medspa site with a 24-month clinical marketing engagement — a 50+ route platform spanning 18 service pages across two active locations (Columbus GA and Warner Robins GA), city-specific SEO landing pages, an interactive hormone health assessment, a searchable Learning Hub, and a content engine publishing two clinical articles every week. The platform is structured for a growing multi-location practice and will reach 200+ published Learning Hub articles by the end of the engagement.",
     liveUrl: "https://revitalize-medical-wellness-clinic-nine.vercel.app",
     tags: ["Medical Wellness", "Medspa", "Local SEO", "Next.js", "Multi-Location"],
     features: [

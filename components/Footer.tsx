@@ -1,175 +1,170 @@
 import Link from "next/link";
-import Image from "next/image";
+import StudioMark from "@/components/marks/StudioMark";
+
+const indexLinks: { label: string; href: string }[] = [
+  { label: "Work", href: "/work" },
+  { label: "Method", href: "/method" },
+  { label: "Studio", href: "/studio" },
+  { label: "Practice", href: "/practice" },
+  { label: "Notes", href: "/notes" },
+  { label: "Review", href: "/review" },
+  { label: "Inquire", href: "/inquire" },
+];
 
 export default function Footer() {
   const year = new Date().getUTCFullYear();
+
   return (
     <footer
-      style={{
-        background: "#030810",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-        padding: "3.5rem 1.5rem 2rem",
-      }}
+      className="cover-surface"
+      style={{ marginTop: "clamp(96px, 12vw, 160px)" }}
     >
       <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-          gap: "2.5rem",
-          marginBottom: "2.5rem",
-        }}
+        className="section-wrap"
+        style={{ paddingTop: "72px", paddingBottom: "48px" }}
       >
-        {/* Brand column */}
-        <div>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: "0.65rem", marginBottom: "0.75rem" }}>
-            <Image
-              src="/images/brand/campbell-digital-studio-icon-transparent.png"
-              alt=""
-              aria-hidden="true"
-              width={40}
-              height={40}
-              sizes="40px"
-              style={{
-                width: "40px",
-                height: "40px",
-                objectFit: "contain",
-                borderRadius: "10px",
-                background: "rgba(79,142,247,0.06)",
-                border: "1px solid rgba(79,142,247,0.15)",
-                padding: "2px",
-                flexShrink: 0,
-              }}
-            />
+        <div
+          className="footer-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "48px",
+            alignItems: "start",
+          }}
+        >
+          {/* Studio */}
+          <div>
+            <div className="mono-caption" style={{ color: "var(--gold-400)", marginBottom: "16px" }}>
+              § Studio
+            </div>
+            <div style={{ marginBottom: "16px" }}>
+              <StudioMark onDark size="sm" />
+            </div>
             <p
               style={{
-                fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-                fontSize: "1rem",
-                fontWeight: 700,
-                color: "#f0f4fc",
-                margin: 0,
-                letterSpacing: "-0.01em",
+                fontFamily: "var(--font-manrope), sans-serif",
+                fontSize: "13px",
+                lineHeight: 1.6,
+                color: "rgba(255,255,255,0.78)",
               }}
             >
-              Campbell Digital{" "}
-              <span
-                style={{
-                  background: "linear-gradient(135deg, #7db0ff, #4f8ef7)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Studio
-              </span>
+              Daphne, Alabama
+              <br />
+              Family Medicine, PGY-1
             </p>
           </div>
-          <p
-            style={{
-              fontFamily: "'DM Sans', system-ui, sans-serif",
-              fontSize: "0.82rem",
-              color: "#475569",
-              lineHeight: 1.65,
-              maxWidth: "240px",
-            }}
-          >
-            Custom medical and local-business websites built by a physician in training.
-          </p>
-        </div>
 
-        {/* Navigation */}
-        <div>
-          <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.63rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#4f8ef7", marginBottom: "1rem" }}>Navigation</p>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-            {[
-              { label: "Work", href: "/work" },
-              { label: "Services", href: "/services" },
-              { label: "About", href: "/about" },
-              { label: "Website Review", href: "/website-review" },
-              { label: "Contact", href: "/contact" },
-            ].map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                style={{ fontFamily: "'DM Sans', system-ui, sans-serif", fontSize: "0.875rem", color: "#475569", textDecoration: "none" }}
-                className="nav-link-hover"
-              >
-                {link.label}
-              </Link>
-            ))}
+          {/* Index */}
+          <div>
+            <div className="mono-caption" style={{ color: "var(--gold-400)", marginBottom: "16px" }}>
+              § Index
+            </div>
+            <ul
+              style={{
+                listStyle: "none",
+                padding: 0,
+                margin: 0,
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+              }}
+            >
+              {indexLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="editorial-link on-dark"
+                    style={{
+                      fontFamily: "var(--font-manrope), sans-serif",
+                      fontSize: "14px",
+                      color: "rgba(255,255,255,0.85)",
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Currently */}
+          <div>
+            <div className="mono-caption" style={{ color: "var(--gold-400)", marginBottom: "16px" }}>
+              § Currently
+            </div>
+            <p
+              style={{
+                fontFamily: "var(--font-fraunces), Georgia, serif",
+                fontSize: "16px",
+                fontStyle: "italic",
+                fontWeight: 300,
+                lineHeight: 1.55,
+                color: "rgba(255,255,255,0.92)",
+                fontVariationSettings: '"opsz" 24',
+              }}
+            >
+              Building Air Solutions Heating &amp; Cooling — a 600-page Baldwin County HVAC platform.
+            </p>
+            <Link
+              href="/inquire"
+              className="editorial-link on-dark"
+              style={{
+                fontFamily: "var(--font-jetbrains), monospace",
+                fontSize: "11px",
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "var(--gold-400)",
+                marginTop: "16px",
+                display: "inline-block",
+              }}
+            >
+              Inquire about a project →
+            </Link>
           </div>
         </div>
 
-        {/* Featured work */}
-        <div>
-          <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.63rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#4f8ef7", marginBottom: "1rem" }}>Featured Work</p>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-            {[
-              { label: "Revitalize Aesthetics", href: "/work/revitalize" },
-              { label: "ACExperts251", href: "/work/acexperts" },
-              { label: "Collective Counseling", href: "/work/collective-counseling" },
-              { label: "Blessed Barbershop", href: "/work/blessed-barbershop" },
-              { label: "Interactive Health Ed.", href: "/work/interactive-health-education" },
-            ].map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                style={{ fontFamily: "'DM Sans', system-ui, sans-serif", fontSize: "0.875rem", color: "#475569", textDecoration: "none" }}
-                className="nav-link-hover"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* Get started */}
-        <div>
-          <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.63rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#4f8ef7", marginBottom: "1rem" }}>Get Started</p>
-          <p style={{ fontFamily: "'DM Sans', system-ui, sans-serif", fontSize: "0.82rem", color: "#475569", marginBottom: "1rem", lineHeight: 1.65 }}>
-            Have a website that feels outdated or underbuilt? Send me the link.
-          </p>
-          <Link
-            href="/website-review"
+        <div
+          style={{
+            borderTop: "1px solid rgba(232,196,107,0.2)",
+            marginTop: "56px",
+            paddingTop: "20px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "baseline",
+            gap: "16px",
+            flexWrap: "wrap",
+          }}
+        >
+          <span
             style={{
-              display: "inline-block",
-              fontFamily: "'DM Sans', system-ui, sans-serif",
-              fontSize: "0.8rem",
-              fontWeight: 600,
-              color: "#ffffff",
-              background: "linear-gradient(135deg, #4f8ef7, #3b7de8)",
-              padding: "0.5rem 1.15rem",
-              borderRadius: "7px",
-              textDecoration: "none",
-              boxShadow: "0 2px 10px rgba(79,142,247,0.2)",
+              fontFamily: "var(--font-jetbrains), monospace",
+              fontSize: "10px",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.5)",
             }}
           >
-            Request Website Review
-          </Link>
+            © {year} Campbell Digital Studio · Daphne, Alabama
+          </span>
+          <span
+            style={{
+              fontFamily: "var(--font-jetbrains), monospace",
+              fontSize: "10px",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.5)",
+            }}
+          >
+            Made by hand, deliberately small.
+          </span>
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          paddingTop: "2rem",
-          borderTop: "1px solid rgba(255,255,255,0.05)",
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-          gap: "0.75rem",
-        }}
-      >
-        <p style={{ fontFamily: "'DM Sans', system-ui, sans-serif", fontSize: "0.75rem", color: "#1e293b" }}>
-          &copy; {year} Campbell Digital Studio. All rights reserved.
-        </p>
-        <p style={{ fontFamily: "'DM Sans', system-ui, sans-serif", fontSize: "0.75rem", color: "#1e293b" }}>
-          Baldwin County, Alabama
-        </p>
-      </div>
+      <style>{`
+        @media (max-width: 720px) {
+          .footer-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+        }
+      `}</style>
     </footer>
   );
 }

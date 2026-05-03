@@ -1,9 +1,27 @@
 import type { Metadata } from "next";
+import { Fraunces, Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ScrollProgress from "@/components/ScrollProgress";
-import BackToTop from "@/components/BackToTop";
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  display: "swap",
+  axes: ["opsz"],
+  variable: "--font-fraunces",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-manrope",
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-jetbrains",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -11,20 +29,20 @@ export const metadata: Metadata = {
     template: "%s | Campbell Digital Studio",
   },
   description:
-    "Custom websites, local SEO, and digital assets for medical practices and local businesses. Built by a physician in training with a focus on clinical accuracy, conversion, and local search.",
+    "A small studio building modern websites and local-search infrastructure for clinics, wellness practices, and the kind of local businesses that still answer their own phone.",
   metadataBase: new URL("https://peytoncampbell.studio"),
   openGraph: {
     type: "website",
     siteName: "Campbell Digital Studio",
     title: "Campbell Digital Studio | Medical & Local Business Websites",
     description:
-      "Custom websites, local SEO, and digital assets for medical practices and local businesses. Built by a physician in training with a focus on clinical accuracy, conversion, and local search.",
+      "A small studio building modern websites and local-search infrastructure for clinics, wellness practices, and the kind of local businesses that still answer their own phone.",
     images: [
       {
         url: "/images/og/campbell-digital-studio-og-image.png",
         width: 1024,
         height: 533,
-        alt: "Campbell Digital Studio — Custom Websites and Local SEO for Medical and Local Businesses",
+        alt: "Campbell Digital Studio — editorial websites and local-search infrastructure",
       },
     ],
   },
@@ -39,13 +57,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${fraunces.variable} ${manrope.variable} ${jetbrains.variable}`}
+    >
       <body>
-        <ScrollProgress />
         <Header />
         <main>{children}</main>
         <Footer />
-        <BackToTop />
       </body>
     </html>
   );

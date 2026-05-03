@@ -1,596 +1,427 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { projects } from "@/lib/projects";
-import ProjectCard from "@/components/ProjectCard";
-import CTASection from "@/components/CTASection";
-import SectionHeader from "@/components/SectionHeader";
-import PricingPhilosophy from "@/components/PricingPhilosophy";
+import SectionTag from "@/components/editorial/SectionTag";
+import EditorialH2 from "@/components/editorial/EditorialH2";
+import Eyebrow from "@/components/editorial/Eyebrow";
+import IndexRow from "@/components/editorial/IndexRow";
 
 export const metadata: Metadata = {
-  title: "Campbell Digital Studio | Medical & Local Business Websites",
+  title: "Campbell Digital Studio | Editorial Websites for Clinics and Local Businesses",
   description:
-    "Custom websites, local SEO, and digital assets for medical practices and local businesses. Built by a physician in training with a focus on clinical accuracy, conversion, and local search.",
+    "A small studio building modern websites and local-search infrastructure for clinics, wellness practices, and the kind of local businesses that still answer their own phone.",
 };
 
-const metrics = [
-  { value: "7", label: "Production Sites" },
-  { value: "145+", label: "Medical Apps Built" },
-  { value: "50+", label: "Service Pages" },
-  { value: "2", label: "SaaS Platforms" },
+const projectYears: Record<string, string> = {
+  "air-solutions": "2026",
+  revitalize: "2026",
+  "interactive-health-education": "2025",
+  acexperts: "2025",
+  "collective-counseling": "2024",
+  "blessed-barbershop": "2024",
+};
+
+const projectMeta: Record<string, string> = {
+  "air-solutions": "HVAC · 249 routes · 4 posts/wk · 24-mo retainer",
+  revitalize: "Medical Wellness · 50+ routes · 2 posts/wk · 24-mo retainer",
+  "interactive-health-education": "Digital Health Platform · 145 apps",
+  acexperts: "HVAC · 30+ routes · 3D tool",
+  "collective-counseling": "Therapy · ADHD Testing · 4 routes",
+  "blessed-barbershop": "Barbershop · 1 route · Mobile-first",
+};
+
+const principles = [
+  {
+    num: "01",
+    title: (
+      <>
+        Architecture <em>before</em> aesthetics.
+      </>
+    ),
+    body:
+      "Every project starts with a sitemap, a service hierarchy, and the local-search structure. The visual design is the last layer, not the first. Most “redesigns” fail because they were aesthetic exercises on a broken foundation.",
+  },
+  {
+    num: "02",
+    title: (
+      <>
+        Copy is <em>the</em> deliverable.
+      </>
+    ),
+    body:
+      "A clinic's homepage is a piece of writing. The job is to make a hesitant person feel safe enough to call. That's a writing problem disguised as a design problem, and most agencies solve only half of it.",
+  },
+  {
+    num: "03",
+    title: (
+      <>
+        A matrix, <em>not a brochure.</em>
+      </>
+    ),
+    body:
+      "Most local-business sites have 15–40 pages. The recent ones run 250 pages on launch day and grow to 650 inside 24 months. The job isn’t to ship a website — it’s to give the business a city × service matrix dense enough that no competitor can match the surface area. Architecture is the strategy.",
+  },
 ];
 
-const trustPillars = [
-  { label: "Physician-in-Training Perspective", desc: "I understand the clinical side, the patient journey, and the business model." },
-  { label: "Modern Development Stack", desc: "Next.js, TypeScript, Tailwind, and Vercel — clean, fast, production-ready builds." },
-  { label: "Local SEO and Conversion Focus", desc: "Sites structured to be found, trusted, and acted on." },
-  { label: "Medical and Local-Service Experience", desc: "Clinics, medspas, therapy practices, and local trades." },
+const studioMakes = [
+  {
+    n: "01",
+    title: "Medical practice websites",
+    body:
+      "Primary care, DPC, urgent care, and specialty clinics that need patient-facing sites built around the actual patient journey.",
+  },
+  {
+    n: "02",
+    title: "Therapy and counseling websites",
+    body:
+      "Practice sites that balance professionalism and approachability for clients navigating sensitive decisions.",
+  },
+  {
+    n: "03",
+    title: "Medspa and wellness clinics",
+    body:
+      "Conversion-focused sites for aesthetic, hormone, and wellness practices with complex service menus.",
+  },
+  {
+    n: "04",
+    title: "Local service businesses",
+    body:
+      "HVAC, trades, and home services where stronger local SEO and clearer service pages move the needle.",
+  },
+  {
+    n: "05",
+    title: "Patient-education tools",
+    body:
+      "Assessments, calculators, treatment finders, and education modules built for clinical settings.",
+  },
+  {
+    n: "06",
+    title: "Rebuilds and SEO migrations",
+    body:
+      "Turning outdated or template-based sites into modern, structured platforms without losing existing rankings.",
+  },
 ];
 
-const problemItems = [
-  "Template-style designs that look like every other clinic in town",
-  "No service page structure — everything buried on one long homepage",
-  "Missing local SEO: no city pages, no schema, no Google Business alignment",
-  "Weak or absent booking and contact flows",
-  "No trust signals for new patients navigating a sensitive decision",
-  "Copy written for a brochure, not for a patient who is comparing options",
-  "Not mobile-friendly despite most patients searching from a phone",
-  "No content strategy — nothing building authority between visits",
-];
-
-const buildCategories = [
-  { title: "Medical Practice Websites", desc: "Primary care, DPC, urgent care, and specialty practices that need modern patient-facing sites." },
-  { title: "Therapy and Counseling Websites", desc: "Practice sites that balance professionalism and approachability for clients navigating sensitive decisions." },
-  { title: "Medspa and Wellness Clinic Websites", desc: "Conversion-focused sites for aesthetic, hormone, and wellness practices with complex service menus." },
-  { title: "Local Service Business Websites", desc: "HVAC, trades, and home services that need stronger local SEO and clearer service pages." },
-  { title: "Patient Education and Interactive Tools", desc: "Assessments, calculators, treatment finders, and education modules for clinical settings." },
-  { title: "Website Rebuilds and SEO Migrations", desc: "Turning outdated or template-based sites into modern, structured, launch-ready platforms." },
-];
-
-const approachSteps = [
-  { step: "01", title: "Audit the Current Site and Business", desc: "Review the existing site, service mix, local search opportunity, and patient or customer journey from discovery to booking." },
-  { step: "02", title: "Clarify Services and Conversion Goals", desc: "Define what the business needs the site to accomplish — inquiries, bookings, direction traffic, education, or a combination." },
-  { step: "03", title: "Build Clean Local SEO Architecture", desc: "Structure service pages, city pages, metadata, schema markup, internal links, and Google Business alignment." },
-  { step: "04", title: "Write Service-Focused Copy", desc: "Clear, direct language that explains what the business does, who it serves, and why a patient or customer should choose them." },
-  { step: "05", title: "Add CTAs, Booking Flows, and Trust Signals", desc: "Booking links, review integrations, certifications, and contact flows that reduce friction from first visit to first appointment." },
-  { step: "06", title: "QA Mobile, Links, Metadata, and Launch Readiness", desc: "Mobile testing, broken link audit, metadata review, sitemap, robots, analytics setup, and pre-launch checklist." },
+const currently = [
+  {
+    label: "Now",
+    body:
+      "Operating two 24-month retainers: Air Solutions (4 posts/week) and Revitalize Aesthetics & Wellness (2 posts/week).",
+  },
+  {
+    label: "Live",
+    body:
+      "Air Solutions Heating & Cooling — 249 pages at launch, growing to 650+ URLs through May 2028. Programmatic SEO across 15 cities × 9 services.",
+  },
+  {
+    label: "Next",
+    body: "Inquiries open for fall 2026. Two project slots.",
+  },
+  {
+    label: "Location",
+    body: "Daphne, Alabama. Family Medicine, PGY-1.",
+  },
 ];
 
 export default function HomePage() {
   return (
     <>
-      {/* ─── Hero ────────────────────────────────────────────────────────── */}
+      {/* ─── Hero ─────────────────────────────────────────────────── */}
       <section
-        style={{
-          paddingTop: "120px",
-          paddingBottom: "80px",
-          paddingLeft: "1.5rem",
-          paddingRight: "1.5rem",
-          maxWidth: "1200px",
-          margin: "0 auto",
-          position: "relative",
-        }}
+        className="cover-surface"
+        style={{ minHeight: "min(720px, 92vh)", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}
       >
-        {/* Ambient glow behind hero */}
         <div
-          aria-hidden
+          className="section-wrap"
           style={{
-            position: "absolute",
-            top: "60px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "700px",
-            height: "400px",
-            borderRadius: "50%",
-            background: "radial-gradient(ellipse, rgba(79,142,247,0.07) 0%, transparent 70%)",
-            pointerEvents: "none",
-            zIndex: 0,
+            paddingTop: "clamp(120px, 18vw, 200px)",
+            paddingBottom: "clamp(56px, 8vw, 96px)",
+            display: "flex",
+            flexDirection: "column",
+            gap: "clamp(40px, 6vw, 72px)",
           }}
-        />
-
-        <div
-          className="hero-grid"
-          style={{ position: "relative", zIndex: 1 }}
         >
-          {/* Left: copy */}
-          <div>
-            <p
-              style={{
-                fontFamily: "'DM Mono', monospace",
-                fontSize: "0.65rem",
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
-                color: "#7db0ff",
-                marginBottom: "1.25rem",
-              }}
-            >
-              Web Studio &mdash; Baldwin County, Alabama
-            </p>
-
+          <div style={{ maxWidth: "920px" }}>
+            <Eyebrow onDark>§ 01 / Campbell Digital Studio · Baldwin County, Alabama</Eyebrow>
             <h1
+              className="display-serif"
               style={{
-                fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-                fontSize: "clamp(2.4rem, 5.5vw, 3.8rem)",
-                fontWeight: 800,
-                lineHeight: 1.06,
-                letterSpacing: "-0.03em",
-                marginBottom: "1.5rem",
-                background: "linear-gradient(135deg, #f0f4fc 20%, #a8c8ff 65%, #7db0ff 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
+                fontSize: "clamp(40px, 7vw, 88px)",
+                color: "white",
+                marginBottom: "clamp(24px, 3vw, 32px)",
+                maxWidth: "16ch",
               }}
             >
-              Custom websites and local SEO for medical and local businesses.
+              The web for businesses<br />
+              <em style={{ color: "var(--gold-400)" }}>that earn trust by hand.</em>
             </h1>
-
             <p
               style={{
-                fontFamily: "'DM Sans', system-ui, sans-serif",
-                fontSize: "clamp(1rem, 2vw, 1.1rem)",
-                color: "#94a3b8",
-                lineHeight: 1.75,
-                marginBottom: "2rem",
-                maxWidth: "520px",
+                fontFamily: "var(--font-manrope), sans-serif",
+                fontSize: "clamp(15px, 1.6vw, 18px)",
+                lineHeight: 1.6,
+                color: "rgba(255,255,255,0.78)",
+                maxWidth: "620px",
+                fontWeight: 300,
               }}
             >
-              I build modern, SEO-ready websites for clinics, wellness practices, therapy offices, and local service businesses. The goal is simple: make the business easier to find, easier to trust, and easier to choose.
-            </p>
-
-            {/* Metric strip */}
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
-                gap: "0",
-                marginBottom: "2.5rem",
-                borderRadius: "10px",
-                overflow: "hidden",
-                border: "1px solid rgba(79,142,247,0.12)",
-                background: "rgba(79,142,247,0.04)",
-              }}
-            >
-              {metrics.map((m, i) => (
-                <div
-                  key={m.label}
-                  style={{
-                    padding: "0.85rem 0.5rem",
-                    textAlign: "center",
-                    borderRight: i < metrics.length - 1 ? "1px solid rgba(79,142,247,0.1)" : "none",
-                  }}
-                >
-                  <p
-                    style={{
-                      fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-                      fontSize: "1.35rem",
-                      fontWeight: 800,
-                      color: "#7db0ff",
-                      letterSpacing: "-0.02em",
-                      margin: 0,
-                      lineHeight: 1,
-                    }}
-                  >
-                    {m.value}
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: "'DM Sans', system-ui, sans-serif",
-                      fontSize: "0.68rem",
-                      color: "#475569",
-                      margin: "0.3rem 0 0",
-                      lineHeight: 1.2,
-                    }}
-                  >
-                    {m.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-              <Link href="/website-review" className="btn-primary">
-                Request Website Review
-              </Link>
-              <Link href="/work" className="btn-outline">
-                View Work
-              </Link>
-            </div>
-          </div>
-
-          {/* Right: hero visual */}
-          <div className="hero-visual" style={{ position: "relative" }}>
-            <div
-              style={{
-                position: "absolute",
-                inset: "-2px",
-                borderRadius: "16px",
-                background: "linear-gradient(135deg, rgba(79,142,247,0.2) 0%, transparent 60%)",
-                pointerEvents: "none",
-                zIndex: 0,
-              }}
-            />
-            <Image
-              src="/images/site/campbell-digital-studio-hero-graphic.png"
-              alt="Campbell Digital Studio — custom websites and local SEO for medical practices and local businesses"
-              width={1024}
-              height={533}
-              priority
-              sizes="(max-width: 768px) 100vw, 50vw"
-              style={{
-                width: "100%",
-                height: "auto",
-                borderRadius: "14px",
-                display: "block",
-                position: "relative",
-                zIndex: 1,
-                border: "1px solid rgba(79,142,247,0.12)",
-              }}
-            />
-            <p
-              style={{
-                fontFamily: "'DM Mono', monospace",
-                fontSize: "0.57rem",
-                letterSpacing: "0.06em",
-                color: "#1e293b",
-                marginTop: "0.6rem",
-                textAlign: "right",
-              }}
-            >
-              Representative systems shown — not guaranteed results
-            </p>
-          </div>
-        </div>
-
-        {/* Trust strip */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: "1px",
-            background: "rgba(255,255,255,0.05)",
-            borderRadius: "12px",
-            overflow: "hidden",
-            marginTop: "4rem",
-            border: "1px solid rgba(255,255,255,0.05)",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
-          {trustPillars.map((pillar) => (
-            <div
-              key={pillar.label}
-              style={{ background: "#050c1a", padding: "1.5rem" }}
-            >
-              <p
-                style={{
-                  fontFamily: "'DM Mono', monospace",
-                  fontSize: "0.63rem",
-                  letterSpacing: "0.06em",
-                  textTransform: "uppercase",
-                  color: "#4f8ef7",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                {pillar.label}
-              </p>
-              <p
-                style={{
-                  fontFamily: "'DM Sans', system-ui, sans-serif",
-                  fontSize: "0.8rem",
-                  color: "#475569",
-                  lineHeight: 1.55,
-                }}
-              >
-                {pillar.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ─── Problem section ─────────────────────────────────────────────── */}
-      <section style={{ padding: "5rem 1.5rem", maxWidth: "1200px", margin: "0 auto" }}>
-        <div className="grid-2">
-          <div style={{ maxWidth: "420px" }}>
-            <SectionHeader
-              eyebrow="The Problem"
-              headline="Most local business websites are not doing their job."
-            />
-            <p
-              style={{
-                fontFamily: "'DM Sans', system-ui, sans-serif",
-                fontSize: "0.95rem",
-                color: "#94a3b8",
-                lineHeight: 1.8,
-              }}
-            >
-              A website is often the first impression a patient or customer has of a business. Most of the time, that impression is a template from 2015 with the wrong address listed and a phone number that goes nowhere.
+              A small studio building <strong>programmatic local-search platforms</strong> for clinics,
+              wellness practices, and the kind of local businesses that still answer their own phone — the
+              same architectural pattern Airbnb, Zapier, and Zillow use, applied at the scale of a single county.
             </p>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.55rem" }}>
-            {problemItems.map((item) => (
-              <div
-                key={item}
-                style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: "0.75rem",
-                  padding: "0.85rem 1rem",
-                  background: "#0d1728",
-                  borderRadius: "9px",
-                  border: "1px solid rgba(255,255,255,0.05)",
-                }}
-              >
-                <span
-                  style={{
-                    color: "#4f8ef7",
-                    flexShrink: 0,
-                    fontFamily: "'DM Mono', monospace",
-                    fontSize: "0.75rem",
-                    marginTop: "0.1rem",
-                    opacity: 0.7,
-                  }}
-                >
-                  ✕
-                </span>
-                <p
-                  style={{
-                    fontFamily: "'DM Sans', system-ui, sans-serif",
-                    fontSize: "0.85rem",
-                    color: "#94a3b8",
-                    margin: 0,
-                  }}
-                >
-                  {item}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── What I Build ─────────────────────────────────────────────────── */}
-      <section style={{ padding: "5rem 1.5rem", background: "#030810" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <SectionHeader
-            eyebrow="What I Build"
-            headline="Sites built around what the business actually needs."
-            centered
-          />
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: "1rem",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              flexWrap: "wrap",
+              gap: "32px",
+              borderTop: "1px solid rgba(232,196,107,0.25)",
+              paddingTop: "28px",
             }}
           >
-            {buildCategories.map((cat) => (
-              <div
-                key={cat.title}
-                className="card-hover"
-                style={{
-                  background: "#0d1728",
-                  border: "1px solid rgba(255,255,255,0.06)",
-                  borderRadius: "12px",
-                  padding: "1.5rem",
-                }}
-              >
-                <div
-                  style={{
-                    width: "28px",
-                    height: "2px",
-                    background: "linear-gradient(90deg, #4f8ef7, transparent)",
-                    marginBottom: "0.85rem",
-                  }}
-                />
-                <h3
-                  style={{
-                    fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-                    fontSize: "1rem",
-                    fontWeight: 700,
-                    color: "#f0f4fc",
-                    marginBottom: "0.5rem",
-                    letterSpacing: "-0.01em",
-                  }}
-                >
-                  {cat.title}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "'DM Sans', system-ui, sans-serif",
-                    fontSize: "0.85rem",
-                    color: "#475569",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  {cat.desc}
-                </p>
-              </div>
-            ))}
+            <Link
+              href="/review"
+              className="editorial-link arrow-link on-dark"
+              style={{
+                fontFamily: "var(--font-jetbrains), monospace",
+                fontSize: "12px",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "var(--gold-400)",
+              }}
+            >
+              Request a Website Review <span className="arrow" aria-hidden>→</span>
+            </Link>
+            <span
+              style={{
+                fontFamily: "var(--font-jetbrains), monospace",
+                fontSize: "10px",
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.5)",
+              }}
+            >
+              Established 2024 · Sole practitioner
+            </span>
           </div>
         </div>
       </section>
 
-      {/* ─── Featured Work ────────────────────────────────────────────────── */}
-      <section style={{ padding: "5rem 1.5rem", maxWidth: "1200px", margin: "0 auto" }}>
-        <SectionHeader
-          eyebrow="Featured Work"
-          headline="Selected projects and case studies."
-          subtext="A sample of the websites, platforms, and strategic rebuilds in my portfolio."
-        />
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
-            gap: "1.25rem",
-            marginBottom: "2rem",
-          }}
-        >
-          {projects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
+      {/* ─── § 02 / Selected Work ─────────────────────────────────── */}
+      <section className="section-wrap section-block">
+        <SectionTag num="02" label="Selected Work" />
+        <EditorialH2>
+          Recent projects,<br />
+          <em>through the lens of a clinic.</em>
+        </EditorialH2>
+
+        <div style={{ marginTop: "48px" }}>
+          {projects.map((p) => (
+            <IndexRow
+              key={p.slug}
+              href={`/work/${p.slug}`}
+              year={projectYears[p.slug] ?? ""}
+              title={p.title}
+              meta={projectMeta[p.slug] ?? p.category}
+            />
           ))}
         </div>
-        <div style={{ textAlign: "center", marginTop: "1.5rem" }}>
-          <Link
-            href="/work"
-            style={{
-              fontFamily: "'DM Sans', system-ui, sans-serif",
-              fontSize: "0.875rem",
-              color: "#7db0ff",
-              textDecoration: "none",
-            }}
-          >
-            View all projects →
+
+        <div style={{ marginTop: "32px" }}>
+          <Link href="/work" className="editorial-link arrow-link mono">
+            View all projects <span className="arrow" aria-hidden>→</span>
           </Link>
         </div>
       </section>
 
-      {/* ─── Pricing Philosophy ──────────────────────────────────────────── */}
-      <PricingPhilosophy />
+      {/* ─── § 03 / The Studio ────────────────────────────────────── */}
+      <section className="section-wrap section-block" style={{ background: "var(--surface)", marginLeft: 0, marginRight: 0, maxWidth: "100%" }}>
+        <div className="section-wrap" style={{ paddingLeft: 0, paddingRight: 0 }}>
+          <SectionTag num="03" label="The Studio" />
+          <EditorialH2 className="reading-col">
+            A studio of one,<br />
+            <em>practiced like a clinic.</em>
+          </EditorialH2>
 
-      {/* ─── Approach ────────────────────────────────────────────────────── */}
-      <section style={{ padding: "5rem 1.5rem", background: "#030810" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <SectionHeader
-            eyebrow="My Approach"
-            headline="A process built around business outcomes."
-            subtext="I do not start with a template. I start with what the business needs to accomplish."
-          />
+          <div className="editorial-body reading-col" style={{ marginTop: "32px" }}>
+            <p>
+              Most local-business websites are built by people who have never sat in a waiting room
+              with the patient who’s about to read them. I have. I’ve also written discharge
+              instructions, watched families decide between providers, and seen what gets a nervous
+              person to follow through.
+            </p>
+            <p>
+              Campbell Digital Studio is the small practice I run alongside residency. It’s
+              deliberately small. The work is full-stack — strategy, architecture, copy, build,
+              launch — and the only person between the brief and the finished site is me.
+            </p>
+            <p>
+              The result is the work in the index above: clinics, practices, and local businesses
+              with sites that read like they were built by someone who knows the difference between
+              a brochure and a first impression.
+            </p>
+          </div>
+
+          <div style={{ marginTop: "32px" }}>
+            <Link href="/studio" className="editorial-link arrow-link mono">
+              Read more about the studio <span className="arrow" aria-hidden>→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── § 04 / How the Work Gets Made ───────────────────────── */}
+      <section className="section-wrap section-block">
+        <SectionTag num="04" label="How the Work Gets Made" />
+        <EditorialH2>
+          Three principles<br />
+          <em>the studio runs on.</em>
+        </EditorialH2>
+
+        <div style={{ marginTop: "48px" }}>
+          {principles.map((p) => (
+            <div key={p.num} className="tier-row">
+              <span className="tier-num">{p.num}</span>
+              <div>
+                <div className="tier-name">{p.title}</div>
+                <div className="tier-body">
+                  <p>{p.body}</p>
+                </div>
+              </div>
+              <span aria-hidden />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ─── § 05 / What the Studio Makes ────────────────────────── */}
+      <section style={{ background: "var(--surface)", borderTop: "1px solid var(--paper-rule)", borderBottom: "1px solid var(--paper-rule)" }}>
+        <div className="section-wrap section-block">
+          <SectionTag num="05" label="What the Studio Makes" />
+          <EditorialH2>
+            A focused practice.<br />
+            <em>Six things, done well.</em>
+          </EditorialH2>
+
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "1px",
-              background: "rgba(255,255,255,0.04)",
-              borderRadius: "14px",
-              overflow: "hidden",
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              gap: "clamp(24px, 4vw, 48px) clamp(32px, 5vw, 72px)",
+              marginTop: "48px",
             }}
+            className="studio-makes-grid"
           >
-            {approachSteps.map((step) => (
-              <div
-                key={step.step}
-                style={{
-                  background: "#050c1a",
-                  padding: "1.75rem 2rem",
-                  display: "grid",
-                  gridTemplateColumns: "64px 1fr",
-                  gap: "1.5rem",
-                  alignItems: "start",
-                }}
-              >
+            {studioMakes.map((s) => (
+              <div key={s.n}>
                 <span
                   style={{
-                    fontFamily: "'DM Mono', monospace",
-                    fontSize: "0.72rem",
-                    letterSpacing: "0.06em",
-                    color: "#4f8ef7",
-                    opacity: 0.6,
+                    fontFamily: "var(--font-jetbrains), monospace",
+                    fontSize: "11px",
+                    letterSpacing: "0.18em",
+                    color: "var(--gold-700)",
+                    textTransform: "uppercase",
+                    fontWeight: 600,
                   }}
                 >
-                  {step.step}
+                  {s.n}
                 </span>
-                <div>
-                  <h3
-                    style={{
-                      fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-                      fontSize: "1rem",
-                      fontWeight: 700,
-                      color: "#f0f4fc",
-                      marginBottom: "0.35rem",
-                      letterSpacing: "-0.01em",
-                    }}
-                  >
-                    {step.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontFamily: "'DM Sans', system-ui, sans-serif",
-                      fontSize: "0.875rem",
-                      color: "#475569",
-                      lineHeight: 1.65,
-                      margin: 0,
-                    }}
-                  >
-                    {step.desc}
-                  </p>
-                </div>
+                <h3 className="editorial-h3" style={{ marginTop: "8px", marginBottom: "8px" }}>
+                  {s.title}
+                </h3>
+                <p style={{ fontSize: "15px", lineHeight: 1.65, color: "var(--ink-soft)" }}>
+                  {s.body}
+                </p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* ─── Why my background helps ─────────────────────────────────────── */}
-      <section style={{ padding: "5rem 1.5rem", maxWidth: "1200px", margin: "0 auto" }}>
-        <div className="grid-2-center">
-          <SectionHeader
-            eyebrow="Why My Background Helps"
-            headline="I am not just looking at the website."
-            accentWarm
-          />
-          <div>
-            <p
-              style={{
-                fontFamily: "'DM Sans', system-ui, sans-serif",
-                fontSize: "1rem",
-                color: "#94a3b8",
-                lineHeight: 1.8,
-                marginBottom: "1.5rem",
-              }}
-            >
-              When I review a medical or local business website, I am not looking at it as a designer who sees a layout problem. I am looking at it as someone who understands the patient journey, the business model, the services, the local search opportunity, and the trust signals that make someone actually book.
-            </p>
-            <p
-              style={{
-                fontFamily: "'DM Sans', system-ui, sans-serif",
-                fontSize: "1rem",
-                color: "#94a3b8",
-                lineHeight: 1.8,
-                marginBottom: "2rem",
-              }}
-            >
-              That perspective changes what gets built. Service pages are written for what patients actually search. Copy is calibrated for someone who is nervous, comparing options, or navigating a sensitive decision. The booking flow is designed around reducing friction at the moment someone is ready to commit.
-            </p>
-            <div
-              style={{
-                background: "rgba(212,168,83,0.05)",
-                border: "1px solid rgba(212,168,83,0.15)",
-                borderRadius: "10px",
-                padding: "1.25rem 1.5rem",
-              }}
-            >
-              <p
-                style={{
-                  fontFamily: "'DM Mono', monospace",
-                  fontSize: "0.65rem",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "#d4a853",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                PGY-1 Family Medicine Resident
-              </p>
-              <p
-                style={{
-                  fontFamily: "'DM Sans', system-ui, sans-serif",
-                  fontSize: "0.875rem",
-                  color: "#94a3b8",
-                  lineHeight: 1.65,
-                  margin: 0,
-                }}
-              >
-                Training in Baldwin County, Alabama — building websites for the exact patient populations and business types I work with every day.
-              </p>
-            </div>
+          <div style={{ marginTop: "48px" }}>
+            <Link href="/practice" className="editorial-link arrow-link mono">
+              Full practice details <span className="arrow" aria-hidden>→</span>
+            </Link>
           </div>
         </div>
+
+        <style>{`
+          @media (max-width: 720px) {
+            .studio-makes-grid { grid-template-columns: 1fr !important; }
+          }
+        `}</style>
       </section>
 
-      {/* ─── CTA ─────────────────────────────────────────────────────────── */}
-      <section style={{ padding: "3rem 1.5rem 5rem", maxWidth: "1200px", margin: "0 auto" }}>
-        <CTASection />
+      {/* ─── § 06 / Currently ────────────────────────────────────── */}
+      <section className="section-wrap section-block-tight">
+        <SectionTag num="06" label="Currently" />
+
+        <div className="currently-strip" style={{ marginTop: "16px" }}>
+          {currently.map((row) => (
+            <div key={row.label} className="currently-row">
+              <span className="label">{row.label}</span>
+              <span className="body">{row.body}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ─── Closing ─────────────────────────────────────────────── */}
+      <section className="cover-surface">
+        <div className="section-wrap section-block">
+          <SectionTag num="07" label="Working Together" onDark />
+          <EditorialH2 onDark className="reading-col">
+            A site that does<br />
+            <em>the work for you.</em>
+          </EditorialH2>
+
+          <p
+            className="reading-col"
+            style={{
+              fontFamily: "var(--font-manrope), sans-serif",
+              fontSize: "17px",
+              lineHeight: 1.65,
+              color: "rgba(255,255,255,0.82)",
+              marginTop: "24px",
+              fontWeight: 300,
+            }}
+          >
+            The most useful starting point is to send a link to the current site. The review is
+            free, takes about a week, and comes back as a written read of the architecture, copy,
+            local-search structure, and conversion gaps. No two engagements have looked the same —
+            and that’s the point.
+          </p>
+
+          <div style={{ marginTop: "40px", display: "flex", gap: "32px", flexWrap: "wrap", alignItems: "center" }}>
+            <Link
+              href="/review"
+              className="editorial-link arrow-link on-dark"
+              style={{
+                fontFamily: "var(--font-jetbrains), monospace",
+                fontSize: "12px",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "var(--gold-400)",
+              }}
+            >
+              Request Website Review <span className="arrow" aria-hidden>→</span>
+            </Link>
+            <Link
+              href="/inquire"
+              className="editorial-link on-dark"
+              style={{
+                fontFamily: "var(--font-jetbrains), monospace",
+                fontSize: "12px",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.7)",
+              }}
+            >
+              Or, inquire directly →
+            </Link>
+          </div>
+        </div>
       </section>
     </>
   );
