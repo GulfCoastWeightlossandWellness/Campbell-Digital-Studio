@@ -34,11 +34,11 @@ export default function Footer() {
         >
           {/* Studio */}
           <div>
-            <div className="mono-caption" style={{ color: "var(--gold-400)", marginBottom: "16px" }}>
+            <div className="mono-caption" style={{ color: "var(--gold-400)", marginBottom: "20px" }}>
               § Studio
             </div>
-            <div style={{ marginBottom: "16px" }}>
-              <StudioMark onDark size="sm" />
+            <div style={{ marginBottom: "20px", marginLeft: "-16px" }}>
+              <StudioMark onDark size="xl" />
             </div>
             <p
               style={{
