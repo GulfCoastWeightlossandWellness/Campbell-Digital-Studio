@@ -53,9 +53,8 @@ export default function NotFound() {
         {[
           { label: "Home", href: "/" },
           { label: "Work", href: "/work" },
-          { label: "Studio", href: "/studio" },
-          { label: "Practice", href: "/practice" },
-          { label: "Review", href: "/review" },
+          { label: "About", href: "/#about" },
+          { label: "Capabilities", href: "/#capabilities" },
           { label: "Inquire", href: "/inquire" },
         ].map((link) => (
           <Link key={link.href} href={link.href} className="editorial-link mono">

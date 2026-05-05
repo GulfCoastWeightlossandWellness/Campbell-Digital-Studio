@@ -5,6 +5,12 @@ import { getProjectBySlug } from "@/lib/projects";
 import SectionTag from "@/components/editorial/SectionTag";
 import EditorialH2 from "@/components/editorial/EditorialH2";
 import Eyebrow from "@/components/editorial/Eyebrow";
+import SelectedClients from "@/components/sections/SelectedClients";
+import FaqSection from "@/components/sections/FaqSection";
+import TestimonialBlock from "@/components/sections/TestimonialBlock";
+import { getFeaturedTestimonials } from "@/lib/data/testimonials";
+import { faqs } from "@/lib/data/faq";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title:
@@ -71,9 +77,28 @@ const processSteps = [
   },
 ];
 
+const featuredTestimonials = getFeaturedTestimonials();
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: f.answer,
+    },
+  })),
+};
+
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       {/* ─── § 01 / Hero ─────────────────────────────────────────────── */}
       <section
         className="cover-surface"
@@ -163,6 +188,21 @@ export default function HomePage() {
               >
                 Start a conversation →
               </Link>
+              {siteConfig.calUsername ? (
+                <Link
+                  href="/call"
+                  className="editorial-link on-dark"
+                  style={{
+                    fontFamily: "var(--font-jetbrains), monospace",
+                    fontSize: "12px",
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    color: "rgba(255,255,255,0.7)",
+                  }}
+                >
+                  Or book a 20-min call →
+                </Link>
+              ) : null}
             </div>
             <span
               style={{
@@ -256,6 +296,21 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* ─── § Selected Clients (renders only when ≥2 clients consent) ── */}
+      <SelectedClients sectionNum="§ 02" />
+
+      {/* ─── § Featured testimonials (renders only when at least one has a real quote) ── */}
+      {featuredTestimonials.length > 0 ? (
+        <section className="section-wrap section-block-tight">
+          <SectionTag num="§ 03" label="What clients say" />
+          <div style={{ marginTop: "32px", display: "grid", gap: "48px" }}>
+            {featuredTestimonials.map((t) => (
+              <TestimonialBlock key={t.id} testimonial={t} />
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       {/* ─── § 02 / Featured Case Study — Revitalize ─────────────────── */}
       {revitalize ? (
@@ -563,9 +618,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── § 06 / About ────────────────────────────────────────────── */}
+      {/* ─── § 06 / Common Questions ─────────────────────────────────── */}
+      <FaqSection sectionNum="06" />
+
+      {/* ─── § 07 / About ────────────────────────────────────────────── */}
       <section id="about" className="section-wrap section-block" style={{ scrollMarginTop: "96px" }}>
-        <SectionTag num="06" label="About" />
+        <SectionTag num="07" label="About" />
         <EditorialH2 className="reading-col">
           Peyton Campbell, <em>DO.</em>
         </EditorialH2>
@@ -589,10 +647,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── § 07 / Contact CTA ──────────────────────────────────────── */}
+      {/* ─── § 08 / Contact CTA ──────────────────────────────────────── */}
       <section className="cover-surface">
         <div className="section-wrap section-block">
-          <SectionTag num="07" label="Working Together" onDark />
+          <SectionTag num="08" label="Working Together" onDark />
           <EditorialH2 onDark className="reading-col">
             Start a<br />
             <em>conversation.</em>

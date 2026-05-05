@@ -90,7 +90,7 @@ export default function WorkPage() {
       >
         <SectionTag num="§ Index" label="Selected Work" />
         <EditorialH2>
-          Six projects<br />
+          Five projects<br />
           <em>the studio has shipped.</em>
         </EditorialH2>
 

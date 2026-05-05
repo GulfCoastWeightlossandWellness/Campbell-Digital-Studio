@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useSyncExternalStore } from "react";
+import { usePathname } from "next/navigation";
 import StudioMark from "@/components/marks/StudioMark";
 
 const navLinks: { label: string; href: string }[] = [
@@ -12,16 +13,28 @@ const navLinks: { label: string; href: string }[] = [
   { label: "Inquire", href: "/inquire" },
 ];
 
+// Subscribe to scrollY via useSyncExternalStore so we don't have to setState-in-effect.
+function subscribeScroll(cb: () => void) {
+  window.addEventListener("scroll", cb, { passive: true });
+  return () => window.removeEventListener("scroll", cb);
+}
+function getScrollY() {
+  return window.scrollY > 8;
+}
+
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const scrolled = useSyncExternalStore(subscribeScroll, getScrollY, () => false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  // Adjust state when pathname changes — close the menu mid-navigation.
+  // Using the "store previous prop" pattern (https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes)
+  // rather than setMobileOpen-in-effect.
+  const [previousPathname, setPreviousPathname] = useState(pathname);
+  if (previousPathname !== pathname) {
+    setPreviousPathname(pathname);
+    if (mobileOpen) setMobileOpen(false);
+  }
 
   // Lock body scroll when mobile menu open
   useEffect(() => {
@@ -32,6 +45,16 @@ export default function Header() {
         document.body.style.overflow = prev;
       };
     }
+  }, [mobileOpen]);
+
+  // Close on Escape
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
   }, [mobileOpen]);
 
   return (
@@ -79,11 +102,12 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Mobile hamburger */}
+        {/* Mobile hamburger — 44×44 minimum tap target */}
         <button
           type="button"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
+          aria-controls="mobile-nav-overlay"
           onClick={() => setMobileOpen((v) => !v)}
           className="mobile-menu-btn"
           style={{
@@ -91,9 +115,13 @@ export default function Header() {
             background: "none",
             border: "none",
             cursor: "pointer",
-            padding: "0.5rem",
+            padding: "12px",
             color: "var(--navy-900)",
-            margin: "-0.5rem",
+            margin: "-12px",
+            minWidth: "44px",
+            minHeight: "44px",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
@@ -112,9 +140,10 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile overlay */}
+      {/* Mobile overlay — z-index above the header so it covers the bar fully */}
       {mobileOpen && (
         <div
+          id="mobile-nav-overlay"
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation"
@@ -122,12 +151,39 @@ export default function Header() {
             position: "fixed",
             inset: 0,
             background: "var(--paper-cream)",
-            zIndex: 90,
+            zIndex: 110,
             paddingTop: "76px",
             display: "flex",
             flexDirection: "column",
+            overflowY: "auto",
           }}
         >
+          {/* Close button positioned over the overlay so the X is always reachable */}
+          <button
+            type="button"
+            aria-label="Close menu"
+            onClick={() => setMobileOpen(false)}
+            style={{
+              position: "absolute",
+              top: "20px",
+              right: "clamp(12px, 4vw, 32px)",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: "12px",
+              color: "var(--navy-900)",
+              minWidth: "44px",
+              minHeight: "44px",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
           <nav
             style={{
               display: "flex",

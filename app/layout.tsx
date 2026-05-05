@@ -3,6 +3,9 @@ import { Fraunces, Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import StickyMobileCTA from "@/components/StickyMobileCTA";
+import Analytics from "@/components/Analytics";
+import { siteConfig, absoluteUrl } from "@/lib/site-config";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -23,28 +26,37 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 
+const titleDefault = `${siteConfig.name} | Medical & Local Business Websites`;
+
 export const metadata: Metadata = {
   title: {
-    default: "Campbell Digital Studio | Medical & Local Business Websites",
-    template: "%s | Campbell Digital Studio",
+    default: titleDefault,
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    "A small studio building modern websites and local-search infrastructure for clinics, wellness practices, and the kind of local businesses that still answer their own phone.",
-  metadataBase: new URL("https://peytoncampbell.studio"),
+  description: siteConfig.description,
+  metadataBase: new URL(siteConfig.url),
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    siteName: "Campbell Digital Studio",
-    title: "Campbell Digital Studio | Medical & Local Business Websites",
-    description:
-      "A small studio building modern websites and local-search infrastructure for clinics, wellness practices, and the kind of local businesses that still answer their own phone.",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: titleDefault,
+    description: siteConfig.description,
     images: [
       {
-        url: "/images/og/campbell-digital-studio-og-image.png",
+        url: siteConfig.ogImage,
         width: 1024,
         height: 533,
-        alt: "Campbell Digital Studio — editorial websites and local-search infrastructure",
+        type: "image/png",
+        alt: `${siteConfig.name} — editorial websites and local-search infrastructure`,
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: titleDefault,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
   },
   icons: {
     icon: [
@@ -55,6 +67,41 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: siteConfig.name,
+  url: siteConfig.url,
+  logo: absoluteUrl("/images/brand/campbell-digital-studio-icon.png"),
+  email: siteConfig.email,
+  description: siteConfig.description,
+  founder: {
+    "@type": "Person",
+    name: siteConfig.founder.name,
+    honorificSuffix: siteConfig.founder.credential,
+    jobTitle: siteConfig.founder.role,
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Daphne",
+    addressRegion: "AL",
+    addressCountry: "US",
+  },
+  sameAs: [
+    siteConfig.social.github
+      ? `https://github.com/${siteConfig.social.github}`
+      : null,
+  ].filter(Boolean),
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteConfig.name,
+  url: siteConfig.url,
+  description: siteConfig.description,
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -62,9 +109,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${fraunces.variable} ${manrope.variable} ${jetbrains.variable}`}
     >
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <Analytics />
         <Header />
         <main>{children}</main>
         <Footer />
+        <StickyMobileCTA />
       </body>
     </html>
   );

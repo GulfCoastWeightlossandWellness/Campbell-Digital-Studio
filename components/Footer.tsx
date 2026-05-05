@@ -1,5 +1,7 @@
 import Link from "next/link";
 import StudioMark from "@/components/marks/StudioMark";
+import FooterEmailCapture from "@/components/FooterEmailCapture";
+import { siteConfig } from "@/lib/site-config";
 
 const indexLinks: { label: string; href: string }[] = [
   { label: "Work", href: "/work" },
@@ -11,6 +13,7 @@ const indexLinks: { label: string; href: string }[] = [
 
 export default function Footer() {
   const year = new Date().getUTCFullYear();
+  const showBooking = !!siteConfig.calUsername;
 
   return (
     <footer
@@ -25,7 +28,7 @@ export default function Footer() {
           className="footer-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
+            gridTemplateColumns: "1.1fr 0.8fr 1.2fr",
             gap: "48px",
             alignItems: "start",
           }}
@@ -44,10 +47,42 @@ export default function Footer() {
                 fontSize: "13px",
                 lineHeight: 1.6,
                 color: "rgba(255,255,255,0.78)",
+                marginBottom: "10px",
               }}
             >
-              Daphne, Alabama
+              {siteConfig.founder.location}
             </p>
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="editorial-link on-dark"
+              style={{
+                fontFamily: "var(--font-jetbrains), monospace",
+                fontSize: "12px",
+                letterSpacing: "0.12em",
+                color: "var(--gold-400)",
+              }}
+            >
+              {siteConfig.email}
+            </a>
+            {siteConfig.social.github ? (
+              <div style={{ marginTop: "10px" }}>
+                <a
+                  href={`https://github.com/${siteConfig.social.github}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="editorial-link on-dark"
+                  style={{
+                    fontFamily: "var(--font-jetbrains), monospace",
+                    fontSize: "11px",
+                    letterSpacing: "0.18em",
+                    textTransform: "uppercase",
+                    color: "rgba(255,255,255,0.6)",
+                  }}
+                >
+                  GitHub ↗
+                </a>
+              </div>
+            ) : null}
           </div>
 
           {/* Index */}
@@ -80,13 +115,28 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              {showBooking ? (
+                <li>
+                  <Link
+                    href="/call"
+                    className="editorial-link on-dark"
+                    style={{
+                      fontFamily: "var(--font-manrope), sans-serif",
+                      fontSize: "14px",
+                      color: "rgba(255,255,255,0.85)",
+                    }}
+                  >
+                    Book a call
+                  </Link>
+                </li>
+              ) : null}
             </ul>
           </div>
 
-          {/* Currently */}
+          {/* Contact / capture */}
           <div>
             <div className="mono-caption" style={{ color: "var(--gold-400)", marginBottom: "16px" }}>
-              § Currently
+              § Contact
             </div>
             <p
               style={{
@@ -97,25 +147,12 @@ export default function Footer() {
                 lineHeight: 1.55,
                 color: "rgba(255,255,255,0.92)",
                 fontVariationSettings: '"opsz" 24',
+                marginBottom: "20px",
               }}
             >
               Currently building digital infrastructure for clinical practices and multi-location service businesses on the Gulf Coast.
             </p>
-            <Link
-              href="/inquire"
-              className="editorial-link on-dark"
-              style={{
-                fontFamily: "var(--font-jetbrains), monospace",
-                fontSize: "11px",
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                color: "var(--gold-400)",
-                marginTop: "16px",
-                display: "inline-block",
-              }}
-            >
-              Inquire about a project →
-            </Link>
+            <FooterEmailCapture />
           </div>
         </div>
 
@@ -140,7 +177,7 @@ export default function Footer() {
               color: "rgba(255,255,255,0.5)",
             }}
           >
-            © {year} Campbell Digital Studio · Daphne, Alabama
+            © {year} {siteConfig.name} · {siteConfig.founder.location}
           </span>
           <span
             style={{
@@ -157,7 +194,7 @@ export default function Footer() {
       </div>
 
       <style>{`
-        @media (max-width: 720px) {
+        @media (max-width: 860px) {
           .footer-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
         }
       `}</style>

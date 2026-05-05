@@ -3,6 +3,7 @@ import Link from "next/link";
 import SectionTag from "@/components/editorial/SectionTag";
 import EditorialH2 from "@/components/editorial/EditorialH2";
 import Eyebrow from "@/components/editorial/Eyebrow";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Inquire",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
     "Start a conversation with Campbell Digital Studio about a clinical practice or local service business website project.",
 };
 
-const contactEmail = "hello@peytoncampbell.studio";
+const contactEmail = siteConfig.email;
 
 export default function InquirePage() {
   const subject = encodeURIComponent("Project Inquiry — Campbell Digital Studio");

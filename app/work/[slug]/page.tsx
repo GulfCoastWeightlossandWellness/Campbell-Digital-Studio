@@ -7,6 +7,10 @@ import SectionTag from "@/components/editorial/SectionTag";
 import EditorialH2 from "@/components/editorial/EditorialH2";
 import Eyebrow from "@/components/editorial/Eyebrow";
 import Pullquote from "@/components/editorial/Pullquote";
+import CaseStudyResults from "@/components/sections/CaseStudyResults";
+import TestimonialBlock from "@/components/sections/TestimonialBlock";
+import { getTestimonialForSlug } from "@/lib/data/testimonials";
+import { siteConfig } from "@/lib/site-config";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -65,6 +69,8 @@ export default async function CaseStudyPage({ params }: Props) {
     label,
     image: project.screenshotImages?.[i],
   }));
+
+  const testimonial = getTestimonialForSlug(slug);
 
   return (
     <>
@@ -198,6 +204,19 @@ export default async function CaseStudyPage({ params }: Props) {
           <p>{project.challenge}</p>
         </div>
       </section>
+
+      {/* ─── § Results (renders only when real numbers exist) ───── */}
+      <CaseStudyResults slug={slug} sectionNum="02" />
+
+      {/* ─── § Testimonial (renders only when a real quote exists) ── */}
+      {testimonial ? (
+        <section className="section-wrap section-block-tight">
+          <SectionTag num="03" label="Client voice" />
+          <div style={{ marginTop: "32px" }}>
+            <TestimonialBlock testimonial={testimonial} />
+          </div>
+        </section>
+      ) : null}
 
       {/* ─── § 02 / Selected screens ─────────────────────────────── */}
       {featuredScreens.length > 0 ? (
@@ -424,25 +443,29 @@ export default async function CaseStudyPage({ params }: Props) {
           </p>
         </div>
 
-        {project.slug === "revitalize" ? (
-          <div
-            className="reading-col"
-            style={{
-              marginTop: "32px",
-              padding: "24px 28px",
-              border: "1px dashed var(--paper-rule)",
-              background: "var(--surface)",
-              fontFamily: "var(--font-jetbrains), monospace",
-              fontSize: "11px",
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              color: "var(--ink-mute)",
-              lineHeight: 1.6,
-            }}
-          >
-            [ Client testimonial pending — to be added with approval from Revitalize. ]
-          </div>
-        ) : null}
+      </section>
+
+      {/* ─── § Inquire CTA — case-study tail ─────────────────────── */}
+      <section className="section-wrap section-block-tight">
+        <div
+          style={{
+            display: "flex",
+            gap: "32px",
+            flexWrap: "wrap",
+            alignItems: "center",
+            paddingTop: "32px",
+            borderTop: "1px solid var(--paper-rule)",
+          }}
+        >
+          <Link href="/inquire" className="editorial-link arrow-link mono">
+            Inquire about a similar project <span className="arrow" aria-hidden>→</span>
+          </Link>
+          {siteConfig.calUsername ? (
+            <Link href="/call" className="editorial-link arrow-link mono">
+              Or book a 20-minute call <span className="arrow" aria-hidden>→</span>
+            </Link>
+          ) : null}
+        </div>
       </section>
 
       {/* ─── § 07 / Prev / Next ──────────────────────────────────── */}
