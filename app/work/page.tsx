@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { projects } from "@/lib/projects";
 import SectionTag from "@/components/editorial/SectionTag";
 import EditorialH2 from "@/components/editorial/EditorialH2";
 
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "A transparent record of the sites and platforms Campbell Digital Studio has built — with honest labels, real scope, and real market valuations on each.",
+    "A transparent record of the sites and platforms Campbell Digital Studio has built — with honest labels and real scope on each.",
 };
 
 type WorkRow = {
@@ -16,40 +15,34 @@ type WorkRow = {
   title: string;
   scope: string;
   sectorTags: string[];
-  buildLabel: { glyph: "◆" | "◇" | "※"; text: string };
+  buildLabel: { glyph: "◆" | "◇"; text: string };
   liveUrl: string | null;
+  /** Whether this row links into a full case study */
+  hasCaseStudy: boolean;
 };
 
 const rows: WorkRow[] = [
-  {
-    slug: "air-solutions",
-    year: "2026",
-    title: "Air Solutions Heating & Cooling",
-    scope:
-      "A 24-month market-dominance program: 249 launch pages → 650 URLs by 2028, 441-post content library, 135 city × service intersection pages, NWS hurricane alert integration, 3 custom interactive tools.",
-    sectorTags: ["HVAC", "Programmatic SEO"],
-    buildLabel: { glyph: "◆", text: "24-Month Build + Retainer" },
-    liveUrl: "https://airsolutionspros.com",
-  },
   {
     slug: "revitalize",
     year: "2026",
     title: "Revitalize Aesthetics & Wellness",
     scope:
-      "A 24-month clinical marketing engagement: 50+ routes, 18 service pages, two-location SEO, JaneApp booking, and a content engine publishing two clinical articles every week through 2028.",
-    sectorTags: ["Medical Wellness", "Multi-Location"],
-    buildLabel: { glyph: "◆", text: "24-Month Build + Retainer" },
+      "A multi-location medical aesthetics, hormone, and weight-management practice in Georgia. Two clinics, a connected nutrition supplement brand, a published book, and a coaching institute — under one digital ecosystem.",
+    sectorTags: ["Healthcare", "Multi-Location"],
+    buildLabel: { glyph: "◆", text: "Featured Case Study" },
     liveUrl: "https://revitalize-medical-wellness-clinic-nine.vercel.app",
+    hasCaseStudy: true,
   },
   {
-    slug: "interactive-health-education",
-    year: "2025",
-    title: "Interactive Health Education",
+    slug: "air-solutions",
+    year: "2026",
+    title: "Air Solutions Heating & Cooling",
     scope:
-      "A B2B marketing site and a 145-app patient-education dashboard, governed by a policy engine and licensed across 11 commercial bundles.",
-    sectorTags: ["Digital Health", "B2B SaaS"],
-    buildLabel: { glyph: "※", text: "Original Product" },
-    liveUrl: "https://dashboard.interactivehealtheducation.com/",
+      "A 159-page programmatic SEO architecture for an HVAC contractor in coastal Alabama — 15 cities × 9 services, plus four custom interactive tools.",
+    sectorTags: ["HVAC", "Programmatic SEO"],
+    buildLabel: { glyph: "◆", text: "Featured Case Study" },
+    liveUrl: "https://airsolutionspros.com",
+    hasCaseStudy: true,
   },
   {
     slug: "acexperts",
@@ -58,18 +51,20 @@ const rows: WorkRow[] = [
     scope:
       "A full-stack Next.js HVAC site with 8 city pages, 7 services, three interactive tools, and Google Sheets-backed lead capture.",
     sectorTags: ["HVAC", "Local SEO"],
-    buildLabel: { glyph: "◆", text: "Original Build" },
+    buildLabel: { glyph: "◇", text: "Original Build" },
     liveUrl: "https://acexperts251.com",
+    hasCaseStudy: false,
   },
   {
     slug: "collective-counseling",
     year: "2024",
     title: "Collective Counseling",
     scope:
-      "A four-page therapy practice site with a dedicated adult ADHD testing page, real therapist photography, and Daphne-targeted local SEO.",
+      "A focused therapy practice site with a dedicated adult ADHD testing page, real therapist photography, and Daphne-targeted local SEO.",
     sectorTags: ["Therapy", "ADHD Testing"],
-    buildLabel: { glyph: "◆", text: "Original Build" },
+    buildLabel: { glyph: "◇", text: "Original Build" },
     liveUrl: "https://collectivecounselingdaphne.com",
+    hasCaseStudy: false,
   },
   {
     slug: "blessed-barbershop",
@@ -77,27 +72,13 @@ const rows: WorkRow[] = [
     title: "Blessed Barbershop",
     scope:
       "A mobile-first barbershop site with WebP-optimized media, a service menu with pricing, and a frictionless booking link.",
-    sectorTags: ["Barbershop", "Local SEO"],
-    buildLabel: { glyph: "◆", text: "Original Build" },
+    sectorTags: ["Local Business", "Mobile-First"],
+    buildLabel: { glyph: "◇", text: "Original Build" },
     liveUrl: "https://www.blessedbarbershopdaphne.com",
+    hasCaseStudy: false,
   },
 ];
 
-// Defensive: guard against projects added to lib/projects without a row entry.
-const knownSlugs = new Set(rows.map((r) => r.slug));
-projects.forEach((p) => {
-  if (!knownSlugs.has(p.slug)) {
-    rows.push({
-      slug: p.slug,
-      year: "—",
-      title: p.title,
-      scope: p.shortSummary,
-      sectorTags: p.tags.slice(0, 2),
-      buildLabel: { glyph: "◆", text: "Original Build" },
-      liveUrl: p.liveUrl,
-    });
-  }
-});
 
 export default function WorkPage() {
   return (
@@ -123,8 +104,8 @@ export default function WorkPage() {
             marginTop: "24px",
           }}
         >
-          A transparent record of the sites and platforms I’ve built — with honest labels, real
-          scope, and real market valuations on each. Click into a project for the full case study.
+          A transparent record of the sites and platforms I’ve built — with honest labels and
+          real scope on each. Click into a project for the full case study.
         </p>
       </section>
 
@@ -137,11 +118,15 @@ export default function WorkPage() {
         }}
       >
         <div className="section-wrap" style={{ paddingTop: "16px", paddingBottom: "16px" }}>
-          {rows.map((r) => (
+          {rows.map((r) => {
+            const href = r.hasCaseStudy ? `/work/${r.slug}` : (r.liveUrl ?? "/work");
+            const external = !r.hasCaseStudy && r.liveUrl !== null;
+            return (
             <Link
               key={r.slug}
-              href={`/work/${r.slug}`}
+              href={href}
               className="work-row"
+              {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             >
               {/* Col 1 — year */}
               <div>
@@ -235,11 +220,12 @@ export default function WorkPage() {
                   }}
                 >
                   <span aria-hidden style={{ color: "var(--gold-600)" }}>{r.buildLabel.glyph}</span>
-                  {r.buildLabel.text}
+                  {r.buildLabel.text}{external ? " ↗" : ""}
                 </span>
               </div>
             </Link>
-          ))}
+            );
+          })}
         </div>
       </section>
 
@@ -251,14 +237,12 @@ export default function WorkPage() {
             className="editorial-body"
             style={{ fontSize: "17px" }}
           >
-            Every project page contains a market valuation tier — what an agency, a senior
-            independent, and a generalist would charge for the same scope — and a written rationale
-            for why the work is worth the price. The intent is to make a normally opaque conversation
-            transparent.
+            Featured rows link into a full case study with the brief, what was built, and a written
+            rationale. Earlier builds link directly to the live site.
           </p>
           <div style={{ marginTop: "32px" }}>
-            <Link href="/review" className="editorial-link arrow-link mono">
-              Request a Website Review <span className="arrow" aria-hidden>→</span>
+            <Link href="/inquire" className="editorial-link arrow-link mono">
+              Start a conversation <span className="arrow" aria-hidden>→</span>
             </Link>
           </div>
         </div>

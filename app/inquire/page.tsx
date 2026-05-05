@@ -7,7 +7,7 @@ import Eyebrow from "@/components/editorial/Eyebrow";
 export const metadata: Metadata = {
   title: "Inquire",
   description:
-    "Inquire about a project with Campbell Digital Studio — websites, local-search infrastructure, and platforms for clinics, wellness practices, and local businesses.",
+    "Start a conversation with Campbell Digital Studio about a clinical practice or local service business website project.",
 };
 
 const contactEmail = "hello@peytoncampbell.studio";
@@ -20,8 +20,10 @@ export default function InquirePage() {
       "",
       "Business name: ",
       "Current website (if any): ",
-      "Goals for the project: ",
-      "Launch deadline (if any): ",
+      "Type of business (medical practice / home services / other): ",
+      "What you're trying to accomplish: ",
+      "Approximate budget range: ",
+      "Timeline: ",
       "",
     ].join("\n"),
   );
@@ -31,7 +33,10 @@ export default function InquirePage() {
     <>
       <section
         className="section-wrap"
-        style={{ paddingTop: "clamp(96px, 14vw, 160px)", paddingBottom: "clamp(48px, 6vw, 80px)" }}
+        style={{
+          paddingTop: "clamp(96px, 14vw, 160px)",
+          paddingBottom: "clamp(48px, 6vw, 80px)",
+        }}
       >
         <Eyebrow>§ Inquire / Start a Conversation</Eyebrow>
 
@@ -44,30 +49,33 @@ export default function InquirePage() {
             maxWidth: "16ch",
           }}
         >
-          Inquire about<br />
-          <em style={{ color: "var(--navy-700)" }}>a project.</em>
+          Start a<br />
+          <em style={{ color: "var(--navy-700)" }}>conversation.</em>
         </h1>
 
         <div className="editorial-body reading-col">
           <p>
-            The most useful way to start is an email with a few specifics. Send the business name,
-            a link to the current site (or a sentence on what’s currently in place), what you’d
-            like the new site to do, and any deadline that’s already been set.
+            The most useful way to begin is an email with a few specifics. Send the business name,
+            a link to the current site (or a sentence on what&apos;s currently in place), what
+            you&apos;re trying to accomplish, an approximate budget range, and a timeline.
           </p>
           <p>
-            I read every inquiry personally. If the project is a fit, I’ll write back with a few
-            questions and a suggested next step — usually a free written review of the existing
-            site. If it isn’t a fit, I’ll tell you that too, and where possible point you toward
-            someone better suited.
+            I read every inquiry personally. If the project is a fit, you&apos;ll hear back within
+            a week with a few questions and a suggested next step. If it isn&apos;t a fit,
+            I&apos;ll tell you that too, and where possible point you toward someone better suited.
           </p>
         </div>
 
-        <div style={{ marginTop: "56px", display: "flex", flexDirection: "column", gap: "16px", alignItems: "flex-start" }}>
-          <a
-            href={mailto}
-            className="btn-fill"
-            style={{ fontSize: "12px" }}
-          >
+        <div
+          style={{
+            marginTop: "56px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "16px",
+            alignItems: "flex-start",
+          }}
+        >
+          <a href={mailto} className="btn-fill" style={{ fontSize: "12px" }}>
             Email the Studio
           </a>
           <span
@@ -91,25 +99,40 @@ export default function InquirePage() {
         </div>
       </section>
 
-      <section className="section-wrap section-block-tight">
-        <SectionTag num="§ Note" label="If you’re not sure yet" />
-        <EditorialH2 className="reading-col">
-          Start with a website review<br />
-          <em>instead.</em>
-        </EditorialH2>
+      {/* ─── Fit note ─────────────────────────────────────────────── */}
+      <section
+        style={{
+          background: "var(--surface)",
+          borderTop: "1px solid var(--paper-rule)",
+          borderBottom: "1px solid var(--paper-rule)",
+        }}
+      >
+        <div className="section-wrap section-block-tight">
+          <SectionTag num="§ Note" label="Project fit" />
+          <EditorialH2 className="reading-col">
+            Most engagements run<br />
+            <em>mid-five figures and up.</em>
+          </EditorialH2>
 
-        <div className="editorial-body reading-col" style={{ marginTop: "32px" }}>
-          <p>
-            If you’re not ready to commit to a project, the website review is the right first
-            step. It’s a free, written read of the current site — architecture, copy, local
-            search, and conversion. There’s no pitch attached.
-          </p>
-        </div>
+          <div className="editorial-body reading-col" style={{ marginTop: "32px" }}>
+            <p>
+              The work is full-stack — strategy, architecture, copy, build, launch — and the only
+              person between the brief and the finished site is me. That makes the studio a fit
+              for clinical practices and multi-location service businesses where the site needs to
+              actually do something for the business, and a poor fit for one-page sites and
+              SEO-only retainers.
+            </p>
+            <p>
+              If your budget is below mid-five figures, I&apos;ll happily refer you to someone
+              good rather than scope down a project that needs more.
+            </p>
+          </div>
 
-        <div style={{ marginTop: "32px" }}>
-          <Link href="/review" className="editorial-link arrow-link mono">
-            Request a Website Review <span className="arrow" aria-hidden>→</span>
-          </Link>
+          <div style={{ marginTop: "32px" }}>
+            <Link href="/work" className="editorial-link arrow-link mono">
+              See recent work <span className="arrow" aria-hidden>→</span>
+            </Link>
+          </div>
         </div>
       </section>
     </>

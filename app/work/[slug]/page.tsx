@@ -13,7 +13,9 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  // Only featured projects render at full case-study depth; the rest redirect
+  // to the /work index via next.config.ts.
+  return projects.filter((p) => p.featured).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -34,28 +36,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const projectYears: Record<string, string> = {
   "air-solutions": "2026",
   revitalize: "2026",
-  "interactive-health-education": "2025",
-  acexperts: "2025",
-  "collective-counseling": "2024",
-  "blessed-barbershop": "2024",
 };
 
 const projectStatus: Record<string, string> = {
-  "air-solutions": "Live · 24-month engagement through May 2028",
-  revitalize: "Live · 24-month engagement",
-  "interactive-health-education": "Production · 145 apps live",
-  acexperts: "Production · launched 2025",
-  "collective-counseling": "Production · launched 2024",
-  "blessed-barbershop": "Production · launched 2024",
+  "air-solutions": "Live",
+  revitalize: "Live",
 };
 
 const projectHosting: Record<string, string> = {
   "air-solutions": "Vercel · Vercel Cron · Cloudflare Turnstile · Resend",
   revitalize: "Vercel",
-  "interactive-health-education": "Vercel (marketing) · Vercel (dashboard)",
-  acexperts: "Vercel",
-  "collective-counseling": "Vercel",
-  "blessed-barbershop": "Cloudflare Pages",
 };
 
 export default async function CaseStudyPage({ params }: Props) {
@@ -65,24 +55,16 @@ export default async function CaseStudyPage({ params }: Props) {
 
   const year = projectYears[slug] ?? "—";
 
-  // next / previous in source order
-  const idx = projects.findIndex((p) => p.slug === project.slug);
-  const prev = idx > 0 ? projects[idx - 1] : null;
-  const next = idx < projects.length - 1 ? projects[idx + 1] : null;
+  // next / previous within the featured set only
+  const featured = projects.filter((p) => p.featured);
+  const idx = featured.findIndex((p) => p.slug === project.slug);
+  const prev = idx > 0 ? featured[idx - 1] : null;
+  const next = idx < featured.length - 1 ? featured[idx + 1] : null;
 
-  // Choose display screenshots — IHE has marketing+dashboard pairs, others use the standard set.
-  const showcase: { label: string; image?: string }[] =
-    project.slug === "interactive-health-education" && project.dashboardScreenshotLabels
-      ? project.dashboardScreenshotLabels.map((label, i) => ({
-          label,
-          image: project.dashboardScreenshotImages?.[i],
-        }))
-      : project.screenshotLabels.map((label, i) => ({
-          label,
-          image: project.screenshotImages?.[i],
-        }));
-
-  const featuredScreens = showcase.slice(0, 4);
+  const featuredScreens = project.screenshotLabels.slice(0, 6).map((label, i) => ({
+    label,
+    image: project.screenshotImages?.[i],
+  }));
 
   return (
     <>
@@ -358,127 +340,9 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
       </section>
 
-      {/* ─── § 05 / Market valuation ─────────────────────────────── */}
+      {/* ─── § 05 / Stack & artifacts ────────────────────────────── */}
       <section className="section-wrap section-block-tight">
-        <SectionTag num="05" label="Market Valuation" />
-        <EditorialH2>
-          What this kind of work<br />
-          <em>actually costs.</em>
-        </EditorialH2>
-
-        <p
-          className="reading-col"
-          style={{
-            fontFamily: "var(--font-manrope), sans-serif",
-            fontSize: "16px",
-            lineHeight: 1.65,
-            color: "var(--ink-soft)",
-            marginTop: "24px",
-          }}
-        >
-          The same scope of work, priced honestly across the three places a business can hire it.
-          The intent is to make a normally opaque conversation transparent.
-        </p>
-
-        <div style={{ marginTop: "48px" }}>
-          <div className="tier-row">
-            <span className="tier-num">01</span>
-            <div>
-              <div className="tier-name">Medical / boutique agency</div>
-              <div className="tier-body">
-                <p>{project.pricingNotes.agency}</p>
-              </div>
-            </div>
-            <div style={{ textAlign: "right", minWidth: "180px" }}>
-              <div
-                style={{
-                  fontFamily: "var(--font-fraunces), Georgia, serif",
-                  fontSize: "20px",
-                  fontWeight: 600,
-                  color: "var(--navy-900)",
-                  lineHeight: 1,
-                  letterSpacing: "-0.02em",
-                  fontVariationSettings: '"opsz" 96',
-                }}
-              >
-                {project.pricing.agency}
-              </div>
-              <div
-                className="mono-caption"
-                style={{ marginTop: "6px", color: "var(--ink-mute)" }}
-              >
-                Agency tier
-              </div>
-            </div>
-          </div>
-
-          <div className="tier-row">
-            <span className="tier-num">02</span>
-            <div>
-              <div className="tier-name">Senior independent</div>
-              <div className="tier-body">
-                <p>{project.pricingNotes.highFreelance}</p>
-              </div>
-            </div>
-            <div style={{ textAlign: "right", minWidth: "180px" }}>
-              <div
-                style={{
-                  fontFamily: "var(--font-fraunces), Georgia, serif",
-                  fontSize: "20px",
-                  fontWeight: 600,
-                  color: "var(--navy-900)",
-                  lineHeight: 1,
-                  letterSpacing: "-0.02em",
-                  fontVariationSettings: '"opsz" 96',
-                }}
-              >
-                {project.pricing.highFreelance}
-              </div>
-              <div
-                className="mono-caption"
-                style={{ marginTop: "6px", color: "var(--ink-mute)" }}
-              >
-                Senior tier
-              </div>
-            </div>
-          </div>
-
-          <div className="tier-row">
-            <span className="tier-num">03</span>
-            <div>
-              <div className="tier-name">Generalist freelancer</div>
-              <div className="tier-body">
-                <p>{project.pricingNotes.lowFreelance}</p>
-              </div>
-            </div>
-            <div style={{ textAlign: "right", minWidth: "180px" }}>
-              <div
-                style={{
-                  fontFamily: "var(--font-fraunces), Georgia, serif",
-                  fontSize: "20px",
-                  fontWeight: 600,
-                  color: "var(--navy-900)",
-                  lineHeight: 1,
-                  letterSpacing: "-0.02em",
-                  fontVariationSettings: '"opsz" 96',
-                }}
-              >
-                {project.pricing.lowFreelance}
-              </div>
-              <div
-                className="mono-caption"
-                style={{ marginTop: "6px", color: "var(--ink-mute)" }}
-              >
-                Generalist tier
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── § 06 / Stack & artifacts ────────────────────────────── */}
-      <section className="section-wrap section-block-tight">
-        <SectionTag num="06" label="Stack &amp; Artifacts" />
+        <SectionTag num="05" label="Stack &amp; Artifacts" />
 
         <div
           style={{
@@ -540,6 +404,43 @@ export default async function CaseStudyPage({ params }: Props) {
             >
               Visit live project <span className="arrow" aria-hidden>↗</span>
             </a>
+          </div>
+        ) : null}
+      </section>
+
+      {/* ─── § 06 / Outcome ──────────────────────────────────────── */}
+      <section className="section-wrap section-block-tight">
+        <SectionTag num="06" label="Outcome" />
+        <EditorialH2 className="reading-col">
+          Metrics, captured<br />
+          <em>at 30 / 60 / 90 days.</em>
+        </EditorialH2>
+
+        <div className="editorial-body reading-col" style={{ marginTop: "32px" }}>
+          <p>
+            Outcome reporting for this engagement is captured at 30, 60, and 90 days post-launch
+            via Google Search Console and GA4. Reported metrics will appear here once the
+            measurement window closes.
+          </p>
+        </div>
+
+        {project.slug === "revitalize" ? (
+          <div
+            className="reading-col"
+            style={{
+              marginTop: "32px",
+              padding: "24px 28px",
+              border: "1px dashed var(--paper-rule)",
+              background: "var(--surface)",
+              fontFamily: "var(--font-jetbrains), monospace",
+              fontSize: "11px",
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "var(--ink-mute)",
+              lineHeight: 1.6,
+            }}
+          >
+            [ Client testimonial pending — to be added with approval from Revitalize. ]
           </div>
         ) : null}
       </section>

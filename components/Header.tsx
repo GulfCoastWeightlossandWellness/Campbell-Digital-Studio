@@ -6,10 +6,9 @@ import StudioMark from "@/components/marks/StudioMark";
 
 const navLinks: { label: string; href: string }[] = [
   { label: "Work", href: "/work" },
-  { label: "Method", href: "/method" },
-  { label: "Studio", href: "/studio" },
-  { label: "Practice", href: "/practice" },
-  { label: "Notes", href: "/notes" },
+  { label: "Capabilities", href: "/#capabilities" },
+  { label: "Process", href: "/#process" },
+  { label: "About", href: "/#about" },
   { label: "Inquire", href: "/inquire" },
 ];
 
@@ -163,7 +162,7 @@ export default function Header() {
               </Link>
             ))}
             <Link
-              href="/review"
+              href="/inquire"
               onClick={() => setMobileOpen(false)}
               className="editorial-link"
               style={{
@@ -175,7 +174,7 @@ export default function Header() {
                 color: "var(--gold-700)",
               }}
             >
-              Request a Website Review →
+              Start a conversation →
             </Link>
           </nav>
         </div>

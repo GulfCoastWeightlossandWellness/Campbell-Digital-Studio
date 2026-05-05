@@ -3,11 +3,9 @@ import StudioMark from "@/components/marks/StudioMark";
 
 const indexLinks: { label: string; href: string }[] = [
   { label: "Work", href: "/work" },
-  { label: "Method", href: "/method" },
-  { label: "Studio", href: "/studio" },
-  { label: "Practice", href: "/practice" },
-  { label: "Notes", href: "/notes" },
-  { label: "Review", href: "/review" },
+  { label: "Capabilities", href: "/#capabilities" },
+  { label: "Process", href: "/#process" },
+  { label: "About", href: "/#about" },
   { label: "Inquire", href: "/inquire" },
 ];
 
@@ -49,8 +47,6 @@ export default function Footer() {
               }}
             >
               Daphne, Alabama
-              <br />
-              Family Medicine, PGY-1
             </p>
           </div>
 
@@ -103,7 +99,7 @@ export default function Footer() {
                 fontVariationSettings: '"opsz" 24',
               }}
             >
-              Building Air Solutions Heating &amp; Cooling — a 600-page Baldwin County HVAC platform.
+              Currently building digital infrastructure for clinical practices and multi-location service businesses on the Gulf Coast.
             </p>
             <Link
               href="/inquire"

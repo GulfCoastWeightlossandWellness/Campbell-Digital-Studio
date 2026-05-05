@@ -1,10 +1,4 @@
-export type ProjectLabel =
-  | "Strategic Rebuild Concept"
-  | "Original Build"
-  | "Original Product"
-  | "Internal / Founder Project";
-
-export type PricingTier = "agency" | "senior-dev";
+export type ProjectLabel = "Original Build" | "Original Product";
 
 export type FilterTag = "full-stack" | "medical" | "local" | "platform" | "static";
 
@@ -15,15 +9,11 @@ export type Project = {
   category: string;
   shortSummary: string;
   summary: string;
-  /** Primary link used in hero buttons and card CTAs. For IHE: the dashboard. */
+  /** Live URL for the deployed project */
   liveUrl: string | null;
-  /** IHE only — public marketing/buyer-facing site */
-  marketingUrl?: string;
-  /** IHE only — the working product dashboard (core asset) */
-  dashboardUrl?: string;
-  /** Renders the project with flagship visual treatment in grids */
-  isFlagship?: boolean;
-  /** Primary project cover image for portfolio cards */
+  /** Whether to render the project at full case-study depth on the site */
+  featured?: boolean;
+  /** Project cover image */
   coverImage?: string;
   tags: string[];
   features: string[];
@@ -34,111 +24,138 @@ export type Project = {
   seoConversion: string;
   businessValue: string;
   screenshotLabels: string[];
-  /** Optional real screenshot paths matched by index to screenshotLabels */
+  /** Screenshot paths matched by index to screenshotLabels */
   screenshotImages?: string[];
-  /** IHE only — marketing site screenshot labels */
-  marketingScreenshotLabels?: string[];
-  marketingScreenshotImages?: string[];
-  /** IHE only — product dashboard screenshot labels */
-  dashboardScreenshotLabels?: string[];
-  dashboardScreenshotImages?: string[];
-  /** Market valuation tier for this build */
-  pricingTier: PricingTier;
-  /** Estimated market price ranges for each hiring tier */
-  pricing: {
-    agency: string;
-    highFreelance: string;
-    lowFreelance: string;
-  };
-  /** One-sentence notes explaining each pricing tier for this specific project */
-  pricingNotes: {
-    agency: string;
-    highFreelance: string;
-    lowFreelance: string;
-  };
-  /** Common-language explanation of why the work is worth the price */
+  /** Common-language explanation of why the work is structured the way it is */
   valueExplainer: string;
-  /** Filter categories for the work page filter system */
   filterTags: FilterTag[];
 };
 
 export const projects: Project[] = [
+  // ── Revitalize Aesthetics & Wellness ─────────────────────────────────────
+  {
+    slug: "revitalize",
+    title: "Revitalize Aesthetics & Wellness",
+    label: "Original Build",
+    category: "Multi-Location Medical Practice",
+    featured: true,
+    coverImage: "/images/case-studies/covers/revitalize-1-hero.png",
+    filterTags: ["full-stack", "medical"],
+    valueExplainer:
+      "Revitalize had a clinic, a separate book, a separate nutrition shop, a separate coaching institute, and no system that connected them. The build unified all of it into one ecosystem with one brand voice and one navigation logic, while keeping each business operationally separate.",
+    shortSummary:
+      "A multi-location medical aesthetics practice in Georgia. Two clinics, a connected nutrition supplement brand, a published book, and a coaching institute — all under one digital ecosystem.",
+    summary:
+      "Revitalize is a multi-location medical aesthetics, hormone, and weight-management practice operating two clinics in Columbus and Warner Robins, Georgia. The build replaced a template medspa site with a 50+ route clinical platform spanning 18 service pages, two-location SEO, an interactive hormone health assessment, a searchable Learning Library, and JaneApp booking flows per location — and connected three additional businesses (a supplement shop, a published book, and a coaching institute) under one brand system.",
+    liveUrl: "https://revitalize-medical-wellness-clinic-nine.vercel.app",
+    tags: ["Healthcare", "Multi-Location", "Medspa", "Next.js"],
+    features: [
+      "Main clinic platform — 50+ routes across the practice",
+      "18 individual service pages — neuromodulators, fillers, hormone therapy, weight loss, IV hydration, laser, PRP, and more",
+      "2 location pages with NAP details, hours, and booking integration",
+      "City-specific service landing pages for Columbus and Warner Robins",
+      "Learning Library architecture for clinical content at scale",
+      "Hormone Health Self-Assessment interactive patient tool",
+      "Treatment Finder interactive guide",
+      "Patient onboarding pathway and Start Here flow",
+      "Provider profiles and team page",
+      "Payment plans page for treatment accessibility",
+      "Location-specific JaneApp booking integration",
+      "Connected nutrition supplement shop on its own subdomain",
+      "Book microsite with multi-platform retailer integration",
+      "Rebuild Metabolic Health Institute — coaching microsite",
+      "Brand system spanning all four properties",
+      "Auburn location closure cleanup and redirect strategy",
+      "Dynamic sitemap and JSON-LD medical schema markup",
+      "RSS feed and JSON index endpoint for content discoverability",
+      "Mobile sticky booking, call, and Start Here bar",
+    ],
+    valuePoints: [
+      "Two clinic locations with dedicated SEO instead of one shared brochure page",
+      "Eighteen service pages a patient can find by name instead of a flattened menu",
+      "A connected ecosystem (clinic + shop + book + institute) under one brand voice",
+      "Booking, content, and provider information all routed through one architecture",
+      "Patient education that builds authority before the first appointment",
+    ],
+    stack:
+      "Next.js, TypeScript, Tailwind CSS, Vercel, App Router, Dynamic Sitemap, JSON-LD Medical Schema, RSS Feed, JaneApp Booking Integration, Shopify (nutrition shop)",
+    challenge:
+      "Revitalize had grown into four separate businesses — a two-location aesthetics and hormone clinic, a published book, a nutrition supplement brand, and a coaching institute — each with its own audience, its own commercial logic, and no system connecting them. The existing template site presented one of those four (the clinic) as a flat brochure with minimal local SEO, an outdated location footprint, and no patient-facing tools. Patients had no clear pathway to book, understand services, or compare locations. The other three businesses lived elsewhere on the internet, invisible to anyone who came in through the clinic site.",
+    whatIBuilt:
+      "A 50+ page clinical marketing platform built around 18 individual service pages, dedicated location SEO for Columbus and Warner Robins, a structured Start Here patient pathway, an interactive hormone health assessment, a treatment finder, a searchable Learning Library, provider profiles, payment plans, and JaneApp booking flows per location. Connected the supplement brand, the book, and the coaching institute under one brand system so the four businesses cross-reference each other without merging operationally. Cleaned up a closed-location footprint with a redirect strategy that preserved existing rankings.",
+    seoConversion:
+      "Built dedicated city-level service pages for Columbus and Warner Robins — Botox, hormone therapy, medical weight loss, and IV hydration each have city-specific landing pages instead of one shared service page. Added JSON-LD schema for the medical practice entity, dynamic sitemap, and RSS feed. The Learning Library structure means content scales without a CMS subscription, and each article has its own metadata, schema, and internal linking. Booking infrastructure is location-aware so patient flow is routed to the correct JaneApp instance from any service page.",
+    businessValue:
+      "Gives Revitalize a clear two-location digital footprint, an 18-service searchable architecture, and a content system that grows with the practice. The connected ecosystem (clinic + shop + book + institute) means a patient who arrives for hormone therapy can discover the practice's published book, the supplement line they prescribe, and the coaching institute that supports long-term care — all without leaving the brand. Each business stays operationally separate; the architecture connects them.",
+    screenshotLabels: [
+      "Homepage — hero and new patient pathway",
+      "Start Here — onboarding flow",
+      "Treatment Finder — interactive guide",
+      "Columbus location — local SEO",
+      "Learning Library — clinical articles",
+    ],
+    screenshotImages: [
+      "/images/case-studies/covers/revitalize-1-hero.png",
+      "/images/case-studies/covers/revitalize-2-pathways.png",
+      "/images/case-studies/covers/revitalize-3-services.png",
+      "/images/case-studies/covers/revitalize-4-tools.png",
+      "/images/case-studies/covers/revitalize-5-library.png",
+    ],
+  },
+
   // ── Air Solutions Heating & Cooling ───────────────────────────────────────
   {
     slug: "air-solutions",
     title: "Air Solutions Heating & Cooling",
     label: "Original Build",
-    category: "HVAC / Local Service Business · 24-Month Engagement",
-    isFlagship: true,
+    category: "HVAC · Multi-City Programmatic SEO",
+    featured: true,
     coverImage: "/images/case-studies/covers/air-solutions-1-hero.png",
     filterTags: ["full-stack", "local"],
-    pricingTier: "agency",
-    pricing: {
-      agency: "$480,000 – $615,000",
-      highFreelance: "$314,000",
-      lowFreelance: "$8,000 – $20,000",
-    },
-    pricingNotes: {
-      agency:
-        "A national HVAC-vertical agency — Scorpion, Blue Corona, WebFX — would scope this build at $480K–$615K for the identical 24-month engagement. That figure was independently verified by component-by-component audit against the live codebase: 249 launch pages, 441-post content library, native scheduling system, programmatic SEO matrix, 9-type Schema.org architecture, three custom interactive tools, and 24 months of operating retainer.",
-      highFreelance:
-        "Senior independent developer market rate — verified against the same component audit — comes to $314,000 for the full 24-month engagement. Building this scope requires senior Next.js development, programmatic SEO architecture, a custom data pipeline for automated content scheduling, TypeScript across hundreds of unique page types, and the domain knowledge to write what an HVAC customer in Baldwin County actually searches for.",
-      lowFreelance:
-        "A generalist freelancer would deliver a 30–40 page WordPress theme with a contact form, basic local SEO, and one or two service pages. No programmatic SEO matrix. No content engine. No interactive tools. No NWS hurricane alert integration. The outcome looks similar at first glance and performs in an entirely different category in search.",
-    },
     valueExplainer:
-      "The methodology at the core of this platform is programmatic SEO — the same architectural pattern Airbnb uses for “apartments in [every city on earth],” Zapier uses for “[App A] integration with [App B],” and Tripadvisor uses for “[restaurant type] in [every neighborhood].” Applied to a single Baldwin County HVAC contractor, it produces 135 city × service intersection pages, a 441-post content engine that publishes automatically through May 2028, and a category of digital asset no competitor in the market currently occupies. By month 18 the moat is structural — replication cost is $285K and 9–12 months of full-time work.",
+      "Programmatic SEO is the same architectural pattern Airbnb uses for apartments per city, Zapier for app integrations, and Tripadvisor for restaurants per neighborhood. Applied to a single Baldwin County HVAC contractor, it produces 135 city × service intersection pages, an automated content engine, and a category of digital asset no competitor in the market currently occupies.",
     shortSummary:
-      "A 24-Month Market Dominance Program: 249 launch pages growing to 650+ URLs through May 2028. Programmatic SEO across 15 cities × 9 services, a native automated content engine publishing 4 posts a week, three custom interactive tools, and a 12-section GBP operating manual.",
+      "A 159-page programmatic SEO architecture for an HVAC contractor in coastal Alabama. 15 cities × 9 services, plus four custom interactive tools.",
     summary:
-      "Air Solutions Heating & Cooling commissioned a build replacing a 36-page WordPress brochure with a 24-month engagement built on programmatic SEO, native automated publishing, and a 9-type Schema.org architecture. The platform launched with 249 indexed pages — 11.8× the old site — and is on a content schedule that will reach 650+ URLs and 3,280 keyword targets by May 2028. The same architectural pattern Netflix and Vercel use for production applications, applied to a local HVAC contractor in Baldwin County, Alabama.",
+      "Air Solutions Heating & Cooling commissioned a build replacing a 36-page WordPress brochure with a programmatic SEO platform: 249 indexed pages at launch, a 9-type Schema.org architecture, four custom interactive tools, and a native automated publishing engine. The same architectural pattern Netflix and Vercel use for production applications, applied to a local HVAC contractor in Baldwin County, Alabama.",
     liveUrl: "https://airsolutionspros.com",
-    tags: ["HVAC", "Programmatic SEO", "Baldwin County", "Next.js", "24-Month Retainer", "Content Engine"],
+    tags: ["HVAC", "Programmatic SEO", "Custom Tools", "Next.js"],
     features: [
       "249 indexed pages at launch — 11.8× the old WordPress site",
-      "650+ URLs by May 2028 with automated content publishing",
       "Programmatic SEO matrix: 15 Baldwin County cities × 9 HVAC services = 135 intersection pages",
       "9 service hub pages — AC repair, install, heating, heat pump, mini-split, IAQ, commercial, emergency, maintenance",
       "15 city hub pages — Daphne, Fairhope, Foley, Gulf Shores, Orange Beach, and the rest of the county",
       "3 commercial vertical pages — restaurants, vacation rentals, property managers",
       "4 seasonal landing pages — spring, summer, fall, winter campaigns",
       "2 cost-guide pages targeting purchase-decision keyword queries",
-      "441-post content library — 50 live at launch, 391 scheduled and queued through May 2028",
       "Native date-gated publishing engine — Vercel cron, no plugin, no CMS subscription",
-      "Tuesday and Thursday 6 AM CT publishing schedule, fully automated",
-      "Live NWS hurricane alert API integration — non-dismissable banner across every page during severe alerts",
+      "Live NWS hurricane alert API integration — non-dismissable banner during severe alerts",
       "4-tier seasonal banner system: manual override → NWS alert → scheduled banner → nothing",
-      "3D AC Explorer — 1,281 lines of custom Three.js, interactive component visualization",
-      "HVAC Diagnostic Quiz — 617 lines of typed TypeScript, decision-tree symptom triage",
+      "3D AC Explorer — Three.js interactive component visualization",
+      "HVAC Diagnostic Quiz — typed decision-tree symptom triage",
       "Repair vs. Replace ROI Calculator — live financial modeling tool",
       "9-type Schema.org architecture — HVACBusiness subtype, OfferCatalog, per-city postalCode arrays",
       "Single source of truth data architecture — one edit propagates across all 249 pages, schema, and metadata",
-      "6 branded Open Graph image generators rendering social cards at request time",
-      "Smart form pipeline — Zod validation, Cloudflare Turnstile, Resend, 5-type intent routing",
-      "Cool Club maintenance program page with member benefits",
-      "Financing partner program page",
-      "2,961-line keyword-coverage map maintained inside the project at /docs/seo/keyword-map.md",
+      "Smart form pipeline — Zod validation, Cloudflare Turnstile, Resend, intent routing",
+      "Open Graph image generators rendering branded social cards on demand",
       "12-section Google Business Profile operating manual delivered at launch",
-      "24-month retainer: monthly Search Console, quarterly Local Falcon, bi-annual keyword optimization",
     ],
     valuePoints: [
-      "Replacement-cost valuation: $314K senior independent / $480K–$615K national agency",
-      "From 100 keyword targets on 36 URLs to 3,280 keyword targets on 650+ URLs by month 24",
-      "Conservative GBP Prominence lift estimate: +18–22%. Realistic: +25–30%",
-      "Live ranking moves from 0% Share of Local Voice in south Baldwin to top-3 by month 12 (projected)",
-      "By month 18 the content moat is structural — competitor replication cost: $285K and 9–12 months",
-      "Pays back in under 6 months at one extra AC install per month at $8,000",
+      "Closes the Share of Local Voice gap in south Baldwin markets — Foley, Gulf Shores, Orange Beach — where the business showed 0% before launch",
+      "Programmatic city × service architecture covers every market the trucks operate in, not just the city of record",
+      "Native publishing engine compounds the authority signal at a cadence competitors publishing 0–2 posts a month cannot match",
+      "Four custom interactive tools no competitor in the county offers",
     ],
     stack:
-      "Next.js, TypeScript, Tailwind CSS, Vercel, App Router, Three.js / WebGL, Vercel Cron, Cloudflare Turnstile, Resend, Zod, NWS Public Alert API, 9-Type Schema.org, Custom Date-Gated Publishing Engine",
+      "Next.js 14, TypeScript, Tailwind, Three.js (3D explorer), Vercel Cron, Cloudflare Turnstile, Resend, Zod, NWS Public Alert API, 9-Type Schema.org, custom date-gated publishing engine",
     challenge:
-      "The previous airsolutionspros.com site was a 36-page WordPress brochure being maintained, not built to compete. Despite Air Solutions holding the strongest review velocity in Baldwin County, the business showed 0% Share of Local Voice in south Baldwin markets — Foley, Gulf Shores, Orange Beach — where its trucks operate daily. Distance to the home address is fixed; relevance is improvable. The platform’s job was to close the relevance gap with 135 dedicated city × service pages, then sustain that advantage with a content engine that publishes through May 2028 without manual intervention.",
+      "The previous airsolutionspros.com site was a 36-page WordPress brochure being maintained, not built to compete. Despite Air Solutions holding the strongest review velocity in Baldwin County, the business showed 0% Share of Local Voice in south Baldwin markets — Foley, Gulf Shores, Orange Beach — where its trucks operate daily. Distance to the home address is fixed; relevance is improvable. The platform's job was to close the relevance gap with 135 dedicated city × service pages, then sustain that advantage with a content engine that publishes without manual intervention.",
     whatIBuilt:
-      "A 249-page Next.js application with a 9-type Schema.org architecture, a 135-page programmatic SEO matrix covering every Baldwin County city × every HVAC service, a 441-post content library with 50 posts live at launch and 391 scheduled through May 2028, a native date-gated publishing engine running on Vercel cron with no plugin or CMS dependency, a 4-tier seasonal banner system including a live National Weather Service hurricane alert integration, three custom interactive tools (a 1,281-line Three.js 3D AC Explorer, a 617-line typed diagnostic quiz, a Repair vs. Replace ROI calculator), a smart form pipeline with Zod validation and Cloudflare Turnstile, a single source of truth data architecture, and a 12-section GBP operating manual delivered at launch. The 2,961-line keyword-coverage map lives inside the project codebase and is updated every six months as part of the retainer.",
+      "A 249-page Next.js application with a 9-type Schema.org architecture, a 135-page programmatic SEO matrix covering every Baldwin County city × every HVAC service, a native date-gated publishing engine running on Vercel cron with no plugin or CMS dependency, a 4-tier seasonal banner system including a live National Weather Service hurricane alert integration, three custom interactive tools (a Three.js 3D AC Explorer, a typed diagnostic quiz, a Repair vs. Replace ROI calculator), a smart form pipeline with Zod validation and Cloudflare Turnstile, a single source of truth data architecture, and a 12-section GBP operating manual delivered at launch.",
     seoConversion:
-      "Built around the programmatic-SEO methodology used at the enterprise level by Airbnb, Zapier, Tripadvisor, and Zillow — applied to a single county. Every city × service combination is a standalone indexed page with unique local content, proper metadata, schema markup, and internal links. The 9-type Schema.org architecture includes the HVACBusiness subtype, OfferCatalog with all 9 services listed, and per-city postalCode arrays across all 15 Baldwin County cities — enterprise-level structured data implementation at a local-contractor scale. The retainer includes monthly Google Search Console monitoring, quarterly Local Falcon grid reports across the service area, and bi-annual keyword-optimization audits comparing live Search Console performance against the project’s keyword map.",
+      "Built around the programmatic-SEO methodology used at the enterprise level by Airbnb, Zapier, Tripadvisor, and Zillow — applied to a single county. Every city × service combination is a standalone indexed page with unique local content, proper metadata, schema markup, and internal links. The 9-type Schema.org architecture includes the HVACBusiness subtype, OfferCatalog with all 9 services listed, and per-city postalCode arrays across all 15 Baldwin County cities — enterprise-level structured data implementation at a local-contractor scale.",
     businessValue:
-      "Gives Air Solutions the strongest technical local-search platform in Baldwin County HVAC — 11.8× the old site’s indexed surface area at launch, growing to 32.8× by month 24. The GBP Prominence lift from 135 city-specific Relevance signals projects at +25–30%. Edge markets (Bay Minette, Loxley, Silverhill, Fort Morgan, Magnolia Springs, Lillian) where no competitor has even one dedicated page now have 9 service pages each. The content engine compounds: every post that indexes adds an authority signal Google reads as active business, on a publishing cadence (4 posts a week) that competitors publishing 0–2 posts a month cannot match. By month 18 the moat is structural and the cost to replicate is $285K and 9–12 months of senior development time.",
+      "Gives Air Solutions the strongest technical local-search platform in Baldwin County HVAC. Edge markets where no competitor has a single dedicated page now have nine service pages each. The content engine compounds: every post that indexes adds an authority signal Google reads as active business, on a publishing cadence competitors cannot match.",
     screenshotLabels: [
       "Homepage hero — Heating & Cooling, Done Right",
       "Five core HVAC services hub",
@@ -149,9 +166,6 @@ export const projects: Project[] = [
       "Schedule HVAC service — typed form pipeline",
       "3D AC Explorer — interactive Three.js model",
       "Field Guide — automated content engine",
-      "Latest from the Field — published posts",
-      "Service area — Baldwin County coverage map",
-      "250+ five-star reviews — local trust signal",
     ],
     screenshotImages: [
       "/images/case-studies/covers/air-solutions-1-hero.png",
@@ -163,216 +177,6 @@ export const projects: Project[] = [
       "/images/case-studies/covers/air-solutions-7-schedule.png",
       "/images/case-studies/covers/air-solutions-8-3d-explorer.png",
       "/images/case-studies/covers/air-solutions-9-field-guide.png",
-      "/images/case-studies/covers/air-solutions-10-guides.png",
-      "/images/case-studies/covers/air-solutions-11-coverage.png",
-      "/images/case-studies/covers/air-solutions-12-reviews.png",
-    ],
-  },
-
-  // ── Revitalize ────────────────────────────────────────────────────────────
-  {
-    slug: "revitalize",
-    title: "Revitalize Aesthetics & Wellness",
-    label: "Original Build",
-    category: "Medical Wellness / Medspa / Multi-Location · 24-Month Engagement",
-    isFlagship: true,
-    coverImage: "/images/case-studies/covers/revitalize-1-hero.png",
-    filterTags: ["full-stack", "medical"],
-    pricingTier: "agency",
-    pricing: {
-      agency: "$140,000 – $220,000",
-      highFreelance: "$104,000 – $180,000",
-      lowFreelance: "$4,000 – $8,500",
-    },
-    pricingNotes: {
-      agency:
-        "A medical marketing agency scopes the 24-month engagement at $140K–$220K — clinical strategist, medical copywriter, designer, developer, QA, plus the 200+ scheduled blog posts published twice weekly across the two-year content schedule. Eighteen service pages with clinical copy alone is a separate content sprint at agency rates.",
-      highFreelance:
-        "Senior independent replacement-cost valuation: $104K–$180K for the platform plus 24 months of content engine and operating retainer. Medical marketing specialists who can write a service page for PRP, bioidentical hormones, GLP-1, and hormone replacement at clinical accuracy are a small pool — and almost none of them ship the surrounding architecture.",
-      lowFreelance:
-        "A generalist delivers 4–5 static pages. No service hub, no JSON-LD medical schema, no city-specific landing pages, no RSS feed, no JaneApp integration, no content engine. The site looks okay and ranks nowhere.",
-    },
-    valueExplainer:
-      "Patients choosing a medspa or hormone clinic are making a trust-sensitive, often expensive decision. A site that reads like it was written by someone who doesn’t understand the medicine loses that patient before the first phone call. Eighteen individual service pages, city-specific SEO landing pages, a searchable Learning Hub, JaneApp booking per location, plus a 24-month content engine publishing two clinical articles a week — this is the infrastructure a growing two-location clinic needs to compete online.",
-    shortSummary:
-      "A 24-month engagement: a 50+ route clinical marketing platform with 18 service pages, two-location SEO, a searchable Learning Hub, JaneApp booking flows, and a content engine publishing two physician-written clinical articles every week through 2028.",
-    summary:
-      "Revitalize Aesthetics & Wellness commissioned a build replacing a template medspa site with a 24-month clinical marketing engagement — a 50+ route platform spanning 18 service pages across two active locations (Columbus GA and Warner Robins GA), city-specific SEO landing pages, an interactive hormone health assessment, a searchable Learning Hub, and a content engine publishing two clinical articles every week. The platform is structured for a growing multi-location practice and will reach 200+ published Learning Hub articles by the end of the engagement.",
-    liveUrl: "https://revitalize-medical-wellness-clinic-nine.vercel.app",
-    tags: ["Medical Wellness", "Medspa", "Local SEO", "Next.js", "Multi-Location"],
-    features: [
-      "50+ page clinical marketing platform (Next.js App Router)",
-      "18 individual service pages — neuromodulators, fillers, hormone therapy, weight loss, IV hydration, laser, PRP, and more",
-      "Location pages for Columbus GA and Warner Robins GA with dedicated SEO",
-      "City-specific service landing pages (Botox, hormone therapy, medical weight loss, IV hydration by city)",
-      "Start Here new patient onboarding pathway",
-      "Hormone Health Self-Assessment interactive tool",
-      "Treatment Finder interactive guide",
-      "Searchable Learning Hub with articles, videos, and patient resources",
-      "Hub RSS feed and JSON index endpoint for content discoverability",
-      "Blog with dynamic slug routing and legacy article preservation",
-      "Team page with provider profiles",
-      "Payment plans page for treatment accessibility",
-      "Media review system for press/feature management",
-      "Location-specific JaneApp booking links",
-      "Auburn location closure cleanup and redirect strategy",
-      "Google review link infrastructure",
-      "Dynamic sitemap and JSON-LD schema markup",
-      "Mobile sticky booking, call, and Start Here bar",
-      "Conservative medical disclaimers throughout",
-    ],
-    valuePoints: [
-      "Clearer active-location footprint after Auburn closure",
-      "Stronger local SEO for Columbus and Warner Robins markets",
-      "Better patient navigation across 18+ service lines",
-      "Streamlined booking flow per location via JaneApp",
-      "Authority-building content system with searchable Learning Hub and RSS",
-      "Safer migration architecture with redirect strategy from legacy site",
-    ],
-    stack: "Next.js 15, TypeScript, Tailwind CSS, Vercel, App Router, Dynamic Sitemap, JSON-LD Schema Markup, RSS Feed, JaneApp Booking Integration",
-    challenge:
-      "The existing site was a template-style brochure with minimal local SEO structure, no patient education system, and an outdated location footprint that still referenced a closed Auburn location. Patients had no clear pathway to book, understand services, or compare locations across the two active markets.",
-    whatIBuilt:
-      "A 50+ page clinical marketing platform with 18 individual service pages, city-specific SEO landing pages for Columbus and Warner Robins, a structured Start Here patient pathway, an interactive hormone health assessment and treatment finder, a searchable Learning Hub with RSS feed, blog with dynamic routing, team profiles, payment plans, and JaneApp booking flows specific to each location.",
-    seoConversion:
-      "Built city-specific landing pages for Columbus and Warner Robins at the service level — Botox, hormone therapy, medical weight loss, and IV hydration each have dedicated city-market pages. Added JSON-LD schema markup for medical practice entities, a dynamic sitemap, an RSS feed for content distribution, a clean redirect strategy for the Auburn closure, and Google review link infrastructure.",
-    businessValue:
-      "Gives Revitalize a clear two-location digital footprint, 18 searchable service pages, a patient education system that builds authority before the first appointment, and a booking architecture that reduces friction from discovery to scheduling — all within a scalable content system that grows with the practice.",
-    screenshotLabels: [
-      "Homepage — hero and new patient pathway",
-      "Start Here — new patient onboarding flow",
-      "Treatment Finder — interactive guide",
-      "Columbus location page — local SEO",
-      "Learning Library — articles and patient guides",
-    ],
-    screenshotImages: [
-      "/images/case-studies/covers/revitalize-1-hero.png",
-      "/images/case-studies/covers/revitalize-2-pathways.png",
-      "/images/case-studies/covers/revitalize-3-services.png",
-      "/images/case-studies/covers/revitalize-4-tools.png",
-      "/images/case-studies/covers/revitalize-5-library.png",
-    ],
-  },
-
-  // ── Interactive Health Education ──────────────────────────────────────────
-  {
-    slug: "interactive-health-education",
-    title: "Interactive Health Education",
-    label: "Original Product",
-    category: "Digital Health · Patient Education Platform",
-    isFlagship: true,
-    coverImage: "/images/case-studies/covers/ihe-dashboard-1-home.png",
-    filterTags: ["platform", "full-stack", "medical"],
-    pricingTier: "agency",
-    pricing: {
-      agency: "$650,000 – $1,200,000",
-      highFreelance: "$500,000 – $750,000",
-      lowFreelance: "$120,000 – $250,000",
-    },
-    pricingNotes: {
-      agency: "Replacement-cost benchmark from the valuation report: rebuilding the full platform in 2026 market conditions (dashboard wrapper + 144+ modules + packaging/QA) is estimated at roughly $650K-$1.2M.",
-      highFreelance: "Risk-adjusted current strategic value benchmark from the report: approximately $500K-$750K after accounting for commercialization risk, remaining polish work, and go-to-market traction.",
-      lowFreelance: "Represents a significantly reduced rebuild scope (partial library + lighter productization). This does not reflect full parity with the current IHE platform architecture.",
-    },
-    valueExplainer: "This is two fully distinct production systems: a B2B marketing site targeting healthcare buyers with dedicated landing pages, an ROI calculator, and a live demo flow — and a 145-app patient education platform with a commercial licensing engine, demo mode, and policy-governed catalog. Most patient education tools are outdated PDFs locked inside EHR systems. This is a deployable, no-PHI, licensable product that removes the compliance barrier that stops most clinic software deals.",
-    shortSummary:
-      "A physician-designed digital health platform with two distinct surfaces: a B2B marketing site and a React SPA dashboard delivering 144+ patient-facing interactive modules across 21 clinical categories and 11 commercial licensing bundles.",
-    summary:
-      "Interactive Health Education is a physician-designed patient education platform built as two distinct surfaces. The marketing site (interactivehealtheducation.com) is a buyer-facing multi-page site targeting clinics, health systems, and digital health companies with SEO landing pages, solution verticals, ROI calculator, demo flow, and tiered licensing. The dashboard (dashboard.interactivehealtheducation.com) is the product itself: a React SPA with 144+ interactive patient education apps designed for eighth-grade readability — each a self-contained clinical education module with calculators, symptom scorers, and visual aids — organized by 21 clinical categories, packaged into 11 commercial licensing bundles, and deployable via link, QR code, iframe, or kiosk with no PHI collection in standard use.",
-    liveUrl: "https://dashboard.interactivehealtheducation.com/",
-    marketingUrl: "https://interactivehealtheducation.com",
-    dashboardUrl: "https://dashboard.interactivehealtheducation.com/",
-    tags: [
-      "Digital Health",
-      "Patient Education",
-      "React",
-      "TypeScript",
-      "SPA",
-      "B2B SaaS",
-      "No PHI",
-      "Clinical Content",
-    ],
-    features: [
-      "B2B marketing site with 10+ SEO buyer-persona landing pages targeting specific clinical use cases",
-      "Solution vertical pages: independent clinics, behavioral health, employer/population health, weight loss/metabolic",
-      "ROI calculator for clinic buyer decision-making",
-      "Demo flow with embedded live dashboard access for prospects",
-      "4-tier licensing pricing structure (Starter $1K/yr → Enterprise $5K/yr → Custom health systems)",
-      "White-label add-on and custom domain deployment options",
-      "Video marketing demo (IHEMarketingDemo.mp4) embedded on homepage",
-      "Library snapshot thumbnails for 80+ apps used as marketing assets",
-      "Obfuscated admin dashboard for platform management",
-      "Custom JS modules: analytics.js, forms.js, home.js, demo-config.js",
-      "Full SEO: sitemap.xml, robots.txt, Open Graph, Twitter Cards, structured data",
-      "144+ physician-authored interactive patient education apps — single source of truth in AppList.ts",
-      "React SPA with Vite — lazy-loaded routes for all 145 apps via lazyAppPages.tsx",
-      "Module UX standards target patient comprehension at approximately an eighth-grade reading level",
-      "Flexible deployment options: link, QR code, iframe embedding, or kiosk mode",
-      "21 canonical clinical categories (Cancer & Oncology, Cardiovascular, Mental Health & Behavior, Women's Health, Surgery, etc.)",
-      "11 commercial licensing bundles auto-generated from source JSON (Cardiometabolic, Mental Health Core, Women's Reproductive, MSK Pain, Oncology, Respiratory, GI/Liver, Neuro/Derm, Kidney, Men's Urology, Prevention/Utilities)",
-      "App type taxonomy: flagship, standard, calculator, micro, pathway, caregiver, procedure",
-      "Curated collections system — browse-optimized groupings separate from commercial bundles",
-      "Demo mode: DemoModeDashboard, demo manifest, smart presentation order, access gating for non-demo apps",
-      "Policy engines: commercialBundlePolicy.ts, curatedCollectionPolicy.ts, dashboardBrowseFilter.ts — each with unit tests",
-      "Drug interactions database powering a multi-drug checker with severity ratings",
-      "Clinical calculators: Wells DVT/PE, PERC, eGFR, Framingham 10-yr risk, ABI, IPSS, AUDIT-C, Child-Pugh/MELD",
-    ],
-    valuePoints: [
-      "144+ fully functioning clinical apps — not a demo, not a mockup, a deployable product",
-      "Commercial bundle architecture allows clinics to license exactly the specialty modules they need",
-      "Demo mode lets buyers experience the product before signing — reducing sales friction",
-      "No PHI means zero compliance overhead for clinic partners",
-      "Policy engines with unit tests — the catalog logic is tested, not just built",
-      "Tiered pricing from $1K/year (small clinic) to enterprise custom",
-      "Physician-authored content — the clinical accuracy is part of the product value",
-      "Replacement-cost valuation benchmark: approximately $650k-$1.2M to rebuild in 2026 market conditions",
-      "Current risk-adjusted strategic value benchmark: approximately $500k-$750k with upside from pilots and licensing traction",
-    ],
-    stack:
-      "Marketing Site: HTML5, Tailwind CSS, Vanilla JS, Vercel | Dashboard: React, TypeScript, Vite, Vercel, React Router, Lazy Loading, Policy Engines, Unit Tests",
-    challenge:
-      "Most patient education tools are outdated PDFs, generic third-party portals, or locked inside expensive EHR systems that require compliance agreements to access. The challenge was building an independent, interactive library that was scalable across clinical topics, accurate enough for physician authorship, safe to distribute without PHI collection, and commercial enough to license at B2B scale — all while maintaining a buyer-facing marketing site that could convert healthcare buyers who had never seen the product in person.",
-    whatIBuilt:
-      "Two fully distinct surfaces built for different audiences. The marketing site targets clinic buyers, health systems, and digital health companies — with buyer-persona SEO landing pages, solution verticals, a tiered pricing page, a ROI calculator, a live demo flow, and an admin management layer. The dashboard is the product itself: a React SPA with 145 physician-authored interactive patient education apps, each lazy-loaded and fully functional as a standalone module. The catalog is governed by a policy engine architecture — commercial bundles and curated collections are defined in source JSON and auto-generated into TypeScript modules, meaning the catalog structure is version-controlled, testable, and independent from the UI.",
-    seoConversion:
-      "The marketing site is structured around B2B buyer-persona discovery: 10+ dedicated landing pages targeting specific clinical use cases. Each page targets a distinct buyer context and search intent. The ROI calculator gives buyers a quantified justification for the purchase. The live demo reduces the friction of a sales call by letting buyers self-explore.",
-    businessValue:
-      "Interactive Health Education demonstrates product-level thinking that goes far beyond website work. The dashboard is a physician-designed library of 144+ interactive patient education tools organized into 11 commercial licensing bundles, with a policy engine that governs access, a demo mode built for sales, and a no-PHI architecture that removes the compliance barrier. The platform supports four business models simultaneously: direct clinic licensing, health system enterprise contracts, digital health SaaS partnerships, and white-label distribution. Based on 2026 healthcare app replacement-cost benchmarks, the platform is credibly positioned as a high-value digital health IP asset with seven-figure upside as pilots and licensing maturity increase.",
-    screenshotLabels: [
-      "Marketing site — homepage and value proposition",
-      "Marketing site — use cases and buyer positioning",
-      "Dashboard — module library overview",
-      "Dashboard — search and filter interface",
-      "Dashboard — individual module detail",
-      "Dashboard — mobile module view",
-    ],
-    marketingScreenshotLabels: [
-      "Homepage — product overview and positioning",
-      "Workflow moments and care flow architecture",
-      "Featured value blocks and platform framing",
-      "Licensed bundles and deployment options",
-      "Catalog preview and conversion CTA",
-    ],
-    marketingScreenshotImages: [
-      "/images/case-studies/covers/ihe-marketing-1-hero.png",
-      "/images/case-studies/covers/ihe-marketing-2-flow.png",
-      "/images/case-studies/covers/ihe-marketing-3-featured.png",
-      "/images/case-studies/covers/ihe-marketing-4-bundles.png",
-      "/images/case-studies/covers/ihe-marketing-5-footer-cta.png",
-    ],
-    dashboardScreenshotLabels: [
-      "App library — searchable, filterable module grid",
-      "Module detail — interactive patient education",
-      "Search by topic, condition, or specialty",
-      "Mobile-responsive module view",
-      "Category browsing — primary care and specialty",
-    ],
-    dashboardScreenshotImages: [
-      "/images/case-studies/covers/ihe-dashboard-1-home.png",
-      "/images/case-studies/covers/ihe-dashboard-2-grid.png",
-      "/images/case-studies/covers/ihe-dashboard-3-grid-lower.png",
-      "/images/case-studies/covers/ihe-dashboard-4-list-view.png",
-      "/images/case-studies/covers/ihe-dashboard-5-list-lower.png",
     ],
   },
 
@@ -381,70 +185,46 @@ export const projects: Project[] = [
     slug: "acexperts",
     title: "ACExperts251",
     label: "Original Build",
-    category: "HVAC / Local Service Business",
-    isFlagship: true,
+    category: "HVAC · Local SEO",
     coverImage: "/images/case-studies/covers/acexperts-1-hero.png",
     filterTags: ["full-stack", "local"],
-    pricingTier: "agency",
-    pricing: {
-      agency: "$55,000 – $85,000",
-      highFreelance: "$18,000 – $35,000",
-      lowFreelance: "$3,500 – $7,000",
-    },
-    pricingNotes: {
-      agency: "A home services agency bills the 3D diagnostic tool alone as a $15K–$20K interactive feature sprint. Add strategists, copywriters, and QA across 30+ routes — 4 months minimum.",
-      highFreelance: "A senior Next.js developer with HVAC-industry knowledge and local SEO depth who can also build a Three.js 3D tool and wire a Google Sheets API with Cloudflare Turnstile — this combination of skills is genuinely rare.",
-      lowFreelance: "A generalist delivers a WordPress theme with basic pages. No 3D diagnostic tool, no secure API lead capture, no 8-city SEO architecture. It looks similar to the untrained eye and performs completely differently in search.",
-    },
-    valueExplainer: "The 3D interactive AC diagnostic tool doesn't exist anywhere else in Baldwin County HVAC. Every form submission routes securely to a Google Sheet the owner reads directly — no CRM subscription needed. The 8-city page architecture gives the business a realistic ranking opportunity across every service area they operate in, not just their city of record. This is the most technically capable HVAC website in the county.",
+    valueExplainer:
+      "A full-stack Next.js HVAC site for Baldwin County with seven service pages, eight city pages, three interactive tools, and direct lead capture into a Google Sheet the owner reads.",
     shortSummary:
-      "A full-stack Next.js HVAC website for Baldwin County, Alabama — 7 service pages, 8 city SEO pages, 3 interactive tools (3D diagnostic, quiz, ROI calculator), API-backed lead capture, and a live Google Reviews integration.",
+      "A full-stack Next.js HVAC website for Baldwin County, Alabama — 7 service pages, 8 city SEO pages, 3 interactive tools, API-backed lead capture, and live Google Reviews integration.",
     summary:
-      "ACExperts251 needed a website that matched the quality of their work and gave homeowners in Baldwin County every reason to call over a competitor. The result is a full-stack Next.js application with structured service and city pages, three interactive diagnostic tools, API-backed form handling, and a live review integration — not a template.",
+      "ACExperts251 needed a website that matched the quality of their work and gave homeowners every reason to call over a competitor. The result is a full-stack Next.js application with structured service and city pages, three interactive diagnostic tools, API-backed form handling, and a live review integration.",
     liveUrl: "https://acexperts251.com",
-    tags: ["HVAC", "Local SEO", "Baldwin County", "Next.js", "Service Business", "Interactive Tools"],
+    tags: ["HVAC", "Local SEO", "Interactive Tools"],
     features: [
-      "7 dedicated service pages with dynamic routing — repair, installation, heating, heat pumps/mini-splits, maintenance, indoor air quality",
-      "8 city/service-area pages for Baldwin County — Daphne, Fairhope, Foley, Gulf Shores, Orange Beach, Spanish Fort, Robertsdale, Silverhill",
-      "3D interactive AC system diagnostic tool built with Three.js/WebGL",
-      "AC diagnostic quiz — symptom-to-likely-repair interactive guide",
-      "ROI calculator for HVAC replacement decision-making",
-      "Blog with dynamic slug routing and CMS-ready data structure",
-      "Cloudflare Turnstile CAPTCHA on all form submissions",
+      "7 dedicated service pages with dynamic routing",
+      "8 city pages covering all major Baldwin County markets",
+      "3D interactive AC system diagnostic tool (Three.js / WebGL)",
+      "AC diagnostic quiz — symptom-to-likely-repair guide",
+      "ROI calculator for HVAC replacement decisions",
+      "Cloudflare Turnstile CAPTCHA on all forms",
       "Google Sheets API integration for direct lead capture",
-      "Service scheduling flow with dedicated thank-you confirmation page",
-      "API routes for contact form and scheduling (server-side handling)",
-      "Live Google Reviews widget (Elfsight) with real customer testimonials",
-      "Comfort Club maintenance plan page with plan details and benefits",
-      "Emergency HVAC service page with priority call-to-action",
-      "Financing page with partner program details",
-      "LLMs.txt for AI-crawler and search discoverability",
-      "Feature flag system for controlled feature rollouts",
-      "Trust badges, licensing signals, and insurance indicators",
-      "Mobile-first responsive design with tap-to-call CTAs",
-      "Dynamic sitemap, robots.txt, Open Graph, and manifest",
+      "Live Google Reviews widget",
+      "Emergency service and Comfort Club maintenance pages",
     ],
     valuePoints: [
-      "Full-stack Next.js build — not a template or no-code tool",
-      "Three interactive tools that differentiate the site from every HVAC competitor in Baldwin County",
-      "Server-side form handling with spam protection and lead capture to Google Sheets",
-      "8-city service-area SEO structure covering all of Baldwin County",
-      "Live review integration builds trust without manual content updates",
-      "Emergency page and scheduling flow reduce friction from problem to appointment",
+      "Three interactive tools no other Baldwin County HVAC competitor offers",
+      "Server-side form handling with spam protection and direct lead capture",
+      "8-city service-area SEO covering the full county footprint",
     ],
-    stack: "Next.js 15, TypeScript, Tailwind CSS, Vercel, App Router, Three.js / WebGL, Cloudflare Turnstile, Google Sheets API, Elfsight Reviews, Feature Flags",
+    stack: "Next.js, TypeScript, Tailwind, Vercel, Three.js / WebGL, Cloudflare Turnstile, Google Sheets API",
     challenge:
-      "HVAC competitors in Baldwin County have minimal web presences — outdated sites with no service structure, weak local SEO, no interactive tools, and no clear reason for a homeowner to call over another option. ACExperts needed a site that established authority quickly and demonstrated technical capability no competitor in the market could match.",
+      "HVAC competitors in Baldwin County have minimal web presences — outdated sites with no service structure, weak local SEO, no interactive tools, and no clear reason for a homeowner to call over another option. ACExperts needed a site that established authority quickly.",
     whatIBuilt:
-      "A full-stack Next.js application with 7 dynamic service pages, 8 city SEO pages, 3 interactive tools (a Three.js 3D AC diagnostic viewer, a symptom-based diagnostic quiz, and an ROI calculator), API routes for form handling with Cloudflare Turnstile protection and Google Sheets lead capture, a blog with dynamic routing, a live Google Reviews widget, and dedicated pages for emergency service, maintenance plans, and financing.",
+      "A full-stack Next.js application with 7 dynamic service pages, 8 city SEO pages, 3 interactive tools, API routes for form handling with Cloudflare Turnstile and Google Sheets lead capture, a live Google Reviews widget, and dedicated pages for emergency service, maintenance plans, and financing.",
     seoConversion:
-      "Built 8 city-specific pages covering all major Baldwin County markets. Created 7 service-specific pages targeting high-intent HVAC search terms. Added LLMs.txt for AI search discoverability. Structured the CTA hierarchy to drive phone calls, contact form submissions, and scheduling flows. Emergency page captures urgent search intent.",
+      "8 city-specific pages, 7 service-specific pages targeting high-intent HVAC search terms, LLMs.txt for AI search discoverability, and a CTA hierarchy structured to drive phone calls, contact submissions, and scheduling flows.",
     businessValue:
-      "Gives ACExperts the most technically capable HVAC website in Baldwin County — a credible, professional full-stack presence that earns trust before the first call, supports local search rankings across 8 cities, and turns homeowner questions into booked service calls through interactive tools that no competitor offers.",
+      "Gives ACExperts a credible, professional full-stack presence that earns trust before the first call, supports local search rankings across 8 cities, and turns homeowner questions into booked service calls through interactive tools no competitor offers.",
     screenshotLabels: [
       "Homepage — hero and service overview",
-      "Service pages — HVAC installation and repair",
-      "City coverage pages — Baldwin County",
+      "Service pages — installation and repair",
+      "City coverage — Baldwin County",
       "Financing and maintenance plans",
       "Contact and service request flow",
     ],
@@ -462,74 +242,49 @@ export const projects: Project[] = [
     slug: "collective-counseling",
     title: "Collective Counseling",
     label: "Original Build",
-    category: "Therapy Practice / Counseling / ADHD Testing",
+    category: "Therapy Practice",
     coverImage: "/images/case-studies/covers/collective-1-homepage-hero.png",
     filterTags: ["medical", "static"],
-    pricingTier: "senior-dev",
-    pricing: {
-      agency: "$12,000 – $22,000",
-      highFreelance: "$4,500 – $9,000",
-      lowFreelance: "$800 – $2,500",
-    },
-    pricingNotes: {
-      agency: "A healthcare marketing agency handling a therapy practice runs a brand strategy session, a mental health communication specialist for copy, and a design/development phase — $12K is their minimum engagement.",
-      highFreelance: "Writing copy for a therapy audience is specialized. You have to understand how to speak to someone who is nervous, private, and deciding whether to ask for help. A freelancer who treats this like a brochure misses the point entirely.",
-      lowFreelance: "You get a template with the clinic name swapped in and stock photos of calm people. The copy reads like a brochure, the ADHD testing page doesn't exist as a standalone SEO target, and the emotional tone that makes someone feel safe enough to reach out is completely missing.",
-    },
-    valueExplainer: "A therapy website's job is not to explain services — it's to make a nervous person feel safe enough to send an email. That requires understanding the emotional state of the patient and writing toward it. ADHD testing positioned as a cash-pay specialty service on its own dedicated page means it can actually rank on Google. Real therapist photography instead of stock imagery changes how prospective clients feel about the practice before they ever call.",
+    valueExplainer:
+      "A therapy website's job is not to explain services — it's to make a nervous person feel safe enough to send an email. ADHD testing positioned as a cash-pay specialty service on its own dedicated page means it can actually rank.",
     shortSummary:
-      "A 4-page semantic multi-page website for a therapy practice in Daphne, Alabama — dedicated pages for counseling, ADHD testing, and addiction counseling, with sitemap, webmanifest, and Vercel deployment.",
+      "A 4-page therapy practice site in Daphne, Alabama — dedicated pages for counseling, ADHD testing, and addiction counseling, with real therapist photography.",
     summary:
       "Collective Counseling needed a site that communicated professionalism and approachability in equal measure — helping prospective clients understand services, know what to expect, and feel safe enough to reach out. A lean, semantic multi-page build was the right choice: fast, focused, and built to rank for the specific service terms that matter most.",
     liveUrl: "https://collectivecounselingdaphne.com",
-    tags: ["Therapy", "Counseling", "ADHD Testing", "Local SEO", "Daphne AL"],
+    tags: ["Therapy", "ADHD Testing", "Local SEO"],
     features: [
-      "Multi-page HTML/CSS architecture — homepage, therapy, ADHD testing, and addiction counseling",
-      "Dedicated adult ADHD testing page positioned as a cash-pay specialty service",
-      "Dedicated addiction counseling page with service-specific copy",
-      "Dedicated therapy page covering individual counseling scope and approach",
-      "Client photo and real therapist identity — not stock imagery",
-      "sitemap.xml and robots.txt for full search engine indexing",
-      "Web app manifest for PWA-ready mobile experience",
-      "Local SEO structure for Daphne and Baldwin County",
+      "Multi-page architecture — homepage, therapy, ADHD testing, addiction counseling",
+      "Dedicated adult ADHD testing page positioned as a cash-pay specialty",
+      "Real therapist photography instead of stock imagery",
       "Insurance and payment clarity section",
-      "Professional but warm visual tone calibrated for therapy-first impressions",
-      "Google Business Profile alignment",
-      "Client inquiry and contact flow",
-      "Mobile-first responsive layout",
-      "Vercel deployment with production-ready configuration",
+      "Local SEO structure for Daphne and Baldwin County",
     ],
     valuePoints: [
-      "Dedicated service pages for each specialty — not everything buried on one page",
-      "ADHD testing clearly positioned as a keyword-specific, cash-pay service page",
-      "Real therapist photo builds trust faster than stock imagery",
-      "Insurance and fee transparency reduces pre-contact anxiety",
-      "Lean, fast multi-page build — no unnecessary framework overhead for a focused practice site",
+      "Dedicated service pages for each specialty — not buried under one menu",
+      "ADHD testing as a keyword-specific cash-pay landing page",
+      "Real therapist photo instead of stock imagery",
     ],
-    stack: "HTML/CSS, Multi-Page Architecture, Semantic SEO Markup, Web App Manifest, Vercel Deployment",
+    stack: "HTML/CSS, Multi-Page Architecture, Semantic SEO Markup, Vercel Deployment",
     challenge:
-      "Therapy websites often default to either generic template language or overly clinical copy. The challenge was building a site that felt personal and safe without losing professional credibility — while also positioning ADHD testing and addiction counseling as distinct, searchable services that do not get buried under a generic 'services' umbrella.",
+      "Therapy websites often default to generic template language or overly clinical copy. The challenge was building a site that felt personal and safe without losing professional credibility — while positioning ADHD testing and addiction counseling as distinct, searchable services.",
     whatIBuilt:
-      "A lean, focused multi-page site with individual pages for therapy, adult ADHD testing, and addiction counseling — each with service-specific copy, clear fee and insurance information, and a client inquiry flow designed to reduce the friction of making first contact. Built with real photography of the therapist rather than stock imagery, which meaningfully changes how prospective clients feel about the practice before they ever call.",
+      "A focused multi-page site with individual pages for therapy, adult ADHD testing, and addiction counseling — each with service-specific copy, clear fee and insurance information, and a client inquiry flow.",
     seoConversion:
-      "Individual pages for each service — therapy, ADHD testing, addiction counseling — each targeted at specific search terms. Local SEO structured around Daphne and Baldwin County. ADHD testing page positioned as a cash-pay specialty to capture high-intent search traffic. Full sitemap and robots.txt submitted for indexing.",
+      "Individual pages for each service targeted at specific search terms. Local SEO structured around Daphne and Baldwin County. ADHD testing positioned as a cash-pay specialty to capture high-intent search traffic.",
     businessValue:
-      "Gives Collective Counseling a professional, lightweight web presence that makes potential clients feel understood before they call — with specific service pages that improve local search rankings for each specialty and an identity that builds trust from the first page load.",
+      "Gives Collective Counseling a professional, lightweight web presence that makes potential clients feel understood before they call.",
     screenshotLabels: [
-      "Homepage hero — therapy and adult ADHD testing",
+      "Homepage — therapy and ADHD testing",
       "Service split — therapy and ADHD evaluation",
-      "Meet the therapist — credibility and trust",
+      "Meet the therapist",
       "Fees and insurance transparency",
-      "Contact and appointment request flow",
-      "Adult ADHD testing page detail",
     ],
     screenshotImages: [
       "/images/case-studies/covers/collective-1-homepage-hero.png",
       "/images/case-studies/covers/collective-2-services-split.png",
       "/images/case-studies/covers/collective-3-about-therapist.png",
       "/images/case-studies/covers/collective-4-fees-insurance.png",
-      "/images/case-studies/covers/collective-5-contact-form.png",
-      "/images/case-studies/covers/collective-6-adhd-page.png",
     ],
   },
 
@@ -538,55 +293,39 @@ export const projects: Project[] = [
     slug: "blessed-barbershop",
     title: "Blessed Barbershop",
     label: "Original Build",
-    category: "Barbershop / Appointment-Based Local Business",
+    category: "Local Service Business",
     coverImage: "/images/case-studies/covers/blessed-1-hero.png",
     filterTags: ["local", "static"],
-    pricingTier: "senior-dev",
-    pricing: {
-      agency: "$8,000 – $14,000",
-      highFreelance: "$2,500 – $5,000",
-      lowFreelance: "$400 – $1,200",
-    },
-    pricingNotes: {
-      agency: "Most agencies won't take a single-page local business site — their minimum engagement is $8K regardless. If they do take it, the deliverable is usually over-engineered for what the business actually needs.",
-      highFreelance: "A thoughtful single-page site with WebP optimization, real booking integration, mobile-first performance, and local SEO structure is worth this range from an experienced solo developer who knows what they're doing.",
-      lowFreelance: "You get a Squarespace template or a Wix page. Image optimization is an afterthought, the booking flow is a link to a Google Form, and Google Maps won't rank you because the site doesn't signal local relevance.",
-    },
-    valueExplainer: "A local barbershop's website is competing for one search: 'barbershop near me' on a mobile phone. A fast, WebP-optimized site with a frictionless booking link and real shop photography wins that search. A slow Wix template doesn't. The difference in monthly new clients from ranking vs. not ranking — even in a small market — is measurable in revenue.",
+    valueExplainer:
+      "A local barbershop is competing for one search: 'barbershop near me' on a mobile phone. A fast, WebP-optimized site with a frictionless booking link and real shop photography wins that search.",
     shortSummary:
-      "A mobile-first HTML/CSS barbershop website with WebP-optimized media, online booking integration, service menu with pricing, gallery, and local SEO structure — built for the client base that discovers local businesses on a phone.",
+      "A mobile-first HTML/CSS barbershop website with WebP-optimized media, online booking, service menu with pricing, and gallery — built for clients who discover local businesses on a phone.",
     summary:
-      "Blessed Barbershop needed a modern website that reflected the quality of the shop and made it easy for clients to book online. The site was built around local search discoverability and a frictionless booking experience — using a lean, fast HTML/CSS build optimized for mobile-first discovery.",
+      "Blessed Barbershop needed a modern website that reflected the quality of the shop and made it easy for clients to book online. Built around local search discoverability and a frictionless booking experience.",
     liveUrl: "https://www.blessedbarbershopdaphne.com",
-    tags: ["Barbershop", "Local SEO", "Booking", "HTML/CSS", "Local Business"],
+    tags: ["Local Business", "Mobile-First", "Booking"],
     features: [
       "Mobile-first HTML/CSS build — fast load with no framework overhead",
-      "WebP-optimized image assets across all visuals",
-      "Online booking integration — direct link from homepage and service menu",
-      "Service menu with clear pricing for new clients",
-      "Photo gallery showcasing the shop and work quality",
-      "Google Business Profile alignment for map and local search visibility",
-      "Location, hours, and contact information prominently placed",
-      "Social proof section with reviews and trust signals",
-      "Mobile tap-to-call CTA throughout",
-      "Shop photography used throughout — not stock imagery",
+      "WebP-optimized image assets",
+      "Online booking integration",
+      "Service menu with clear pricing",
+      "Photo gallery of shop and work",
+      "Google Business Profile alignment",
     ],
     valuePoints: [
-      "Professional web presence matching the quality of the service",
-      "WebP-optimized images mean fast load times on mobile where most clients search",
-      "Online booking reduces inbound phone volume and reduces no-shows",
-      "Service menu with pricing removes the question that stops new clients from booking",
-      "Gallery builds trust before the first visit",
+      "WebP-optimized images for fast load on mobile where clients search",
+      "Online booking reduces inbound phone volume and no-shows",
+      "Service menu with pricing removes the question that stops new clients",
     ],
     stack: "HTML/CSS, WebP-Optimized Media, Mobile-First Layout, Cloudflare Hosting",
     challenge:
-      "Most barbershops rely on Instagram or Google Maps as their only digital presence. Blessed Barbershop needed a dedicated site that gave new clients confidence and a clear path to booking — fast enough to hold attention on a mobile connection, and specific enough to stand apart from a generic listing.",
+      "Most barbershops rely on Instagram or Google Maps as their only digital presence. Blessed Barbershop needed a dedicated site that gave new clients confidence and a clear path to booking.",
     whatIBuilt:
-      "A focused, mobile-first barbershop site with a service menu and pricing, online booking flow, a real photo gallery of the shop and work, location and hours details, and a visual identity that matched the shop's brand. Built with WebP-optimized media for performance on mobile connections.",
+      "A focused, mobile-first barbershop site with a service menu, pricing, online booking flow, real photo gallery, and shop-brand visual identity.",
     seoConversion:
-      "Local SEO structured around Daphne and Baldwin County. Google Business Profile alignment for local map visibility. WebP images and lean HTML ensure fast page load scores. Mobile tap-to-call CTA at every scroll position. Booking link prominently placed to remove friction between discovery and appointment.",
+      "Local SEO around Daphne and Baldwin County. Google Business Profile alignment. WebP and lean HTML for fast page-load scores. Mobile tap-to-call CTA at every scroll position.",
     businessValue:
-      "Gives Blessed Barbershop a professional digital home that earns client trust before they walk in — with a gallery that shows the work, pricing that removes uncertainty, and a booking flow that converts discovery into appointments without requiring a phone call.",
+      "A professional digital home that earns client trust before they walk in — with a gallery that shows the work, pricing that removes uncertainty, and a booking flow that converts.",
     screenshotLabels: [
       "Homepage — services and booking CTA",
       "Service menu and pricing",
@@ -600,7 +339,6 @@ export const projects: Project[] = [
       "/images/case-studies/covers/blessed-5-hours-map.png",
     ],
   },
-
 ];
 
 export function getProjectBySlug(slug: string): Project | undefined {
@@ -609,23 +347,11 @@ export function getProjectBySlug(slug: string): Project | undefined {
 
 export function getLabelClass(label: ProjectLabel): string {
   switch (label) {
-    case "Strategic Rebuild Concept":
-      return "label-concept";
     case "Original Build":
       return "label-build";
     case "Original Product":
-    case "Internal / Founder Project":
       return "label-product";
     default:
       return "label-build";
-  }
-}
-
-export function getTierLabel(tier: PricingTier): string {
-  switch (tier) {
-    case "agency":
-      return "Agency-Grade Build";
-    case "senior-dev":
-      return "Senior-Dev Build";
   }
 }
