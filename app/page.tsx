@@ -216,8 +216,8 @@ export default function HomePage() {
       {/* ─── Proof bar ────────────────────────────────────────────────── */}
       <section
         style={{
-          background: "var(--surface)",
-          borderBottom: "1px solid var(--paper-rule)",
+          background: "var(--panel)",
+          borderBottom: "1px solid var(--border-subtle)",
         }}
       >
         <div

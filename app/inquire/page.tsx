@@ -26,16 +26,14 @@ export default function InquirePage() {
         <Eyebrow>§ Inquire / Start a Conversation</Eyebrow>
 
         <h1
-          className="display-serif"
+          className="display-sans display-96"
           style={{
-            fontSize: "clamp(40px, 7vw, 88px)",
-            color: "var(--navy-900)",
             marginBottom: "32px",
             maxWidth: "16ch",
           }}
         >
           Start a<br />
-          <em style={{ color: "var(--navy-700)" }}>conversation.</em>
+          <em>conversation.</em>
         </h1>
 
         <div className="editorial-body reading-col">
@@ -59,9 +57,9 @@ export default function InquirePage() {
       {/* ─── Fit note ─────────────────────────────────────────────── */}
       <section
         style={{
-          background: "var(--surface)",
-          borderTop: "1px solid var(--paper-rule)",
-          borderBottom: "1px solid var(--paper-rule)",
+          background: "var(--panel)",
+          borderTop: "1px solid var(--border-subtle)",
+          borderBottom: "1px solid var(--border-subtle)",
         }}
       >
         <div className="section-wrap section-block-tight">

@@ -14,26 +14,25 @@ export default function NotFound() {
       <Eyebrow>§ 404 / Page Not Found</Eyebrow>
 
       <h1
-        className="display-serif"
+        className="display-sans display-96"
         style={{
-          fontSize: "clamp(48px, 8vw, 96px)",
-          color: "var(--navy-900)",
           marginBottom: "32px",
           maxWidth: "16ch",
         }}
       >
         That page has<br />
-        <em style={{ color: "var(--navy-700)" }}>moved or never existed.</em>
+        <em>moved or never existed.</em>
       </h1>
 
       <p
         className="reading-col"
         style={{
-          fontFamily: "var(--font-manrope), sans-serif",
+          fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
           fontSize: "17px",
           lineHeight: 1.65,
-          color: "var(--ink-soft)",
+          color: "var(--ink-2)",
           marginBottom: "48px",
+          letterSpacing: "-0.01em",
         }}
       >
         The site was recently rebuilt and a few pages were renamed. Most of the old links should
@@ -47,7 +46,7 @@ export default function NotFound() {
           flexWrap: "wrap",
           alignItems: "baseline",
           paddingTop: "24px",
-          borderTop: "1px solid var(--paper-rule)",
+          borderTop: "1px solid var(--border-subtle)",
         }}
       >
         {[
