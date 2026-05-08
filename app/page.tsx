@@ -8,7 +8,7 @@ import Eyebrow from "@/components/editorial/Eyebrow";
 import SelectedClients from "@/components/sections/SelectedClients";
 import FaqSection from "@/components/sections/FaqSection";
 import TestimonialBlock from "@/components/sections/TestimonialBlock";
-import HeroCurve from "@/components/HeroCurve";
+import HeroAurora from "@/components/HeroAurora";
 import { getFeaturedTestimonials } from "@/lib/data/testimonials";
 import { faqs } from "@/lib/data/faq";
 import { siteConfig } from "@/lib/site-config";
@@ -125,27 +125,24 @@ export default function HomePage() {
           <div style={{ maxWidth: "960px" }}>
             <Eyebrow onDark>§ 01 / Campbell Digital Studio</Eyebrow>
             <h1
-              className="display-serif"
+              className="display-sans display-96"
               style={{
-                fontSize: "clamp(40px, 7vw, 88px)",
-                color: "white",
                 marginBottom: "clamp(24px, 3vw, 32px)",
                 maxWidth: "18ch",
               }}
             >
               Digital infrastructure for{" "}
-              <em style={{ color: "var(--gold-400)" }}>
-                clinical practices and local service businesses.
-              </em>
+              <em>clinical practices and local service businesses.</em>
             </h1>
             <p
               style={{
-                fontFamily: "var(--font-manrope), sans-serif",
-                fontSize: "clamp(15px, 1.6vw, 18px)",
-                lineHeight: 1.65,
-                color: "rgba(255,255,255,0.82)",
+                fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
+                fontSize: "clamp(16px, 1.6vw, 19px)",
+                lineHeight: 1.55,
+                color: "var(--ink-2)",
                 maxWidth: "640px",
-                fontWeight: 300,
+                fontWeight: 400,
+                letterSpacing: "-0.01em",
               }}
             >
               Multi-location medical clinics, trade service brands, and the connected ecosystems
@@ -160,47 +157,27 @@ export default function HomePage() {
               alignItems: "flex-end",
               flexWrap: "wrap",
               gap: "32px",
-              borderTop: "1px solid rgba(232,196,107,0.25)",
+              borderTop: "1px solid var(--border-default)",
               paddingTop: "24px",
             }}
           >
-            <div style={{ display: "flex", gap: "32px", flexWrap: "wrap", alignItems: "center" }}>
-              <Link
-                href="/work"
-                className="editorial-link arrow-link on-dark"
-                style={{
-                  fontFamily: "var(--font-jetbrains), monospace",
-                  fontSize: "12px",
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: "var(--gold-400)",
-                }}
-              >
-                See recent work <span className="arrow" aria-hidden>→</span>
+            <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", alignItems: "center" }}>
+              <Link href="/inquire" className="btn-fill">
+                Start a conversation
               </Link>
-              <Link
-                href="/inquire"
-                className="editorial-link on-dark"
-                style={{
-                  fontFamily: "var(--font-jetbrains), monospace",
-                  fontSize: "12px",
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: "rgba(255,255,255,0.7)",
-                }}
-              >
-                Start a conversation →
+              <Link href="/work" className="btn-ghost">
+                See recent work
               </Link>
               {siteConfig.calUsername ? (
                 <Link
                   href="/call"
-                  className="editorial-link on-dark"
+                  className="editorial-link mono on-dark"
                   style={{
-                    fontFamily: "var(--font-jetbrains), monospace",
-                    fontSize: "12px",
-                    letterSpacing: "0.2em",
+                    fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
+                    fontSize: "11px",
+                    letterSpacing: "0.18em",
                     textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.7)",
+                    color: "var(--ink-3)",
                   }}
                 >
                   Or book a 20-min call →
@@ -209,11 +186,11 @@ export default function HomePage() {
             </div>
             <span
               style={{
-                fontFamily: "var(--font-jetbrains), monospace",
+                fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
                 fontSize: "10px",
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "rgba(255,255,255,0.5)",
+                color: "var(--ink-4)",
               }}
             >
               Daphne, Alabama · Sole practitioner
@@ -232,7 +209,7 @@ export default function HomePage() {
             marginTop: "auto",
           }}
         >
-          <HeroCurve />
+          <HeroAurora />
         </div>
       </section>
 
