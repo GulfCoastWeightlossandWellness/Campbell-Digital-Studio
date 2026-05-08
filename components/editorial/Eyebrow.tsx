@@ -11,7 +11,7 @@ export default function Eyebrow({ children, onDark, className = "" }: Props) {
     <p
       className={`mono-caption ${className}`}
       style={{
-        color: onDark ? "var(--gold-400)" : "var(--gold-700)",
+        color: "var(--aurora-violet)",
         marginBottom: "1.25rem",
       }}
     >
