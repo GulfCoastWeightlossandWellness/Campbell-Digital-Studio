@@ -7,6 +7,9 @@ Items shipped in commit `d0c58b0` (the prior rebuild) and any subsequent iterati
 {1-line summary}
 ```
 
+## [iter 005] Wire `/inquire` to a real backend (replace mailto) — feat / inquire
+Built `components/InquireForm.tsx` — client component with 8 form fields (name, email, business, current site, business type, goals, budget, timeline), state machine (idle/submitting/success/error), accessible labels with required/optional indicators, `role="alert"` error messaging, and an on-success thank-you block. Posts to `/api/lead` with structured multi-line `note` and `source: "inquire"`. Wired the previously-defined `Inquiry Form Submit` analytics event. Mounted in `app/inquire/page.tsx`, replacing the mailto button. Added `alternates: { canonical: "/inquire" }`. Conversion 7→8. Total 69→70 (+1). See `ITERATIONS/005-inquire-form.md`.
+
 ## [iter 004] Fix invisible header on dark hero + skip-to-main link — fix / nav
 `Header.tsx` detects `overDark = pathname === "/" && !scrolled` and flips the studio wordmark (uses dark-canvas variant), hamburger color (white), and nav links (`on-dark` modifier → gold-400) when on the home hero at scroll-top. Previously dark icons rendered on dark navy = invisible. Header background also tightened with a faint cream tint at scroll-top on non-home pages. Added a skip-to-main-content link as the first focusable element; rigged `<main id="main-content" tabIndex={-1}>`. Bumped hamburger SVG to 24×24 with stroke 1.75 for legibility. Mobile 8→9, A11y 7→8. Total 67→69 (+2). Owner's larger asks (showcase home, buttons-everywhere, multi-page IA, mobile audit) queued in BACKLOG as Projects A–D, sized for 12 chunked iterations. See `ITERATIONS/004-mobile-header-fix.md`.
 

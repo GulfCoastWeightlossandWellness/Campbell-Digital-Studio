@@ -2,12 +2,12 @@
 
 Rubric (0–10 per dimension, 90 total). Aim for ≥85/90 (94/100) as the "essentially done" threshold. See loop prompt §07 for the rubric definitions.
 
-## Current scores (after iteration 004)
+## Current scores (after iteration 005)
 
 | Dimension              | Score | Why                                                                                   |
 |------------------------|-------|---------------------------------------------------------------------------------------|
 | 1. Editorial cohesion  | 9     | Single nav, single footer, consistent voice, design tokens centralized. Hero process-curve centerpiece + on-system gold-vs-mono domain treatment. Italic sub-clause used in 7/8 H2s. |
-| 2. Conversion strength | 7     | Inquire (mailto), `/call` (env-gated Cal.com), footer email capture, sticky mobile CTA. Work index and Selected Clients expose every live site as a separately-clickable domain link. `/inquire` still mailto-only and `/playbook` not built. |
+| 2. Conversion strength | 8     | **`/inquire` now a real 8-field form posting to `/api/lead` with state machine, accessible labels, success state.** `/call` (env-gated Cal.com), footer email capture, sticky mobile CTA, work-index domain links. `Inquiry Form Submit` analytics event now wired. `/playbook` lead magnet still pending. |
 | 3. Mobile experience   | 9     | Hamburger close on Escape + route change, sticky CTA bar, 44×44 tap targets. Hero curve collapses to vertical timeline ≤720px. **Header now detects dark-surface state on home hero and flips logo/hamburger/nav colors; previously these were invisible on the navy hero.** Lighthouse mobile not yet measured. |
 | 4. Accessibility       | 8     | Focus-visible styles, aria-modal/expanded/controls on overlay, prefers-reduced-motion. Every external domain link has an explicit aria-label. **Skip-to-main-content link added (WCAG 2.4.1); `<main id="main-content" tabIndex={-1}>` rigged.** Full axe sweep still pending. |
 | 5. Performance         | 8     | next/font, next/image with `sizes`, deferred analytics, lazy Cal embed. HeroCurve inline SVG ~3KB; URL helper is pure-JS, near-zero bundle impact. Lighthouse not yet run. |
@@ -15,7 +15,7 @@ Rubric (0–10 per dimension, 90 total). Aim for ≥85/90 (94/100) as the "essen
 | 7. Content quality     | 7     | Real case-study scope copy. Two case studies have `valueExplainer` pull-quotes. Hero curve visualizes engagement narrative. IHE added as a sixth client entry. No real Results numbers yet. |
 | 8. Social proof        | 5     | Selected Clients row renders 6 clients. 5 of 6 on real custom domains. Testimonial section still auto-hides — no entry has a real quote yet. |
 | 9. Code quality        | 8     | TypeScript strict, ESLint clean, design tokens centralized, env-gated integrations. `lib/url-display.ts` helper consumed by 3 components. Untyped `any` count: 0. |
-| **Total**              | **69**| **/90 = 77/100**                                                                      |
+| **Total**              | **70**| **/90 = 78/100**                                                                      |
 
 > Three of these (Editorial, Mobile, Performance — all 8) are self-assessments pending real data: a full grep audit for design-system drift; a real Lighthouse mobile run; and an axe-core sweep. Each is on the backlog. Today's number is conservative; numbers may move when real data lands.
 
@@ -27,6 +27,7 @@ Rubric (0–10 per dimension, 90 total). Aim for ≥85/90 (94/100) as the "essen
 | 002  | 9         | 6    | 8      | 7    | 8    | 8   | 7       | 4      | 8    | 65    | 72   |
 | 003  | 9         | 7    | 8      | 7    | 8    | 8   | 7       | 5      | 8    | 67    | 74   |
 | 004  | 9         | 7    | 9      | 8    | 8    | 8   | 7       | 5      | 8    | 69    | 77   |
+| 005  | 9         | 8    | 9      | 8    | 8    | 8   | 7       | 5      | 8    | 70    | 78   |
 
 ## Notes per dimension
 

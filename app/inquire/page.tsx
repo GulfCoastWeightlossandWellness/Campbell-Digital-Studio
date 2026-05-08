@@ -3,33 +3,17 @@ import Link from "next/link";
 import SectionTag from "@/components/editorial/SectionTag";
 import EditorialH2 from "@/components/editorial/EditorialH2";
 import Eyebrow from "@/components/editorial/Eyebrow";
+import InquireForm from "@/components/InquireForm";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Inquire",
   description:
     "Start a conversation with Campbell Digital Studio about a clinical practice or local service business website project.",
+  alternates: { canonical: "/inquire" },
 };
 
-const contactEmail = siteConfig.email;
-
 export default function InquirePage() {
-  const subject = encodeURIComponent("Project Inquiry — Campbell Digital Studio");
-  const body = encodeURIComponent(
-    [
-      "Hi Peyton,",
-      "",
-      "Business name: ",
-      "Current website (if any): ",
-      "Type of business (medical practice / home services / other): ",
-      "What you're trying to accomplish: ",
-      "Approximate budget range: ",
-      "Timeline: ",
-      "",
-    ].join("\n"),
-  );
-  const mailto = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
-
   return (
     <>
       <section
@@ -56,9 +40,9 @@ export default function InquirePage() {
 
         <div className="editorial-body reading-col">
           <p>
-            The most useful way to begin is an email with a few specifics. Send the business name,
-            a link to the current site (or a sentence on what&apos;s currently in place), what
-            you&apos;re trying to accomplish, an approximate budget range, and a timeline.
+            A few specifics save us both time. The fields below ask for the same things I&apos;d ask
+            on a first call — what business you&apos;re running, what you have today, what
+            you&apos;re trying to accomplish, an approximate budget, and a timeline.
           </p>
           <p>
             I read every inquiry personally. If the project is a fit, you&apos;ll hear back within
@@ -67,36 +51,8 @@ export default function InquirePage() {
           </p>
         </div>
 
-        <div
-          style={{
-            marginTop: "56px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "16px",
-            alignItems: "flex-start",
-          }}
-        >
-          <a href={mailto} className="btn-fill" style={{ fontSize: "12px" }}>
-            Email the Studio
-          </a>
-          <span
-            style={{
-              fontFamily: "var(--font-jetbrains), monospace",
-              fontSize: "11px",
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              color: "var(--ink-mute)",
-            }}
-          >
-            Or write directly:{" "}
-            <a
-              href={`mailto:${contactEmail}`}
-              className="editorial-link gold"
-              style={{ color: "var(--gold-700)" }}
-            >
-              {contactEmail}
-            </a>
-          </span>
+        <div style={{ marginTop: "40px" }}>
+          <InquireForm />
         </div>
       </section>
 
@@ -129,10 +85,15 @@ export default function InquirePage() {
             </p>
           </div>
 
-          <div style={{ marginTop: "32px" }}>
+          <div style={{ marginTop: "32px", display: "flex", gap: "32px", flexWrap: "wrap" }}>
             <Link href="/work" className="editorial-link arrow-link mono">
               See recent work <span className="arrow" aria-hidden>→</span>
             </Link>
+            {siteConfig.calUsername ? (
+              <Link href="/call" className="editorial-link arrow-link mono">
+                Or book a 20-min call <span className="arrow" aria-hidden>→</span>
+              </Link>
+            ) : null}
           </div>
         </div>
       </section>

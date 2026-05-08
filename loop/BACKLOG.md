@@ -90,11 +90,7 @@ The owner has directed three substantive shifts in design + IA. Each is too big 
 
 ---
 
-
-**Effort:** M
-**Dimension:** Conversion strength
-**Why:** The current `/inquire` page is a mailto link with a structured body. If a prospect's mailto handler fails (no default mail client, or webmail), the lead is lost silently. The `/api/lead` endpoint already exists; what's missing is an actual form on `/inquire` posting to it.
-**Acceptance:** `/inquire` shows a form with the same fields the mailto template prompts for (business name, current site, scope, budget, timeline, message), submits to `/api/lead` with `source: "inquire"`, shows a thank-you state on success, and falls back gracefully when Resend isn't configured.
+> Iter 005 closed `[CRITICAL] Wire /inquire to a real backend` — see `COMPLETED.md`.
 
 ## [CRITICAL] Audit and standardize per-route canonical URLs
 **Effort:** S

@@ -23,7 +23,7 @@ export const EVENT = {
 |-----------------------------|----------------------------------------------|------------------------------|
 | `Footer Email Captured`     | `components/FooterEmailCapture.tsx` on POST success | **wired** |
 | `Calendar Booking Started`  | `components/CalEmbed.tsx` on `bookingSuccessful` callback | **wired (when Cal embed renders)** |
-| `Inquiry Form Submit`       | `app/inquire/page.tsx` on form post (form not yet built) | **pending** |
+| `Inquiry Form Submit`       | `components/InquireForm.tsx` on POST success         | **wired (iter 005)** |
 | `Lead Magnet Download`      | `app/playbook/page.tsx` on email capture (route not yet built) | **pending** |
 | `Case Study Viewed`         | `app/work/[slug]/page.tsx` on mount | **pending** |
 | `External Link Clicked`     | `app/work/page.tsx` on `Live Site ↗` click; case-study `Visit live project ↗`  | **pending** |
