@@ -8,6 +8,7 @@ import Eyebrow from "@/components/editorial/Eyebrow";
 import SelectedClients from "@/components/sections/SelectedClients";
 import FaqSection from "@/components/sections/FaqSection";
 import TestimonialBlock from "@/components/sections/TestimonialBlock";
+import HeroCurve from "@/components/HeroCurve";
 import { getFeaturedTestimonials } from "@/lib/data/testimonials";
 import { faqs } from "@/lib/data/faq";
 import { siteConfig } from "@/lib/site-config";
@@ -100,23 +101,25 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       {/* ─── § 01 / Hero ─────────────────────────────────────────────── */}
+      {/* Hero is now in two parts: an editorial header (eyebrow, headline, CTAs)
+          and a process-curve centerpiece below. Both live inside one cover-surface
+          so the gold top-stripe still reads as a single hero band. */}
       <section
         className="cover-surface"
         style={{
-          minHeight: "min(720px, 92vh)",
+          minHeight: "min(880px, 100vh)",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-end",
         }}
       >
         <div
           className="section-wrap"
           style={{
-            paddingTop: "clamp(120px, 18vw, 200px)",
-            paddingBottom: "clamp(56px, 8vw, 96px)",
+            paddingTop: "clamp(110px, 16vw, 180px)",
+            paddingBottom: "clamp(28px, 4vw, 48px)",
             display: "flex",
             flexDirection: "column",
-            gap: "clamp(40px, 6vw, 72px)",
+            gap: "clamp(28px, 4vw, 44px)",
           }}
         >
           <div style={{ maxWidth: "960px" }}>
@@ -158,7 +161,7 @@ export default function HomePage() {
               flexWrap: "wrap",
               gap: "32px",
               borderTop: "1px solid rgba(232,196,107,0.25)",
-              paddingTop: "28px",
+              paddingTop: "24px",
             }}
           >
             <div style={{ display: "flex", gap: "32px", flexWrap: "wrap", alignItems: "center" }}>
@@ -216,6 +219,20 @@ export default function HomePage() {
               Daphne, Alabama · Sole practitioner
             </span>
           </div>
+        </div>
+
+        {/* Process-curve centerpiece — fills the lower half of the hero on desktop,
+            collapses to a stacked timeline on mobile. Same five steps as §05 Process,
+            surfaced earlier as a visual anchor. */}
+        <div
+          className="section-wrap"
+          style={{
+            paddingTop: "clamp(8px, 2vw, 24px)",
+            paddingBottom: "clamp(40px, 6vw, 72px)",
+            marginTop: "auto",
+          }}
+        >
+          <HeroCurve />
         </div>
       </section>
 

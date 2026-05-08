@@ -7,6 +7,9 @@ Items shipped in commit `d0c58b0` (the prior rebuild) and any subsequent iterati
 {1-line summary}
 ```
 
+## [iter 002] Hero centerpiece — process-arc curve — feat / hero
+Built `components/HeroCurve.tsx`: SVG visualizing the 5-step engagement process as a gold-gradient arc on the dark hero, with mobile fallback to a stacked timeline. Restructured `app/page.tsx` hero to mount it inside the existing `cover-surface`. Editorial 8→9, Content 6→7. Total 63→65 (+2). See `ITERATIONS/002-hero-curve-centerpiece.md`.
+
 ## Pre-loop (commit d0c58b0, 2026-05-05)
 
 These items from the loop prompt's §05 backlog were already shipped before iteration 001 ran. Listed here so future iterations don't duplicate them. Cross-reference: `docs/HANDOFF.md` and `docs/BUGS_FOUND.md` from that commit.
