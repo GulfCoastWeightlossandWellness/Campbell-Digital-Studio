@@ -16,7 +16,81 @@ Priorities: `[CRITICAL]` (blocking the funnel or build), `[HIGH]`, `[MEDIUM]`, `
 
 ---
 
-## [CRITICAL] Wire `/inquire` to a real backend (replace mailto)
+# Owner-directed multi-iteration projects (added at iter 004)
+
+The owner has directed three substantive shifts in design + IA. Each is too big for one iteration; each is broken into chunks here. Take them in the order shown — every chunk is sized for one iteration and ships independently.
+
+## Project A — Showcase-style work display on the home page
+**Why:** Owner wants the home page to "show off" the websites — a beautiful showcase room of the work, not a list under the hero. The current home has a typographic hero + curve + Selected Clients text-wordmark row. Showcase means visual: thumbnails, titles, real visit-this-site buttons.
+
+### A.1 [HIGH] Build a `WorkShowcase` section component (one iteration)
+**Effort:** M
+**Dimension:** Conversion strength + Editorial
+**Acceptance:** New `components/sections/WorkShowcase.tsx` renders the 6 client projects as a 2- or 3-column tile grid (mobile single-col). Each tile shows the project's `coverImage` at 16:9, title, scope/sector, and a primary CTA button (linked to the case study or live site) plus a secondary mono link for the live domain. On-system styling: paper-cream bg, navy/gold accents, subtle borders, no rounded-full pills.
+
+### A.2 [HIGH] Replace home Selected Clients with the Showcase (one iteration)
+**Effort:** S
+**Acceptance:** `app/page.tsx` mounts `WorkShowcase` in place of the current `SelectedClients` row. Selected Clients lives on for any future "compact" surface but isn't on home.
+
+## Project B — Buttons-everywhere CTA system
+**Why:** Owner wants every clickable thing to be an obvious button — easy to spot, easy to tap. The current site is mostly editorial text-links with arrow animations. This shift moves primary CTAs to filled or outlined buttons; secondary text links remain.
+
+### B.1 [HIGH] Add `Button` primitive with primary / secondary / ghost variants (one iteration)
+**Effort:** M
+**Dimension:** Conversion strength
+**Acceptance:** `components/editorial/Button.tsx` exports a typed `Button` with `variant: "primary" | "secondary" | "ghost"`, `size: "sm" | "md" | "lg"`, supports both `href` (Link or external) and `onClick`. On-system: navy fill / cream text for primary, navy outline for secondary, gold underline for ghost (closest the design system gets to a "button"). Documented in THEME.md with rationale for the override of the existing "no rounded-full pills" rule (rounded-3px corners only — no full pills, no gradients).
+
+### B.2 [HIGH] Replace primary text-link CTAs with `Button` instances (one iteration)
+**Effort:** M
+**Acceptance:** Hero CTAs ("See recent work", "Start a conversation", "Or book a 20-min call"), case-study tail CTAs, footer "Inquire about a project", `/inquire` "Email the Studio", `/call` "Email to schedule" — all use `Button`. Mono text-link arrow-CTAs remain for secondary actions and within-page in-prose links.
+
+## Project C — Multi-page IA (significant rework)
+**Why:** Owner wants the site as multiple pages instead of one long-scroll home. The previous rebuild deliberately collapsed `/studio`, `/practice`, `/method`, `/notes` into anchor sections of `/`. Reversing that creates real per-page surfaces but requires more than one iteration — reconfiguring redirects, building each page, updating nav across all routes.
+
+### C.1 [HIGH] Decide page roster + nav structure (one iteration, mostly docs)
+**Effort:** S
+**Dimension:** Editorial cohesion
+**Acceptance:** New file `loop/IA-PLAN.md` lists the new route map: e.g. `/`, `/work`, `/work/[slug]`, `/studio` (about + credentials), `/services` (capabilities + process), `/notes`, `/inquire`, `/call`. Updates `loop/BLOCKERS.md` to confirm Peyton's IA decision (or asks if any). No code change this chunk; sets the plan.
+
+### C.2 [HIGH] Build `/studio` as a real page (one iteration)
+**Effort:** M
+**Acceptance:** `app/studio/page.tsx` renders the studio's about + credentials content (currently §07 of `/`). Removes the `/studio → /#about` redirect from `next.config.ts`. Updates Header + Footer nav to link to `/studio` instead of `/#about`. `/` keeps the §07 About section for the long-scroll experience, but the canonical "studio overview" lives at its own URL.
+
+### C.3 [HIGH] Build `/services` (or `/practice`) as a real page (one iteration)
+**Effort:** M
+**Acceptance:** Same pattern: lift Capabilities (§04) + Process (§05) content into `app/services/page.tsx`. Remove `/services → /#capabilities` and `/practice → /#capabilities` redirects. Update nav.
+
+### C.4 [MEDIUM] Build a thin `/notes` index (deferred until first essay exists, one iteration when triggered)
+**Effort:** M
+**Acceptance:** As specified in the existing "Build /notes index + slug route" item lower in this backlog.
+
+### C.5 [HIGH] Refactor home page to reflect the new IA (one iteration)
+**Effort:** M
+**Acceptance:** Home shortens — the long-scroll sections that now have dedicated pages (About, Services) become thin previews on home that link to the dedicated pages. Hero, curve, WorkShowcase, FAQ, Contact CTA all stay.
+
+### C.6 [HIGH] Update sitemap, JSON-LD, and SEO for new routes (one iteration)
+**Effort:** S
+**Acceptance:** `app/sitemap.ts` lists the new routes. Per-route metadata (title, description, canonical) declared in each new page's `generateMetadata`. Organization JSON-LD references key pages.
+
+> Project C ships across 6 iterations. Don't try to compress it — each chunk has a clean scoped acceptance criterion and shouldn't be merged with neighbors.
+
+## Project D — Mobile UX hardening (started in iter 004; remaining)
+
+### D.1 [MEDIUM] Run a real-device mobile audit at 320 / 375 / 390 / 414 / 720 widths (one iteration)
+**Effort:** M
+**Dimension:** Mobile experience
+**Acceptance:** `loop/MOBILE_AUDIT.md` lists per-route per-width findings. Fixes are split into separate chunks if any are non-trivial.
+
+### D.2 [MEDIUM] Add tap-feedback states (active style) to all clickable elements (one iteration)
+**Effort:** S
+**Acceptance:** Every interactive element has a visible `:active` style (e.g. brief opacity dim or scale). Helps mobile users know their tap registered.
+
+### D.3 [LOW] Add tap-to-call link in the footer once Peyton publishes a phone number
+**Effort:** S — blocked by a decision from Peyton. Not adding without a real number.
+
+---
+
+
 **Effort:** M
 **Dimension:** Conversion strength
 **Why:** The current `/inquire` page is a mailto link with a structured body. If a prospect's mailto handler fails (no default mail client, or webmail), the lead is lost silently. The `/api/lead` endpoint already exists; what's missing is an actual form on `/inquire` posting to it.

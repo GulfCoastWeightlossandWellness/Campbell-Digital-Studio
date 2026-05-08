@@ -7,6 +7,9 @@ Items shipped in commit `d0c58b0` (the prior rebuild) and any subsequent iterati
 {1-line summary}
 ```
 
+## [iter 004] Fix invisible header on dark hero + skip-to-main link — fix / nav
+`Header.tsx` detects `overDark = pathname === "/" && !scrolled` and flips the studio wordmark (uses dark-canvas variant), hamburger color (white), and nav links (`on-dark` modifier → gold-400) when on the home hero at scroll-top. Previously dark icons rendered on dark navy = invisible. Header background also tightened with a faint cream tint at scroll-top on non-home pages. Added a skip-to-main-content link as the first focusable element; rigged `<main id="main-content" tabIndex={-1}>`. Bumped hamburger SVG to 24×24 with stroke 1.75 for legibility. Mobile 8→9, A11y 7→8. Total 67→69 (+2). Owner's larger asks (showcase home, buttons-everywhere, multi-page IA, mobile audit) queued in BACKLOG as Projects A–D, sized for 12 chunked iterations. See `ITERATIONS/004-mobile-header-fix.md`.
+
 ## [iter 003] Real-domain link treatment + IHE addition + URL fixes — feat / work
 Surfaced every client's live URL as a separately-clickable domain link. Real custom domains in gold serif (13.5px); staging URLs in mono ink-mute (12px). Added `lib/url-display.ts` helper. Added Interactive Health Education as a sixth client (marketing site + dashboard). Fixed Revitalize URL to `revitalizemedicalclinic.com`. Conversion 6→7, Social 4→5. Total 65→67 (+2). See `ITERATIONS/003-real-domain-link-treatment.md`.
 
