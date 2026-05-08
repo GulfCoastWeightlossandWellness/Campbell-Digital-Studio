@@ -101,11 +101,11 @@ export default function InquireForm() {
       <div className="inquire-success">
         <p
           style={{
-            fontFamily: "var(--font-jetbrains), monospace",
+            fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
             fontSize: "11px",
             letterSpacing: "0.18em",
             textTransform: "uppercase",
-            color: "var(--gold-700)",
+            color: "var(--aurora-violet)",
             marginBottom: "16px",
           }}
         >
@@ -269,8 +269,8 @@ export default function InquireForm() {
           Or write directly to{" "}
           <a
             href={`mailto:${siteConfig.email}`}
-            className="editorial-link gold"
-            style={{ color: "var(--gold-700)" }}
+            className="editorial-link violet"
+            style={{ color: "var(--aurora-violet)" }}
           >
             {siteConfig.email}
           </a>
@@ -300,15 +300,15 @@ export default function InquireForm() {
         }
 
         .inquire-label {
-          font-family: var(--font-jetbrains), ui-monospace, monospace;
+          font-family: var(--font-geist-mono), var(--font-jetbrains), ui-monospace, monospace;
           font-size: 10px;
           font-weight: 600;
           letter-spacing: 0.18em;
           text-transform: uppercase;
-          color: var(--gold-700);
+          color: var(--aurora-violet);
         }
         .inquire-label-optional {
-          color: var(--ink-mute);
+          color: var(--ink-3);
           font-weight: 400;
           letter-spacing: 0.16em;
           margin-left: 0.6em;
@@ -317,44 +317,46 @@ export default function InquireForm() {
         .inquire-input {
           width: 100%;
           padding: 12px 14px;
-          background: white;
-          border: 1px solid var(--paper-rule);
-          color: var(--ink);
-          font-family: var(--font-manrope), system-ui, sans-serif;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid var(--border-default);
+          color: var(--ink-1);
+          font-family: var(--font-geist-sans), system-ui, sans-serif;
           font-size: 16px;
           line-height: 1.5;
-          border-radius: 2px;
-          transition: border-color 0.2s ease, box-shadow 0.2s ease;
+          border-radius: 6px;
+          transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
           min-height: 44px;
         }
         textarea.inquire-input {
-          font-family: var(--font-manrope), system-ui, sans-serif;
+          font-family: var(--font-geist-sans), system-ui, sans-serif;
           resize: vertical;
         }
         select.inquire-input {
           appearance: none;
-          background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%239A7820' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+          background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23A855F7' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
           background-repeat: no-repeat;
           background-position: right 14px center;
           padding-right: 36px;
         }
         .inquire-input:focus {
           outline: none;
-          border-color: var(--gold-600);
-          box-shadow: 0 0 0 3px rgba(196, 154, 53, 0.15);
+          border-color: var(--aurora-violet);
+          background: rgba(255, 255, 255, 0.05);
+          box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
         }
         .inquire-input::placeholder {
-          color: var(--ink-faint);
+          color: var(--ink-4);
         }
 
         .inquire-error-message {
           margin-top: 16px;
           padding: 12px 16px;
-          background: rgba(184, 58, 44, 0.08);
-          border-left: 3px solid var(--error);
-          font-family: var(--font-manrope), sans-serif;
+          background: rgba(248, 113, 113, 0.08);
+          border-left: 2px solid var(--error);
+          border-radius: 0 6px 6px 0;
+          font-family: var(--font-geist-sans), system-ui, sans-serif;
           font-size: 14px;
-          color: var(--ink);
+          color: var(--ink-1);
         }
 
         .inquire-submit-row {
@@ -364,14 +366,14 @@ export default function InquireForm() {
           align-items: baseline;
           gap: 24px;
           padding-top: 24px;
-          border-top: 1px solid var(--paper-rule);
+          border-top: 1px solid var(--border-subtle);
         }
         .inquire-fallback {
-          font-family: var(--font-jetbrains), monospace;
+          font-family: var(--font-geist-mono), var(--font-jetbrains), monospace;
           font-size: 11px;
           letter-spacing: 0.16em;
           text-transform: uppercase;
-          color: var(--ink-mute);
+          color: var(--ink-3);
         }
       `}</style>
     </form>
@@ -399,7 +401,7 @@ function Field({
       <label htmlFor={id} className="inquire-label">
         {label}
         {required ? (
-          <span aria-hidden style={{ color: "var(--gold-600)", marginLeft: "0.4em" }}>*</span>
+          <span aria-hidden style={{ color: "var(--aurora-violet)", marginLeft: "0.4em" }}>*</span>
         ) : optional ? (
           <span className="inquire-label-optional">(optional)</span>
         ) : null}
