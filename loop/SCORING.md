@@ -2,20 +2,20 @@
 
 Rubric (0–10 per dimension, 90 total). Aim for ≥85/90 (94/100) as the "essentially done" threshold. See loop prompt §07 for the rubric definitions.
 
-## Current scores (after iteration 002)
+## Current scores (after iteration 003)
 
 | Dimension              | Score | Why                                                                                   |
 |------------------------|-------|---------------------------------------------------------------------------------------|
-| 1. Editorial cohesion  | 9     | Single nav, single footer, consistent voice, design tokens centralized. **Hero now has a signature visual centerpiece (process-curve in gold + Fraunces) on top of the existing typography.** Italic sub-clause used in 7/8 H2s. |
-| 2. Conversion strength | 6     | Inquire (mailto), `/call` (env-gated Cal.com), footer email capture (wired to `/api/lead`), sticky mobile CTA — but `/inquire` itself is mailto-only and `/playbook` doesn't exist yet. |
-| 3. Mobile experience   | 8     | Hamburger correctly closes on Escape + route change, sticky CTA bar, 44×44 tap targets. **Hero curve gracefully collapses to vertical timeline ≤720px.** Lighthouse not yet run on mobile. |
-| 4. Accessibility       | 7     | Focus-visible styles, aria-modal/expanded/controls on overlay, prefers-reduced-motion honored. **Hero SVG has role="img" + aria-label; mobile timeline carries the real text content for screen readers.** Skip-to-main link missing; full axe sweep not yet run. |
-| 5. Performance         | 8     | next/font, next/image with `sizes`, deferred analytics, lazy Cal embed. **HeroCurve adds ~3KB inline SVG, no new requests.** Lighthouse not yet run for a numeric baseline. |
-| 6. SEO infrastructure  | 8     | Per-page metadata via `generateMetadata`, Organization + WebSite + FAQPage JSON-LD, sitemap reads from `siteConfig`, Twitter Card. BreadcrumbList missing on case studies; per-route canonicals not all explicit. |
-| 7. Content quality     | 7     | Real case-study scope copy. Two case studies have `valueExplainer` pull-quotes. **Hero process-arc visualizes the 5-step engagement narrative; the same content also lives in the §05 Process section as prose.** No real Results numbers seeded yet (data layer is empty for both featured slugs). |
-| 8. Social proof        | 4     | Selected Clients row renders with 5 clients (text wordmarks). Testimonial section auto-hides because no entry has a real quote yet — both seed entries have empty `quote`. |
-| 9. Code quality        | 8     | TypeScript strict, ESLint clean, design tokens centralized, sections componentized, env-gated integrations with safe fallbacks. Untyped `any` count: 0. |
-| **Total**              | **65**| **/90 = 72/100**                                                                      |
+| 1. Editorial cohesion  | 9     | Single nav, single footer, consistent voice, design tokens centralized. Hero process-curve centerpiece + on-system gold-vs-mono domain treatment. Italic sub-clause used in 7/8 H2s. |
+| 2. Conversion strength | 7     | Inquire (mailto), `/call` (env-gated Cal.com), footer email capture, sticky mobile CTA. **Work index and Selected Clients now expose every live site as a separately-clickable domain link — visitors can verify the studio's claims in one click.** `/inquire` still mailto-only and `/playbook` not built. |
+| 3. Mobile experience   | 8     | Hamburger close on Escape + route change, sticky CTA bar, 44×44 tap targets. Hero curve collapses to vertical timeline ≤720px. Lighthouse mobile not yet measured. |
+| 4. Accessibility       | 7     | Focus-visible styles, aria-modal/expanded/controls on overlay, prefers-reduced-motion. **Every external domain link has an explicit aria-label.** Skip-to-main link missing; full axe sweep not yet run. |
+| 5. Performance         | 8     | next/font, next/image with `sizes`, deferred analytics, lazy Cal embed. HeroCurve inline SVG ~3KB; URL helper is pure-JS, near-zero bundle impact. Lighthouse not yet run. |
+| 6. SEO infrastructure  | 8     | Per-page metadata, Organization + WebSite + FAQPage JSON-LD, sitemap from `siteConfig`, Twitter Card. BreadcrumbList missing on case studies; per-route canonicals not all explicit. |
+| 7. Content quality     | 7     | Real case-study scope copy. Two case studies have `valueExplainer` pull-quotes. Hero curve visualizes engagement narrative. **IHE added as a sixth client entry with marketing + dashboard URLs.** No real Results numbers yet. |
+| 8. Social proof        | 5     | Selected Clients row renders 6 clients. **5 of 6 are on real custom domains (visibly labeled).** Air Solutions on staging URL until its custom domain comes back. Testimonial section still auto-hides — no entry has a real quote yet. |
+| 9. Code quality        | 8     | TypeScript strict, ESLint clean, design tokens centralized, env-gated integrations. **New `lib/url-display.ts` helper consumed by 3 components; no duplicated domain-formatting logic.** Untyped `any` count: 0. |
+| **Total**              | **67**| **/90 = 74/100**                                                                      |
 
 > Three of these (Editorial, Mobile, Performance — all 8) are self-assessments pending real data: a full grep audit for design-system drift; a real Lighthouse mobile run; and an axe-core sweep. Each is on the backlog. Today's number is conservative; numbers may move when real data lands.
 
@@ -25,6 +25,7 @@ Rubric (0–10 per dimension, 90 total). Aim for ≥85/90 (94/100) as the "essen
 |------|-----------|------|--------|------|------|-----|---------|--------|------|-------|------|
 | 001  | 8         | 6    | 8      | 7    | 8    | 8   | 6       | 4      | 8    | 63    | 70   |
 | 002  | 9         | 6    | 8      | 7    | 8    | 8   | 7       | 4      | 8    | 65    | 72   |
+| 003  | 9         | 7    | 8      | 7    | 8    | 8   | 7       | 5      | 8    | 67    | 74   |
 
 ## Notes per dimension
 

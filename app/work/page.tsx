@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SectionTag from "@/components/editorial/SectionTag";
 import EditorialH2 from "@/components/editorial/EditorialH2";
+import { displayDomain, isRealDomain } from "@/lib/url-display";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -17,6 +18,10 @@ type WorkRow = {
   sectorTags: string[];
   buildLabel: { glyph: "◆" | "◇"; text: string };
   liveUrl: string | null;
+  /** Optional second live URL (IHE has marketing + dashboard) */
+  productUrl?: string;
+  /** Label for the product URL when shown alongside liveUrl */
+  productLabel?: string;
   /** Whether this row links into a full case study */
   hasCaseStudy: boolean;
 };
@@ -30,7 +35,7 @@ const rows: WorkRow[] = [
       "A multi-location medical aesthetics, hormone, and weight-management practice in Georgia. Two clinics, a connected nutrition supplement brand, a published book, and a coaching institute — under one digital ecosystem.",
     sectorTags: ["Healthcare", "Multi-Location"],
     buildLabel: { glyph: "◆", text: "Featured Case Study" },
-    liveUrl: "https://revitalize-medical-wellness-clinic-nine.vercel.app",
+    liveUrl: "http://revitalizemedicalclinic.com/",
     hasCaseStudy: true,
   },
   {
@@ -41,8 +46,21 @@ const rows: WorkRow[] = [
       "A 159-page programmatic SEO architecture for an HVAC contractor in coastal Alabama — 15 cities × 9 services, plus four custom interactive tools.",
     sectorTags: ["HVAC", "Programmatic SEO"],
     buildLabel: { glyph: "◆", text: "Featured Case Study" },
-    liveUrl: "https://airsolutionspros.com",
+    liveUrl: "https://air-solutions-pros.vercel.app",
     hasCaseStudy: true,
+  },
+  {
+    slug: "interactive-health-education",
+    year: "2025",
+    title: "Interactive Health Education",
+    scope:
+      "A digital health education platform — public marketing site plus a live application dashboard that teaches clinical concepts through interactive modules.",
+    sectorTags: ["Digital Health", "Platform"],
+    buildLabel: { glyph: "◇", text: "Original Product" },
+    liveUrl: "https://www.interactivehealtheducation.com/",
+    productUrl: "https://dashboard.interactivehealtheducation.com/",
+    productLabel: "Live product",
+    hasCaseStudy: false,
   },
   {
     slug: "acexperts",
@@ -119,111 +137,150 @@ export default function WorkPage() {
       >
         <div className="section-wrap" style={{ paddingTop: "16px", paddingBottom: "16px" }}>
           {rows.map((r) => {
-            const href = r.hasCaseStudy ? `/work/${r.slug}` : (r.liveUrl ?? "/work");
-            const external = !r.hasCaseStudy && r.liveUrl !== null;
+            // Primary link target: case study if one exists, otherwise the live site.
+            // Domain links live in the meta column and are independently clickable.
+            const primaryHref = r.hasCaseStudy ? `/work/${r.slug}` : (r.liveUrl ?? "/work");
+            const primaryExternal = !r.hasCaseStudy && r.liveUrl !== null;
+            const liveReal = isRealDomain(r.liveUrl);
+            const productReal = isRealDomain(r.productUrl);
+
             return (
-            <Link
-              key={r.slug}
-              href={href}
-              className="work-row"
-              {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-            >
-              {/* Col 1 — year */}
-              <div>
-                <span
-                  style={{
-                    fontFamily: "var(--font-jetbrains), monospace",
-                    fontSize: "12px",
-                    letterSpacing: "0.16em",
-                    color: "var(--ink-mute)",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {r.year}
-                </span>
-              </div>
+              <div key={r.slug} className="work-row">
+                {/* Col 1 — year */}
+                <div className="work-row-year">
+                  <span
+                    style={{
+                      fontFamily: "var(--font-jetbrains), monospace",
+                      fontSize: "12px",
+                      letterSpacing: "0.16em",
+                      color: "var(--ink-mute)",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {r.year}
+                  </span>
+                </div>
 
-              {/* Col 2 — title + scope */}
-              <div>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-fraunces), Georgia, serif",
-                    fontSize: "clamp(22px, 2.6vw, 30px)",
-                    fontWeight: 500,
-                    color: "var(--navy-900)",
-                    letterSpacing: "-0.018em",
-                    fontVariationSettings: '"opsz" 96',
-                    marginBottom: "8px",
-                    lineHeight: 1.15,
-                  }}
-                >
-                  {r.title}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "var(--font-manrope), sans-serif",
-                    fontSize: "14.5px",
-                    lineHeight: 1.6,
-                    color: "var(--ink-soft)",
-                    maxWidth: "60ch",
-                  }}
-                >
-                  {r.scope}
-                </p>
-              </div>
+                {/* Col 2 — title (primary link) + scope */}
+                <div>
+                  <Link
+                    href={primaryHref}
+                    {...(primaryExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    className="work-row-title"
+                  >
+                    <h3
+                      style={{
+                        fontFamily: "var(--font-fraunces), Georgia, serif",
+                        fontSize: "clamp(22px, 2.6vw, 30px)",
+                        fontWeight: 500,
+                        color: "var(--navy-900)",
+                        letterSpacing: "-0.018em",
+                        fontVariationSettings: '"opsz" 96',
+                        marginBottom: "8px",
+                        lineHeight: 1.15,
+                      }}
+                    >
+                      {r.title}
+                      {primaryExternal ? (
+                        <span aria-hidden style={{ color: "var(--gold-600)", marginLeft: "0.4em", fontSize: "0.7em" }}>↗</span>
+                      ) : null}
+                    </h3>
+                  </Link>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-manrope), sans-serif",
+                      fontSize: "14.5px",
+                      lineHeight: 1.6,
+                      color: "var(--ink-soft)",
+                      maxWidth: "60ch",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    {r.scope}
+                  </p>
 
-              {/* Col 3 — meta + actions */}
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-end",
-                  gap: "12px",
-                  textAlign: "right",
-                }}
-                className="work-row-meta"
-              >
+                  {/* Domain links — visible, separately clickable, real domains in gold */}
+                  {(r.liveUrl || r.productUrl) ? (
+                    <div className="work-row-domains">
+                      {r.liveUrl ? (
+                        <a
+                          href={r.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`domain-link ${liveReal ? "domain-real" : "domain-staging"}`}
+                          aria-label={`Visit ${r.title} — opens in new tab`}
+                        >
+                          {displayDomain(r.liveUrl)} <span aria-hidden>↗</span>
+                        </a>
+                      ) : null}
+                      {r.productUrl ? (
+                        <a
+                          href={r.productUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`domain-link ${productReal ? "domain-real" : "domain-staging"}`}
+                          aria-label={`${r.productLabel ?? "Live product"} — opens in new tab`}
+                        >
+                          <span className="domain-link-prefix">{r.productLabel ?? "Live product"}:</span>{" "}
+                          {displayDomain(r.productUrl)} <span aria-hidden>↗</span>
+                        </a>
+                      ) : null}
+                    </div>
+                  ) : null}
+                </div>
+
+                {/* Col 3 — meta */}
                 <div
+                  className="work-row-meta"
                   style={{
                     display: "flex",
                     flexDirection: "column",
-                    gap: "6px",
                     alignItems: "flex-end",
+                    gap: "12px",
+                    textAlign: "right",
                   }}
                 >
-                  {r.sectorTags.map((tag) => (
-                    <span
-                      key={tag}
-                      style={{
-                        fontFamily: "var(--font-jetbrains), monospace",
-                        fontSize: "10px",
-                        letterSpacing: "0.16em",
-                        color: "var(--ink-mute)",
-                        textTransform: "uppercase",
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "6px",
+                      alignItems: "flex-end",
+                    }}
+                  >
+                    {r.sectorTags.map((tag) => (
+                      <span
+                        key={tag}
+                        style={{
+                          fontFamily: "var(--font-jetbrains), monospace",
+                          fontSize: "10px",
+                          letterSpacing: "0.16em",
+                          color: "var(--ink-mute)",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-jetbrains), monospace",
+                      fontSize: "10px",
+                      letterSpacing: "0.16em",
+                      textTransform: "uppercase",
+                      color: "var(--gold-700)",
+                      fontWeight: 600,
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "8px",
+                    }}
+                  >
+                    <span aria-hidden style={{ color: "var(--gold-600)" }}>{r.buildLabel.glyph}</span>
+                    {r.buildLabel.text}
+                  </span>
                 </div>
-                <span
-                  style={{
-                    fontFamily: "var(--font-jetbrains), monospace",
-                    fontSize: "10px",
-                    letterSpacing: "0.16em",
-                    textTransform: "uppercase",
-                    color: "var(--gold-700)",
-                    fontWeight: 600,
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "8px",
-                  }}
-                >
-                  <span aria-hidden style={{ color: "var(--gold-600)" }}>{r.buildLabel.glyph}</span>
-                  {r.buildLabel.text}{external ? " ↗" : ""}
-                </span>
               </div>
-            </Link>
             );
           })}
         </div>
@@ -256,8 +313,6 @@ export default function WorkPage() {
           padding: 28px 0;
           border-top: 1px solid var(--paper-rule);
           align-items: start;
-          text-decoration: none;
-          color: inherit;
           transition: background 0.2s ease, padding 0.2s ease;
         }
         .work-row:first-of-type { border-top: none; }
@@ -266,11 +321,70 @@ export default function WorkPage() {
           padding-left: 16px;
           padding-right: 16px;
         }
-        .work-row:hover h3 {
+
+        .work-row-title {
+          display: block;
+          text-decoration: none;
+          color: inherit;
+        }
+        .work-row:hover .work-row-title h3 {
           background-image: linear-gradient(currentColor, currentColor);
           background-size: 100% 1px;
           background-repeat: no-repeat;
           background-position: left 95%;
+        }
+
+        /* Domain link treatment — real custom domains carry more visual weight
+           (gold serif) than platform staging URLs (mono, ink-mute). */
+        .work-row-domains {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px 20px;
+          align-items: baseline;
+          margin-top: 4px;
+        }
+        .domain-link {
+          display: inline-flex;
+          align-items: baseline;
+          gap: 0.35em;
+          text-decoration: none;
+          font-family: var(--font-jetbrains), ui-monospace, monospace;
+          font-size: 12px;
+          letter-spacing: 0.04em;
+          padding: 6px 0;
+          transition: color 0.2s ease, transform 0.2s ease;
+          line-height: 1.3;
+        }
+        .domain-link .domain-link-prefix {
+          font-weight: 600;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          font-size: 10px;
+          color: var(--ink-mute);
+        }
+        .domain-real {
+          color: var(--gold-700);
+          font-weight: 600;
+          font-size: 13.5px;
+          letter-spacing: 0.02em;
+        }
+        .domain-real:hover {
+          color: var(--gold-600);
+          background-image: linear-gradient(var(--gold-600), var(--gold-600));
+          background-size: 100% 1px;
+          background-repeat: no-repeat;
+          background-position: left 90%;
+        }
+        .domain-staging {
+          color: var(--ink-mute);
+          font-weight: 500;
+        }
+        .domain-staging:hover {
+          color: var(--ink);
+          background-image: linear-gradient(currentColor, currentColor);
+          background-size: 100% 1px;
+          background-repeat: no-repeat;
+          background-position: left 90%;
         }
 
         @media (max-width: 860px) {

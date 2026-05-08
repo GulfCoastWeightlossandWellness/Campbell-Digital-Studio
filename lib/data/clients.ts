@@ -23,6 +23,11 @@ export type Client = {
   logoUrl?: string;
   /** Live site URL — opens in new tab */
   websiteUrl: string;
+  /**
+   * Optional secondary URL for clients with both a marketing site and a product
+   * (currently only IHE: marketing + dashboard).
+   */
+  productUrl?: string;
   /** If a featured case study exists, internal-link to it instead of the live site */
   caseStudySlug?: string;
   /** When false, the client is excluded from public renders entirely */
@@ -35,7 +40,7 @@ export const clients: Client[] = [
     name: "Revitalize Aesthetics & Wellness",
     shortName: "Revitalize",
     type: "Medical aesthetics · Georgia",
-    websiteUrl: "https://revitalize-medical-wellness-clinic-nine.vercel.app",
+    websiteUrl: "http://revitalizemedicalclinic.com/",
     caseStudySlug: "revitalize",
     publicConsent: true,
   },
@@ -44,8 +49,17 @@ export const clients: Client[] = [
     name: "Air Solutions Heating & Cooling",
     shortName: "Air Solutions",
     type: "HVAC · Baldwin County, AL",
-    websiteUrl: "https://airsolutionspros.com",
+    websiteUrl: "https://air-solutions-pros.vercel.app",
     caseStudySlug: "air-solutions",
+    publicConsent: true,
+  },
+  {
+    id: "interactive-health-education",
+    name: "Interactive Health Education",
+    shortName: "Interactive Health Education",
+    type: "Digital health platform · Marketing + product",
+    websiteUrl: "https://www.interactivehealtheducation.com/",
+    productUrl: "https://dashboard.interactivehealtheducation.com/",
     publicConsent: true,
   },
   {

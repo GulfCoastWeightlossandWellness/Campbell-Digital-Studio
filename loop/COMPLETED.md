@@ -7,6 +7,9 @@ Items shipped in commit `d0c58b0` (the prior rebuild) and any subsequent iterati
 {1-line summary}
 ```
 
+## [iter 003] Real-domain link treatment + IHE addition + URL fixes — feat / work
+Surfaced every client's live URL as a separately-clickable domain link. Real custom domains in gold serif (13.5px); staging URLs in mono ink-mute (12px). Added `lib/url-display.ts` helper. Added Interactive Health Education as a sixth client (marketing site + dashboard). Fixed Revitalize URL to `revitalizemedicalclinic.com`. Conversion 6→7, Social 4→5. Total 65→67 (+2). See `ITERATIONS/003-real-domain-link-treatment.md`.
+
 ## [iter 002] Hero centerpiece — process-arc curve — feat / hero
 Built `components/HeroCurve.tsx`: SVG visualizing the 5-step engagement process as a gold-gradient arc on the dark hero, with mobile fallback to a stacked timeline. Restructured `app/page.tsx` hero to mount it inside the existing `cover-surface`. Editorial 8→9, Content 6→7. Total 63→65 (+2). See `ITERATIONS/002-hero-curve-centerpiece.md`.
 

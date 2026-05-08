@@ -11,6 +11,7 @@ import CaseStudyResults from "@/components/sections/CaseStudyResults";
 import TestimonialBlock from "@/components/sections/TestimonialBlock";
 import { getTestimonialForSlug } from "@/lib/data/testimonials";
 import { siteConfig } from "@/lib/site-config";
+import { displayDomain, isRealDomain } from "@/lib/url-display";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -419,9 +420,20 @@ export default async function CaseStudyPage({ params }: Props) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="editorial-link arrow-link mono"
+              className={`editorial-link arrow-link ${isRealDomain(project.liveUrl) ? "gold" : "mono"}`}
+              style={
+                isRealDomain(project.liveUrl)
+                  ? {
+                      fontFamily: "var(--font-jetbrains), monospace",
+                      fontSize: "13px",
+                      fontWeight: 600,
+                      letterSpacing: "0.02em",
+                      color: "var(--gold-700)",
+                    }
+                  : undefined
+              }
             >
-              Visit live project <span className="arrow" aria-hidden>↗</span>
+              Visit live: {displayDomain(project.liveUrl)} <span className="arrow" aria-hidden>↗</span>
             </a>
           </div>
         ) : null}

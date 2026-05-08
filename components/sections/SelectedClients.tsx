@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getDisplayableClients } from "@/lib/data/clients";
 import SectionTag from "@/components/editorial/SectionTag";
+import { displayDomain, isRealDomain } from "@/lib/url-display";
 
 type Props = {
   /** Section number to render in the eyebrow tag */
@@ -11,10 +12,10 @@ type Props = {
  * Selected Clients row.
  *
  * Renders nothing if fewer than 2 clients have publicConsent.
- * Each client is a text wordmark (Fraunces) over a small mono caption — the
- * intentional senior-studio look. If `logoUrl` is supplied later, swap to <Image />.
- *
- * Each row links to the case-study page (when one exists) or the live site.
+ * Each client tile shows: name (links to case study or site), type/sector,
+ * live domain (separately clickable, gold for real domains, mono-muted for
+ * staging URLs), and an optional second domain for clients with both a
+ * marketing site and a product (currently only IHE).
  */
 export default function SelectedClients({ sectionNum }: Props) {
   const clients = getDisplayableClients();
@@ -41,39 +42,36 @@ export default function SelectedClients({ sectionNum }: Props) {
           }}
         >
           {clients.map((c) => {
-            const href = c.caseStudySlug ? `/work/${c.caseStudySlug}` : c.websiteUrl;
-            const external = !c.caseStudySlug;
+            // Primary destination: case study if one exists, otherwise the live site.
+            const primaryHref = c.caseStudySlug ? `/work/${c.caseStudySlug}` : c.websiteUrl;
+            const primaryExternal = !c.caseStudySlug;
+            const liveReal = isRealDomain(c.websiteUrl);
+            const productReal = isRealDomain(c.productUrl);
+
             return (
-              <Link
+              <div
                 key={c.id}
-                href={href}
-                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="selected-client"
                 style={{
-                  display: "block",
-                  textDecoration: "none",
-                  color: "inherit",
                   paddingTop: "12px",
                   paddingBottom: "12px",
                   borderTop: "1px solid var(--paper-rule)",
                 }}
               >
-                <div
-                  style={{
-                    fontFamily: "var(--font-fraunces), Georgia, serif",
-                    fontSize: "clamp(15px, 1.4vw, 18px)",
-                    fontWeight: 500,
-                    color: "var(--navy-900)",
-                    letterSpacing: "-0.012em",
-                    fontVariationSettings: '"opsz" 96',
-                    lineHeight: 1.25,
-                    marginBottom: "8px",
-                  }}
+                <Link
+                  href={primaryHref}
+                  {...(primaryExternal
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  className="selected-client-name"
                 >
                   {c.shortName}
-                  {external ? (
-                    <span style={{ color: "var(--gold-600)", marginLeft: "0.4em", fontSize: "0.8em" }}>↗</span>
+                  {primaryExternal ? (
+                    <span aria-hidden style={{ color: "var(--gold-600)", marginLeft: "0.4em", fontSize: "0.8em" }}>
+                      ↗
+                    </span>
                   ) : null}
-                </div>
+                </Link>
                 <div
                   style={{
                     fontFamily: "var(--font-jetbrains), monospace",
@@ -82,16 +80,93 @@ export default function SelectedClients({ sectionNum }: Props) {
                     textTransform: "uppercase",
                     color: "var(--ink-mute)",
                     lineHeight: 1.5,
+                    marginBottom: "10px",
                   }}
                 >
                   {c.type}
                 </div>
-              </Link>
+
+                {/* Domain link(s) — separately clickable. Real domains in gold. */}
+                <a
+                  href={c.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`selected-client-domain ${liveReal ? "is-real" : "is-staging"}`}
+                  aria-label={`Visit ${c.name} — opens in new tab`}
+                >
+                  {displayDomain(c.websiteUrl)} <span aria-hidden>↗</span>
+                </a>
+                {c.productUrl ? (
+                  <a
+                    href={c.productUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`selected-client-domain ${productReal ? "is-real" : "is-staging"}`}
+                    style={{ marginTop: "4px" }}
+                    aria-label={`Live product — opens in new tab`}
+                  >
+                    <span className="prefix">Product:</span>{" "}
+                    {displayDomain(c.productUrl)} <span aria-hidden>↗</span>
+                  </a>
+                ) : null}
+              </div>
             );
           })}
         </div>
       </div>
       <style>{`
+        .selected-client-name {
+          display: block;
+          font-family: var(--font-fraunces), Georgia, serif;
+          font-size: clamp(15px, 1.4vw, 18px);
+          font-weight: 500;
+          color: var(--navy-900);
+          letter-spacing: -0.012em;
+          font-variation-settings: "opsz" 96;
+          line-height: 1.25;
+          margin-bottom: 8px;
+          text-decoration: none;
+        }
+        .selected-client-name:hover {
+          background-image: linear-gradient(currentColor, currentColor);
+          background-size: 100% 1px;
+          background-repeat: no-repeat;
+          background-position: left 95%;
+        }
+        .selected-client-domain {
+          display: inline-flex;
+          align-items: baseline;
+          gap: 0.35em;
+          text-decoration: none;
+          font-family: var(--font-jetbrains), ui-monospace, monospace;
+          font-size: 12px;
+          letter-spacing: 0.04em;
+          line-height: 1.4;
+          padding: 4px 0;
+          word-break: break-all;
+        }
+        .selected-client-domain .prefix {
+          font-weight: 600;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          font-size: 10px;
+          color: var(--ink-mute);
+        }
+        .selected-client-domain.is-real {
+          color: var(--gold-700);
+          font-weight: 600;
+          font-size: 13px;
+        }
+        .selected-client-domain.is-real:hover {
+          color: var(--gold-600);
+        }
+        .selected-client-domain.is-staging {
+          color: var(--ink-mute);
+        }
+        .selected-client-domain.is-staging:hover {
+          color: var(--ink);
+        }
+
         @media (max-width: 860px) {
           .selected-clients-grid {
             grid-template-columns: 1fr 1fr !important;

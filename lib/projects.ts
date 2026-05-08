@@ -47,7 +47,7 @@ export const projects: Project[] = [
       "A multi-location medical aesthetics practice in Georgia. Two clinics, a connected nutrition supplement brand, a published book, and a coaching institute — all under one digital ecosystem.",
     summary:
       "Revitalize is a multi-location medical aesthetics, hormone, and weight-management practice operating two clinics in Columbus and Warner Robins, Georgia. The build replaced a template medspa site with a 50+ route clinical platform spanning 18 service pages, two-location SEO, an interactive hormone health assessment, a searchable Learning Library, and JaneApp booking flows per location — and connected three additional businesses (a supplement shop, a published book, and a coaching institute) under one brand system.",
-    liveUrl: "https://revitalize-medical-wellness-clinic-nine.vercel.app",
+    liveUrl: "http://revitalizemedicalclinic.com/",
     tags: ["Healthcare", "Multi-Location", "Medspa", "Next.js"],
     features: [
       "Main clinic platform — 50+ routes across the practice",
@@ -118,7 +118,7 @@ export const projects: Project[] = [
       "A 159-page programmatic SEO architecture for an HVAC contractor in coastal Alabama. 15 cities × 9 services, plus four custom interactive tools.",
     summary:
       "Air Solutions Heating & Cooling commissioned a build replacing a 36-page WordPress brochure with a programmatic SEO platform: 249 indexed pages at launch, a 9-type Schema.org architecture, four custom interactive tools, and a native automated publishing engine. The same architectural pattern Netflix and Vercel use for production applications, applied to a local HVAC contractor in Baldwin County, Alabama.",
-    liveUrl: "https://airsolutionspros.com",
+    liveUrl: "https://air-solutions-pros.vercel.app",
     tags: ["HVAC", "Programmatic SEO", "Custom Tools", "Next.js"],
     features: [
       "249 indexed pages at launch — 11.8× the old WordPress site",
