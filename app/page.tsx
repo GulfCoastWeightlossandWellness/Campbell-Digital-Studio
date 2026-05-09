@@ -341,7 +341,7 @@ export default function HomePage() {
                 borderRadius: "12px",
                 overflow: "hidden",
                 background: "var(--panel)",
-                boxShadow: "0 30px 80px -40px rgba(150, 131, 217, 0.22)",
+                boxShadow: "0 30px 80px -40px rgba(199, 123, 67, 0.25)",
               }}
             >
               <Image
@@ -413,7 +413,7 @@ export default function HomePage() {
                   borderRadius: "12px",
                   overflow: "hidden",
                   background: "var(--surface)",
-                  boxShadow: "0 30px 80px -40px rgba(123, 137, 229, 0.22)",
+                  boxShadow: "0 30px 80px -40px rgba(160, 106, 74, 0.22)",
                 }}
               >
                 <Image

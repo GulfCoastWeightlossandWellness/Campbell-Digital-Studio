@@ -3,12 +3,11 @@
 import { motion, useReducedMotion } from "motion/react";
 
 /**
- * HeroAurora — the animated aurora composition that anchors the home hero.
+ * HeroAurora — animated warm composition behind the home hero.
  *
- * Replaces the cream-paper-era HeroCurve. Visual signature: three drifting
- * radial-gradient blobs (electric blue, violet, magenta) over a subtle
- * cross-hatch grid, with a thin aurora horizon line near the bottom edge.
- * Pure decoration — content of the engagement process lives in §05 Process.
+ * v3 palette: three drifting copper-family blobs (deep copper, copper, amber)
+ * over a subtle cross-hatch grid plus a thin copper horizon line. Pure
+ * decoration — content of the engagement process lives in §05 Process.
  *
  * Performance: GPU-only transforms (translate + scale), `will-change` hint,
  * `prefers-reduced-motion` respected via Motion's hook.
@@ -19,7 +18,7 @@ export default function HeroAurora() {
   return (
     <div className="hero-aurora" aria-hidden>
       <motion.div
-        className="blob blob-blue"
+        className="blob blob-deep"
         animate={
           reducedMotion
             ? undefined
@@ -28,7 +27,7 @@ export default function HeroAurora() {
         transition={reducedMotion ? undefined : { duration: 18, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="blob blob-violet"
+        className="blob blob-copper"
         animate={
           reducedMotion
             ? undefined
@@ -37,7 +36,7 @@ export default function HeroAurora() {
         transition={reducedMotion ? undefined : { duration: 22, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
       />
       <motion.div
-        className="blob blob-magenta"
+        className="blob blob-amber"
         animate={
           reducedMotion
             ? undefined
@@ -53,20 +52,18 @@ export default function HeroAurora() {
       >
         <defs>
           <pattern id="hero-grid-aurora" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-            <path d="M 60 0 L 0 0 L 0 60" fill="none" stroke="rgba(255,255,255,0.035)" strokeWidth="1" />
+            <path d="M 60 0 L 0 0 L 0 60" fill="none" stroke="rgba(255,245,235,0.035)" strokeWidth="1" />
           </pattern>
           <linearGradient id="aurora-line-grad" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stopColor="transparent" />
-            <stop offset="20%" stopColor="#7B89E5" stopOpacity="0.5" />
-            <stop offset="50%" stopColor="#9683D9" stopOpacity="0.75" />
-            <stop offset="80%" stopColor="#D89AB0" stopOpacity="0.5" />
+            <stop offset="50%" stopColor="#C77B43" stopOpacity="0.7" />
             <stop offset="100%" stopColor="transparent" />
           </linearGradient>
         </defs>
 
         <rect x="0" y="0" width="1200" height="400" fill="url(#hero-grid-aurora)" />
 
-        {/* Aurora horizon — single thin gradient line near bottom edge */}
+        {/* Single copper horizon line — solid, not multi-color gradient */}
         <line x1="0" y1="350" x2="1200" y2="350" stroke="url(#aurora-line-grad)" strokeWidth="1" />
         <line x1="0" y1="352" x2="1200" y2="352" stroke="url(#aurora-line-grad)" strokeWidth="1" opacity="0.4" />
       </svg>
@@ -87,20 +84,20 @@ export default function HeroAurora() {
           filter: blur(90px);
           will-change: transform;
         }
-        .blob-blue {
-          background: radial-gradient(circle, #7B89E5 0%, transparent 65%);
+        .blob-deep {
+          background: radial-gradient(circle, #A06A4A 0%, transparent 65%);
           top: -16%;
           left: 4%;
-          opacity: 0.45;
+          opacity: 0.42;
         }
-        .blob-violet {
-          background: radial-gradient(circle, #9683D9 0%, transparent 65%);
+        .blob-copper {
+          background: radial-gradient(circle, #C77B43 0%, transparent 65%);
           top: 8%;
           left: 32%;
-          opacity: 0.45;
+          opacity: 0.42;
         }
-        .blob-magenta {
-          background: radial-gradient(circle, #D89AB0 0%, transparent 65%);
+        .blob-amber {
+          background: radial-gradient(circle, #D4A574 0%, transparent 65%);
           top: -10%;
           left: 58%;
           opacity: 0.32;

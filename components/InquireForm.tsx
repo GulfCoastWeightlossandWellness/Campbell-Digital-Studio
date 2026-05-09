@@ -333,7 +333,7 @@ export default function InquireForm() {
         }
         select.inquire-input {
           appearance: none;
-          background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23A855F7' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+          background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23C77B43' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
           background-repeat: no-repeat;
           background-position: right 14px center;
           padding-right: 36px;
@@ -342,7 +342,7 @@ export default function InquireForm() {
           outline: none;
           border-color: var(--aurora-violet);
           background: rgba(255, 255, 255, 0.05);
-          box-shadow: 0 0 0 3px rgba(150, 131, 217, 0.15);
+          box-shadow: 0 0 0 3px rgba(199, 123, 67, 0.18);
         }
         .inquire-input::placeholder {
           color: var(--ink-4);
