@@ -67,7 +67,7 @@ export default function StickyMobileCTA() {
           right: 0,
           bottom: 0,
           zIndex: 95,
-          background: "rgba(10, 10, 11, 0.92)",
+          background: "rgba(17, 17, 20, 0.92)",
           backdropFilter: "saturate(140%) blur(12px)",
           WebkitBackdropFilter: "saturate(140%) blur(12px)",
           borderTop: "1px solid var(--border-default)",

@@ -342,7 +342,7 @@ export default function InquireForm() {
           outline: none;
           border-color: var(--aurora-violet);
           background: rgba(255, 255, 255, 0.05);
-          box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
+          box-shadow: 0 0 0 3px rgba(150, 131, 217, 0.15);
         }
         .inquire-input::placeholder {
           color: var(--ink-4);

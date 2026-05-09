@@ -57,9 +57,9 @@ export default function HeroAurora() {
           </pattern>
           <linearGradient id="aurora-line-grad" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stopColor="transparent" />
-            <stop offset="20%" stopColor="#5B6CFF" stopOpacity="0.55" />
-            <stop offset="50%" stopColor="#A855F7" stopOpacity="0.85" />
-            <stop offset="80%" stopColor="#EC4899" stopOpacity="0.55" />
+            <stop offset="20%" stopColor="#7B89E5" stopOpacity="0.5" />
+            <stop offset="50%" stopColor="#9683D9" stopOpacity="0.75" />
+            <stop offset="80%" stopColor="#D89AB0" stopOpacity="0.5" />
             <stop offset="100%" stopColor="transparent" />
           </linearGradient>
         </defs>
@@ -88,22 +88,22 @@ export default function HeroAurora() {
           will-change: transform;
         }
         .blob-blue {
-          background: radial-gradient(circle, #5B6CFF 0%, transparent 65%);
+          background: radial-gradient(circle, #7B89E5 0%, transparent 65%);
           top: -16%;
           left: 4%;
-          opacity: 0.55;
+          opacity: 0.45;
         }
         .blob-violet {
-          background: radial-gradient(circle, #A855F7 0%, transparent 65%);
+          background: radial-gradient(circle, #9683D9 0%, transparent 65%);
           top: 8%;
           left: 32%;
-          opacity: 0.55;
+          opacity: 0.45;
         }
         .blob-magenta {
-          background: radial-gradient(circle, #EC4899 0%, transparent 65%);
+          background: radial-gradient(circle, #D89AB0 0%, transparent 65%);
           top: -10%;
           left: 58%;
-          opacity: 0.40;
+          opacity: 0.32;
         }
         .grid-svg {
           position: absolute;

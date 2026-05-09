@@ -59,7 +59,7 @@ export default function Header() {
         left: 0,
         right: 0,
         zIndex: 100,
-        background: scrolled ? "rgba(10, 10, 11, 0.78)" : "transparent",
+        background: scrolled ? "rgba(17, 17, 20, 0.78)" : "transparent",
         backdropFilter: scrolled ? "saturate(140%) blur(12px)" : "none",
         WebkitBackdropFilter: scrolled ? "saturate(140%) blur(12px)" : "none",
         borderBottom: scrolled ? "1px solid var(--border-subtle)" : "1px solid transparent",

@@ -173,7 +173,7 @@ export default async function CaseStudyPage({ params }: Props) {
               borderRadius: "12px",
               overflow: "hidden",
               background: "var(--surface)",
-              boxShadow: "0 30px 80px -40px rgba(168, 85, 247, 0.25)",
+              boxShadow: "0 30px 80px -40px rgba(150, 131, 217, 0.22)",
             }}
           >
             <Image
@@ -246,7 +246,7 @@ export default async function CaseStudyPage({ params }: Props) {
                     borderRadius: "12px",
                     overflow: "hidden",
                     background: "var(--surface)",
-                    boxShadow: "0 24px 60px -32px rgba(91, 108, 255, 0.20)",
+                    boxShadow: "0 24px 60px -32px rgba(123, 137, 229, 0.18)",
                   }}
                 >
                   {s.image ? (
