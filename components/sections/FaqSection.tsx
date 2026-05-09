@@ -34,7 +34,7 @@ export default function FaqSection({ sectionNum = "06" }: Props) {
         style={{
           marginTop: "48px",
           maxWidth: "820px",
-          borderTop: "1px solid var(--paper-rule)",
+          borderTop: "1px solid var(--border-subtle)",
         }}
       >
         {faqs.map((item, idx) => {
@@ -43,7 +43,7 @@ export default function FaqSection({ sectionNum = "06" }: Props) {
           return (
             <div
               key={item.question}
-              style={{ borderBottom: "1px solid var(--paper-rule)" }}
+              style={{ borderBottom: "1px solid var(--border-subtle)" }}
             >
               <button
                 type="button"
@@ -62,18 +62,17 @@ export default function FaqSection({ sectionNum = "06" }: Props) {
                   border: "none",
                   cursor: "pointer",
                   textAlign: "left",
-                  color: "var(--navy-900)",
+                  color: "var(--ink-1)",
                   minHeight: "44px",
                 }}
               >
                 <span
                   style={{
-                    fontFamily: "var(--font-fraunces), Georgia, serif",
+                    fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                     fontSize: "clamp(17px, 1.8vw, 20px)",
                     fontWeight: 500,
-                    color: "var(--navy-900)",
-                    letterSpacing: "-0.012em",
-                    fontVariationSettings: '"opsz" 96',
+                    color: "var(--ink-1)",
+                    letterSpacing: "-0.018em",
                     lineHeight: 1.35,
                   }}
                 >
@@ -82,9 +81,9 @@ export default function FaqSection({ sectionNum = "06" }: Props) {
                 <span
                   aria-hidden
                   style={{
-                    fontFamily: "var(--font-jetbrains), monospace",
+                    fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
                     fontSize: "18px",
-                    color: "var(--gold-600)",
+                    color: "var(--aurora-violet)",
                     transform: open ? "rotate(45deg)" : "rotate(0)",
                     transition: "transform 0.2s ease",
                     flexShrink: 0,
@@ -101,10 +100,10 @@ export default function FaqSection({ sectionNum = "06" }: Props) {
                 hidden={!open}
                 style={{
                   paddingBottom: open ? "24px" : "0",
-                  fontFamily: "var(--font-manrope), sans-serif",
+                  fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                   fontSize: "15px",
                   lineHeight: 1.7,
-                  color: "var(--ink-soft)",
+                  color: "var(--ink-2)",
                   maxWidth: "65ch",
                 }}
               >

@@ -24,9 +24,9 @@ export default function SelectedClients({ sectionNum }: Props) {
   return (
     <section
       style={{
-        background: "var(--surface)",
-        borderTop: "1px solid var(--paper-rule)",
-        borderBottom: "1px solid var(--paper-rule)",
+        background: "var(--panel)",
+        borderTop: "1px solid var(--border-subtle)",
+        borderBottom: "1px solid var(--border-subtle)",
       }}
     >
       <div className="section-wrap section-block-tight">
@@ -55,7 +55,7 @@ export default function SelectedClients({ sectionNum }: Props) {
                 style={{
                   paddingTop: "12px",
                   paddingBottom: "12px",
-                  borderTop: "1px solid var(--paper-rule)",
+                  borderTop: "1px solid var(--border-subtle)",
                 }}
               >
                 <Link
@@ -67,18 +67,18 @@ export default function SelectedClients({ sectionNum }: Props) {
                 >
                   {c.shortName}
                   {primaryExternal ? (
-                    <span aria-hidden style={{ color: "var(--gold-600)", marginLeft: "0.4em", fontSize: "0.8em" }}>
+                    <span aria-hidden style={{ color: "var(--aurora-violet)", marginLeft: "0.4em", fontSize: "0.8em" }}>
                       ↗
                     </span>
                   ) : null}
                 </Link>
                 <div
                   style={{
-                    fontFamily: "var(--font-jetbrains), monospace",
+                    fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
                     fontSize: "10px",
                     letterSpacing: "0.16em",
                     textTransform: "uppercase",
-                    color: "var(--ink-mute)",
+                    color: "var(--ink-3)",
                     lineHeight: 1.5,
                     marginBottom: "10px",
                   }}
@@ -117,54 +117,52 @@ export default function SelectedClients({ sectionNum }: Props) {
       <style>{`
         .selected-client-name {
           display: block;
-          font-family: var(--font-fraunces), Georgia, serif;
+          font-family: var(--font-geist-sans), system-ui, sans-serif;
           font-size: clamp(15px, 1.4vw, 18px);
           font-weight: 500;
-          color: var(--navy-900);
-          letter-spacing: -0.012em;
-          font-variation-settings: "opsz" 96;
+          color: var(--ink-1);
+          letter-spacing: -0.018em;
           line-height: 1.25;
           margin-bottom: 8px;
           text-decoration: none;
+          transition: color 0.2s ease;
         }
         .selected-client-name:hover {
-          background-image: linear-gradient(currentColor, currentColor);
-          background-size: 100% 1px;
-          background-repeat: no-repeat;
-          background-position: left 95%;
+          color: var(--aurora-violet);
         }
         .selected-client-domain {
           display: inline-flex;
           align-items: baseline;
           gap: 0.35em;
           text-decoration: none;
-          font-family: var(--font-jetbrains), ui-monospace, monospace;
+          font-family: var(--font-geist-mono), var(--font-jetbrains), ui-monospace, monospace;
           font-size: 12px;
-          letter-spacing: 0.04em;
+          letter-spacing: 0.02em;
           line-height: 1.4;
           padding: 4px 0;
           word-break: break-all;
+          transition: color 0.2s ease;
         }
         .selected-client-domain .prefix {
           font-weight: 600;
           letter-spacing: 0.16em;
           text-transform: uppercase;
           font-size: 10px;
-          color: var(--ink-mute);
+          color: var(--ink-3);
         }
         .selected-client-domain.is-real {
-          color: var(--gold-700);
+          color: var(--aurora-violet);
           font-weight: 600;
           font-size: 13px;
         }
         .selected-client-domain.is-real:hover {
-          color: var(--gold-600);
+          color: var(--aurora-magenta);
         }
         .selected-client-domain.is-staging {
-          color: var(--ink-mute);
+          color: var(--ink-3);
         }
         .selected-client-domain.is-staging:hover {
-          color: var(--ink);
+          color: var(--ink-1);
         }
 
         @media (max-width: 860px) {

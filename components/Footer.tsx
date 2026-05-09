@@ -35,7 +35,7 @@ export default function Footer() {
         >
           {/* Studio */}
           <div>
-            <div className="mono-caption" style={{ color: "var(--gold-400)", marginBottom: "20px" }}>
+            <div className="mono-caption" style={{ color: "var(--aurora-violet)", marginBottom: "20px" }}>
               § Studio
             </div>
             <div style={{ marginBottom: "20px", marginLeft: "-16px" }}>
@@ -43,10 +43,10 @@ export default function Footer() {
             </div>
             <p
               style={{
-                fontFamily: "var(--font-manrope), sans-serif",
+                fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                 fontSize: "13px",
                 lineHeight: 1.6,
-                color: "rgba(255,255,255,0.78)",
+                color: "var(--ink-2)",
                 marginBottom: "10px",
               }}
             >
@@ -56,10 +56,10 @@ export default function Footer() {
               href={`mailto:${siteConfig.email}`}
               className="editorial-link on-dark"
               style={{
-                fontFamily: "var(--font-jetbrains), monospace",
+                fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
                 fontSize: "12px",
-                letterSpacing: "0.12em",
-                color: "var(--gold-400)",
+                letterSpacing: "0.10em",
+                color: "var(--aurora-violet)",
               }}
             >
               {siteConfig.email}
@@ -72,11 +72,11 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="editorial-link on-dark"
                   style={{
-                    fontFamily: "var(--font-jetbrains), monospace",
+                    fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
                     fontSize: "11px",
                     letterSpacing: "0.18em",
                     textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.6)",
+                    color: "var(--ink-3)",
                   }}
                 >
                   GitHub ↗
@@ -87,7 +87,7 @@ export default function Footer() {
 
           {/* Index */}
           <div>
-            <div className="mono-caption" style={{ color: "var(--gold-400)", marginBottom: "16px" }}>
+            <div className="mono-caption" style={{ color: "var(--aurora-violet)", marginBottom: "16px" }}>
               § Index
             </div>
             <ul
@@ -106,9 +106,9 @@ export default function Footer() {
                     href={link.href}
                     className="editorial-link on-dark"
                     style={{
-                      fontFamily: "var(--font-manrope), sans-serif",
+                      fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                       fontSize: "14px",
-                      color: "rgba(255,255,255,0.85)",
+                      color: "var(--ink-1)",
                     }}
                   >
                     {link.label}
@@ -121,9 +121,9 @@ export default function Footer() {
                     href="/call"
                     className="editorial-link on-dark"
                     style={{
-                      fontFamily: "var(--font-manrope), sans-serif",
+                      fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                       fontSize: "14px",
-                      color: "rgba(255,255,255,0.85)",
+                      color: "var(--ink-1)",
                     }}
                   >
                     Book a call
@@ -135,7 +135,7 @@ export default function Footer() {
 
           {/* Contact / capture */}
           <div>
-            <div className="mono-caption" style={{ color: "var(--gold-400)", marginBottom: "16px" }}>
+            <div className="mono-caption" style={{ color: "var(--aurora-violet)", marginBottom: "16px" }}>
               § Contact
             </div>
             <p
@@ -145,7 +145,7 @@ export default function Footer() {
                 fontStyle: "italic",
                 fontWeight: 300,
                 lineHeight: 1.55,
-                color: "rgba(255,255,255,0.92)",
+                color: "var(--ink-1)",
                 fontVariationSettings: '"opsz" 24',
                 marginBottom: "20px",
               }}
@@ -158,7 +158,7 @@ export default function Footer() {
 
         <div
           style={{
-            borderTop: "1px solid rgba(232,196,107,0.2)",
+            borderTop: "1px solid var(--border-subtle)",
             marginTop: "56px",
             paddingTop: "20px",
             display: "flex",
@@ -170,22 +170,22 @@ export default function Footer() {
         >
           <span
             style={{
-              fontFamily: "var(--font-jetbrains), monospace",
+              fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
               fontSize: "10px",
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.5)",
+              color: "var(--ink-4)",
             }}
           >
             © {year} {siteConfig.name} · {siteConfig.founder.location}
           </span>
           <span
             style={{
-              fontFamily: "var(--font-jetbrains), monospace",
+              fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
               fontSize: "10px",
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.5)",
+              color: "var(--ink-4)",
             }}
           >
             Made by hand, deliberately small.

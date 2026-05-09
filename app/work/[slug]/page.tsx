@@ -18,8 +18,6 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  // Only featured projects render at full case-study depth; the rest redirect
-  // to the /work index via next.config.ts.
   return projects.filter((p) => p.featured).map((p) => ({ slug: p.slug }));
 }
 
@@ -60,7 +58,6 @@ export default async function CaseStudyPage({ params }: Props) {
 
   const year = projectYears[slug] ?? "—";
 
-  // next / previous within the featured set only
   const featured = projects.filter((p) => p.featured);
   const idx = featured.findIndex((p) => p.slug === project.slug);
   const prev = idx > 0 ? featured[idx - 1] : null;
@@ -75,16 +72,14 @@ export default async function CaseStudyPage({ params }: Props) {
 
   return (
     <>
-      {/* ─── Hero (paper) ─────────────────────────────────────────── */}
+      {/* ─── Hero ─────────────────────────────────────────────────── */}
       <section className="section-wrap" style={{ paddingTop: "clamp(96px, 14vw, 160px)", paddingBottom: "clamp(48px, 6vw, 72px)" }}>
         <Eyebrow>
           § Case Study / {project.category}
         </Eyebrow>
         <h1
-          className="display-serif"
+          className="display-sans display-80"
           style={{
-            fontSize: "clamp(40px, 6.5vw, 80px)",
-            color: "var(--navy-900)",
             maxWidth: "20ch",
             marginBottom: "32px",
           }}
@@ -97,7 +92,7 @@ export default async function CaseStudyPage({ params }: Props) {
             fontFamily: "var(--font-fraunces), Georgia, serif",
             fontSize: "21px",
             lineHeight: 1.6,
-            color: "var(--ink-soft)",
+            color: "var(--ink-2)",
             fontVariationSettings: '"opsz" 24',
             fontStyle: "italic",
             fontWeight: 300,
@@ -111,8 +106,10 @@ export default async function CaseStudyPage({ params }: Props) {
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",
             gap: "0",
-            border: "1px solid var(--paper-rule)",
-            background: "var(--surface)",
+            border: "1px solid var(--border-default)",
+            background: "var(--panel)",
+            borderRadius: "12px",
+            overflow: "hidden",
             marginTop: "48px",
           }}
           className="brief-meta"
@@ -130,17 +127,17 @@ export default async function CaseStudyPage({ params }: Props) {
               key={m.label}
               style={{
                 padding: "20px 22px",
-                borderRight: "1px solid var(--paper-rule)",
+                borderRight: "1px solid var(--border-subtle)",
               }}
               className="brief-cell"
             >
               <div
                 style={{
-                  fontFamily: "var(--font-jetbrains), monospace",
+                  fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
                   fontSize: "10px",
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
-                  color: "var(--gold-700)",
+                  color: "var(--aurora-violet)",
                   marginBottom: "6px",
                   fontWeight: 600,
                 }}
@@ -149,12 +146,12 @@ export default async function CaseStudyPage({ params }: Props) {
               </div>
               <div
                 style={{
-                  fontFamily: "var(--font-fraunces), Georgia, serif",
+                  fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                   fontSize: "16px",
                   fontWeight: 500,
-                  color: "var(--navy-900)",
+                  color: "var(--ink-1)",
                   lineHeight: 1.3,
-                  fontVariationSettings: '"opsz" 24',
+                  letterSpacing: "-0.018em",
                 }}
               >
                 {m.value}
@@ -172,9 +169,11 @@ export default async function CaseStudyPage({ params }: Props) {
               position: "relative",
               width: "100%",
               aspectRatio: "16 / 9",
-              border: "1px solid var(--paper-rule)",
+              border: "1px solid var(--border-default)",
+              borderRadius: "12px",
               overflow: "hidden",
-              background: "var(--paper-sand)",
+              background: "var(--surface)",
+              boxShadow: "0 30px 80px -40px rgba(199, 123, 67, 0.25)",
             }}
           >
             <Image
@@ -206,10 +205,10 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
       </section>
 
-      {/* ─── § Results (renders only when real numbers exist) ───── */}
+      {/* ─── § Results ──────────────────────────────────────────── */}
       <CaseStudyResults slug={slug} sectionNum="02" />
 
-      {/* ─── § Testimonial (renders only when a real quote exists) ── */}
+      {/* ─── § Testimonial ──────────────────────────────────────── */}
       {testimonial ? (
         <section className="section-wrap section-block-tight">
           <SectionTag num="03" label="Client voice" />
@@ -243,9 +242,11 @@ export default async function CaseStudyPage({ params }: Props) {
                     position: "relative",
                     width: "100%",
                     aspectRatio: "16 / 10",
-                    border: "1px solid var(--paper-rule)",
+                    border: "1px solid var(--border-default)",
+                    borderRadius: "12px",
                     overflow: "hidden",
-                    background: "var(--paper-sand)",
+                    background: "var(--surface)",
+                    boxShadow: "0 24px 60px -32px rgba(160, 106, 74, 0.18)",
                   }}
                 >
                   {s.image ? (
@@ -282,15 +283,15 @@ export default async function CaseStudyPage({ params }: Props) {
         <div style={{ marginTop: "48px" }}>
           <div
             style={{
-              fontFamily: "var(--font-jetbrains), monospace",
+              fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
               fontSize: "10px",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "var(--gold-700)",
+              color: "var(--aurora-violet)",
               fontWeight: 600,
               marginBottom: "20px",
               paddingBottom: "10px",
-              borderBottom: "1px solid var(--paper-rule)",
+              borderBottom: "1px solid var(--border-subtle)",
             }}
           >
             Deliverables
@@ -312,11 +313,11 @@ export default async function CaseStudyPage({ params }: Props) {
                 style={{
                   position: "relative",
                   padding: "10px 0 10px 22px",
-                  fontFamily: "var(--font-manrope), sans-serif",
+                  fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                   fontSize: "14.5px",
                   lineHeight: 1.6,
-                  color: "var(--ink-soft)",
-                  borderBottom: "1px solid var(--paper-rule)",
+                  color: "var(--ink-2)",
+                  borderBottom: "1px solid var(--border-subtle)",
                 }}
               >
                 <span
@@ -327,7 +328,7 @@ export default async function CaseStudyPage({ params }: Props) {
                     top: "20px",
                     width: "12px",
                     height: "1px",
-                    background: "var(--gold-600)",
+                    background: "var(--aurora-violet)",
                   }}
                 />
                 {feature}
@@ -337,8 +338,8 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
       </section>
 
-      {/* ─── § 04 / SEO + value (prose) ─────────────────────────── */}
-      <section style={{ background: "var(--surface)", borderTop: "1px solid var(--paper-rule)", borderBottom: "1px solid var(--paper-rule)" }}>
+      {/* ─── § 04 / Why It Works ─────────────────────────────────── */}
+      <section style={{ background: "var(--panel)", borderTop: "1px solid var(--border-subtle)", borderBottom: "1px solid var(--border-subtle)" }}>
         <div className="section-wrap section-block-tight">
           <SectionTag num="04" label="Why It Works" />
           <EditorialH2>
@@ -369,8 +370,10 @@ export default async function CaseStudyPage({ params }: Props) {
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
             gap: "0",
-            border: "1px solid var(--paper-rule)",
-            background: "var(--surface)",
+            border: "1px solid var(--border-default)",
+            background: "var(--panel)",
+            borderRadius: "12px",
+            overflow: "hidden",
             marginTop: "32px",
           }}
         >
@@ -384,16 +387,16 @@ export default async function CaseStudyPage({ params }: Props) {
               key={m.label}
               style={{
                 padding: "22px 24px",
-                borderRight: i < arr.length - 1 ? "1px solid var(--paper-rule)" : "none",
+                borderRight: i < arr.length - 1 ? "1px solid var(--border-subtle)" : "none",
               }}
             >
               <div
                 style={{
-                  fontFamily: "var(--font-jetbrains), monospace",
+                  fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
                   fontSize: "10px",
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
-                  color: "var(--gold-700)",
+                  color: "var(--aurora-violet)",
                   marginBottom: "8px",
                   fontWeight: 600,
                 }}
@@ -402,10 +405,10 @@ export default async function CaseStudyPage({ params }: Props) {
               </div>
               <div
                 style={{
-                  fontFamily: "var(--font-manrope), sans-serif",
+                  fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                   fontSize: "13.5px",
                   lineHeight: 1.55,
-                  color: "var(--ink-soft)",
+                  color: "var(--ink-2)",
                 }}
               >
                 {m.value}
@@ -420,15 +423,15 @@ export default async function CaseStudyPage({ params }: Props) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`editorial-link arrow-link ${isRealDomain(project.liveUrl) ? "gold" : "mono"}`}
+              className={`editorial-link arrow-link ${isRealDomain(project.liveUrl) ? "violet" : "mono"}`}
               style={
                 isRealDomain(project.liveUrl)
                   ? {
-                      fontFamily: "var(--font-jetbrains), monospace",
+                      fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
                       fontSize: "13px",
                       fontWeight: 600,
                       letterSpacing: "0.02em",
-                      color: "var(--gold-700)",
+                      color: "var(--aurora-violet)",
                     }
                   : undefined
               }
@@ -457,24 +460,24 @@ export default async function CaseStudyPage({ params }: Props) {
 
       </section>
 
-      {/* ─── § Inquire CTA — case-study tail ─────────────────────── */}
+      {/* ─── § Inquire CTA ───────────────────────────────────────── */}
       <section className="section-wrap section-block-tight">
         <div
           style={{
             display: "flex",
-            gap: "32px",
+            gap: "20px",
             flexWrap: "wrap",
             alignItems: "center",
             paddingTop: "32px",
-            borderTop: "1px solid var(--paper-rule)",
+            borderTop: "1px solid var(--border-subtle)",
           }}
         >
-          <Link href="/inquire" className="editorial-link arrow-link mono">
-            Inquire about a similar project <span className="arrow" aria-hidden>→</span>
+          <Link href="/inquire" className="btn-fill">
+            Inquire about a similar project
           </Link>
           {siteConfig.calUsername ? (
-            <Link href="/call" className="editorial-link arrow-link mono">
-              Or book a 20-minute call <span className="arrow" aria-hidden>→</span>
+            <Link href="/call" className="btn-ghost">
+              Or book a 20-minute call
             </Link>
           ) : null}
         </div>
@@ -483,9 +486,9 @@ export default async function CaseStudyPage({ params }: Props) {
       {/* ─── § 07 / Prev / Next ──────────────────────────────────── */}
       <section
         style={{
-          borderTop: "1px solid var(--paper-rule)",
-          borderBottom: "1px solid var(--paper-rule)",
-          background: "var(--surface)",
+          borderTop: "1px solid var(--border-subtle)",
+          borderBottom: "1px solid var(--border-subtle)",
+          background: "var(--panel)",
           marginTop: "clamp(48px, 6vw, 96px)",
         }}
       >
@@ -505,7 +508,7 @@ export default async function CaseStudyPage({ params }: Props) {
               className="prev-next-cell"
               style={{
                 padding: "40px clamp(20px, 5vw, 60px)",
-                borderRight: "1px solid var(--paper-rule)",
+                borderRight: "1px solid var(--border-subtle)",
                 textDecoration: "none",
                 color: "inherit",
                 display: "block",
@@ -514,18 +517,17 @@ export default async function CaseStudyPage({ params }: Props) {
             >
               <span
                 className="mono-caption"
-                style={{ display: "block", marginBottom: "10px", color: "var(--ink-mute)" }}
+                style={{ display: "block", marginBottom: "10px", color: "var(--ink-3)" }}
               >
                 ← Previous
               </span>
               <h4
                 style={{
-                  fontFamily: "var(--font-fraunces), Georgia, serif",
+                  fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                   fontSize: "24px",
                   fontWeight: 500,
-                  color: "var(--navy-900)",
-                  letterSpacing: "-0.015em",
-                  fontVariationSettings: '"opsz" 96',
+                  color: "var(--ink-1)",
+                  letterSpacing: "-0.022em",
                   lineHeight: 1.2,
                 }}
               >
@@ -550,18 +552,17 @@ export default async function CaseStudyPage({ params }: Props) {
             >
               <span
                 className="mono-caption"
-                style={{ display: "block", marginBottom: "10px", color: "var(--ink-mute)" }}
+                style={{ display: "block", marginBottom: "10px", color: "var(--ink-3)" }}
               >
                 Next →
               </span>
               <h4
                 style={{
-                  fontFamily: "var(--font-fraunces), Georgia, serif",
+                  fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                   fontSize: "24px",
                   fontWeight: 500,
-                  color: "var(--navy-900)",
-                  letterSpacing: "-0.015em",
-                  fontVariationSettings: '"opsz" 96',
+                  color: "var(--ink-1)",
+                  letterSpacing: "-0.022em",
                   lineHeight: 1.2,
                 }}
               >
@@ -575,11 +576,11 @@ export default async function CaseStudyPage({ params }: Props) {
       </section>
 
       <style>{`
-        .prev-next-cell:hover { background: var(--paper-sand); }
+        .prev-next-cell:hover { background: rgba(255, 255, 255, 0.02); }
         @media (max-width: 720px) {
           .brief-meta { grid-template-columns: 1fr 1fr !important; }
           .brief-cell:nth-child(2n) { border-right: none !important; }
-          .brief-cell:nth-child(-n+2) { border-bottom: 1px solid var(--paper-rule); }
+          .brief-cell:nth-child(-n+2) { border-bottom: 1px solid var(--border-subtle); }
         }
       `}</style>
     </>

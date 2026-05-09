@@ -18,11 +18,8 @@ type WorkRow = {
   sectorTags: string[];
   buildLabel: { glyph: "◆" | "◇"; text: string };
   liveUrl: string | null;
-  /** Optional second live URL (IHE has marketing + dashboard) */
   productUrl?: string;
-  /** Label for the product URL when shown alongside liveUrl */
   productLabel?: string;
-  /** Whether this row links into a full case study */
   hasCaseStudy: boolean;
 };
 
@@ -101,7 +98,6 @@ const rows: WorkRow[] = [
 export default function WorkPage() {
   return (
     <>
-      {/* ─── Header ───────────────────────────────────────────────── */}
       <section
         className="section-wrap"
         style={{ paddingTop: "clamp(96px, 14vw, 160px)", paddingBottom: "clamp(48px, 6vw, 72px)" }}
@@ -115,30 +111,28 @@ export default function WorkPage() {
         <p
           className="reading-col"
           style={{
-            fontFamily: "var(--font-manrope), sans-serif",
+            fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
             fontSize: "17px",
             lineHeight: 1.65,
-            color: "var(--ink-soft)",
+            color: "var(--ink-2)",
             marginTop: "24px",
+            letterSpacing: "-0.01em",
           }}
         >
-          A transparent record of the sites and platforms I’ve built — with honest labels and
+          A transparent record of the sites and platforms I&rsquo;ve built — with honest labels and
           real scope on each. Click into a project for the full case study.
         </p>
       </section>
 
-      {/* ─── Project index — full-bleed editorial rows ────────────── */}
       <section
         style={{
-          borderTop: "1px solid var(--paper-rule)",
-          borderBottom: "1px solid var(--paper-rule)",
-          background: "var(--surface)",
+          borderTop: "1px solid var(--border-subtle)",
+          borderBottom: "1px solid var(--border-subtle)",
+          background: "var(--panel)",
         }}
       >
         <div className="section-wrap" style={{ paddingTop: "16px", paddingBottom: "16px" }}>
           {rows.map((r) => {
-            // Primary link target: case study if one exists, otherwise the live site.
-            // Domain links live in the meta column and are independently clickable.
             const primaryHref = r.hasCaseStudy ? `/work/${r.slug}` : (r.liveUrl ?? "/work");
             const primaryExternal = !r.hasCaseStudy && r.liveUrl !== null;
             const liveReal = isRealDomain(r.liveUrl);
@@ -146,14 +140,13 @@ export default function WorkPage() {
 
             return (
               <div key={r.slug} className="work-row">
-                {/* Col 1 — year */}
                 <div className="work-row-year">
                   <span
                     style={{
-                      fontFamily: "var(--font-jetbrains), monospace",
+                      fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
                       fontSize: "12px",
                       letterSpacing: "0.16em",
-                      color: "var(--ink-mute)",
+                      color: "var(--ink-3)",
                       textTransform: "uppercase",
                     }}
                   >
@@ -161,7 +154,6 @@ export default function WorkPage() {
                   </span>
                 </div>
 
-                {/* Col 2 — title (primary link) + scope */}
                 <div>
                   <Link
                     href={primaryHref}
@@ -170,28 +162,27 @@ export default function WorkPage() {
                   >
                     <h3
                       style={{
-                        fontFamily: "var(--font-fraunces), Georgia, serif",
+                        fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                         fontSize: "clamp(22px, 2.6vw, 30px)",
                         fontWeight: 500,
-                        color: "var(--navy-900)",
-                        letterSpacing: "-0.018em",
-                        fontVariationSettings: '"opsz" 96',
+                        color: "var(--ink-1)",
+                        letterSpacing: "-0.022em",
                         marginBottom: "8px",
                         lineHeight: 1.15,
                       }}
                     >
                       {r.title}
                       {primaryExternal ? (
-                        <span aria-hidden style={{ color: "var(--gold-600)", marginLeft: "0.4em", fontSize: "0.7em" }}>↗</span>
+                        <span aria-hidden style={{ color: "var(--aurora-violet)", marginLeft: "0.4em", fontSize: "0.7em" }}>↗</span>
                       ) : null}
                     </h3>
                   </Link>
                   <p
                     style={{
-                      fontFamily: "var(--font-manrope), sans-serif",
+                      fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                       fontSize: "14.5px",
                       lineHeight: 1.6,
-                      color: "var(--ink-soft)",
+                      color: "var(--ink-2)",
                       maxWidth: "60ch",
                       marginBottom: "12px",
                     }}
@@ -199,7 +190,6 @@ export default function WorkPage() {
                     {r.scope}
                   </p>
 
-                  {/* Domain links — visible, separately clickable, real domains in gold */}
                   {(r.liveUrl || r.productUrl) ? (
                     <div className="work-row-domains">
                       {r.liveUrl ? (
@@ -229,7 +219,6 @@ export default function WorkPage() {
                   ) : null}
                 </div>
 
-                {/* Col 3 — meta */}
                 <div
                   className="work-row-meta"
                   style={{
@@ -252,10 +241,10 @@ export default function WorkPage() {
                       <span
                         key={tag}
                         style={{
-                          fontFamily: "var(--font-jetbrains), monospace",
+                          fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
                           fontSize: "10px",
                           letterSpacing: "0.16em",
-                          color: "var(--ink-mute)",
+                          color: "var(--ink-3)",
                           textTransform: "uppercase",
                         }}
                       >
@@ -265,18 +254,18 @@ export default function WorkPage() {
                   </div>
                   <span
                     style={{
-                      fontFamily: "var(--font-jetbrains), monospace",
+                      fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
                       fontSize: "10px",
                       letterSpacing: "0.16em",
                       textTransform: "uppercase",
-                      color: "var(--gold-700)",
+                      color: "var(--aurora-violet)",
                       fontWeight: 600,
                       display: "inline-flex",
                       alignItems: "center",
                       gap: "8px",
                     }}
                   >
-                    <span aria-hidden style={{ color: "var(--gold-600)" }}>{r.buildLabel.glyph}</span>
+                    <span aria-hidden style={{ color: "var(--aurora-violet)" }}>{r.buildLabel.glyph}</span>
                     {r.buildLabel.text}
                   </span>
                 </div>
@@ -286,7 +275,6 @@ export default function WorkPage() {
         </div>
       </section>
 
-      {/* ─── Closing copy ─────────────────────────────────────────── */}
       <section className="section-wrap section-block-tight">
         <div className="reading-col">
           <SectionTag num="§ Note" label="Reading the index" />
@@ -311,13 +299,13 @@ export default function WorkPage() {
           grid-template-columns: 100px 1fr 220px;
           gap: 32px;
           padding: 28px 0;
-          border-top: 1px solid var(--paper-rule);
+          border-top: 1px solid var(--border-subtle);
           align-items: start;
           transition: background 0.2s ease, padding 0.2s ease;
         }
         .work-row:first-of-type { border-top: none; }
         .work-row:hover {
-          background: var(--paper-sand);
+          background: rgba(255, 255, 255, 0.02);
           padding-left: 16px;
           padding-right: 16px;
         }
@@ -326,16 +314,12 @@ export default function WorkPage() {
           display: block;
           text-decoration: none;
           color: inherit;
+          transition: color 0.2s ease;
         }
         .work-row:hover .work-row-title h3 {
-          background-image: linear-gradient(currentColor, currentColor);
-          background-size: 100% 1px;
-          background-repeat: no-repeat;
-          background-position: left 95%;
+          color: var(--aurora-violet);
         }
 
-        /* Domain link treatment — real custom domains carry more visual weight
-           (gold serif) than platform staging URLs (mono, ink-mute). */
         .work-row-domains {
           display: flex;
           flex-wrap: wrap;
@@ -348,11 +332,11 @@ export default function WorkPage() {
           align-items: baseline;
           gap: 0.35em;
           text-decoration: none;
-          font-family: var(--font-jetbrains), ui-monospace, monospace;
+          font-family: var(--font-geist-mono), var(--font-jetbrains), ui-monospace, monospace;
           font-size: 12px;
-          letter-spacing: 0.04em;
+          letter-spacing: 0.02em;
           padding: 6px 0;
-          transition: color 0.2s ease, transform 0.2s ease;
+          transition: color 0.2s ease;
           line-height: 1.3;
         }
         .domain-link .domain-link-prefix {
@@ -360,31 +344,23 @@ export default function WorkPage() {
           letter-spacing: 0.16em;
           text-transform: uppercase;
           font-size: 10px;
-          color: var(--ink-mute);
+          color: var(--ink-3);
         }
         .domain-real {
-          color: var(--gold-700);
+          color: var(--aurora-violet);
           font-weight: 600;
           font-size: 13.5px;
           letter-spacing: 0.02em;
         }
         .domain-real:hover {
-          color: var(--gold-600);
-          background-image: linear-gradient(var(--gold-600), var(--gold-600));
-          background-size: 100% 1px;
-          background-repeat: no-repeat;
-          background-position: left 90%;
+          color: var(--aurora-magenta);
         }
         .domain-staging {
-          color: var(--ink-mute);
+          color: var(--ink-3);
           font-weight: 500;
         }
         .domain-staging:hover {
-          color: var(--ink);
-          background-image: linear-gradient(currentColor, currentColor);
-          background-size: 100% 1px;
-          background-repeat: no-repeat;
-          background-position: left 90%;
+          color: var(--ink-1);
         }
 
         @media (max-width: 860px) {

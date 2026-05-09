@@ -8,7 +8,7 @@ import Eyebrow from "@/components/editorial/Eyebrow";
 import SelectedClients from "@/components/sections/SelectedClients";
 import FaqSection from "@/components/sections/FaqSection";
 import TestimonialBlock from "@/components/sections/TestimonialBlock";
-import HeroCurve from "@/components/HeroCurve";
+import HeroAurora from "@/components/HeroAurora";
 import { getFeaturedTestimonials } from "@/lib/data/testimonials";
 import { faqs } from "@/lib/data/faq";
 import { siteConfig } from "@/lib/site-config";
@@ -125,27 +125,24 @@ export default function HomePage() {
           <div style={{ maxWidth: "960px" }}>
             <Eyebrow onDark>§ 01 / Campbell Digital Studio</Eyebrow>
             <h1
-              className="display-serif"
+              className="display-sans display-96"
               style={{
-                fontSize: "clamp(40px, 7vw, 88px)",
-                color: "white",
                 marginBottom: "clamp(24px, 3vw, 32px)",
                 maxWidth: "18ch",
               }}
             >
               Digital infrastructure for{" "}
-              <em style={{ color: "var(--gold-400)" }}>
-                clinical practices and local service businesses.
-              </em>
+              <em>clinical practices and local service businesses.</em>
             </h1>
             <p
               style={{
-                fontFamily: "var(--font-manrope), sans-serif",
-                fontSize: "clamp(15px, 1.6vw, 18px)",
-                lineHeight: 1.65,
-                color: "rgba(255,255,255,0.82)",
+                fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
+                fontSize: "clamp(16px, 1.6vw, 19px)",
+                lineHeight: 1.55,
+                color: "var(--ink-2)",
                 maxWidth: "640px",
-                fontWeight: 300,
+                fontWeight: 400,
+                letterSpacing: "-0.01em",
               }}
             >
               Multi-location medical clinics, trade service brands, and the connected ecosystems
@@ -160,47 +157,27 @@ export default function HomePage() {
               alignItems: "flex-end",
               flexWrap: "wrap",
               gap: "32px",
-              borderTop: "1px solid rgba(232,196,107,0.25)",
+              borderTop: "1px solid var(--border-default)",
               paddingTop: "24px",
             }}
           >
-            <div style={{ display: "flex", gap: "32px", flexWrap: "wrap", alignItems: "center" }}>
-              <Link
-                href="/work"
-                className="editorial-link arrow-link on-dark"
-                style={{
-                  fontFamily: "var(--font-jetbrains), monospace",
-                  fontSize: "12px",
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: "var(--gold-400)",
-                }}
-              >
-                See recent work <span className="arrow" aria-hidden>→</span>
+            <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", alignItems: "center" }}>
+              <Link href="/inquire" className="btn-fill">
+                Start a conversation
               </Link>
-              <Link
-                href="/inquire"
-                className="editorial-link on-dark"
-                style={{
-                  fontFamily: "var(--font-jetbrains), monospace",
-                  fontSize: "12px",
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: "rgba(255,255,255,0.7)",
-                }}
-              >
-                Start a conversation →
+              <Link href="/work" className="btn-ghost">
+                See recent work
               </Link>
               {siteConfig.calUsername ? (
                 <Link
                   href="/call"
-                  className="editorial-link on-dark"
+                  className="editorial-link mono on-dark"
                   style={{
-                    fontFamily: "var(--font-jetbrains), monospace",
-                    fontSize: "12px",
-                    letterSpacing: "0.2em",
+                    fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
+                    fontSize: "11px",
+                    letterSpacing: "0.18em",
                     textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.7)",
+                    color: "var(--ink-3)",
                   }}
                 >
                   Or book a 20-min call →
@@ -209,11 +186,11 @@ export default function HomePage() {
             </div>
             <span
               style={{
-                fontFamily: "var(--font-jetbrains), monospace",
+                fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
                 fontSize: "10px",
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "rgba(255,255,255,0.5)",
+                color: "var(--ink-4)",
               }}
             >
               Daphne, Alabama · Sole practitioner
@@ -232,15 +209,15 @@ export default function HomePage() {
             marginTop: "auto",
           }}
         >
-          <HeroCurve />
+          <HeroAurora />
         </div>
       </section>
 
       {/* ─── Proof bar ────────────────────────────────────────────────── */}
       <section
         style={{
-          background: "var(--surface)",
-          borderBottom: "1px solid var(--paper-rule)",
+          background: "var(--panel)",
+          borderBottom: "1px solid var(--border-subtle)",
         }}
       >
         <div
@@ -274,11 +251,11 @@ export default function HomePage() {
             <div key={cell.label}>
               <div
                 style={{
-                  fontFamily: "var(--font-jetbrains), monospace",
+                  fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
                   fontSize: "10px",
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
-                  color: "var(--gold-700)",
+                  color: "var(--aurora-violet)",
                   fontWeight: 600,
                   marginBottom: "8px",
                 }}
@@ -287,13 +264,12 @@ export default function HomePage() {
               </div>
               <div
                 style={{
-                  fontFamily: "var(--font-fraunces), Georgia, serif",
+                  fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                   fontSize: "clamp(17px, 2vw, 21px)",
                   fontWeight: 500,
-                  color: "var(--navy-900)",
+                  color: "var(--ink-1)",
                   lineHeight: 1.25,
-                  letterSpacing: "-0.015em",
-                  fontVariationSettings: '"opsz" 32',
+                  letterSpacing: "-0.018em",
                   marginBottom: "4px",
                 }}
               >
@@ -301,9 +277,9 @@ export default function HomePage() {
               </div>
               <div
                 style={{
-                  fontFamily: "var(--font-manrope), sans-serif",
+                  fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                   fontSize: "13px",
-                  color: "var(--ink-mute)",
+                  color: "var(--ink-3)",
                   lineHeight: 1.5,
                 }}
               >
@@ -361,9 +337,11 @@ export default function HomePage() {
                 position: "relative",
                 width: "100%",
                 aspectRatio: "16 / 9",
-                border: "1px solid var(--paper-rule)",
+                border: "1px solid var(--border-default)",
+                borderRadius: "12px",
                 overflow: "hidden",
-                background: "var(--paper-sand)",
+                background: "var(--panel)",
+                boxShadow: "0 30px 80px -40px rgba(199, 123, 67, 0.25)",
               }}
             >
               <Image
@@ -396,9 +374,9 @@ export default function HomePage() {
       {airSolutions ? (
         <section
           style={{
-            background: "var(--surface)",
-            borderTop: "1px solid var(--paper-rule)",
-            borderBottom: "1px solid var(--paper-rule)",
+            background: "var(--panel)",
+            borderTop: "1px solid var(--border-subtle)",
+            borderBottom: "1px solid var(--border-subtle)",
           }}
         >
           <div className="section-wrap section-block">
@@ -431,9 +409,11 @@ export default function HomePage() {
                   position: "relative",
                   width: "100%",
                   aspectRatio: "16 / 9",
-                  border: "1px solid var(--paper-rule)",
+                  border: "1px solid var(--border-default)",
+                  borderRadius: "12px",
                   overflow: "hidden",
-                  background: "var(--paper-sand)",
+                  background: "var(--surface)",
+                  boxShadow: "0 30px 80px -40px rgba(160, 106, 74, 0.22)",
                 }}
               >
                 <Image
@@ -489,11 +469,11 @@ export default function HomePage() {
                   style={{
                     position: "relative",
                     padding: "10px 0 10px 22px",
-                    fontFamily: "var(--font-manrope), sans-serif",
+                    fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                     fontSize: "14.5px",
                     lineHeight: 1.6,
-                    color: "var(--ink-soft)",
-                    borderBottom: "1px solid var(--paper-rule)",
+                    color: "var(--ink-2)",
+                    borderBottom: "1px solid var(--border-subtle)",
                   }}
                 >
                   <span
@@ -504,7 +484,7 @@ export default function HomePage() {
                       top: "20px",
                       width: "12px",
                       height: "1px",
-                      background: "var(--gold-600)",
+                      background: "var(--aurora-violet)",
                     }}
                   />
                   {item}
@@ -524,11 +504,11 @@ export default function HomePage() {
                   style={{
                     position: "relative",
                     padding: "10px 0 10px 22px",
-                    fontFamily: "var(--font-manrope), sans-serif",
+                    fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                     fontSize: "14.5px",
                     lineHeight: 1.6,
-                    color: "var(--ink-soft)",
-                    borderBottom: "1px solid var(--paper-rule)",
+                    color: "var(--ink-2)",
+                    borderBottom: "1px solid var(--border-subtle)",
                   }}
                 >
                   <span
@@ -539,7 +519,7 @@ export default function HomePage() {
                       top: "20px",
                       width: "12px",
                       height: "1px",
-                      background: "var(--gold-600)",
+                      background: "var(--aurora-violet)",
                     }}
                   />
                   {item}
@@ -559,11 +539,11 @@ export default function HomePage() {
                   style={{
                     position: "relative",
                     padding: "10px 0 10px 22px",
-                    fontFamily: "var(--font-manrope), sans-serif",
+                    fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                     fontSize: "14.5px",
                     lineHeight: 1.6,
-                    color: "var(--ink-mute)",
-                    borderBottom: "1px solid var(--paper-rule)",
+                    color: "var(--ink-3)",
+                    borderBottom: "1px solid var(--border-subtle)",
                   }}
                 >
                   <span
@@ -574,7 +554,7 @@ export default function HomePage() {
                       top: "20px",
                       width: "12px",
                       height: "1px",
-                      background: "var(--ink-mute)",
+                      background: "var(--ink-4)",
                     }}
                   />
                   {item}
@@ -589,9 +569,9 @@ export default function HomePage() {
       <section
         id="process"
         style={{
-          background: "var(--surface)",
-          borderTop: "1px solid var(--paper-rule)",
-          borderBottom: "1px solid var(--paper-rule)",
+          background: "var(--panel)",
+          borderTop: "1px solid var(--border-subtle)",
+          borderBottom: "1px solid var(--border-subtle)",
           scrollMarginTop: "96px",
         }}
       >
@@ -622,11 +602,12 @@ export default function HomePage() {
             style={{
               marginTop: "48px",
               fontFamily: "var(--font-fraunces), Georgia, serif",
-              fontSize: "18px",
-              lineHeight: 1.6,
-              color: "var(--ink-soft)",
+              fontSize: "19px",
+              lineHeight: 1.55,
+              color: "var(--ink-2)",
               fontStyle: "italic",
-              fontVariationSettings: '"opsz" 24',
+              fontWeight: 300,
+              fontVariationSettings: '"opsz" 32',
             }}
           >
             Most engagements run mid-five figures and up. If your budget is below that, I&apos;ll
@@ -676,12 +657,13 @@ export default function HomePage() {
           <p
             className="reading-col"
             style={{
-              fontFamily: "var(--font-manrope), sans-serif",
+              fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
               fontSize: "17px",
               lineHeight: 1.65,
-              color: "rgba(255,255,255,0.82)",
+              color: "var(--ink-2)",
               marginTop: "24px",
-              fontWeight: 300,
+              fontWeight: 400,
+              letterSpacing: "-0.01em",
             }}
           >
             Send the business name, a link to the current site (or what&apos;s currently in place),
@@ -694,36 +676,16 @@ export default function HomePage() {
             style={{
               marginTop: "40px",
               display: "flex",
-              gap: "32px",
+              gap: "20px",
               flexWrap: "wrap",
               alignItems: "center",
             }}
           >
-            <Link
-              href="/inquire"
-              className="editorial-link arrow-link on-dark"
-              style={{
-                fontFamily: "var(--font-jetbrains), monospace",
-                fontSize: "12px",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "var(--gold-400)",
-              }}
-            >
-              Inquire about a project <span className="arrow" aria-hidden>→</span>
+            <Link href="/inquire" className="btn-fill">
+              Inquire about a project
             </Link>
-            <Link
-              href="/work"
-              className="editorial-link on-dark"
-              style={{
-                fontFamily: "var(--font-jetbrains), monospace",
-                fontSize: "12px",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.7)",
-              }}
-            >
-              See more work →
+            <Link href="/work" className="btn-ghost">
+              See more work
             </Link>
           </div>
         </div>

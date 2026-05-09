@@ -27,16 +27,14 @@ export default function CallPage() {
         <Eyebrow>§ Book / Twenty-Minute Call</Eyebrow>
 
         <h1
-          className="display-serif"
+          className="display-sans display-96"
           style={{
-            fontSize: "clamp(40px, 7vw, 88px)",
-            color: "var(--navy-900)",
             marginBottom: "32px",
             maxWidth: "16ch",
           }}
         >
           Twenty minutes,<br />
-          <em style={{ color: "var(--navy-700)" }}>no deck.</em>
+          <em>no deck.</em>
         </h1>
 
         <div className="editorial-body reading-col">
@@ -55,8 +53,9 @@ export default function CallPage() {
           <div
             style={{
               marginTop: "24px",
-              border: "1px solid var(--paper-rule)",
-              background: "var(--surface)",
+              border: "1px solid var(--border-default)",
+              background: "var(--panel)",
+              borderRadius: "12px",
               padding: "clamp(12px, 2vw, 20px)",
               minHeight: "640px",
             }}
@@ -67,9 +66,9 @@ export default function CallPage() {
       ) : (
         <section
           style={{
-            background: "var(--surface)",
-            borderTop: "1px solid var(--paper-rule)",
-            borderBottom: "1px solid var(--paper-rule)",
+            background: "var(--panel)",
+            borderTop: "1px solid var(--border-subtle)",
+            borderBottom: "1px solid var(--border-subtle)",
           }}
         >
           <div className="section-wrap section-block-tight">

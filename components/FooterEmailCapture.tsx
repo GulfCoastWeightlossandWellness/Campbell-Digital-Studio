@@ -5,12 +5,6 @@ import { track, EVENT } from "@/lib/analytics";
 
 type State = "idle" | "submitting" | "success" | "error";
 
-/**
- * Lowest-friction lead path: a single email input in the footer.
- * Posts to /api/lead. Falls back to a "thank you" message even if the
- * backend isn't fully wired (the API route logs to the server console
- * when no Resend key is configured).
- */
 export default function FooterEmailCapture() {
   const [email, setEmail] = useState("");
   const [note, setNote] = useState("");
@@ -53,7 +47,7 @@ export default function FooterEmailCapture() {
           fontSize: "15px",
           fontStyle: "italic",
           fontWeight: 300,
-          color: "rgba(255,255,255,0.92)",
+          color: "var(--ink-1)",
           lineHeight: 1.55,
           fontVariationSettings: '"opsz" 24',
         }}
@@ -64,15 +58,19 @@ export default function FooterEmailCapture() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+    <form
+      onSubmit={onSubmit}
+      noValidate
+      style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+    >
       <label
         htmlFor="footer-email"
         style={{
-          fontFamily: "var(--font-jetbrains), monospace",
+          fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
           fontSize: "10px",
           letterSpacing: "0.18em",
           textTransform: "uppercase",
-          color: "rgba(255,255,255,0.7)",
+          color: "var(--ink-3)",
         }}
       >
         Have a project? Send me your site.
@@ -92,12 +90,12 @@ export default function FooterEmailCapture() {
             flex: "1 1 200px",
             minWidth: 0,
             padding: "12px 14px",
-            background: "rgba(255,255,255,0.06)",
-            border: "1px solid rgba(232,196,107,0.3)",
-            color: "white",
-            fontFamily: "var(--font-manrope), sans-serif",
+            background: "rgba(255,255,255,0.04)",
+            border: "1px solid var(--border-default)",
+            color: "var(--ink-1)",
+            fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
             fontSize: "16px",
-            borderRadius: "3px",
+            borderRadius: "6px",
             outline: "none",
           }}
         />
@@ -106,16 +104,15 @@ export default function FooterEmailCapture() {
           disabled={state === "submitting"}
           style={{
             padding: "12px 18px",
-            background: "var(--gold-500)",
-            color: "var(--navy-900)",
-            border: "none",
-            fontFamily: "var(--font-jetbrains), monospace",
-            fontSize: "11px",
-            fontWeight: 600,
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
+            background: "var(--violet-base)",
+            color: "#FFFFFF",
+            border: "1px solid var(--violet-base)",
+            fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
+            fontSize: "13px",
+            fontWeight: 500,
+            letterSpacing: "-0.01em",
             cursor: state === "submitting" ? "wait" : "pointer",
-            borderRadius: "3px",
+            borderRadius: "6px",
             opacity: state === "submitting" ? 0.6 : 1,
             minHeight: "44px",
           }}
@@ -131,17 +128,17 @@ export default function FooterEmailCapture() {
         onChange={(e) => setNote(e.target.value)}
         style={{
           padding: "10px 14px",
-          background: "rgba(255,255,255,0.04)",
-          border: "1px solid rgba(232,196,107,0.18)",
-          color: "rgba(255,255,255,0.9)",
-          fontFamily: "var(--font-manrope), sans-serif",
+          background: "rgba(255,255,255,0.025)",
+          border: "1px solid var(--border-subtle)",
+          color: "var(--ink-2)",
+          fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
           fontSize: "14px",
-          borderRadius: "3px",
+          borderRadius: "6px",
           outline: "none",
         }}
       />
       {state === "error" && errorMsg ? (
-        <p style={{ color: "var(--gold-200)", fontSize: "12px", margin: 0 }}>{errorMsg}</p>
+        <p style={{ color: "var(--error)", fontSize: "12px", margin: 0 }}>{errorMsg}</p>
       ) : null}
     </form>
   );

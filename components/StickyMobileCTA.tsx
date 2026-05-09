@@ -5,14 +5,6 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/lib/site-config";
 
-/**
- * Slim sticky bar shown only on mobile (≤768px).
- * - Hidden on /inquire and /call (the destination pages of the bar)
- * - Reveals when scrolling up, hides when scrolling down (≥6px delta)
- * - Always shown when within the first 200px of the page
- * - Honors prefers-reduced-motion (no hide/show, just always visible)
- */
-
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 
 function subscribeReducedMotion(cb: () => void) {
@@ -34,8 +26,6 @@ export default function StickyMobileCTA() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    // When reduced motion is on, the bar stays visible (initial state) and
-    // we don't attach a scroll listener at all.
     if (reducedMotion) return;
 
     let lastY = window.scrollY;
@@ -61,7 +51,6 @@ export default function StickyMobileCTA() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [reducedMotion]);
 
-  // Hide on the inquire / booking pages themselves
   if (pathname === "/inquire" || pathname === "/call") return null;
 
   const showBooking = !!siteConfig.calUsername;
@@ -78,8 +67,10 @@ export default function StickyMobileCTA() {
           right: 0,
           bottom: 0,
           zIndex: 95,
-          background: "var(--navy-900)",
-          borderTop: "1px solid var(--gold-600)",
+          background: "rgba(22, 20, 18, 0.92)",
+          backdropFilter: "saturate(140%) blur(12px)",
+          WebkitBackdropFilter: "saturate(140%) blur(12px)",
+          borderTop: "1px solid var(--border-default)",
           padding: "10px 16px env(safe-area-inset-bottom, 12px) 16px",
           display: "none",
           gridTemplateColumns: showBooking ? "1fr 1fr" : "1fr",
@@ -90,22 +81,20 @@ export default function StickyMobileCTA() {
       >
         <Link
           href={primaryHref}
-          className="sticky-mobile-cta-primary"
           style={{
             display: "inline-flex",
             alignItems: "center",
             justifyContent: "center",
             minHeight: "44px",
             padding: "10px 16px",
-            background: "var(--gold-500)",
-            color: "var(--navy-900)",
-            fontFamily: "var(--font-jetbrains), monospace",
-            fontSize: "12px",
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-            fontWeight: 600,
+            background: "var(--violet-base)",
+            color: "#FFFFFF",
+            fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
+            fontSize: "13px",
+            fontWeight: 500,
+            letterSpacing: "-0.01em",
             textDecoration: "none",
-            borderRadius: "3px",
+            borderRadius: "6px",
           }}
         >
           {primaryLabel}
@@ -119,16 +108,15 @@ export default function StickyMobileCTA() {
               justifyContent: "center",
               minHeight: "44px",
               padding: "10px 16px",
-              background: "transparent",
-              color: "rgba(255,255,255,0.92)",
-              fontFamily: "var(--font-jetbrains), monospace",
-              fontSize: "12px",
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              fontWeight: 600,
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--ink-1)",
+              fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
+              fontSize: "13px",
+              fontWeight: 500,
+              letterSpacing: "-0.01em",
               textDecoration: "none",
-              borderRadius: "3px",
-              border: "1px solid rgba(232,196,107,0.4)",
+              borderRadius: "6px",
+              border: "1px solid var(--border-default)",
             }}
           >
             Inquire
@@ -138,7 +126,6 @@ export default function StickyMobileCTA() {
       <style>{`
         @media (max-width: 768px) {
           .sticky-mobile-cta { display: grid !important; }
-          /* Reserve space at the bottom of <main> so the bar never covers footer content */
           main { padding-bottom: 80px; }
         }
       `}</style>
