@@ -4,14 +4,7 @@ import Link from "next/link";
 import { useState, useEffect, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import StudioMark from "@/components/marks/StudioMark";
-
-const navLinks: { label: string; href: string }[] = [
-  { label: "Work", href: "/work" },
-  { label: "Capabilities", href: "/#capabilities" },
-  { label: "Process", href: "/#process" },
-  { label: "About", href: "/#about" },
-  { label: "Inquire", href: "/inquire" },
-];
+import { primaryNavLinks } from "@/lib/nav";
 
 function subscribeScroll(cb: () => void) {
   window.addEventListener("scroll", cb, { passive: true });
@@ -87,12 +80,19 @@ export default function Header() {
           className="desktop-nav"
           style={{ display: "flex", alignItems: "center", gap: "2.25rem" }}
         >
-          {navLinks.map((link) => (
+          {primaryNavLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className="editorial-link mono on-dark"
               style={{ paddingBottom: "4px" }}
+              aria-current={
+                link.href === "/work" && pathname === "/work"
+                  ? "page"
+                  : link.href === "/inquire" && pathname === "/inquire"
+                    ? "page"
+                    : undefined
+              }
             >
               {link.label}
             </Link>
@@ -186,7 +186,7 @@ export default function Header() {
               padding: "clamp(20px, 5vw, 40px)",
             }}
           >
-            {navLinks.map((link, i) => (
+            {primaryNavLinks.map((link, i) => (
               <Link
                 key={link.href}
                 href={link.href}

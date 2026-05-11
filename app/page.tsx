@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     "Campbell Digital Studio | Digital infrastructure for clinical practices and local service businesses",
   description:
     "Multi-location medical clinics, trade service brands, and the connected ecosystems they need to grow. Built by a physician with a development background.",
+  alternates: { canonical: "/" },
 };
 
 const revitalize = getProjectBySlug("revitalize");

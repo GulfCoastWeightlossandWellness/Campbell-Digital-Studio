@@ -37,7 +37,6 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   metadataBase: new URL(siteConfig.url),
-  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     url: siteConfig.url,

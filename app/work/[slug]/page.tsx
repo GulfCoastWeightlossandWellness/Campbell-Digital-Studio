@@ -28,11 +28,40 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: project.title,
     description: project.shortSummary,
+    alternates: { canonical: `/work/${slug}` },
     openGraph: {
       title: `${project.title} | Campbell Digital Studio`,
       description: project.shortSummary,
+      url: `/work/${slug}`,
       images: project.coverImage ? [{ url: project.coverImage }] : undefined,
     },
+  };
+}
+
+function getCaseStudyBreadcrumbSchema(title: string, slug: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: siteConfig.name,
+        item: siteConfig.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Work",
+        item: `${siteConfig.url.replace(/\/$/, "")}/work`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: title,
+        item: `${siteConfig.url.replace(/\/$/, "")}/work/${slug}`,
+      },
+    ],
   };
 }
 
@@ -72,6 +101,12 @@ export default async function CaseStudyPage({ params }: Props) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(getCaseStudyBreadcrumbSchema(project.title, project.slug)),
+        }}
+      />
       {/* ─── Hero ─────────────────────────────────────────────────── */}
       <section className="section-wrap" style={{ paddingTop: "clamp(96px, 14vw, 160px)", paddingBottom: "clamp(48px, 6vw, 72px)" }}>
         <Eyebrow>

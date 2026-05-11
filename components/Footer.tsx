@@ -2,14 +2,7 @@ import Link from "next/link";
 import StudioMark from "@/components/marks/StudioMark";
 import FooterEmailCapture from "@/components/FooterEmailCapture";
 import { siteConfig } from "@/lib/site-config";
-
-const indexLinks: { label: string; href: string }[] = [
-  { label: "Work", href: "/work" },
-  { label: "Capabilities", href: "/#capabilities" },
-  { label: "Process", href: "/#process" },
-  { label: "About", href: "/#about" },
-  { label: "Inquire", href: "/inquire" },
-];
+import { primaryNavLinks } from "@/lib/nav";
 
 export default function Footer() {
   const year = new Date().getUTCFullYear();
@@ -100,7 +93,7 @@ export default function Footer() {
                 gap: "10px",
               }}
             >
-              {indexLinks.map((link) => (
+              {primaryNavLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}

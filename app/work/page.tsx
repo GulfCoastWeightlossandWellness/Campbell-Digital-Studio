@@ -3,11 +3,32 @@ import Link from "next/link";
 import SectionTag from "@/components/editorial/SectionTag";
 import EditorialH2 from "@/components/editorial/EditorialH2";
 import { displayDomain, isRealDomain } from "@/lib/url-display";
+import { siteConfig, absoluteUrl } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Work",
   description:
     "A transparent record of the sites and platforms Campbell Digital Studio has built — with honest labels and real scope on each.",
+  alternates: { canonical: "/work" },
+};
+
+const workBreadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: siteConfig.name,
+      item: siteConfig.url,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Work",
+      item: absoluteUrl("/work"),
+    },
+  ],
 };
 
 type WorkRow = {
@@ -98,6 +119,10 @@ const rows: WorkRow[] = [
 export default function WorkPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(workBreadcrumbSchema) }}
+      />
       <section
         className="section-wrap"
         style={{ paddingTop: "clamp(96px, 14vw, 160px)", paddingBottom: "clamp(48px, 6vw, 72px)" }}

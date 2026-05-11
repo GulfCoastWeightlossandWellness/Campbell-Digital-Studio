@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: siteConfig.url, lastModified, changeFrequency: "monthly", priority: 1 },
     { url: absoluteUrl("/work"), lastModified, changeFrequency: "monthly", priority: 0.9 },
-    { url: absoluteUrl("/inquire"), lastModified, changeFrequency: "yearly", priority: 0.6 },
+    { url: absoluteUrl("/inquire"), lastModified, changeFrequency: "monthly", priority: 0.8 },
   ];
 
   if (siteConfig.calUsername) {
@@ -26,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }
 
   // Only featured projects render at /work/[slug]; the others 308-redirect to /work.
+  // Keep the sitemap aligned with that rule: never submit a URL that redirects.
   const projectRoutes: MetadataRoute.Sitemap = projects
     .filter((p) => p.featured)
     .map((p) => ({

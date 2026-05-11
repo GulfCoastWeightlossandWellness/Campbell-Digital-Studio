@@ -4,6 +4,13 @@ const nextConfig: NextConfig = {
   async redirects() {
     // Legacy routes collapsed into the long-scroll home or removed entirely.
     return [
+      // Canonical host: always redirect apex -> www
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "campbelldigitalstudio.com" }],
+        destination: "https://www.campbelldigitalstudio.com/:path*",
+        permanent: true,
+      },
       { source: "/about", destination: "/#about", permanent: true },
       { source: "/studio", destination: "/#about", permanent: true },
       { source: "/services", destination: "/#capabilities", permanent: true },

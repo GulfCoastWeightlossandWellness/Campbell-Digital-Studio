@@ -9,7 +9,7 @@
  * See docs/DOMAIN_MIGRATION.md for the full migration checklist.
  */
 
-const fallbackUrl = "https://campbell-digital-studio.vercel.app";
+const fallbackUrl = "https://www.campbelldigitalstudio.com";
 
 export const siteConfig = {
   /** Canonical URL — read by metadataBase, sitemap, robots, OG tags, JSON-LD */

@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Book a call",
   description:
     "Book a 20-minute introductory call with Campbell Digital Studio — what you have, what you need, whether the studio is a fit.",
+  alternates: { canonical: "/call" },
 };
 
 export default function CallPage() {
