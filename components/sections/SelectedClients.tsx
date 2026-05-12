@@ -30,7 +30,7 @@ export default function SelectedClients({ sectionNum }: Props) {
       }}
     >
       <div className="section-wrap section-block-tight">
-        <SectionTag num={sectionNum ?? "§ Index"} label="Selected Clients" />
+        <SectionTag num={sectionNum ?? "02"} label="Selected Clients" />
         <div
           className="selected-clients-grid"
           style={{

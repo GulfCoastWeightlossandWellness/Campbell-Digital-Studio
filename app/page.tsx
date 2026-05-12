@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { getProjectBySlug } from "@/lib/projects";
 import SectionTag from "@/components/editorial/SectionTag";
 import EditorialH2 from "@/components/editorial/EditorialH2";
@@ -9,6 +8,7 @@ import SelectedClients from "@/components/sections/SelectedClients";
 import FaqSection from "@/components/sections/FaqSection";
 import TestimonialBlock from "@/components/sections/TestimonialBlock";
 import HeroAurora from "@/components/HeroAurora";
+import HomeFeaturedCaseStudy from "@/components/sections/HomeFeaturedCaseStudy";
 import { getFeaturedTestimonials } from "@/lib/data/testimonials";
 import { faqs } from "@/lib/data/faq";
 import { siteConfig } from "@/lib/site-config";
@@ -106,7 +106,7 @@ export default function HomePage() {
           and a process-curve centerpiece below. Both live inside one cover-surface
           so the gold top-stripe still reads as a single hero band. */}
       <section
-        className="cover-surface"
+        className="cover-surface cover-surface--grain"
         style={{
           minHeight: "min(880px, 100vh)",
           display: "flex",
@@ -124,7 +124,7 @@ export default function HomePage() {
           }}
         >
           <div style={{ maxWidth: "960px" }}>
-            <Eyebrow onDark>§ 01 / Campbell Digital Studio</Eyebrow>
+            <Eyebrow onDark>01 / Campbell Digital Studio</Eyebrow>
             <h1
               className="display-sans display-96"
               style={{
@@ -215,23 +215,8 @@ export default function HomePage() {
       </section>
 
       {/* ─── Proof bar ────────────────────────────────────────────────── */}
-      <section
-        style={{
-          background: "var(--panel)",
-          borderBottom: "1px solid var(--border-subtle)",
-        }}
-      >
-        <div
-          className="section-wrap"
-          style={{
-            paddingTop: "clamp(28px, 4vw, 40px)",
-            paddingBottom: "clamp(28px, 4vw, 40px)",
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "clamp(20px, 4vw, 48px)",
-          }}
-          // proof-bar uses grid so cells space evenly on desktop, stacks on mobile
-        >
+      <section className="home-proof-bar" aria-label="Studio snapshot">
+        <div className="section-wrap home-proof-bar__grid">
           {[
             {
               label: "Active engagements",
@@ -250,54 +235,21 @@ export default function HomePage() {
             },
           ].map((cell) => (
             <div key={cell.label}>
-              <div
-                style={{
-                  fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
-                  fontSize: "10px",
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: "var(--aurora-violet)",
-                  fontWeight: 600,
-                  marginBottom: "8px",
-                }}
-              >
-                {cell.label}
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
-                  fontSize: "clamp(17px, 2vw, 21px)",
-                  fontWeight: 500,
-                  color: "var(--ink-1)",
-                  lineHeight: 1.25,
-                  letterSpacing: "-0.018em",
-                  marginBottom: "4px",
-                }}
-              >
-                {cell.value}
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
-                  fontSize: "13px",
-                  color: "var(--ink-3)",
-                  lineHeight: 1.5,
-                }}
-              >
-                {cell.detail}
-              </div>
+              <div className="proof-label">{cell.label}</div>
+              <div className="proof-value">{cell.value}</div>
+              <div className="proof-detail">{cell.detail}</div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ─── § Selected Clients (renders only when ≥2 clients consent) ── */}
-      <SelectedClients sectionNum="§ 02" />
+      {/* ─── Selected Clients (renders only when ≥2 clients consent) ── */}
+      <SelectedClients sectionNum="02" />
 
       {/* ─── § Featured testimonials (renders only when at least one has a real quote) ── */}
       {featuredTestimonials.length > 0 ? (
         <section className="section-wrap section-block-tight">
-          <SectionTag num="§ 03" label="What clients say" />
+          <SectionTag num="03" label="What clients say" />
           <div style={{ marginTop: "32px", display: "grid", gap: "48px" }}>
             {featuredTestimonials.map((t) => (
               <TestimonialBlock key={t.id} testimonial={t} />
@@ -306,146 +258,45 @@ export default function HomePage() {
         </section>
       ) : null}
 
-      {/* ─── § 02 / Featured Case Study — Revitalize ─────────────────── */}
+      {/* ─── Featured Case Study — Revitalize (split) ─────────────────── */}
       {revitalize ? (
-        <section className="section-wrap section-block">
-          <SectionTag num="02" label="Featured Case Study" />
-          <EditorialH2>
+        <HomeFeaturedCaseStudy
+          project={revitalize}
+          variant="split"
+          surface="canvas"
+          sectionNum="04"
+          sectionLabel="Featured Case Study"
+          imageGlow="strong"
+          imagePriority
+        >
+          <>
             Revitalize Aesthetics<br />
             <em>&amp; Wellness.</em>
-          </EditorialH2>
-
-          <p
-            className="reading-col"
-            style={{
-              fontFamily: "var(--font-fraunces), Georgia, serif",
-              fontSize: "21px",
-              lineHeight: 1.6,
-              color: "var(--ink-soft)",
-              fontVariationSettings: '"opsz" 24',
-              fontStyle: "italic",
-              fontWeight: 300,
-              marginTop: "24px",
-            }}
-          >
-            {revitalize.shortSummary}
-          </p>
-
-          {revitalize.coverImage ? (
-            <div
-              style={{
-                marginTop: "48px",
-                position: "relative",
-                width: "100%",
-                aspectRatio: "16 / 9",
-                border: "1px solid var(--border-default)",
-                borderRadius: "12px",
-                overflow: "hidden",
-                background: "var(--panel)",
-                boxShadow: "0 30px 80px -40px rgba(199, 123, 67, 0.25)",
-              }}
-            >
-              <Image
-                src={revitalize.coverImage}
-                alt="Revitalize Aesthetics & Wellness — homepage"
-                fill
-                priority
-                sizes="(max-width: 1280px) 100vw, 1280px"
-                style={{ objectFit: "cover" }}
-              />
-            </div>
-          ) : null}
-
-          <div className="editorial-body reading-col" style={{ marginTop: "48px" }}>
-            <p>{revitalize.valueExplainer}</p>
-          </div>
-
-          <div style={{ marginTop: "32px" }}>
-            <Link
-              href={`/work/${revitalize.slug}`}
-              className="editorial-link arrow-link mono"
-            >
-              Read the full case study <span className="arrow" aria-hidden>→</span>
-            </Link>
-          </div>
-        </section>
+          </>
+        </HomeFeaturedCaseStudy>
       ) : null}
 
-      {/* ─── § 03 / Featured Case Study — Air Solutions ──────────────── */}
+      {/* ─── Featured Case Study — Air Solutions (stacked / panel) ─────── */}
       {airSolutions ? (
-        <section
-          style={{
-            background: "var(--panel)",
-            borderTop: "1px solid var(--border-subtle)",
-            borderBottom: "1px solid var(--border-subtle)",
-          }}
+        <HomeFeaturedCaseStudy
+          project={airSolutions}
+          variant="stacked"
+          surface="panel"
+          sectionNum="05"
+          sectionLabel="Featured Case Study"
+          imageGlow="soft"
+          imageSurface="surface"
         >
-          <div className="section-wrap section-block">
-            <SectionTag num="03" label="Featured Case Study" />
-            <EditorialH2>
-              Air Solutions<br />
-              <em>Heating &amp; Cooling.</em>
-            </EditorialH2>
-
-            <p
-              className="reading-col"
-              style={{
-                fontFamily: "var(--font-fraunces), Georgia, serif",
-                fontSize: "21px",
-                lineHeight: 1.6,
-                color: "var(--ink-soft)",
-                fontVariationSettings: '"opsz" 24',
-                fontStyle: "italic",
-                fontWeight: 300,
-                marginTop: "24px",
-              }}
-            >
-              {airSolutions.shortSummary}
-            </p>
-
-            {airSolutions.coverImage ? (
-              <div
-                style={{
-                  marginTop: "48px",
-                  position: "relative",
-                  width: "100%",
-                  aspectRatio: "16 / 9",
-                  border: "1px solid var(--border-default)",
-                  borderRadius: "12px",
-                  overflow: "hidden",
-                  background: "var(--surface)",
-                  boxShadow: "0 30px 80px -40px rgba(160, 106, 74, 0.22)",
-                }}
-              >
-                <Image
-                  src={airSolutions.coverImage}
-                  alt="Air Solutions Heating & Cooling — homepage"
-                  fill
-                  sizes="(max-width: 1280px) 100vw, 1280px"
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
-            ) : null}
-
-            <div className="editorial-body reading-col" style={{ marginTop: "48px" }}>
-              <p>{airSolutions.valueExplainer}</p>
-            </div>
-
-            <div style={{ marginTop: "32px" }}>
-              <Link
-                href={`/work/${airSolutions.slug}`}
-                className="editorial-link arrow-link mono"
-              >
-                Read the full case study <span className="arrow" aria-hidden>→</span>
-              </Link>
-            </div>
-          </div>
-        </section>
+          <>
+            Air Solutions<br />
+            <em>Heating &amp; Cooling.</em>
+          </>
+        </HomeFeaturedCaseStudy>
       ) : null}
 
-      {/* ─── § 04 / Capabilities ─────────────────────────────────────── */}
+      {/* ─── Capabilities ─────────────────────────────────────── */}
       <section id="capabilities" className="section-wrap section-block" style={{ scrollMarginTop: "96px" }}>
-        <SectionTag num="04" label="Capabilities" />
+        <SectionTag num="06" label="Capabilities" />
         <EditorialH2>
           What I build,<br />
           <em>and what I don&apos;t.</em>
@@ -577,7 +428,7 @@ export default function HomePage() {
         }}
       >
         <div className="section-wrap section-block">
-          <SectionTag num="05" label="Process" />
+          <SectionTag num="07" label="Process" />
           <EditorialH2>
             How an engagement<br />
             <em>actually runs.</em>
@@ -618,11 +469,11 @@ export default function HomePage() {
       </section>
 
       {/* ─── § 06 / Common Questions ─────────────────────────────────── */}
-      <FaqSection sectionNum="06" />
+      <FaqSection sectionNum="08" />
 
       {/* ─── § 07 / About ────────────────────────────────────────────── */}
-      <section id="about" className="section-wrap section-block" style={{ scrollMarginTop: "96px" }}>
-        <SectionTag num="07" label="About" />
+      <section id="about" className="section-wrap section-block-loose" style={{ scrollMarginTop: "96px" }}>
+        <SectionTag num="09" label="About" />
         <EditorialH2 className="reading-col">
           Peyton Campbell, <em>DO.</em>
         </EditorialH2>
@@ -649,7 +500,7 @@ export default function HomePage() {
       {/* ─── § 08 / Contact CTA ──────────────────────────────────────── */}
       <section className="cover-surface">
         <div className="section-wrap section-block">
-          <SectionTag num="08" label="Working Together" onDark />
+          <SectionTag num="10" label="Working Together" onDark />
           <EditorialH2 onDark className="reading-col">
             Start a<br />
             <em>conversation.</em>

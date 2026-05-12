@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import StudioMark from "@/components/marks/StudioMark";
 import { primaryNavLinks } from "@/lib/nav";
 
@@ -18,6 +19,7 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const scrolled = useSyncExternalStore(subscribeScroll, getScrollY, () => false);
+  const reduceMotion = useReducedMotion();
 
   const [previousPathname, setPreviousPathname] = useState(pathname);
   if (previousPathname !== pathname) {
@@ -56,7 +58,8 @@ export default function Header() {
         backdropFilter: scrolled ? "saturate(140%) blur(12px)" : "none",
         WebkitBackdropFilter: scrolled ? "saturate(140%) blur(12px)" : "none",
         borderBottom: scrolled ? "1px solid var(--border-subtle)" : "1px solid transparent",
-        transition: "background 0.25s ease, border-color 0.25s ease",
+        transition:
+          "background 0.25s var(--ease-snappy), border-color 0.25s var(--ease-snappy), backdrop-filter 0.25s var(--ease-snappy), -webkit-backdrop-filter 0.25s var(--ease-snappy)",
       }}
     >
       <a href="#main-content" className="skip-link">
@@ -70,7 +73,7 @@ export default function Header() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          transition: "height 0.25s ease",
+          transition: "height 0.25s var(--ease-snappy)",
         }}
       >
         <StudioMark size={scrolled ? "sm" : "md"} onDark />
@@ -84,7 +87,7 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="editorial-link mono on-dark"
+              className="editorial-link mono on-dark header-nav-link"
               style={{ paddingBottom: "4px" }}
               aria-current={
                 link.href === "/work" && pathname === "/work"
@@ -136,26 +139,33 @@ export default function Header() {
         </button>
       </div>
 
-      {mobileOpen && (
-        <div
-          id="mobile-nav-overlay"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Mobile navigation"
-          style={{
-            position: "fixed",
-            inset: 0,
-            background: "var(--canvas)",
-            zIndex: 110,
-            paddingTop: "76px",
-            display: "flex",
-            flexDirection: "column",
-            overflowY: "auto",
-          }}
-        >
+      <AnimatePresence>
+        {mobileOpen ? (
+          <motion.div
+            key="mobile-nav-overlay"
+            id="mobile-nav-overlay"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation"
+            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, x: "100%" }}
+            animate={reduceMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, x: "100%" }}
+            transition={{ duration: reduceMotion ? 0.18 : 0.32, ease: [0.2, 0, 0, 1] }}
+            style={{
+              position: "fixed",
+              inset: 0,
+              background: "var(--canvas)",
+              zIndex: 110,
+              paddingTop: "76px",
+              display: "flex",
+              flexDirection: "column",
+              overflowY: "auto",
+            }}
+          >
           <button
             type="button"
             aria-label="Close menu"
+            className="mobile-menu-close"
             onClick={() => setMobileOpen(false)}
             style={{
               position: "absolute",
@@ -237,8 +247,9 @@ export default function Header() {
               Start a conversation →
             </Link>
           </nav>
-        </div>
-      )}
+        </motion.div>
+        ) : null}
+      </AnimatePresence>
 
       <style>{`
         @media (max-width: 860px) {
@@ -254,7 +265,7 @@ export default function Header() {
           background: var(--panel);
           color: var(--ink-1);
           font-family: var(--font-geist-mono), var(--font-jetbrains), monospace;
-          fontSize: 12px;
+          font-size: 12px;
           letter-spacing: 0.16em;
           text-transform: uppercase;
           text-decoration: none;

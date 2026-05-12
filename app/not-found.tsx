@@ -11,7 +11,7 @@ export default function NotFound() {
         minHeight: "70vh",
       }}
     >
-      <Eyebrow>§ 404 / Page Not Found</Eyebrow>
+      <Eyebrow>404 / Page Not Found</Eyebrow>
 
       <h1
         className="display-sans display-96"

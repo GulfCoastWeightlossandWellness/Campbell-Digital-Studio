@@ -33,8 +33,8 @@ export const siteConfig = {
     location: "Daphne, Alabama",
   },
 
-  /** Contact — must match the inquire page mailto */
-  email: "hello@peytoncampbell.studio",
+  /** Contact — single source for mailto, JSON-LD, forms, and lead notifications default */
+  email: "peyton@campbelldigitalstudio.com",
 
   /** Default OG image, relative to /public */
   ogImage: "/images/og/campbell-digital-studio-og-image.png",

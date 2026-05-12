@@ -110,7 +110,7 @@ export default async function CaseStudyPage({ params }: Props) {
       {/* ─── Hero ─────────────────────────────────────────────────── */}
       <section className="section-wrap" style={{ paddingTop: "clamp(96px, 14vw, 160px)", paddingBottom: "clamp(48px, 6vw, 72px)" }}>
         <Eyebrow>
-          § Case Study / {project.category}
+          Case Study / {project.category}
         </Eyebrow>
         <h1
           className="display-sans display-80"
@@ -238,6 +238,15 @@ export default async function CaseStudyPage({ params }: Props) {
           <p>{project.summary}</p>
           <p>{project.challenge}</p>
         </div>
+
+        {project.valuePoints[0] ? (
+          <div style={{ marginTop: "40px", maxWidth: "820px" }}>
+            <Pullquote>
+              {project.valuePoints[0]}
+              <span className="attr">What moved the needle</span>
+            </Pullquote>
+          </div>
+        ) : null}
       </section>
 
       {/* ─── § Results ──────────────────────────────────────────── */}
@@ -253,10 +262,10 @@ export default async function CaseStudyPage({ params }: Props) {
         </section>
       ) : null}
 
-      {/* ─── § 02 / Selected screens ─────────────────────────────── */}
+      {/* ─── Selected screens ─────────────────────────────── */}
       {featuredScreens.length > 0 ? (
         <section className="section-wrap section-block-tight">
-          <SectionTag num="02" label="Selected Screens" />
+          <SectionTag num="04" label="Selected Screens" />
           <EditorialH2>
             What it looks like,<br />
             <em>on screen.</em>
@@ -270,9 +279,19 @@ export default async function CaseStudyPage({ params }: Props) {
               marginTop: "48px",
             }}
           >
-            {featuredScreens.map((s, i) => (
-              <figure key={s.label} style={{ margin: 0 }}>
+            {featuredScreens.map((s, i) => {
+              const inset = i % 2 === 1;
+              const sizes = inset
+                ? "(max-width: 768px) 100vw, min(920px, 92vw)"
+                : "(max-width: 1280px) 100vw, 1280px";
+              return (
+              <figure
+                key={s.label}
+                style={{ margin: 0 }}
+                className={inset ? "case-study-screen--inset" : undefined}
+              >
                 <div
+                  className="case-study-screen-frame"
                   style={{
                     position: "relative",
                     width: "100%",
@@ -281,7 +300,6 @@ export default async function CaseStudyPage({ params }: Props) {
                     borderRadius: "12px",
                     overflow: "hidden",
                     background: "var(--surface)",
-                    boxShadow: "0 24px 60px -32px rgba(160, 106, 74, 0.18)",
                   }}
                 >
                   {s.image ? (
@@ -289,7 +307,7 @@ export default async function CaseStudyPage({ params }: Props) {
                       src={s.image}
                       alt={s.label}
                       fill
-                      sizes="(max-width: 1280px) 100vw, 1280px"
+                      sizes={sizes}
                       style={{ objectFit: "cover" }}
                     />
                   ) : null}
@@ -298,14 +316,15 @@ export default async function CaseStudyPage({ params }: Props) {
                   fig. {String(i + 2).padStart(2, "0")} — {s.label}
                 </figcaption>
               </figure>
-            ))}
+            );
+            })}
           </div>
         </section>
       ) : null}
 
-      {/* ─── § 03 / What was built ───────────────────────────────── */}
+      {/* ─── What was built ───────────────────────────────── */}
       <section className="section-wrap section-block-tight">
-        <SectionTag num="03" label="What Was Built" />
+        <SectionTag num="05" label="What Was Built" />
         <EditorialH2>
           The deliverables,<br />
           <em>line by line.</em>
@@ -376,7 +395,7 @@ export default async function CaseStudyPage({ params }: Props) {
       {/* ─── § 04 / Why It Works ─────────────────────────────────── */}
       <section style={{ background: "var(--panel)", borderTop: "1px solid var(--border-subtle)", borderBottom: "1px solid var(--border-subtle)" }}>
         <div className="section-wrap section-block-tight">
-          <SectionTag num="04" label="Why It Works" />
+          <SectionTag num="06" label="Why It Works" />
           <EditorialH2>
             How the build<br />
             <em>earns the call.</em>
@@ -398,7 +417,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
       {/* ─── § 05 / Stack & artifacts ────────────────────────────── */}
       <section className="section-wrap section-block-tight">
-        <SectionTag num="05" label="Stack &amp; Artifacts" />
+        <SectionTag num="07" label="Stack &amp; Artifacts" />
 
         <div
           style={{
@@ -479,7 +498,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
       {/* ─── § 06 / Outcome ──────────────────────────────────────── */}
       <section className="section-wrap section-block-tight">
-        <SectionTag num="06" label="Outcome" />
+        <SectionTag num="08" label="Outcome" />
         <EditorialH2 className="reading-col">
           Metrics, captured<br />
           <em>at 30 / 60 / 90 days.</em>
