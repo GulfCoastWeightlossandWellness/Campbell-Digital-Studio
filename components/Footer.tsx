@@ -172,17 +172,52 @@ export default function Footer() {
           >
             © {year} {siteConfig.name} · {siteConfig.founder.location}
           </span>
-          <span
+          <div
             style={{
-              fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
-              fontSize: "10px",
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              color: "var(--ink-4)",
+              display: "flex",
+              gap: "20px",
+              alignItems: "baseline",
+              flexWrap: "wrap",
             }}
           >
-            Made by hand, deliberately small.
-          </span>
+            <Link
+              href="/privacy"
+              className="editorial-link on-dark"
+              style={{
+                fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
+                fontSize: "10px",
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "var(--ink-4)",
+              }}
+            >
+              Privacy
+            </Link>
+            <Link
+              href="/terms"
+              className="editorial-link on-dark"
+              style={{
+                fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
+                fontSize: "10px",
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "var(--ink-4)",
+              }}
+            >
+              Terms
+            </Link>
+            <span
+              style={{
+                fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
+                fontSize: "10px",
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "var(--ink-4)",
+              }}
+            >
+              Made by hand, deliberately small.
+            </span>
+          </div>
         </div>
       </div>
 
