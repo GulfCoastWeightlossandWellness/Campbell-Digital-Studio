@@ -138,13 +138,15 @@ export const projects: Project[] = [
       "Single source of truth data architecture — one edit propagates across all 249 pages, schema, and metadata",
       "Smart form pipeline — Zod validation, Cloudflare Turnstile, Resend, intent routing",
       "Open Graph image generators rendering branded social cards on demand",
-      "12-section Google Business Profile operating manual delivered at launch",
+      "12-section Google Business Profile operating manual delivered at launch — covers categories, services, attributes, NAP integrity across 30+ directories, review velocity workflow (request scripts + QR cards on every completed job), photo cadence (2-3 per week from real job sites), Q&A architecture, posts at a 2x/month cadence (mid-month tip + end-of-month offer), Local Falcon baseline scans for Daphne / Fairhope / south Baldwin, and once GBP API access lands, programmatic photo upload + review-response drafting + NAP monitoring",
+      "Ongoing GBP operations retainer running monthly — review velocity, photo cadence, posts, Q&A, and (post-API-approval) automation pipeline. The retainer began before the site cutover so the Local Voice gains start compounding immediately on the existing GBP, then carry over to the rebuilt site",
     ],
     valuePoints: [
       "Closes the Share of Local Voice gap in south Baldwin markets — Foley, Gulf Shores, Orange Beach — where the business showed 0% before launch",
       "Programmatic city × service architecture covers every market the trucks operate in, not just the city of record",
       "Native publishing engine compounds the authority signal at a cadence competitors publishing 0–2 posts a month cannot match",
       "Four custom interactive tools no competitor in the county offers",
+      "GBP operations retainer running monthly — review velocity workflow, photo cadence, posts, and the GBP API automation pipeline once approved",
     ],
     stack:
       "Next.js 14, TypeScript, Tailwind, Three.js (3D explorer), Vercel Cron, Cloudflare Turnstile, Resend, Zod, NWS Public Alert API, 9-Type Schema.org, custom date-gated publishing engine",

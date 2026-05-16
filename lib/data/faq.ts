@@ -45,6 +45,11 @@ export const faqs: FAQItem[] = [
       "Yes — but only as a separate retainer, not bundled into the build. Most clients don't need it. The ones who do (clients running active local SEO campaigns or content engines) sign a monthly retainer that covers content publishing, SEO monitoring, and quarterly strategy.",
   },
   {
+    question: "Do you manage Google Business Profiles?",
+    answer:
+      "Yes. GBP work is part of the Phase 3 build for every local-search engagement, and continues as a retainer afterward. Standalone GBP retainers are available for businesses with an existing site that isn't being rebuilt right now — the retainer covers GBP foundation audit (categories, services, attributes, hours), NAP consistency across 30+ directories, review velocity workflow (request scripts + QR cards), photo cadence (2-3 per week from real job sites), Q&A architecture, posts at a 2x/month cadence, and — once GBP API access is approved — programmatic photo upload, review-response drafting, and NAP monitoring. For HVAC, painting, roofing, plumbing, and electrical contractors on the Gulf Coast, this is the same methodology delivered to Air Solutions Heating & Cooling.",
+  },
+  {
     question: "Will my Google rankings survive a rebuild?",
     answer:
       "Yes, with the right migration. A proper rebuild includes a 301 redirect map for every existing URL, a content audit to preserve link equity, and a launch sequence designed to minimize the indexing gap. Rankings typically recover within a few weeks of launch and often improve from there.",

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title:
     "Campbell Digital Studio | Digital infrastructure for clinical practices and local service businesses",
   description:
-    "Multi-location medical clinics, trade service brands, and the connected ecosystems they need to grow. Built by a physician with a development background.",
+    "Websites, programmatic SEO, and Google Business Profile operations for multi-location medical clinics and trade service brands. Built by a physician with a development background.",
   alternates: { canonical: "/" },
 };
 
@@ -27,6 +27,7 @@ const airSolutions = getProjectBySlug("air-solutions");
 const capabilitiesBuild = [
   "Multi-location medical and clinical practice ecosystems",
   "Programmatic SEO architectures for local service businesses",
+  "Google Business Profile operations — review velocity, photo cadence, posts cadence, Q&A architecture, GBP API automation, NAP integrity across 30+ directories",
   "Custom interactive tools — 3D, calculators, diagnostics, assessments",
   "Connected microsite ecosystems (clinic + shop + book + institute models)",
   "Brand systems and visual identity",
@@ -43,7 +44,7 @@ const capabilitiesNot = [
   "E-commerce platforms beyond simple Shopify integrations",
   "Mobile apps",
   "One-page sites under $5K",
-  "SEO-only engagements without a build component",
+  "Backlink campaigns or generic SEO retainers that don't tie to a specific build, GBP operations program, or content engine",
 ];
 
 const processSteps = [
@@ -75,7 +76,7 @@ const processSteps = [
     n: "05",
     title: "Ongoing",
     body:
-      "Optional monthly retainer for content additions, SEO monitoring, and feature work. No retainer required to launch.",
+      "Optional monthly retainer for content additions, Google Business Profile operations (reviews, photos, posts, API automation), SEO monitoring, and feature work. Standalone GBP retainers are available for businesses with an existing site that won't be rebuilt. No retainer required to launch.",
   },
 ];
 
