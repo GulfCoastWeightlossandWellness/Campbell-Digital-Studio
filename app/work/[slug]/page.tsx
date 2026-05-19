@@ -3,10 +3,12 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { projects, getProjectBySlug } from "@/lib/projects";
+import PageIntro from "@/components/editorial/PageIntro";
 import SectionTag from "@/components/editorial/SectionTag";
 import EditorialH2 from "@/components/editorial/EditorialH2";
-import Eyebrow from "@/components/editorial/Eyebrow";
 import Pullquote from "@/components/editorial/Pullquote";
+import MetaGrid from "@/components/case-study/MetaGrid";
+import CaseStudyNav from "@/components/case-study/CaseStudyNav";
 import CaseStudyResults from "@/components/sections/CaseStudyResults";
 import TestimonialBlock from "@/components/sections/TestimonialBlock";
 import { getTestimonialForSlug } from "@/lib/data/testimonials";
@@ -99,6 +101,20 @@ export default async function CaseStudyPage({ params }: Props) {
 
   const testimonial = getTestimonialForSlug(slug);
 
+  const heroMeta = [
+    { label: "Sector", value: project.category.split(/[/·]/)[0].trim() },
+    { label: "Year", value: year },
+    { label: "Stack", value: project.stack.split(",")[0].trim() },
+    { label: "Status", value: projectStatus[slug] ?? "Production" },
+  ];
+
+  const stackMeta = [
+    { label: "Stack", value: project.stack },
+    { label: "Hosting", value: projectHosting[slug] ?? "Vercel" },
+    { label: "Launched", value: year },
+    { label: "Status", value: projectStatus[slug] ?? "Production" },
+  ];
+
   return (
     <>
       <script
@@ -107,110 +123,23 @@ export default async function CaseStudyPage({ params }: Props) {
           __html: JSON.stringify(getCaseStudyBreadcrumbSchema(project.title, project.slug)),
         }}
       />
-      {/* ─── Hero ─────────────────────────────────────────────────── */}
-      <section className="section-wrap" style={{ paddingTop: "clamp(96px, 14vw, 160px)", paddingBottom: "clamp(48px, 6vw, 72px)" }}>
-        <Eyebrow>
-          Case Study / {project.category}
-        </Eyebrow>
-        <h1
-          className="display-sans display-80"
-          style={{
-            maxWidth: "20ch",
-            marginBottom: "32px",
-          }}
-        >
-          {project.title}.
-        </h1>
-        <p
-          className="reading-col"
-          style={{
-            fontFamily: "var(--font-fraunces), Georgia, serif",
-            fontSize: "21px",
-            lineHeight: 1.6,
-            color: "var(--ink-2)",
-            fontVariationSettings: '"opsz" 24',
-            fontStyle: "italic",
-            fontWeight: 300,
-          }}
-        >
-          {project.shortSummary}
-        </p>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: "0",
-            border: "1px solid var(--border-default)",
-            background: "var(--panel)",
-            borderRadius: "12px",
-            overflow: "hidden",
-            marginTop: "48px",
-          }}
-          className="brief-meta"
-        >
-          {[
-            { label: "Sector", value: project.category.split(/[/·]/)[0].trim() },
-            { label: "Year", value: year },
-            { label: "Stack", value: project.stack.split(",")[0].trim() },
-            {
-              label: "Status",
-              value: projectStatus[slug] ?? "Production",
-            },
-          ].map((m) => (
-            <div
-              key={m.label}
-              style={{
-                padding: "20px 22px",
-                borderRight: "1px solid var(--border-subtle)",
-              }}
-              className="brief-cell"
-            >
-              <div
-                style={{
-                  fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
-                  fontSize: "10px",
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: "var(--aurora-violet)",
-                  marginBottom: "6px",
-                  fontWeight: 600,
-                }}
-              >
-                {m.label}
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
-                  fontSize: "16px",
-                  fontWeight: 500,
-                  color: "var(--ink-1)",
-                  lineHeight: 1.3,
-                  letterSpacing: "-0.018em",
-                }}
-              >
-                {m.value}
-              </div>
-            </div>
-          ))}
-        </div>
+      <PageIntro
+        eyebrow={`Case study / ${project.category}`}
+        titleScale="display-80"
+        className="page-intro--case-study"
+      >
+        {project.title}.
+      </PageIntro>
+
+      <section className="section-wrap" style={{ paddingTop: 0, paddingBottom: "clamp(48px, 6vw, 72px)" }}>
+        <p className="case-study-lead reading-col">{project.shortSummary}</p>
+        <MetaGrid items={heroMeta} />
       </section>
 
-      {/* ─── Hero image ──────────────────────────────────────────── */}
       {project.coverImage ? (
         <section className="section-wrap" style={{ paddingBottom: "clamp(48px, 6vw, 80px)" }}>
-          <div
-            style={{
-              position: "relative",
-              width: "100%",
-              aspectRatio: "16 / 9",
-              border: "1px solid var(--border-default)",
-              borderRadius: "12px",
-              overflow: "hidden",
-              background: "var(--surface)",
-              boxShadow: "0 30px 80px -40px rgba(199, 123, 67, 0.25)",
-            }}
-          >
+          <div className="case-study-cover">
             <Image
               src={project.coverImage}
               alt={`${project.title} — cover screen`}
@@ -220,25 +149,22 @@ export default async function CaseStudyPage({ params }: Props) {
               style={{ objectFit: "cover" }}
             />
           </div>
-          <p className="mono-caption" style={{ marginTop: "12px", textAlign: "right" }}>
+          <p className="mono-caption case-study-cover__caption">
             fig. 01 — {project.screenshotLabels[0]}
           </p>
         </section>
       ) : null}
 
-      {/* ─── § 01 / Brief ────────────────────────────────────────── */}
       <section className="section-wrap section-block-tight">
         <SectionTag num="01" label="The Brief" />
         <EditorialH2>
           What the project<br />
           <em>needed to do.</em>
         </EditorialH2>
-
         <div className="editorial-body reading-col" style={{ marginTop: "32px" }}>
           <p>{project.summary}</p>
           <p>{project.challenge}</p>
         </div>
-
         {project.valuePoints[0] ? (
           <div style={{ marginTop: "40px", maxWidth: "820px" }}>
             <Pullquote>
@@ -249,10 +175,8 @@ export default async function CaseStudyPage({ params }: Props) {
         ) : null}
       </section>
 
-      {/* ─── § Results ──────────────────────────────────────────── */}
       <CaseStudyResults slug={slug} sectionNum="02" />
 
-      {/* ─── § Testimonial ──────────────────────────────────────── */}
       {testimonial ? (
         <section className="section-wrap section-block-tight">
           <SectionTag num="03" label="Client voice" />
@@ -262,7 +186,6 @@ export default async function CaseStudyPage({ params }: Props) {
         </section>
       ) : null}
 
-      {/* ─── Selected screens ─────────────────────────────── */}
       {featuredScreens.length > 0 ? (
         <section className="section-wrap section-block-tight">
           <SectionTag num="04" label="Selected Screens" />
@@ -270,142 +193,69 @@ export default async function CaseStudyPage({ params }: Props) {
             What it looks like,<br />
             <em>on screen.</em>
           </EditorialH2>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr",
-              gap: "48px",
-              marginTop: "48px",
-            }}
-          >
+          <div className="case-study-screens">
             {featuredScreens.map((s, i) => {
               const inset = i % 2 === 1;
               const sizes = inset
                 ? "(max-width: 768px) 100vw, min(920px, 92vw)"
                 : "(max-width: 1280px) 100vw, 1280px";
               return (
-              <figure
-                key={s.label}
-                style={{ margin: 0 }}
-                className={inset ? "case-study-screen--inset" : undefined}
-              >
-                <div
-                  className="case-study-screen-frame"
-                  style={{
-                    position: "relative",
-                    width: "100%",
-                    aspectRatio: "16 / 10",
-                    border: "1px solid var(--border-default)",
-                    borderRadius: "12px",
-                    overflow: "hidden",
-                    background: "var(--surface)",
-                  }}
+                <figure
+                  key={s.label}
+                  style={{ margin: 0 }}
+                  className={inset ? "case-study-screen--inset" : undefined}
                 >
-                  {s.image ? (
-                    <Image
-                      src={s.image}
-                      alt={s.label}
-                      fill
-                      sizes={sizes}
-                      style={{ objectFit: "cover" }}
-                    />
-                  ) : null}
-                </div>
-                <figcaption className="mono-caption" style={{ marginTop: "12px" }}>
-                  fig. {String(i + 2).padStart(2, "0")} — {s.label}
-                </figcaption>
-              </figure>
-            );
+                  <div className="case-study-screen-frame">
+                    {s.image ? (
+                      <Image
+                        src={s.image}
+                        alt={s.label}
+                        fill
+                        sizes={sizes}
+                        style={{ objectFit: "cover" }}
+                      />
+                    ) : null}
+                  </div>
+                  <figcaption className="mono-caption" style={{ marginTop: "12px" }}>
+                    fig. {String(i + 2).padStart(2, "0")} — {s.label}
+                  </figcaption>
+                </figure>
+              );
             })}
           </div>
         </section>
       ) : null}
 
-      {/* ─── What was built ───────────────────────────────── */}
       <section className="section-wrap section-block-tight">
         <SectionTag num="05" label="What Was Built" />
         <EditorialH2>
           The deliverables,<br />
           <em>line by line.</em>
         </EditorialH2>
-
         <div className="editorial-body reading-col" style={{ marginTop: "32px" }}>
           <p>{project.whatIBuilt}</p>
         </div>
-
         <div style={{ marginTop: "48px" }}>
-          <div
-            style={{
-              fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
-              fontSize: "10px",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: "var(--aurora-violet)",
-              fontWeight: 600,
-              marginBottom: "20px",
-              paddingBottom: "10px",
-              borderBottom: "1px solid var(--border-subtle)",
-            }}
-          >
-            Deliverables
-          </div>
-          <ul
-            style={{
-              listStyle: "none",
-              padding: 0,
-              margin: 0,
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-              columnGap: "48px",
-              rowGap: "0",
-            }}
-          >
+          <div className="list-section-label">Deliverables</div>
+          <ul className="editorial-list editorial-list-grid">
             {project.features.map((feature) => (
-              <li
-                key={feature}
-                style={{
-                  position: "relative",
-                  padding: "10px 0 10px 22px",
-                  fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
-                  fontSize: "14.5px",
-                  lineHeight: 1.6,
-                  color: "var(--ink-2)",
-                  borderBottom: "1px solid var(--border-subtle)",
-                }}
-              >
-                <span
-                  aria-hidden
-                  style={{
-                    position: "absolute",
-                    left: 0,
-                    top: "20px",
-                    width: "12px",
-                    height: "1px",
-                    background: "var(--aurora-violet)",
-                  }}
-                />
-                {feature}
-              </li>
+              <li key={feature}>{feature}</li>
             ))}
           </ul>
         </div>
       </section>
 
-      {/* ─── § 04 / Why It Works ─────────────────────────────────── */}
-      <section style={{ background: "var(--panel)", borderTop: "1px solid var(--border-subtle)", borderBottom: "1px solid var(--border-subtle)" }}>
+      <section className="panel-band">
         <div className="section-wrap section-block-tight">
           <SectionTag num="06" label="Why It Works" />
           <EditorialH2>
             How the build<br />
             <em>earns the call.</em>
           </EditorialH2>
-
           <div className="editorial-body reading-col" style={{ marginTop: "32px" }}>
             <p>{project.seoConversion}</p>
             <p>{project.businessValue}</p>
           </div>
-
           <div style={{ marginTop: "56px", maxWidth: "820px" }}>
             <Pullquote>
               {project.valueExplainer}
@@ -415,95 +265,30 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
       </section>
 
-      {/* ─── § 05 / Stack & artifacts ────────────────────────────── */}
       <section className="section-wrap section-block-tight">
         <SectionTag num="07" label="Stack &amp; Artifacts" />
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: "0",
-            border: "1px solid var(--border-default)",
-            background: "var(--panel)",
-            borderRadius: "12px",
-            overflow: "hidden",
-            marginTop: "32px",
-          }}
-        >
-          {[
-            { label: "Stack", value: project.stack },
-            { label: "Hosting", value: projectHosting[slug] ?? "Vercel" },
-            { label: "Launched", value: year },
-            { label: "Status", value: projectStatus[slug] ?? "Production" },
-          ].map((m, i, arr) => (
-            <div
-              key={m.label}
-              style={{
-                padding: "22px 24px",
-                borderRight: i < arr.length - 1 ? "1px solid var(--border-subtle)" : "none",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
-                  fontSize: "10px",
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: "var(--aurora-violet)",
-                  marginBottom: "8px",
-                  fontWeight: 600,
-                }}
-              >
-                {m.label}
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
-                  fontSize: "13.5px",
-                  lineHeight: 1.55,
-                  color: "var(--ink-2)",
-                }}
-              >
-                {m.value}
-              </div>
-            </div>
-          ))}
-        </div>
-
+        <MetaGrid items={stackMeta} className="meta-grid--stack" />
         {project.liveUrl ? (
           <div style={{ marginTop: "32px" }}>
             <a
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`editorial-link arrow-link ${isRealDomain(project.liveUrl) ? "violet" : "mono"}`}
-              style={
-                isRealDomain(project.liveUrl)
-                  ? {
-                      fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
-                      fontSize: "13px",
-                      fontWeight: 600,
-                      letterSpacing: "0.02em",
-                      color: "var(--aurora-violet)",
-                    }
-                  : undefined
-              }
+              className={`editorial-link arrow-link ${isRealDomain(project.liveUrl) ? "copper" : "mono"}`}
             >
-              Visit live: {displayDomain(project.liveUrl)} <span className="arrow" aria-hidden>↗</span>
+              Visit live: {displayDomain(project.liveUrl)}{" "}
+              <span className="arrow" aria-hidden>↗</span>
             </a>
           </div>
         ) : null}
       </section>
 
-      {/* ─── § 06 / Outcome ──────────────────────────────────────── */}
       <section className="section-wrap section-block-tight">
         <SectionTag num="08" label="Outcome" />
         <EditorialH2 className="reading-col">
           Metrics, captured<br />
           <em>at 30 / 60 / 90 days.</em>
         </EditorialH2>
-
         <div className="editorial-body reading-col" style={{ marginTop: "32px" }}>
           <p>
             Outcome reporting for this engagement is captured at 30, 60, and 90 days post-launch
@@ -511,21 +296,10 @@ export default async function CaseStudyPage({ params }: Props) {
             measurement window closes.
           </p>
         </div>
-
       </section>
 
-      {/* ─── § Inquire CTA ───────────────────────────────────────── */}
       <section className="section-wrap section-block-tight">
-        <div
-          style={{
-            display: "flex",
-            gap: "20px",
-            flexWrap: "wrap",
-            alignItems: "center",
-            paddingTop: "32px",
-            borderTop: "1px solid var(--border-subtle)",
-          }}
-        >
+        <div className="case-study-cta-row">
           <Link href="/inquire" className="btn-fill">
             Inquire about a similar project
           </Link>
@@ -537,106 +311,7 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
       </section>
 
-      {/* ─── § 07 / Prev / Next ──────────────────────────────────── */}
-      <section
-        style={{
-          borderTop: "1px solid var(--border-subtle)",
-          borderBottom: "1px solid var(--border-subtle)",
-          background: "var(--panel)",
-          marginTop: "clamp(48px, 6vw, 96px)",
-        }}
-      >
-        <div
-          className="section-wrap"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "0",
-            paddingTop: 0,
-            paddingBottom: 0,
-          }}
-        >
-          {prev ? (
-            <Link
-              href={`/work/${prev.slug}`}
-              className="prev-next-cell"
-              style={{
-                padding: "40px clamp(20px, 5vw, 60px)",
-                borderRight: "1px solid var(--border-subtle)",
-                textDecoration: "none",
-                color: "inherit",
-                display: "block",
-                transition: "background 0.2s",
-              }}
-            >
-              <span
-                className="mono-caption"
-                style={{ display: "block", marginBottom: "10px", color: "var(--ink-3)" }}
-              >
-                ← Previous
-              </span>
-              <h4
-                style={{
-                  fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
-                  fontSize: "24px",
-                  fontWeight: 500,
-                  color: "var(--ink-1)",
-                  letterSpacing: "-0.022em",
-                  lineHeight: 1.2,
-                }}
-              >
-                {prev.title}
-              </h4>
-            </Link>
-          ) : (
-            <div />
-          )}
-          {next ? (
-            <Link
-              href={`/work/${next.slug}`}
-              className="prev-next-cell"
-              style={{
-                padding: "40px clamp(20px, 5vw, 60px)",
-                textDecoration: "none",
-                color: "inherit",
-                display: "block",
-                textAlign: "right",
-                transition: "background 0.2s",
-              }}
-            >
-              <span
-                className="mono-caption"
-                style={{ display: "block", marginBottom: "10px", color: "var(--ink-3)" }}
-              >
-                Next →
-              </span>
-              <h4
-                style={{
-                  fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
-                  fontSize: "24px",
-                  fontWeight: 500,
-                  color: "var(--ink-1)",
-                  letterSpacing: "-0.022em",
-                  lineHeight: 1.2,
-                }}
-              >
-                {next.title}
-              </h4>
-            </Link>
-          ) : (
-            <div />
-          )}
-        </div>
-      </section>
-
-      <style>{`
-        .prev-next-cell:hover { background: rgba(255, 255, 255, 0.02); }
-        @media (max-width: 720px) {
-          .brief-meta { grid-template-columns: 1fr 1fr !important; }
-          .brief-cell:nth-child(2n) { border-right: none !important; }
-          .brief-cell:nth-child(-n+2) { border-bottom: 1px solid var(--border-subtle); }
-        }
-      `}</style>
+      <CaseStudyNav prev={prev} next={next} />
     </>
   );
 }

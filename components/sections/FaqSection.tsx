@@ -6,18 +6,10 @@ import EditorialH2 from "@/components/editorial/EditorialH2";
 import { faqs } from "@/lib/data/faq";
 
 type Props = {
-  /** Section number for the eyebrow */
   sectionNum?: string;
 };
 
-/**
- * Accordion-style FAQ. First item open by default.
- *
- * The matching FAQPage JSON-LD is rendered separately in app/page.tsx so
- * the schema can stay in the server-rendered <head>; this component only
- * handles the visible accordion.
- */
-export default function FaqSection({ sectionNum = "06" }: Props) {
+export default function FaqSection({ sectionNum = "07" }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   if (faqs.length === 0) return null;
@@ -30,65 +22,24 @@ export default function FaqSection({ sectionNum = "06" }: Props) {
         <em>ask before signing.</em>
       </EditorialH2>
 
-      <div
-        style={{
-          marginTop: "48px",
-          maxWidth: "820px",
-          borderTop: "1px solid var(--border-subtle)",
-        }}
-      >
+      <div className="faq-list">
         {faqs.map((item, idx) => {
           const open = openIndex === idx;
           const id = `faq-${idx}`;
           return (
-            <div
-              key={item.question}
-              style={{ borderBottom: "1px solid var(--border-subtle)" }}
-            >
+            <div key={item.question} className="faq-item">
               <button
                 type="button"
+                className="faq-trigger"
                 aria-expanded={open}
                 aria-controls={`${id}-panel`}
                 id={`${id}-button`}
                 onClick={() => setOpenIndex(open ? null : idx)}
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  alignItems: "baseline",
-                  justifyContent: "space-between",
-                  gap: "24px",
-                  padding: "22px 0",
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  textAlign: "left",
-                  color: "var(--ink-1)",
-                  minHeight: "44px",
-                }}
               >
+                <span className="faq-trigger__question">{item.question}</span>
                 <span
-                  style={{
-                    fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
-                    fontSize: "clamp(17px, 1.8vw, 20px)",
-                    fontWeight: 500,
-                    color: "var(--ink-1)",
-                    letterSpacing: "-0.018em",
-                    lineHeight: 1.35,
-                  }}
-                >
-                  {item.question}
-                </span>
-                <span
+                  className={`faq-trigger__icon${open ? " is-open" : ""}`}
                   aria-hidden
-                  style={{
-                    fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
-                    fontSize: "18px",
-                    color: "var(--aurora-violet)",
-                    transform: open ? "rotate(45deg)" : "rotate(0)",
-                    transition: "transform 0.2s ease",
-                    flexShrink: 0,
-                    lineHeight: 1,
-                  }}
                 >
                   +
                 </span>
@@ -98,14 +49,7 @@ export default function FaqSection({ sectionNum = "06" }: Props) {
                 role="region"
                 aria-labelledby={`${id}-button`}
                 hidden={!open}
-                style={{
-                  paddingBottom: open ? "24px" : "0",
-                  fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
-                  fontSize: "15px",
-                  lineHeight: 1.7,
-                  color: "var(--ink-2)",
-                  maxWidth: "65ch",
-                }}
+                className="faq-panel"
               >
                 {item.answer}
               </div>

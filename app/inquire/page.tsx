@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import PageIntro from "@/components/editorial/PageIntro";
 import SectionTag from "@/components/editorial/SectionTag";
 import EditorialH2 from "@/components/editorial/EditorialH2";
-import Eyebrow from "@/components/editorial/Eyebrow";
 import InquireForm from "@/components/InquireForm";
 import { siteConfig } from "@/lib/site-config";
 
@@ -16,26 +16,12 @@ export const metadata: Metadata = {
 export default function InquirePage() {
   return (
     <>
-      <section
-        className="section-wrap"
-        style={{
-          paddingTop: "clamp(96px, 14vw, 160px)",
-          paddingBottom: "clamp(48px, 6vw, 80px)",
-        }}
-      >
-        <Eyebrow>§ Inquire / Start a Conversation</Eyebrow>
+      <PageIntro eyebrow="§ Inquire / Start a conversation">
+        Start a<br />
+        <em>conversation.</em>
+      </PageIntro>
 
-        <h1
-          className="display-sans display-96"
-          style={{
-            marginBottom: "32px",
-            maxWidth: "16ch",
-          }}
-        >
-          Start a<br />
-          <em>conversation.</em>
-        </h1>
-
+      <section className="section-wrap" style={{ paddingBottom: "clamp(48px, 6vw, 80px)" }}>
         <div className="editorial-body reading-col">
           <p>
             A few specifics save us both time. The fields below ask for the same things I&apos;d ask
@@ -54,14 +40,7 @@ export default function InquirePage() {
         </div>
       </section>
 
-      {/* ─── Fit note ─────────────────────────────────────────────── */}
-      <section
-        style={{
-          background: "var(--panel)",
-          borderTop: "1px solid var(--border-subtle)",
-          borderBottom: "1px solid var(--border-subtle)",
-        }}
-      >
+      <section className="panel-band">
         <div className="section-wrap section-block-tight">
           <SectionTag num="§ Note" label="Project fit" />
           <EditorialH2 className="reading-col">
@@ -83,7 +62,7 @@ export default function InquirePage() {
             </p>
           </div>
 
-          <div style={{ marginTop: "32px", display: "flex", gap: "32px", flexWrap: "wrap" }}>
+          <div className="page-intro__actions" style={{ marginTop: "32px" }}>
             <Link href="/work" className="editorial-link arrow-link mono">
               See recent work <span className="arrow" aria-hidden>→</span>
             </Link>

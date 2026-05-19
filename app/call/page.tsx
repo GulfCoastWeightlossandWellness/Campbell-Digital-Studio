@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Eyebrow from "@/components/editorial/Eyebrow";
+import PageIntro from "@/components/editorial/PageIntro";
 import SectionTag from "@/components/editorial/SectionTag";
 import EditorialH2 from "@/components/editorial/EditorialH2";
 import CalEmbed from "@/components/CalEmbed";
@@ -18,60 +18,29 @@ export default function CallPage() {
 
   return (
     <>
-      <section
-        className="section-wrap"
-        style={{
-          paddingTop: "clamp(96px, 14vw, 160px)",
-          paddingBottom: "clamp(48px, 6vw, 80px)",
-        }}
-      >
-        <Eyebrow>§ Book / Twenty-Minute Call</Eyebrow>
+      <PageIntro eyebrow="§ Book / Twenty-minute call">
+        Twenty minutes,<br />
+        <em>no deck.</em>
+      </PageIntro>
 
-        <h1
-          className="display-sans display-96"
-          style={{
-            marginBottom: "32px",
-            maxWidth: "16ch",
-          }}
-        >
-          Twenty minutes,<br />
-          <em>no deck.</em>
-        </h1>
-
-        <div className="editorial-body reading-col">
-          <p>
-            A short call to talk through what you have, what you&apos;re trying to accomplish, and
-            whether the studio is the right fit. No deck, no sales pressure. If a project is a fit,
-            you&apos;ll leave the call with a sketch of scope; if it isn&apos;t, you&apos;ll leave
-            with honest notes and where I&apos;d look instead.
-          </p>
-        </div>
+      <section className="section-wrap" style={{ paddingBottom: "clamp(32px, 4vw, 48px)" }}>
+        <p className="page-intro__lead reading-col">
+          A short call to talk through what you have, what you&apos;re trying to accomplish, and
+          whether the studio is the right fit. No deck, no sales pressure. If a project is a fit,
+          you&apos;ll leave the call with a sketch of scope; if it isn&apos;t, you&apos;ll leave
+          with honest notes and where I&apos;d look instead.
+        </p>
       </section>
 
       {username ? (
         <section className="section-wrap section-block-tight">
           <SectionTag num="§" label="Pick a time" />
-          <div
-            style={{
-              marginTop: "24px",
-              border: "1px solid var(--border-default)",
-              background: "var(--panel)",
-              borderRadius: "12px",
-              padding: "clamp(12px, 2vw, 20px)",
-              minHeight: "640px",
-            }}
-          >
+          <div className="cal-embed-frame">
             <CalEmbed username={username} />
           </div>
         </section>
       ) : (
-        <section
-          style={{
-            background: "var(--panel)",
-            borderTop: "1px solid var(--border-subtle)",
-            borderBottom: "1px solid var(--border-subtle)",
-          }}
-        >
+        <section className="panel-band">
           <div className="section-wrap section-block-tight">
             <SectionTag num="§ Note" label="Booking is currently by email" />
             <EditorialH2 className="reading-col">
@@ -85,11 +54,10 @@ export default function CallPage() {
                 to email directly with two or three time windows that work for you.
               </p>
             </div>
-            <div style={{ marginTop: "32px", display: "flex", gap: "32px", flexWrap: "wrap" }}>
+            <div className="page-intro__actions" style={{ marginTop: "32px" }}>
               <a
                 href={`mailto:${siteConfig.email}?subject=${encodeURIComponent("Twenty-minute call")}`}
-                className="btn-fill"
-                style={{ fontSize: "12px" }}
+                className="btn-fill btn-nav"
               >
                 Email to schedule
               </a>

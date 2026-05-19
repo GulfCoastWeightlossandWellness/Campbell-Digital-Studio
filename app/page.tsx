@@ -7,8 +7,7 @@ import Eyebrow from "@/components/editorial/Eyebrow";
 import SelectedClients from "@/components/sections/SelectedClients";
 import FaqSection from "@/components/sections/FaqSection";
 import TestimonialBlock from "@/components/sections/TestimonialBlock";
-import HeroAurora from "@/components/HeroAurora";
-import HomeFeaturedCaseStudy from "@/components/sections/HomeFeaturedCaseStudy";
+import FeaturedWorkPreview from "@/components/sections/FeaturedWorkPreview";
 import { getFeaturedTestimonials } from "@/lib/data/testimonials";
 import { faqs } from "@/lib/data/faq";
 import { siteConfig } from "@/lib/site-config";
@@ -103,67 +102,22 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       {/* ─── § 01 / Hero ─────────────────────────────────────────────── */}
-      {/* Hero is now in two parts: an editorial header (eyebrow, headline, CTAs)
-          and a process-curve centerpiece below. Both live inside one cover-surface
-          so the gold top-stripe still reads as a single hero band. */}
-      <section
-        className="cover-surface cover-surface--grain"
-        style={{
-          minHeight: "min(880px, 100vh)",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <div
-          className="section-wrap"
-          style={{
-            paddingTop: "clamp(110px, 16vw, 180px)",
-            paddingBottom: "clamp(28px, 4vw, 48px)",
-            display: "flex",
-            flexDirection: "column",
-            gap: "clamp(28px, 4vw, 44px)",
-          }}
-        >
-          <div style={{ maxWidth: "960px" }}>
+      <section className="cover-surface home-hero">
+        <div className="section-wrap home-hero__inner">
+          <div className="home-hero__headline">
             <Eyebrow onDark>01 / Campbell Digital Studio</Eyebrow>
-            <h1
-              className="display-sans display-96"
-              style={{
-                marginBottom: "clamp(24px, 3vw, 32px)",
-                maxWidth: "18ch",
-              }}
-            >
+            <h1 className="display-sans display-96">
               Digital infrastructure for{" "}
               <em>clinical practices and local service businesses.</em>
             </h1>
-            <p
-              style={{
-                fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
-                fontSize: "clamp(16px, 1.6vw, 19px)",
-                lineHeight: 1.55,
-                color: "var(--ink-2)",
-                maxWidth: "640px",
-                fontWeight: 400,
-                letterSpacing: "-0.01em",
-              }}
-            >
+            <p className="home-hero__lead">
               Multi-location medical clinics, trade service brands, and the connected ecosystems
               they need to grow. Built by a physician with a development background.
             </p>
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-end",
-              flexWrap: "wrap",
-              gap: "32px",
-              borderTop: "1px solid var(--border-default)",
-              paddingTop: "24px",
-            }}
-          >
-            <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", alignItems: "center" }}>
+          <div className="home-hero__bar">
+            <div className="home-hero__actions">
               <Link href="/inquire" className="btn-fill">
                 Start a conversation
               </Link>
@@ -171,48 +125,15 @@ export default function HomePage() {
                 See recent work
               </Link>
               {siteConfig.calUsername ? (
-                <Link
-                  href="/call"
-                  className="editorial-link mono on-dark"
-                  style={{
-                    fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
-                    fontSize: "11px",
-                    letterSpacing: "0.18em",
-                    textTransform: "uppercase",
-                    color: "var(--ink-3)",
-                  }}
-                >
+                <Link href="/call" className="editorial-link mono on-dark">
                   Or book a 20-min call →
                 </Link>
               ) : null}
             </div>
-            <span
-              style={{
-                fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
-                fontSize: "10px",
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                color: "var(--ink-4)",
-              }}
-            >
-              Daphne, Alabama · Sole practitioner
-            </span>
+            <span className="home-hero__meta">Daphne, Alabama · Sole practitioner</span>
           </div>
         </div>
 
-        {/* Process-curve centerpiece — fills the lower half of the hero on desktop,
-            collapses to a stacked timeline on mobile. Same five steps as §05 Process,
-            surfaced earlier as a visual anchor. */}
-        <div
-          className="section-wrap"
-          style={{
-            paddingTop: "clamp(8px, 2vw, 24px)",
-            paddingBottom: "clamp(40px, 6vw, 72px)",
-            marginTop: "auto",
-          }}
-        >
-          <HeroAurora />
-        </div>
       </section>
 
       {/* ─── Proof bar ────────────────────────────────────────────────── */}
@@ -259,159 +180,43 @@ export default function HomePage() {
         </section>
       ) : null}
 
-      {/* ─── Featured Case Study — Revitalize (split) ─────────────────── */}
-      {revitalize ? (
-        <HomeFeaturedCaseStudy
-          project={revitalize}
-          variant="split"
-          surface="canvas"
-          sectionNum="04"
-          sectionLabel="Featured Case Study"
-          imageGlow="strong"
-          imagePriority
-        >
-          <>
-            Revitalize Aesthetics<br />
-            <em>&amp; Wellness.</em>
-          </>
-        </HomeFeaturedCaseStudy>
-      ) : null}
-
-      {/* ─── Featured Case Study — Air Solutions (stacked / panel) ─────── */}
-      {airSolutions ? (
-        <HomeFeaturedCaseStudy
-          project={airSolutions}
-          variant="stacked"
-          surface="panel"
-          sectionNum="05"
-          sectionLabel="Featured Case Study"
-          imageGlow="soft"
-          imageSurface="surface"
-        >
-          <>
-            Air Solutions<br />
-            <em>Heating &amp; Cooling.</em>
-          </>
-        </HomeFeaturedCaseStudy>
+      {/* ─── Featured work (compact preview → full case studies on /work) ── */}
+      {revitalize && airSolutions ? (
+        <FeaturedWorkPreview projects={[revitalize, airSolutions]} sectionNum="04" />
       ) : null}
 
       {/* ─── Capabilities ─────────────────────────────────────── */}
       <section id="capabilities" className="section-wrap section-block" style={{ scrollMarginTop: "96px" }}>
-        <SectionTag num="06" label="Capabilities" />
+        <SectionTag num="05" label="Capabilities" />
         <EditorialH2>
           What I build,<br />
           <em>and what I don&apos;t.</em>
         </EditorialH2>
 
-        <div
-          style={{
-            marginTop: "56px",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: "clamp(40px, 5vw, 64px)",
-          }}
-        >
+        <div className="capabilities-grid">
           <div>
-            <h3 className="editorial-h3" style={{ marginBottom: "16px" }}>
-              What I build
-            </h3>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            <h3 className="editorial-h3">What I build</h3>
+            <ul className="editorial-list">
               {capabilitiesBuild.map((item) => (
-                <li
-                  key={item}
-                  style={{
-                    position: "relative",
-                    padding: "10px 0 10px 22px",
-                    fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
-                    fontSize: "14.5px",
-                    lineHeight: 1.6,
-                    color: "var(--ink-2)",
-                    borderBottom: "1px solid var(--border-subtle)",
-                  }}
-                >
-                  <span
-                    aria-hidden
-                    style={{
-                      position: "absolute",
-                      left: 0,
-                      top: "20px",
-                      width: "12px",
-                      height: "1px",
-                      background: "var(--aurora-violet)",
-                    }}
-                  />
-                  {item}
-                </li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h3 className="editorial-h3" style={{ marginBottom: "16px" }}>
-              Verticals I work in
-            </h3>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            <h3 className="editorial-h3">Verticals I work in</h3>
+            <ul className="editorial-list">
               {capabilitiesVerticals.map((item) => (
-                <li
-                  key={item}
-                  style={{
-                    position: "relative",
-                    padding: "10px 0 10px 22px",
-                    fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
-                    fontSize: "14.5px",
-                    lineHeight: 1.6,
-                    color: "var(--ink-2)",
-                    borderBottom: "1px solid var(--border-subtle)",
-                  }}
-                >
-                  <span
-                    aria-hidden
-                    style={{
-                      position: "absolute",
-                      left: 0,
-                      top: "20px",
-                      width: "12px",
-                      height: "1px",
-                      background: "var(--aurora-violet)",
-                    }}
-                  />
-                  {item}
-                </li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h3 className="editorial-h3" style={{ marginBottom: "16px" }}>
-              What I don&apos;t do
-            </h3>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            <h3 className="editorial-h3">What I don&apos;t do</h3>
+            <ul className="editorial-list editorial-list--muted">
               {capabilitiesNot.map((item) => (
-                <li
-                  key={item}
-                  style={{
-                    position: "relative",
-                    padding: "10px 0 10px 22px",
-                    fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
-                    fontSize: "14.5px",
-                    lineHeight: 1.6,
-                    color: "var(--ink-3)",
-                    borderBottom: "1px solid var(--border-subtle)",
-                  }}
-                >
-                  <span
-                    aria-hidden
-                    style={{
-                      position: "absolute",
-                      left: 0,
-                      top: "20px",
-                      width: "12px",
-                      height: "1px",
-                      background: "var(--ink-4)",
-                    }}
-                  />
-                  {item}
-                </li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
           </div>
@@ -429,7 +234,7 @@ export default function HomePage() {
         }}
       >
         <div className="section-wrap section-block">
-          <SectionTag num="07" label="Process" />
+          <SectionTag num="06" label="Process" />
           <EditorialH2>
             How an engagement<br />
             <em>actually runs.</em>
@@ -450,19 +255,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          <p
-            className="reading-col"
-            style={{
-              marginTop: "48px",
-              fontFamily: "var(--font-fraunces), Georgia, serif",
-              fontSize: "19px",
-              lineHeight: 1.55,
-              color: "var(--ink-2)",
-              fontStyle: "italic",
-              fontWeight: 300,
-              fontVariationSettings: '"opsz" 32',
-            }}
-          >
+          <p className="reading-col process-note">
             Most engagements run mid-five figures and up. If your budget is below that, I&apos;ll
             happily refer you to someone good.
           </p>
@@ -470,11 +263,11 @@ export default function HomePage() {
       </section>
 
       {/* ─── § 06 / Common Questions ─────────────────────────────────── */}
-      <FaqSection sectionNum="08" />
+      <FaqSection sectionNum="07" />
 
       {/* ─── § 07 / About ────────────────────────────────────────────── */}
-      <section id="about" className="section-wrap section-block-loose" style={{ scrollMarginTop: "96px" }}>
-        <SectionTag num="09" label="About" />
+      <section id="about" className="section-wrap section-block" style={{ scrollMarginTop: "96px" }}>
+        <SectionTag num="08" label="About" />
         <EditorialH2 className="reading-col">
           Peyton Campbell, <em>DO.</em>
         </EditorialH2>
@@ -501,24 +294,13 @@ export default function HomePage() {
       {/* ─── § 08 / Contact CTA ──────────────────────────────────────── */}
       <section className="cover-surface">
         <div className="section-wrap section-block">
-          <SectionTag num="10" label="Working Together" onDark />
+          <SectionTag num="09" label="Working Together" onDark />
           <EditorialH2 onDark className="reading-col">
             Start a<br />
             <em>conversation.</em>
           </EditorialH2>
 
-          <p
-            className="reading-col"
-            style={{
-              fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
-              fontSize: "17px",
-              lineHeight: 1.65,
-              color: "var(--ink-2)",
-              marginTop: "24px",
-              fontWeight: 400,
-              letterSpacing: "-0.01em",
-            }}
-          >
+          <p className="reading-col page-intro__lead">
             Send the business name, a link to the current site (or what&apos;s currently in place),
             what you&apos;re trying to accomplish, an approximate budget, and a timeline. I read
             every inquiry personally. If the project is a fit, you&apos;ll hear back within a week

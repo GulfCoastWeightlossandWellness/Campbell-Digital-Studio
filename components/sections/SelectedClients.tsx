@@ -4,60 +4,31 @@ import SectionTag from "@/components/editorial/SectionTag";
 import { displayDomain, isRealDomain } from "@/lib/url-display";
 
 type Props = {
-  /** Section number to render in the eyebrow tag */
   sectionNum?: string;
 };
 
-/**
- * Selected Clients row.
- *
- * Renders nothing if fewer than 2 clients have publicConsent.
- * Each client tile shows: name (links to case study or site), type/sector,
- * live domain (separately clickable, gold for real domains, mono-muted for
- * staging URLs), and an optional second domain for clients with both a
- * marketing site and a product (currently only IHE).
- */
 export default function SelectedClients({ sectionNum }: Props) {
   const clients = getDisplayableClients();
   if (clients.length < 2) return null;
 
+  const cols = Math.min(clients.length, 5);
+
   return (
-    <section
-      style={{
-        background: "var(--panel)",
-        borderTop: "1px solid var(--border-subtle)",
-        borderBottom: "1px solid var(--border-subtle)",
-      }}
-    >
+    <section className="selected-clients-band">
       <div className="section-wrap section-block-tight">
         <SectionTag num={sectionNum ?? "02"} label="Selected Clients" />
         <div
-          className="selected-clients-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: `repeat(${Math.min(clients.length, 5)}, minmax(0, 1fr))`,
-            gap: "32px",
-            marginTop: "24px",
-            alignItems: "start",
-          }}
+          className="selected-clients-grid selected-clients-grid--auto"
+          style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
         >
           {clients.map((c) => {
-            // Primary destination: case study if one exists, otherwise the live site.
             const primaryHref = c.caseStudySlug ? `/work/${c.caseStudySlug}` : c.websiteUrl;
             const primaryExternal = !c.caseStudySlug;
             const liveReal = isRealDomain(c.websiteUrl);
             const productReal = isRealDomain(c.productUrl);
 
             return (
-              <div
-                key={c.id}
-                className="selected-client"
-                style={{
-                  paddingTop: "12px",
-                  paddingBottom: "12px",
-                  borderTop: "1px solid var(--border-subtle)",
-                }}
-              >
+              <div key={c.id} className="selected-client">
                 <Link
                   href={primaryHref}
                   {...(primaryExternal
@@ -67,31 +38,18 @@ export default function SelectedClients({ sectionNum }: Props) {
                 >
                   {c.shortName}
                   {primaryExternal ? (
-                    <span aria-hidden style={{ color: "var(--aurora-violet)", marginLeft: "0.4em", fontSize: "0.8em" }}>
+                    <span aria-hidden className="link-mark">
                       ↗
                     </span>
                   ) : null}
                 </Link>
-                <div
-                  style={{
-                    fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
-                    fontSize: "10px",
-                    letterSpacing: "0.16em",
-                    textTransform: "uppercase",
-                    color: "var(--ink-3)",
-                    lineHeight: 1.5,
-                    marginBottom: "10px",
-                  }}
-                >
-                  {c.type}
-                </div>
+                <div className="selected-client-type">{c.type}</div>
 
-                {/* Domain link(s) — separately clickable. Real domains in gold. */}
                 <a
                   href={c.websiteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`selected-client-domain ${liveReal ? "is-real" : "is-staging"}`}
+                  className={`domain-link ${liveReal ? "domain-real" : "domain-staging"}`}
                   aria-label={`Visit ${c.name} — opens in new tab`}
                 >
                   {displayDomain(c.websiteUrl)} <span aria-hidden>↗</span>
@@ -101,11 +59,11 @@ export default function SelectedClients({ sectionNum }: Props) {
                     href={c.productUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`selected-client-domain ${productReal ? "is-real" : "is-staging"}`}
+                    className={`domain-link ${productReal ? "domain-real" : "domain-staging"}`}
                     style={{ marginTop: "4px" }}
-                    aria-label={`Live product — opens in new tab`}
+                    aria-label="Live product — opens in new tab"
                   >
-                    <span className="prefix">Product:</span>{" "}
+                    <span className="domain-link-prefix">Product:</span>{" "}
                     {displayDomain(c.productUrl)} <span aria-hidden>↗</span>
                   </a>
                 ) : null}
@@ -114,68 +72,6 @@ export default function SelectedClients({ sectionNum }: Props) {
           })}
         </div>
       </div>
-      <style>{`
-        .selected-client-name {
-          display: block;
-          font-family: var(--font-geist-sans), system-ui, sans-serif;
-          font-size: clamp(15px, 1.4vw, 18px);
-          font-weight: 500;
-          color: var(--ink-1);
-          letter-spacing: -0.018em;
-          line-height: 1.25;
-          margin-bottom: 8px;
-          text-decoration: none;
-          transition: color 0.2s ease;
-        }
-        .selected-client-name:hover {
-          color: var(--aurora-violet);
-        }
-        .selected-client-domain {
-          display: inline-flex;
-          align-items: baseline;
-          gap: 0.35em;
-          text-decoration: none;
-          font-family: var(--font-geist-mono), var(--font-jetbrains), ui-monospace, monospace;
-          font-size: 12px;
-          letter-spacing: 0.02em;
-          line-height: 1.4;
-          padding: 4px 0;
-          word-break: break-all;
-          transition: color 0.2s ease;
-        }
-        .selected-client-domain .prefix {
-          font-weight: 600;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          font-size: 10px;
-          color: var(--ink-3);
-        }
-        .selected-client-domain.is-real {
-          color: var(--aurora-violet);
-          font-weight: 600;
-          font-size: 13px;
-        }
-        .selected-client-domain.is-real:hover {
-          color: var(--aurora-magenta);
-        }
-        .selected-client-domain.is-staging {
-          color: var(--ink-3);
-        }
-        .selected-client-domain.is-staging:hover {
-          color: var(--ink-1);
-        }
-
-        @media (max-width: 860px) {
-          .selected-clients-grid {
-            grid-template-columns: 1fr 1fr !important;
-          }
-        }
-        @media (max-width: 480px) {
-          .selected-clients-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }

@@ -78,28 +78,28 @@ export default function Header() {
       >
         <StudioMark size={scrolled ? "sm" : "md"} onDark />
 
-        <nav
-          aria-label="Main navigation"
-          className="desktop-nav"
-          style={{ display: "flex", alignItems: "center", gap: "2.25rem" }}
-        >
-          {primaryNavLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="editorial-link mono on-dark header-nav-link"
-              style={{ paddingBottom: "4px" }}
-              aria-current={
-                link.href === "/work" && pathname === "/work"
-                  ? "page"
-                  : link.href === "/inquire" && pathname === "/inquire"
-                    ? "page"
-                    : undefined
-              }
-            >
-              {link.label}
-            </Link>
-          ))}
+        <nav aria-label="Main navigation" className="desktop-nav header-nav">
+          {primaryNavLinks
+            .filter((link) => link.href !== "/inquire")
+            .map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="editorial-link mono on-dark header-nav-link"
+                aria-current={
+                  link.href === "/work" && pathname === "/work" ? "page" : undefined
+                }
+              >
+                {link.label}
+              </Link>
+            ))}
+          <Link
+            href="/inquire"
+            className="btn-fill btn-nav"
+            aria-current={pathname === "/inquire" ? "page" : undefined}
+          >
+            Inquire
+          </Link>
         </nav>
 
         <button
@@ -216,11 +216,11 @@ export default function Header() {
               >
                 <span
                   style={{
-                    fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
+                    fontFamily: "var(--font-geist-mono), ui-monospace, monospace",
                     fontSize: "0.32em",
                     fontWeight: 600,
                     marginRight: "0.6em",
-                    color: "var(--aurora-violet)",
+                    color: "var(--copper)",
                     verticalAlign: "middle",
                     letterSpacing: "0.18em",
                     textTransform: "uppercase",
@@ -237,11 +237,11 @@ export default function Header() {
               className="editorial-link"
               style={{
                 marginTop: "32px",
-                fontFamily: "var(--font-geist-mono), var(--font-jetbrains), monospace",
+                fontFamily: "var(--font-geist-mono), ui-monospace, monospace",
                 fontSize: "11px",
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "var(--aurora-violet)",
+                color: "var(--copper)",
               }}
             >
               Start a conversation →
@@ -253,7 +253,6 @@ export default function Header() {
 
       <style>{`
         @media (max-width: 860px) {
-          .desktop-nav { display: none !important; }
           .mobile-menu-btn { display: inline-flex !important; }
         }
         .skip-link {
@@ -264,19 +263,19 @@ export default function Header() {
           padding: 10px 18px;
           background: var(--panel);
           color: var(--ink-1);
-          font-family: var(--font-geist-mono), var(--font-jetbrains), monospace;
+          font-family: var(--font-geist-mono), ui-monospace, monospace;
           font-size: 12px;
           letter-spacing: 0.16em;
           text-transform: uppercase;
           text-decoration: none;
-          border: 1px solid var(--aurora-violet);
+          border: 1px solid var(--copper);
           border-radius: 6px;
           z-index: 200;
           transition: top 0.2s ease;
         }
         .skip-link:focus {
           top: 12px;
-          outline: 2px solid var(--violet-base);
+          outline: 2px solid var(--copper);
           outline-offset: 2px;
         }
       `}</style>
