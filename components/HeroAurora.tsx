@@ -60,11 +60,11 @@ export default function HeroAurora() {
         >
           <defs>
             <pattern id="hero-grid-aurora" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-              <path d="M 60 0 L 0 0 L 0 60" fill="none" stroke="rgba(255,245,235,0.035)" strokeWidth="1" />
+              <path d="M 60 0 L 0 0 L 0 60" fill="none" stroke="rgba(20,24,42,0.05)" strokeWidth="1" />
             </pattern>
             <linearGradient id="aurora-line-grad" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stopColor="transparent" />
-              <stop offset="50%" stopColor="#C77B43" stopOpacity="0.7" />
+              <stop offset="50%" stopColor="#C49A35" stopOpacity="0.7" />
               <stop offset="100%" stopColor="transparent" />
             </linearGradient>
           </defs>
@@ -97,22 +97,22 @@ export default function HeroAurora() {
           will-change: transform;
         }
         .blob-deep {
-          background: radial-gradient(circle, #A06A4A 0%, transparent 65%);
+          background: radial-gradient(circle, #0C1F3D 0%, transparent 65%);
           top: -16%;
           left: 4%;
-          opacity: 0.42;
+          opacity: 0.16;
         }
         .blob-copper {
-          background: radial-gradient(circle, #C77B43 0%, transparent 65%);
+          background: radial-gradient(circle, #C49A35 0%, transparent 65%);
           top: 8%;
           left: 32%;
-          opacity: 0.42;
+          opacity: 0.32;
         }
         .blob-amber {
-          background: radial-gradient(circle, #D4A574 0%, transparent 65%);
+          background: radial-gradient(circle, #E8C46B 0%, transparent 65%);
           top: -10%;
           left: 58%;
-          opacity: 0.32;
+          opacity: 0.24;
         }
         .grid-svg {
           position: absolute;

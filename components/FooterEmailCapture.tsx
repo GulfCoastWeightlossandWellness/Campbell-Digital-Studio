@@ -80,7 +80,7 @@ export default function FooterEmailCapture() {
         value={note}
         onChange={(e) => setNote(e.target.value)}
         className="studio-input"
-        style={{ fontSize: "14px", background: "rgba(255, 245, 235, 0.02)" }}
+        style={{ fontSize: "14px", background: "rgba(20, 24, 42, 0.02)" }}
       />
       {state === "error" && errorMsg ? (
         <p className="footer-capture__error">{errorMsg}</p>

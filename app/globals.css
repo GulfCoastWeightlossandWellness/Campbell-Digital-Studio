@@ -1,21 +1,23 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   Campbell Digital Studio — editorial-dark / premium-tech design system
+   Campbell Digital Studio — editorial-light / brand design system
 
-   v3 palette — warm graphite + honeyed copper:
-   Canvas   #161412 → panel #1E1A17 → surface #27221E (warm dark, slight
-            brown undertone — paper-burned-at-the-edges feel)
-   Accent   honeyed copper #C77B43 — single chromatic accent, no gradient.
-            Premium without reading "AI startup template."
+   v4 palette — cream paper + navy ink + gold accent:
+   Canvas   #FAF6EC → panel #F0E9D6 → surface #FBF8F0 (warm cream paper,
+            paper-stock feel, light mode brand)
+   Ink      #14182A primary text (near-black with navy tint) on cream.
+   Accent   gold #C49A35 — single chromatic accent, no gradient.
+            Premium and brand-correct per v4.2 proposal + Reaves onboarding.
    Type     Geist as primary display + body, weights 400 / 500 / 600.
             Fraunces reserved for italic emphasis inside <em>.
             Geist Mono / JetBrains Mono for labels.
 
-   v3 vs v2: dropped the indigo→violet→rose aurora gradient entirely. Single
-   copper accent reads more designed and ages better. Em italics are now
-   solid copper (no background-clip:text gradient — cleaner at small sizes,
-   more legible). Canvas warmed from cool graphite to warm graphite.
+   v4 vs v3: flipped from warm-graphite dark mode to cream-paper light mode.
+   Replaced honeyed copper accent with brand-gold. Legacy --copper /
+   --accent / --aurora-* aliases retained but remapped to gold so existing
+   components keep rendering during the migration. Em italics are now
+   solid gold (no background-clip:text gradient — cleaner at small sizes).
 
    Synthesis traceable to /docs/design-references/ — primarily linear-app
    (canvas discipline) + claude (warm tonality) + stripe (depth shadows).
@@ -23,41 +25,41 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @theme inline {
-  /* Canvas — warm graphite four-step luminance */
-  --color-canvas:   #161412;
-  --color-panel:    #1E1A17;
-  --color-surface:  #27221E;
-  --color-elevated: #2F2A26;
+  /* Canvas — cream paper four-step luminance (light mode brand) */
+  --color-canvas:   #FAF6EC;
+  --color-panel:    #F0E9D6;
+  --color-surface:  #FBF8F0;
+  --color-elevated: #FFFFFF;
 
-  /* Ink — warm cream → warm grey scale */
-  --color-ink-1: #F2EDE3;
-  --color-ink-2: #B5AEA0;
-  --color-ink-3: #857F73;
-  --color-ink-4: #5C574D;
-  --color-ink-5: #3F3B33;
+  /* Ink — dark navy-tinted text on cream scale */
+  --color-ink-1: #14182A;
+  --color-ink-2: #3B3F50;
+  --color-ink-3: #6E7184;
+  --color-ink-4: #9A9DAE;
+  --color-ink-5: #C5C8D4;
 
-  /* Copper — single chromatic accent */
-  --color-copper:       #C77B43;
-  --color-copper-hover: #D89060;
-  --color-copper-deep:  #A06A4A;
-  --color-walnut:       #8B6B4F;
-  --color-amber:        #D4A574;
+  /* Copper aliases — remapped to gold so legacy components keep rendering */
+  --color-copper:       #C49A35;
+  --color-copper-hover: #DDB64D;
+  --color-copper-deep:  #9A7820;
+  --color-walnut:       #9A7820;
+  --color-amber:        #E8C46B;
 
-  /* Accent (CTA) — points to copper */
-  --color-accent:       #C77B43;
-  --color-accent-hover: #D89060;
-  --color-accent-soft:  #8B6B4F;
+  /* Accent (CTA) — points to gold */
+  --color-accent:       #C49A35;
+  --color-accent-hover: #DDB64D;
+  --color-accent-soft:  #E8C46B;
 
-  /* Border — semi-transparent white over warm dark canvas */
-  --color-border-faint:  rgba(255, 245, 235, 0.04);
-  --color-border-subtle: rgba(255, 245, 235, 0.06);
-  --color-border:        rgba(255, 245, 235, 0.10);
-  --color-border-strong: rgba(255, 245, 235, 0.16);
+  /* Border — semi-transparent ink over cream canvas */
+  --color-border-faint:  rgba(20, 24, 42, 0.04);
+  --color-border-subtle: rgba(20, 24, 42, 0.06);
+  --color-border:        rgba(20, 24, 42, 0.10);
+  --color-border-strong: rgba(20, 24, 42, 0.16);
 
   /* Status (sparingly — kept for forms / errors) */
-  --color-success: #6FB48A;
-  --color-warn:    #D4A574;
-  --color-error:   #D8755D;
+  --color-success: #2F7A4D;
+  --color-warn:    #D08C1A;
+  --color-error:   #B83A2C;
 
   /* Fonts — Geist primary, Fraunces editorial accent, mono for labels */
   --font-display: var(--font-geist-sans), system-ui, sans-serif;
@@ -71,77 +73,84 @@
 }
 
 :root {
-  /* Canonical v3 tokens */
-  --canvas:     #161412;
-  --panel:      #1E1A17;
-  --surface:    #27221E;
-  --elevated:   #2F2A26;
+  /* Canonical brand tokens — light cream + navy + gold */
+  --canvas:     #FAF6EC;
+  --panel:      #F0E9D6;
+  --surface:    #FBF8F0;
+  --elevated:   #FFFFFF;
 
-  --ink-1: #F2EDE3;
-  --ink-2: #B5AEA0;
-  --ink-3: #857F73;
-  --ink-4: #5C574D;
-  --ink-5: #3F3B33;
+  --ink-1: #14182A;
+  --ink-2: #3B3F50;
+  --ink-3: #6E7184;
+  --ink-4: #9A9DAE;
+  --ink-5: #C5C8D4;
 
-  --copper:       #C77B43;
-  --copper-hover: #D89060;
-  --copper-deep:  #A06A4A;
-  --walnut:       #8B6B4F;
-  --amber:        #D4A574;
+  /* Copper aliases now point to gold so legacy components keep rendering */
+  --copper:       #C49A35;
+  --copper-hover: #DDB64D;
+  --copper-deep:  #9A7820;
+  --walnut:       #9A7820;
+  --amber:        #E8C46B;
 
-  --accent:       #C77B43;
-  --accent-hover: #D89060;
-  --accent-soft:  #8B6B4F;
+  --accent:       #C49A35;
+  --accent-hover: #DDB64D;
+  --accent-soft:  #E8C46B;
 
-  --border-faint:   rgba(255, 245, 235, 0.04);
-  --border-subtle:  rgba(255, 245, 235, 0.06);
-  --border-default: rgba(255, 245, 235, 0.10);
-  --border-strong:  rgba(255, 245, 235, 0.16);
+  --border-faint:   rgba(20, 24, 42, 0.04);
+  --border-subtle:  rgba(20, 24, 42, 0.06);
+  --border-default: rgba(20, 24, 42, 0.10);
+  --border-strong:  rgba(20, 24, 42, 0.16);
 
   --ease-fluid:  cubic-bezier(0.3, 0, 0, 1);
   --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
 
-  /* Aurora aliases — kept rendering for components that haven't migrated.
-     v3 dropped the multi-color gradient; these now point to copper-family
-     single tones. The --aurora-grad token is a subtle copper→amber fade
-     used only as a fallback for the few legacy background-clip:text
-     callsites that haven't migrated to solid var(--copper) yet. */
-  --aurora-blue:    #A06A4A;
-  --aurora-violet:  #C77B43;
-  --aurora-magenta: #D4A574;
-  --aurora-grad: linear-gradient(135deg, #A06A4A 0%, #C77B43 50%, #D4A574 100%);
+  /* Aurora aliases — legacy components that haven't migrated read these.
+     Remapped to navy + gold so the brand stays consistent. The
+     --aurora-grad token is now a navy→gold fade used as a fallback for
+     the few legacy background-clip:text callsites that still reference
+     it. New components should use solid var(--accent) instead. */
+  --aurora-blue:    #0C1F3D;
+  --aurora-violet:  #C49A35;
+  --aurora-magenta: #DDB64D;
+  --aurora-grad: linear-gradient(135deg, #0C1F3D 0%, #C49A35 50%, #DDB64D 100%);
 
-  --violet-base:  #C77B43;
-  --violet-hover: #D89060;
-  --violet-soft:  #8B6B4F;
+  --violet-base:  #C49A35;
+  --violet-hover: #DDB64D;
+  --violet-soft:  #E8C46B;
 
-  /* Older aliases — original cream/navy/gold system */
-  --navy-950: #161412;
-  --navy-900: #161412;
-  --navy-800: #1E1A17;
-  --navy-700: #27221E;
-  --navy-600: #8B6B4F;
-  --navy-500: #C77B43;
-  --navy-400: #D89060;
+  /* Brand-correct navy ramp */
+  --navy-950: #08172E;
+  --navy-900: #0C1F3D;
+  --navy-800: #142C5C;
+  --navy-700: #1F3F7A;
+  --navy-600: #2E5BA5;
+  --navy-500: #4A7EC9;
+  --navy-400: #7CA3DA;
+  --navy-300: #B6CBE7;
+  --navy-200: #D4DEEE;
+  --navy-100: #E8EEF6;
+  --navy-50:  #F4F7FB;
 
-  --gold-700: #C77B43;
-  --gold-600: #C77B43;
-  --gold-500: #D89060;
-  --gold-400: #A06A4A;
-  --gold-200: rgba(199, 123, 67, 0.40);
-  --gold-100: rgba(199, 123, 67, 0.16);
-  --gold-50:  rgba(199, 123, 67, 0.08);
+  /* Brand-correct gold ramp */
+  --gold-700: #9A7820;
+  --gold-600: #C49A35;
+  --gold-500: #DDB64D;
+  --gold-400: #E8C46B;
+  --gold-300: #F0D695;
+  --gold-200: #F5E2B0;
+  --gold-100: #F8E9C2;
+  --gold-50:  #FCF4E0;
 
-  --paper-cream: #161412;
-  --paper-sand:  #1E1A17;
-  --paper-stone: #27221E;
-  --paper-rule:  rgba(255, 245, 235, 0.10);
+  --paper-cream: #FAF6EC;
+  --paper-sand:  #F0E9D6;
+  --paper-stone: #D4CCB3;
+  --paper-rule:  #E5DDC5;
 
-  --ink:       #F2EDE3;
-  --ink-soft:  #B5AEA0;
-  --ink-mute:  #857F73;
-  --ink-faint: #5C574D;
-  --bg:        #161412;
+  --ink:       #14182A;
+  --ink-soft:  #3B3F50;
+  --ink-mute:  #6E7184;
+  --ink-faint: #9A9DAE;
+  --bg:        #FAF6EC;
 }
 
 /* ── Base ─────────────────────────────────────────────────────────────── */
@@ -151,7 +160,7 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   background: var(--canvas);
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
@@ -165,7 +174,7 @@ body {
   font-feature-settings: "kern" 1, "ss01" 1;
 }
 
-::selection { background: rgba(199, 123, 67, 0.28); color: var(--ink-1); }
+::selection { background: rgba(196, 154, 53, 0.28); color: var(--ink-1); }
 
 :focus-visible {
   outline: 2px solid var(--copper);
@@ -384,9 +393,9 @@ h1, h2, h3, h4 { color: var(--ink-1); }
   display: inline-block;
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.01em;
-  color: #FFFFFF;
+  color: var(--navy-900);
   background: var(--copper);
   padding: 12px 20px;
   border: 1px solid var(--copper);
@@ -398,13 +407,13 @@ h1, h2, h3, h4 { color: var(--ink-1); }
     transform 0.2s var(--ease-snappy),
     box-shadow 0.24s var(--ease-snappy),
     border-color 0.24s var(--ease-snappy);
-  box-shadow: 0 0 0 0 rgba(199, 123, 67, 0);
+  box-shadow: 0 0 0 0 rgba(196, 154, 53, 0);
 }
 .btn-fill:hover {
   background: var(--copper-hover);
   border-color: var(--copper-hover);
   transform: translateY(-1px);
-  box-shadow: 0 8px 28px -12px rgba(199, 123, 67, 0.55);
+  box-shadow: 0 8px 28px -12px rgba(196, 154, 53, 0.55);
 }
 
 .btn-ghost {
@@ -414,7 +423,7 @@ h1, h2, h3, h4 { color: var(--ink-1); }
   font-weight: 500;
   letter-spacing: -0.01em;
   color: var(--ink-1);
-  background: rgba(255, 245, 235, 0.03);
+  background: rgba(20, 24, 42, 0.03);
   padding: 12px 20px;
   border: 1px solid var(--border-default);
   border-radius: 6px;
@@ -423,7 +432,7 @@ h1, h2, h3, h4 { color: var(--ink-1); }
   transition: background 0.24s var(--ease-snappy), border-color 0.24s var(--ease-snappy);
 }
 .btn-ghost:hover {
-  background: rgba(255, 245, 235, 0.06);
+  background: rgba(20, 24, 42, 0.06);
   border-color: var(--border-strong);
 }
 
@@ -545,10 +554,10 @@ h1, h2, h3, h4 { color: var(--ink-1); }
   background: var(--panel);
 }
 .home-feature-cover-frame--strong {
-  box-shadow: 0 30px 80px -40px rgba(199, 123, 67, 0.25);
+  box-shadow: 0 30px 80px -40px rgba(12, 31, 61, 0.18);
 }
 .home-feature-cover-frame--soft {
-  box-shadow: 0 18px 48px -32px rgba(160, 106, 74, 0.16);
+  box-shadow: 0 18px 48px -32px rgba(12, 31, 61, 0.12);
 }
 .home-feature-stacked__lead {
   font-family: var(--font-fraunces), Georgia, serif;
@@ -570,7 +579,7 @@ h1, h2, h3, h4 { color: var(--ink-1); }
   border-radius: 12px;
   overflow: hidden;
   background: var(--surface);
-  box-shadow: 0 24px 60px -32px rgba(160, 106, 74, 0.18);
+  box-shadow: 0 24px 60px -32px rgba(12, 31, 61, 0.14);
 }
 .case-study-screen--inset {
   max-width: min(100%, 920px);
@@ -578,7 +587,7 @@ h1, h2, h3, h4 { color: var(--ink-1); }
   margin-right: auto;
 }
 .case-study-screen--inset .case-study-screen-frame {
-  box-shadow: 0 16px 44px -28px rgba(160, 106, 74, 0.14);
+  box-shadow: 0 16px 44px -28px rgba(12, 31, 61, 0.10);
 }
 
 .header-nav-link:focus-visible,
@@ -614,20 +623,20 @@ h1, h2, h3, h4 { color: var(--ink-1); }
   inset: 0;
   background:
     radial-gradient(ellipse 70% 45% at 30% -5%,
-      rgba(199, 123, 67, 0.08),
+      rgba(196, 154, 53, 0.08),
       transparent 58%),
     radial-gradient(ellipse 50% 35% at 90% 25%,
-      rgba(212, 165, 116, 0.04),
+      rgba(232, 196, 107, 0.05),
       transparent 52%);
   pointer-events: none;
 }
 .cover-surface.cover-surface--grain::after {
   background:
     radial-gradient(ellipse 70% 45% at 20% 0%,
-      rgba(199, 123, 67, 0.09),
+      rgba(196, 154, 53, 0.09),
       transparent 55%),
     radial-gradient(ellipse 55% 35% at 85% 20%,
-      rgba(212, 165, 116, 0.05),
+      rgba(232, 196, 107, 0.06),
       transparent 50%);
 }
 .cover-surface > * { position: relative; z-index: 1; }
@@ -796,7 +805,7 @@ h1, h2, h3, h4 { color: var(--ink-1); }
   transition: background 0.2s ease, padding 0.2s ease;
 }
 .index-row:last-of-type { border-bottom: 1px solid var(--border-subtle); }
-.index-row:hover { background: rgba(255, 245, 235, 0.02); padding-left: 16px; padding-right: 16px; }
+.index-row:hover { background: rgba(20, 24, 42, 0.03); padding-left: 16px; padding-right: 16px; }
 
 .index-row .year {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
@@ -868,7 +877,7 @@ h1, h2, h3, h4 { color: var(--ink-1); }
   color: var(--ink-2);
 }
 .editorial-table td strong { color: var(--ink-1); font-weight: 600; }
-.editorial-table tbody tr:nth-child(even) { background: rgba(255, 245, 235, 0.015); }
+.editorial-table tbody tr:nth-child(even) { background: rgba(20, 24, 42, 0.025); }
 
 /* ── Currently strip ───────────────────────────────────────────────── */
 
@@ -909,8 +918,8 @@ h1, h2, h3, h4 { color: var(--ink-1); }
 /* ── Why-block (copper callout) ────────────────────────────────────── */
 
 .why-block {
-  background: rgba(199, 123, 67, 0.06);
-  border: 1px solid rgba(199, 123, 67, 0.18);
+  background: rgba(196, 154, 53, 0.08);
+  border: 1px solid rgba(196, 154, 53, 0.22);
   border-radius: 8px;
   padding: 22px 26px;
   margin: 24px 0;
@@ -1397,7 +1406,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .work-row:hover {
-  background: rgba(255, 245, 235, 0.02);
+  background: rgba(20, 24, 42, 0.03);
   padding-left: 16px;
   padding-right: 16px;
 }
@@ -1618,7 +1627,7 @@ img { max-width: 100%; height: auto; display: block; }
   right: 0;
   bottom: 0;
   z-index: 95;
-  background: rgba(22, 20, 18, 0.92);
+  background: rgba(250, 246, 236, 0.92);
   backdrop-filter: saturate(140%) blur(12px);
   -webkit-backdrop-filter: saturate(140%) blur(12px);
   border-top: 1px solid var(--border-default);
@@ -1793,7 +1802,7 @@ img { max-width: 100%; height: auto; display: block; }
   border-radius: 12px;
   overflow: hidden;
   background: var(--surface);
-  box-shadow: 0 30px 80px -40px rgba(199, 123, 67, 0.22);
+  box-shadow: 0 30px 80px -40px rgba(12, 31, 61, 0.18);
 }
 
 .case-study-cover__caption {
@@ -1860,7 +1869,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .prev-next-cell:hover {
-  background: rgba(255, 245, 235, 0.02);
+  background: rgba(20, 24, 42, 0.03);
 }
 
 .prev-next-cell--next {
@@ -1952,7 +1961,7 @@ img { max-width: 100%; height: auto; display: block; }
 .studio-input {
   width: 100%;
   padding: 12px 14px;
-  background: rgba(255, 245, 235, 0.03);
+  background: rgba(20, 24, 42, 0.03);
   border: 1px solid var(--border-default);
   color: var(--ink-1);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
@@ -1973,7 +1982,7 @@ textarea.studio-input {
 
 select.studio-input {
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23C77B43' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23C49A35' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
   padding-right: 36px;
@@ -1982,8 +1991,8 @@ select.studio-input {
 .studio-input:focus {
   outline: none;
   border-color: var(--copper);
-  background: rgba(255, 245, 235, 0.05);
-  box-shadow: 0 0 0 3px rgba(199, 123, 67, 0.18);
+  background: rgba(20, 24, 42, 0.05);
+  box-shadow: 0 0 0 3px rgba(196, 154, 53, 0.22);
 }
 
 .studio-input::placeholder {
@@ -1993,7 +2002,7 @@ select.studio-input {
 .inquire-error-message {
   margin-top: 16px;
   padding: 12px 16px;
-  background: rgba(216, 117, 93, 0.1);
+  background: rgba(184, 58, 44, 0.10);
   border-left: 2px solid var(--error);
   border-radius: 0 6px 6px 0;
   font-size: 14px;
