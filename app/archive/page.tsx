@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Studio Index",
   description:
     "Text-only archive ledger of every site shipped by Campbell Digital Studio. 330+ pages across 7 sites in 18 months, by 1 operator.",
-  alternates: { canonical: "/index" },
+  alternates: { canonical: "/archive" },
 };
 
 const breadcrumbSchema = {
@@ -14,7 +14,7 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: siteConfig.name, item: siteConfig.url },
-    { "@type": "ListItem", position: 2, name: "Studio Index", item: absoluteUrl("/index") },
+    { "@type": "ListItem", position: 2, name: "Studio Archive", item: absoluteUrl("/archive") },
   ],
 };
 
