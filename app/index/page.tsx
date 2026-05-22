@@ -1,0 +1,387 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { siteConfig, absoluteUrl } from "@/lib/site-config";
+
+export const metadata: Metadata = {
+  title: "Studio Index",
+  description:
+    "Text-only archive ledger of every site shipped by Campbell Digital Studio. 330+ pages across 7 sites in 18 months, by 1 operator.",
+  alternates: { canonical: "/index" },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: siteConfig.name, item: siteConfig.url },
+    { "@type": "ListItem", position: 2, name: "Studio Index", item: absoluteUrl("/index") },
+  ],
+};
+
+/* ────────────────────────────────────────────────────────────────────────
+ * Ledger data — hardcoded per-project so the page reads as a static
+ * CV-appendix archive. Sourced from lib/projects.ts and the public
+ * deployment record. Order: newest active → dormant.
+ * ──────────────────────────────────────────────────────────────────── */
+
+type LedgerField = { label: string; value: string };
+
+type LedgerEntry = {
+  name: string;
+  fields: LedgerField[];
+};
+
+const ledger: LedgerEntry[] = [
+  {
+    name: "AIR SOLUTIONS HEATING & COOLING",
+    fields: [
+      { label: "URL", value: "airsolutionspros.com" },
+      { label: "Routes", value: "159 prerendered HTML" },
+      { label: "Schema types", value: "10 JSON-LD (HVACBusiness, LocalBusiness, Service, OfferCatalog, FAQPage, BreadcrumbList, ...)" },
+      { label: "Stack", value: "Next.js 16 · Tailwind v4 · Three.js · Vercel" },
+      { label: "Custom tools", value: "3D AC Explorer · Sizing Calculator · ROI Calc · Diagnostic Quiz" },
+      { label: "Launched", value: "2026-05" },
+      { label: "Status", value: "Active Retainer · Programmatic SEO" },
+    ],
+  },
+  {
+    name: "REVITALIZE MEDICAL & WELLNESS",
+    fields: [
+      { label: "URL", value: "revitalizemedicalclinic.com" },
+      { label: "Routes", value: "72" },
+      { label: "Schema types", value: "8 JSON-LD (MedicalBusiness, LocalBusiness, MedicalProcedure, FAQPage, BreadcrumbList, ...)" },
+      { label: "Stack", value: "Next.js 16 · React 19 · Tailwind v4 · Vercel" },
+      { label: "Sub-brands", value: "Clinic ×2 · Institute · Hub · Shop · Travis personal · Peptide-education" },
+      { label: "Launched", value: "2026" },
+      { label: "Status", value: "Active Retainer" },
+    ],
+  },
+  {
+    name: "ACEXPERTS251",
+    fields: [
+      { label: "URL", value: "acexperts251.com" },
+      { label: "Routes", value: "29" },
+      { label: "Schema types", value: "6 JSON-LD (HVACBusiness, LocalBusiness, Service, AggregateRating, FAQPage, BreadcrumbList)" },
+      { label: "Stack", value: "Next.js · TypeScript · Three.js · Cloudflare Turnstile · Google Sheets API · Vercel" },
+      { label: "Custom tools", value: "3D AC Diagnostic · Symptom Quiz · ROI Calculator" },
+      { label: "Launched", value: "2025" },
+      { label: "Status", value: "Active Retainer" },
+    ],
+  },
+  {
+    name: "IHE MARKETING",
+    fields: [
+      { label: "URL", value: "interactivehealtheducation.com" },
+      { label: "Routes", value: "18" },
+      { label: "Schema types", value: "5 JSON-LD (Organization, WebSite, Product, FAQPage, BreadcrumbList)" },
+      { label: "Stack", value: "Next.js 16 · React 19 · Tailwind v4 · Vercel" },
+      { label: "Launched", value: "2025" },
+      { label: "Status", value: "Active · Original Product" },
+    ],
+  },
+  {
+    name: "IHE PRODUCT DASHBOARD",
+    fields: [
+      { label: "URL", value: "app.interactivehealtheducation.com" },
+      { label: "Routes", value: "146 patient-education apps + dashboard" },
+      { label: "Schema types", value: "n/a (authenticated product surface)" },
+      { label: "Stack", value: "Next.js 16 · React 19 · TypeScript · Tailwind v4 · Vercel" },
+      { label: "Custom tools", value: "146 interactive clinical modules · registrar validation pipeline · phase 1/2/3 ideation engine" },
+      { label: "Launched", value: "2025" },
+      { label: "Status", value: "Active · Original Product" },
+    ],
+  },
+  {
+    name: "COLLECTIVE COUNSELING",
+    fields: [
+      { label: "URL", value: "collectivecounselingdaphne.com" },
+      { label: "Routes", value: "4" },
+      { label: "Schema types", value: "3 JSON-LD (LocalBusiness, MedicalBusiness, BreadcrumbList)" },
+      { label: "Stack", value: "HTML/CSS · Multi-page static · Vercel" },
+      { label: "Launched", value: "2025" },
+      { label: "Status", value: "Shipped" },
+    ],
+  },
+  {
+    name: "BLESSED BARBERSHOP",
+    fields: [
+      { label: "URL", value: "blessedbarbershopdaphne.com" },
+      { label: "Routes", value: "5" },
+      { label: "Schema types", value: "3 JSON-LD (LocalBusiness, HairSalon, BreadcrumbList)" },
+      { label: "Stack", value: "HTML/CSS · WebP-optimized media · Cloudflare" },
+      { label: "Launched", value: "2024" },
+      { label: "Status", value: "Shipped" },
+    ],
+  },
+];
+
+const totals: LedgerField[] = [
+  { label: "TOTAL ROUTES SHIPPED", value: "~333" },
+  { label: "TOTAL CUSTOM TOOLS BUILT", value: "12" },
+  { label: "TOTAL SCHEMA TYPES COVERED", value: "14 unique" },
+  { label: "TOTAL ACTIVE RETAINERS", value: "4" },
+];
+
+/* ────────────────────────────────────────────────────────────────────────
+ * Inline mono style — kept local so the page reads as a single artifact.
+ * ──────────────────────────────────────────────────────────────────── */
+
+const monoFamily =
+  "var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+
+const fieldLabelWidth = "188px";
+
+export default function StudioIndexPage() {
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
+      <section
+        className="section-wrap"
+        style={{
+          paddingTop: "clamp(64px, 9vw, 128px)",
+          paddingBottom: "clamp(48px, 6vw, 80px)",
+        }}
+      >
+        {/* ── A. Headline counter ─────────────────────────────────── */}
+        <div
+          aria-label="Studio total output"
+          style={{
+            fontFamily: monoFamily,
+            color: "var(--ink-1)",
+            display: "grid",
+            gap: "clamp(4px, 0.6vw, 10px)",
+            marginBottom: "clamp(40px, 6vw, 88px)",
+          }}
+        >
+          <div
+            style={{
+              fontFamily: monoFamily,
+              fontSize: "11px",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "var(--copper)",
+              marginBottom: "12px",
+            }}
+          >
+            § INDEX / Archive ledger
+          </div>
+
+          {[
+            { num: "330+", label: "pages shipped" },
+            { num: "7", label: "sites" },
+            { num: "18", label: "months" },
+            { num: "1", label: "operator" },
+          ].map((row) => (
+            <div
+              key={row.label}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "minmax(96px, 132px) 1fr",
+                alignItems: "baseline",
+                gap: "clamp(16px, 2.4vw, 36px)",
+                fontVariantNumeric: "tabular-nums",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: monoFamily,
+                  fontSize: "clamp(48px, 9vw, 112px)",
+                  lineHeight: 1.0,
+                  letterSpacing: "-0.03em",
+                  color: "var(--ink-1)",
+                  fontWeight: 500,
+                  textAlign: "right",
+                }}
+              >
+                {row.num}
+              </span>
+              <span
+                style={{
+                  fontFamily: monoFamily,
+                  fontSize: "clamp(14px, 1.5vw, 18px)",
+                  letterSpacing: "0.04em",
+                  color: "var(--ink-2)",
+                }}
+              >
+                {row.label}
+              </span>
+            </div>
+          ))}
+
+          <p
+            style={{
+              fontFamily: monoFamily,
+              fontSize: "12px",
+              color: "var(--ink-3, var(--ink-2))",
+              marginTop: "20px",
+              letterSpacing: "0.04em",
+            }}
+          >
+            330+ pages shipped across 7 sites in 18 months by 1 operator.
+          </p>
+        </div>
+
+        {/* ── B. Per-project ledger ────────────────────────────────── */}
+        <div
+          style={{
+            borderTop: "1px solid var(--border-default)",
+            paddingTop: "clamp(24px, 3vw, 40px)",
+            display: "grid",
+            gap: "clamp(40px, 5vw, 64px)",
+          }}
+        >
+          {ledger.map((entry) => (
+            <article
+              key={entry.name}
+              style={{
+                fontFamily: monoFamily,
+                color: "var(--ink-1)",
+              }}
+            >
+              <h2
+                style={{
+                  fontFamily: monoFamily,
+                  fontSize: "clamp(15px, 1.6vw, 18px)",
+                  fontWeight: 600,
+                  letterSpacing: "0.06em",
+                  color: "var(--ink-1)",
+                  margin: 0,
+                  marginBottom: "16px",
+                  paddingBottom: "8px",
+                  borderBottom: "1px solid var(--border-subtle)",
+                }}
+              >
+                {entry.name}
+              </h2>
+
+              <dl
+                style={{
+                  margin: 0,
+                  display: "grid",
+                  gap: "6px",
+                  fontVariantNumeric: "tabular-nums",
+                }}
+              >
+                {entry.fields.map((f) => (
+                  <div
+                    key={f.label}
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: `${fieldLabelWidth} 1fr`,
+                      gap: "16px",
+                      alignItems: "baseline",
+                    }}
+                  >
+                    <dt
+                      style={{
+                        fontFamily: monoFamily,
+                        fontSize: "12px",
+                        letterSpacing: "0.08em",
+                        color: "var(--ink-2)",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      {f.label}
+                    </dt>
+                    <dd
+                      style={{
+                        margin: 0,
+                        fontFamily: monoFamily,
+                        fontSize: "13px",
+                        lineHeight: 1.55,
+                        color: "var(--ink-1)",
+                        wordBreak: "break-word",
+                      }}
+                    >
+                      {f.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </article>
+          ))}
+        </div>
+
+        {/* ── C. Aggregate totals ──────────────────────────────────── */}
+        <div
+          style={{
+            marginTop: "clamp(56px, 7vw, 96px)",
+            paddingTop: "clamp(24px, 3vw, 40px)",
+            borderTop: "2px solid var(--ink-1)",
+            display: "grid",
+            gap: "10px",
+            fontFamily: monoFamily,
+            fontVariantNumeric: "tabular-nums",
+          }}
+        >
+          <div
+            style={{
+              fontFamily: monoFamily,
+              fontSize: "11px",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "var(--copper)",
+              marginBottom: "8px",
+            }}
+          >
+            Totals
+          </div>
+          {totals.map((t) => (
+            <div
+              key={t.label}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr auto",
+                gap: "24px",
+                alignItems: "baseline",
+                paddingBlock: "4px",
+                borderBottom: "1px dotted var(--border-subtle)",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: monoFamily,
+                  fontSize: "13px",
+                  letterSpacing: "0.08em",
+                  color: "var(--ink-2)",
+                }}
+              >
+                {t.label}
+              </span>
+              <span
+                style={{
+                  fontFamily: monoFamily,
+                  fontSize: "15px",
+                  fontWeight: 600,
+                  color: "var(--ink-1)",
+                }}
+              >
+                {t.value}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* ── D. Footer link ──────────────────────────────────────── */}
+        <div
+          style={{
+            marginTop: "clamp(48px, 6vw, 80px)",
+            fontFamily: monoFamily,
+          }}
+        >
+          <Link
+            href="/work"
+            className="editorial-link mono"
+            style={{ fontFamily: monoFamily }}
+          >
+            ← Back to /work
+          </Link>
+        </div>
+      </section>
+    </>
+  );
+}

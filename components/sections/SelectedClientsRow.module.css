@@ -1,0 +1,96 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   SelectedClientsRow.module.css — wordmark row with neighbor-dim on hover
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.section {
+  background: var(--color-canvas);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  align-items: center;
+  gap: clamp(16px, 2vw, 32px);
+  list-style: none;
+  margin: 0;
+  padding: clamp(24px, 3vw, 40px) 0;
+  border-top: 1px solid var(--color-border-subtle);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 64px;
+}
+
+/* ── Mark (wordmark or SVG) ────────────────────────────────────────────── */
+.mark {
+  --mark-color: var(--color-ink-2);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--mark-color);
+  opacity: 0.9;
+  filter: saturate(0.85);
+  transition:
+    opacity 220ms var(--ease-fluid),
+    filter 220ms var(--ease-fluid),
+    transform 220ms var(--ease-fluid);
+  padding: 6px 8px;
+  border-radius: 4px;
+  outline-offset: 4px;
+}
+
+.mark:hover,
+.mark:focus-visible {
+  opacity: 1;
+  filter: saturate(1);
+  transform: scale(1.04);
+}
+
+.mark:focus-visible {
+  outline: 2px solid var(--color-accent);
+}
+
+/* Neighbor dim: when any sibling cell's mark is hovered, this cell's mark
+   drops to 0.55 opacity. CSS :has() does the work — no JS needed. */
+.row:has(.mark:hover) .cell:not(:hover) .mark,
+.row:has(.mark:focus-visible) .cell:not(:focus-within) .mark {
+  opacity: 0.55;
+  filter: saturate(0.4);
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: clamp(13px, 1.2vw, 16px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.logoSvg {
+  max-height: 28px;
+  width: auto;
+  display: block;
+}
+
+/* ── Responsive: collapse columns gracefully ──────────────────────────── */
+@media (max-width: 960px) {
+  .row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 20px;
+  }
+  .wordmark {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

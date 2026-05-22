@@ -1,6 +1,7 @@
 import Link from "next/link";
 import StudioMark from "@/components/marks/StudioMark";
 import FooterEmailCapture from "@/components/FooterEmailCapture";
+import OperatorLedger from "@/components/OperatorLedger";
 import { siteConfig } from "@/lib/site-config";
 import { primaryNavLinks } from "@/lib/nav";
 
@@ -10,7 +11,10 @@ export default function Footer() {
   const navLinks = primaryNavLinks.filter((link) => link.href !== "/inquire");
 
   return (
-    <footer className="cover-surface site-footer">
+    <>
+      {/* Operator's Ledger — site-wide signature element */}
+      <OperatorLedger />
+      <footer className="cover-surface site-footer">
       <div className="section-wrap site-footer__inner">
         <div className="footer-grid">
           <div>
@@ -91,5 +95,6 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+    </>
   );
 }

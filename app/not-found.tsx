@@ -4,8 +4,10 @@ import PageIntro from "@/components/editorial/PageIntro";
 const links = [
   { label: "Home", href: "/" },
   { label: "Work", href: "/work" },
-  { label: "About", href: "/#about" },
-  { label: "Capabilities", href: "/#capabilities" },
+  { label: "Healthcare", href: "/healthcare" },
+  { label: "Local Services", href: "/local-services" },
+  { label: "Studio", href: "/studio" },
+  { label: "Notes", href: "/notes" },
   { label: "Inquire", href: "/inquire" },
 ];
 

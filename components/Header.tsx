@@ -81,18 +81,20 @@ export default function Header() {
         <nav aria-label="Main navigation" className="desktop-nav header-nav">
           {primaryNavLinks
             .filter((link) => link.href !== "/inquire")
-            .map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="editorial-link mono on-dark header-nav-link"
-                aria-current={
-                  link.href === "/work" && pathname === "/work" ? "page" : undefined
-                }
-              >
-                {link.label}
-              </Link>
-            ))}
+            .map((link) => {
+              const isActive =
+                pathname === link.href || pathname.startsWith(`${link.href}/`);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="editorial-link mono on-dark header-nav-link"
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           <Link
             href="/inquire"
             className="btn-fill btn-nav"
@@ -196,7 +198,9 @@ export default function Header() {
               padding: "clamp(20px, 5vw, 40px)",
             }}
           >
-            {primaryNavLinks.map((link, i) => (
+            {primaryNavLinks
+              .filter((link) => link.href !== "/inquire")
+              .map((link, i) => (
               <Link
                 key={link.href}
                 href={link.href}

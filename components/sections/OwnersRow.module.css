@@ -1,0 +1,90 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   OwnersRow.module.css — five circle-cropped founder portraits in a row
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.section {
+  background: var(--color-canvas);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(20px, 4vw, 48px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 0 1 auto;
+  max-width: 180px;
+}
+
+.portrait {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 9999px;
+  overflow: hidden;
+  background: var(--color-panel);
+  box-shadow:
+    0 1px 0 var(--color-border-subtle) inset,
+    0 12px 28px -20px rgba(20, 24, 42, 0.32);
+  outline: 0 solid transparent;
+  transition:
+    outline-color 220ms var(--ease-fluid),
+    outline-width 220ms var(--ease-fluid),
+    transform 220ms var(--ease-fluid);
+}
+
+.portrait:hover {
+  outline: 3px solid var(--color-ink-1);
+  outline-offset: 4px;
+  transform: translateY(-2px);
+}
+
+.name {
+  margin: 16px 0 4px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--color-ink-1);
+  font-weight: 500;
+}
+
+.role {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--color-ink-3);
+  line-height: 1.35;
+  max-width: 22ch;
+}
+
+.microcopy {
+  margin: clamp(28px, 3vw, 40px) 0 0;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(15px, 1.4vw, 18px);
+  color: var(--color-ink-2);
+}
+
+@media (max-width: 720px) {
+  .portrait {
+    width: 80px;
+    height: 80px;
+  }
+  .name {
+    font-size: 11px;
+  }
+  .role {
+    font-size: 10px;
+  }
+}

@@ -1,0 +1,234 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   DeviceFrame.module.css — laptop / phone / browser case-study wrappers
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.caption {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--color-ink-3);
+  text-transform: uppercase;
+  text-align: center;
+  max-width: 60ch;
+}
+
+/* ── Laptop ──────────────────────────────────────────────────────────── */
+
+.laptop {
+  width: 100%;
+  max-width: 960px;
+}
+
+.laptopLid {
+  position: relative;
+  background: #1B1F2E;
+  border-radius: 12px 12px 4px 4px;
+  padding: 14px 14px 18px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 24px 64px -32px rgba(20, 24, 42, 0.4);
+}
+
+.laptopBezel {
+  position: relative;
+  background: #0A0C16;
+  border-radius: 4px;
+  padding-top: 10px;
+}
+
+.laptopNotch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56px;
+  height: 6px;
+  background: #1B1F2E;
+  border-radius: 0 0 6px 6px;
+}
+
+.laptopScreen {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--color-panel);
+}
+
+.laptopBase {
+  position: relative;
+  height: 12px;
+  background: linear-gradient(
+    180deg,
+    #C8CCD8 0%,
+    #9DA2B0 60%,
+    #7A7F8E 100%
+  );
+  border-radius: 0 0 18px 18px;
+  margin: 0 -10px;
+  box-shadow: 0 14px 28px -20px rgba(20, 24, 42, 0.35);
+}
+
+.laptopHinge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 88px;
+  height: 4px;
+  background: #6B7080;
+  border-radius: 0 0 4px 4px;
+}
+
+/* ── Phone ───────────────────────────────────────────────────────────── */
+
+.phone {
+  width: 100%;
+  max-width: 280px;
+}
+
+.phoneBezel {
+  position: relative;
+  background: #0A0C16;
+  border-radius: 38px;
+  padding: 10px;
+  box-shadow:
+    0 0 0 1.5px #2A2F40,
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 24px 56px -28px rgba(20, 24, 42, 0.42);
+}
+
+.phoneNotch {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 84px;
+  height: 22px;
+  background: #0A0C16;
+  border-radius: 999px;
+  z-index: 2;
+}
+
+.phoneScreen {
+  position: relative;
+  aspect-ratio: 9 / 19.5;
+  border-radius: 30px;
+  overflow: hidden;
+  background: var(--color-panel);
+}
+
+.phoneHomeBar {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 96px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ── Browser ─────────────────────────────────────────────────────────── */
+
+.browser {
+  width: 100%;
+  max-width: 1040px;
+  background: var(--color-elevated);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px var(--color-border),
+    0 24px 56px -32px rgba(20, 24, 42, 0.35);
+}
+
+.browserChrome {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: linear-gradient(180deg, #F4F1E8 0%, #E9E4D2 100%);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.browserDots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.browserDots span {
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  display: block;
+}
+
+.dotRed   { background: #FF5F57; }
+.dotYellow{ background: #FEBC2E; }
+.dotGreen { background: #28C840; }
+
+.browserUrl {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-self: center;
+  background: var(--color-elevated);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-ink-2);
+  min-width: 240px;
+  max-width: 480px;
+  width: 100%;
+}
+
+.browserUrlText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lockIcon {
+  color: var(--color-success);
+  flex-shrink: 0;
+}
+
+.browserSpacer {
+  width: 39px;
+}
+
+.browserContent {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--color-panel);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .browserUrl {
+    min-width: 0;
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+  .browserChrome {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+  .browserSpacer {
+    width: 0;
+  }
+}

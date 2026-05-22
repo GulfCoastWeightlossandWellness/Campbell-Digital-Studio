@@ -11,13 +11,13 @@ const nextConfig: NextConfig = {
         destination: "https://www.campbelldigitalstudio.com/:path*",
         permanent: true,
       },
-      { source: "/about", destination: "/#about", permanent: true },
-      { source: "/studio", destination: "/#about", permanent: true },
-      { source: "/services", destination: "/#capabilities", permanent: true },
-      { source: "/practice", destination: "/#capabilities", permanent: true },
-      { source: "/method", destination: "/#process", permanent: true },
-      { source: "/notes", destination: "/", permanent: true },
-      { source: "/notes/:slug*", destination: "/", permanent: true },
+      // Legacy About/Capabilities/Process anchors collapsed into /studio in the
+      // 2026-05-22 IA refactor. /studio and /notes are now real routes, so the
+      // earlier redirects that pointed them at the homepage are removed.
+      { source: "/about", destination: "/studio", permanent: true },
+      { source: "/services", destination: "/studio#capabilities", permanent: true },
+      { source: "/practice", destination: "/studio#capabilities", permanent: true },
+      { source: "/method", destination: "/studio#process", permanent: true },
       { source: "/contact", destination: "/inquire", permanent: true },
       { source: "/review", destination: "/inquire", permanent: true },
       { source: "/website-review", destination: "/inquire", permanent: true },

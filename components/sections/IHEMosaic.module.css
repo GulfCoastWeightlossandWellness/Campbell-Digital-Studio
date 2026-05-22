@@ -1,0 +1,135 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   IHEMosaic.module.css — 146-app marquee band
+   Slow horizontal scroll, pause on hover/tap, static grid for reduced motion
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.section {
+  position: relative;
+  isolation: isolate;
+  background: var(--color-canvas);
+  padding-bottom: clamp(48px, 6vw, 80px);
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5.4vw, 64px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  color: var(--color-ink-1);
+  margin: 12px 0 16px;
+  max-width: 22ch;
+}
+
+.headingEm {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
+.subcopy {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--color-ink-3);
+  margin: 0 0 clamp(28px, 3vw, 40px);
+  text-transform: uppercase;
+}
+
+/* ── Viewport ─────────────────────────────────────────────────────────── */
+.viewport {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  /* Soft edge fade so the marquee doesn't clip hard at the page edges. */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+}
+
+.marquee {
+  width: max-content;
+  will-change: transform;
+}
+
+.track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: clamp(140px, 14vw, 220px);
+  grid-template-rows: repeat(2, clamp(140px, 14vw, 220px));
+  gap: clamp(10px, 1vw, 16px);
+  padding: clamp(10px, 1vw, 16px);
+
+  /* Marquee animation — 60s per loop, linear, infinite. The track contains
+     a 2x duplication of the tile list; translating by -50% loops seamlessly. */
+  animation: ihe-marquee 60s linear infinite;
+}
+
+.viewport[data-paused="true"] .track {
+  animation-play-state: paused;
+}
+
+@keyframes ihe-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ── Tile ─────────────────────────────────────────────────────────────── */
+.tile {
+  position: relative;
+  width: clamp(140px, 14vw, 220px);
+  height: clamp(140px, 14vw, 220px);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--color-panel);
+  box-shadow:
+    0 1px 0 var(--color-border-subtle) inset,
+    0 8px 24px -16px rgba(20, 24, 42, 0.18);
+  transition: transform 240ms var(--ease-fluid);
+}
+
+.tile:hover {
+  transform: translateY(-2px) scale(1.015);
+}
+
+/* ── Reduced motion: 6-col static grid ────────────────────────────────── */
+.staticGrid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(8px, 1vw, 14px);
+  padding: 0 clamp(16px, 4vw, 64px);
+}
+
+.viewport[data-reduced-motion="true"] {
+  /* Static grid doesn't need edge fade. */
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.staticGrid .tile {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+@media (max-width: 720px) {
+  .staticGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
