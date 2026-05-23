@@ -374,6 +374,7 @@ export default function MatrixDemo({
           .matrix-demo__controls {
             grid-template-columns: 1fr;
             gap: 14px;
+            padding: 18px 16px;
           }
         }
 
@@ -400,6 +401,17 @@ export default function MatrixDemo({
           min-height: 44px;
           white-space: nowrap;
         }
+        @media (max-width: 720px) {
+          .matrix-demo__submit-wrap {
+            width: 100%;
+          }
+          .matrix-demo__submit-wrap :global(.matrix-demo__submit.btn-fill) {
+            width: 100%;
+            display: block;
+            text-align: center;
+            padding: 14px 20px;
+          }
+        }
 
         .matrix-demo__error {
           margin-top: 16px;
@@ -415,7 +427,8 @@ export default function MatrixDemo({
           margin-top: 28px;
         }
 
-        .matrix-demo__frame {
+        /* motion.* elements drop styled-jsx scope hash, so target globally */
+        .matrix-demo__live-region :global(.matrix-demo__frame) {
           position: relative;
           background: var(--surface);
           border: 1px solid var(--border-default);
@@ -471,29 +484,35 @@ export default function MatrixDemo({
         }
 
         .matrix-demo__body {
-          padding: clamp(20px, 3vw, 32px);
+          padding: clamp(18px, 3vw, 32px);
           display: flex;
           flex-direction: column;
-          gap: 24px;
+          gap: 22px;
+          min-width: 0;
         }
 
-        .matrix-demo__h1 {
+        /* motion.h3 — styled globally because motion strips styled-jsx hash */
+        .matrix-demo__body :global(.matrix-demo__h1) {
           font-family: var(--font-geist-sans), system-ui, sans-serif;
           font-weight: 500;
-          font-size: clamp(24px, 3vw, 32px);
-          line-height: 1.15;
+          font-size: clamp(22px, 5.8vw, 32px);
+          line-height: 1.18;
           letter-spacing: -0.022em;
           color: var(--ink-1);
           margin: 0;
+          overflow-wrap: anywhere;
+          word-break: break-word;
         }
 
-        .matrix-demo__meta {
+        /* motion.p — styled globally */
+        .matrix-demo__body :global(.matrix-demo__meta) {
           margin: 0;
           font-size: 15px;
           line-height: 1.6;
           color: var(--ink-2);
           padding-left: 14px;
           border-left: 2px solid var(--copper);
+          overflow-wrap: anywhere;
         }
         .matrix-demo__meta-label {
           display: block;
@@ -522,7 +541,8 @@ export default function MatrixDemo({
           gap: 14px;
         }
 
-        .matrix-demo__faq {
+        /* motion.div — styled globally */
+        .matrix-demo__faqs :global(.matrix-demo__faq) {
           padding: 14px 16px;
           background: var(--panel);
           border: 1px solid var(--border-subtle);
@@ -560,38 +580,52 @@ export default function MatrixDemo({
             grid-template-columns: 1fr;
           }
         }
-        .matrix-demo__interlinks li {
+        /* motion.li — styled globally. styled-jsx :global() only matches if
+           every part of the selector chain after it is global, so we put the
+           whole tail inside :global(). */
+        :global(.matrix-demo__interlinks ul li) {
           font-family: var(--font-geist-sans), system-ui, sans-serif;
           font-size: 13.5px;
           color: var(--copper);
           padding: 4px 0;
           border-bottom: 1px dashed var(--border-subtle);
+          list-style: none;
+          word-break: break-word;
         }
 
-        .matrix-demo__jsonld {
+        /* motion.div — styled globally; pre/code inside also need :global
+           because they live under a motion ancestor that drops the hash */
+        .matrix-demo__body :global(.matrix-demo__jsonld) {
           display: flex;
           flex-direction: column;
           gap: 8px;
+          min-width: 0;
           /* clip-path is the animated property; baseline state covers the
              full block when reduced-motion bypasses the variant */
         }
-        .matrix-demo__jsonld pre {
+        .matrix-demo__body :global(.matrix-demo__jsonld pre) {
           margin: 0;
           padding: 16px 18px;
           background: #0c1f3d;
           color: #e8eef6;
           border-radius: 8px;
-          overflow: auto;
+          overflow-x: auto;
+          overflow-y: auto;
           max-height: 280px;
+          max-width: 100%;
           font-family: var(--font-geist-mono), ui-monospace, monospace;
           font-size: 12px;
           line-height: 1.55;
+          -webkit-overflow-scrolling: touch;
         }
-        .matrix-demo__jsonld code {
+        .matrix-demo__body :global(.matrix-demo__jsonld code) {
           font-family: inherit;
+          display: block;
+          min-width: max-content;
         }
 
-        .matrix-demo__sweep {
+        /* motion.div — styled globally */
+        .matrix-demo__live-region :global(.matrix-demo__sweep) {
           position: absolute;
           left: 0;
           right: 0;

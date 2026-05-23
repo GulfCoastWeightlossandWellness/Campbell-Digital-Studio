@@ -174,7 +174,7 @@ function MosaicTile({ file }: { file: string }) {
         src={`${THUMB_BASE}/${file}`}
         alt={toAlt(file)}
         fill
-        sizes="(max-width: 720px) 28vw, 16vw"
+        sizes="(max-width: 720px) 96px, 220px"
         loading="lazy"
         style={{ objectFit: "cover" }}
       />

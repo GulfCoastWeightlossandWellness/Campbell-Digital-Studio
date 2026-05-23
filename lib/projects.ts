@@ -79,7 +79,7 @@ export const projects: Project[] = [
     status: "Active Retainer",
     year: "2026",
     featured: true,
-    coverImage: "/images/case-studies/covers/air-solutions-1-hero.png",
+    coverImage: "/images/case-studies/covers/air-solutions-1-hero.jpg",
     filterTags: ["full-stack", "local", "platform"],
     valueExplainer:
       "Programmatic SEO is the same architectural pattern Airbnb uses for apartments per city, Zapier for app integrations, and Tripadvisor for restaurants per neighborhood. Applied to a single Baldwin County HVAC contractor, it produces a city × service intersection matrix, an automated content engine, and a category of digital asset no competitor in the market currently occupies.",
@@ -140,7 +140,7 @@ export const projects: Project[] = [
       "Field Guide — automated content engine",
     ],
     screenshotImages: [
-      "/images/case-studies/covers/air-solutions-1-hero.png",
+      "/images/case-studies/covers/air-solutions-1-hero.jpg",
       "/images/case-studies/covers/air-solutions-2-services.png",
       "/images/case-studies/covers/air-solutions-3-specialty.png",
       "/images/case-studies/covers/air-solutions-4-tools.png",
@@ -151,7 +151,7 @@ export const projects: Project[] = [
       "/images/case-studies/covers/air-solutions-9-field-guide.png",
     ],
     screenshots: [
-      { src: "/images/case-studies/covers/air-solutions-1-hero.png", label: "Homepage hero — Heating & Cooling, Done Right" },
+      { src: "/images/case-studies/covers/air-solutions-1-hero.jpg", label: "Homepage hero — Heating & Cooling, Done Right" },
       { src: "/images/case-studies/covers/air-solutions-2-services.png", label: "Five core HVAC services hub" },
       { src: "/images/case-studies/covers/air-solutions-3-specialty.png", label: "Specialty services — heat pump, mini-split, IAQ" },
       { src: "/images/case-studies/covers/air-solutions-4-tools.png", label: "Four interactive tools — gated discovery" },

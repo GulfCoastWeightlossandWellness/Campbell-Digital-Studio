@@ -74,16 +74,18 @@ export default function FooterEmailCapture() {
         </button>
       </div>
       <input
+        id="footer-note"
         name="note"
         type="text"
         placeholder="Current site URL (optional)"
+        aria-label="Current site URL (optional)"
         value={note}
         onChange={(e) => setNote(e.target.value)}
         className="studio-input"
         style={{ fontSize: "14px", background: "rgba(20, 24, 42, 0.02)" }}
       />
       {state === "error" && errorMsg ? (
-        <p className="footer-capture__error">{errorMsg}</p>
+        <p role="alert" className="footer-capture__error">{errorMsg}</p>
       ) : null}
     </form>
   );

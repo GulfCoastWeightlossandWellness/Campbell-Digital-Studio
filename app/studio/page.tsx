@@ -126,16 +126,7 @@ export default async function StudioPage() {
           Peyton Campbell, <em>DO.</em>
         </EditorialH2>
 
-        <div
-          style={{
-            marginTop: "32px",
-            display: "grid",
-            gridTemplateColumns: "minmax(0, 1fr) auto",
-            gap: "clamp(24px, 4vw, 56px)",
-            alignItems: "start",
-          }}
-          className="studio-founder-grid"
-        >
+        <div className="studio-founder-grid">
           <div className="editorial-body reading-col">
             <p>
               I&apos;m a family-medicine physician based in coastal Alabama with a development
@@ -155,22 +146,12 @@ export default async function StudioPage() {
             </p>
           </div>
 
-          <div
-            style={{
-              width: "clamp(140px, 18vw, 200px)",
-              aspectRatio: "4 / 5",
-              position: "relative",
-              borderRadius: "8px",
-              overflow: "hidden",
-              border: "1px solid var(--border-subtle)",
-              background: "var(--panel)",
-            }}
-          >
+          <div className="studio-founder-grid__portrait">
             <Image
-              src="/images/founder/peyton-campbell.jpg"
+              src="/images/founder/peyton-campbell.svg"
               alt={`${siteConfig.founder.name}, ${siteConfig.founder.credential}`}
               fill
-              sizes="(max-width: 860px) 140px, 200px"
+              sizes="(max-width: 720px) 160px, (max-width: 1024px) 180px, 200px"
               style={{ objectFit: "cover" }}
             />
           </div>

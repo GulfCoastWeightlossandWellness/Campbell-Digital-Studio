@@ -4,6 +4,9 @@
 
 .section {
   background: var(--color-canvas);
+  /* Defensive: aspect-ratio rounding can produce subpixel overflow on some
+     mobile browsers; clip at section level so the page never side-scrolls. */
+  overflow-x: clip;
 }
 
 .frame {
@@ -45,8 +48,18 @@
   color: var(--color-accent);
   text-decoration: none;
   padding: 6px 0;
+  /* Visual underline stays tight to the text… */
   border-bottom: 1px solid currentColor;
+  /* …but the touch target is min 44pt tall on coarse pointers (iOS HIG). */
+  min-height: 44px;
   transition: color 200ms var(--ease-fluid), gap 200ms var(--ease-fluid);
+}
+
+@media (pointer: coarse) {
+  .cta {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
 }
 
 .cta:hover,

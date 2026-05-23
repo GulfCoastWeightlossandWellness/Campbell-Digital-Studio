@@ -347,17 +347,16 @@ export default function Hero() {
               <div className={styles.screen}>
                 {/* Poster image (LCP-safe, loads first, fades out when video ready) */}
                 <Image
-                  src={POSTER_TEMP}
+                  src={POSTER_PATH}
                   alt=""
                   width={1280}
                   height={800}
-                  unoptimized
                   priority={false}
                   fetchPriority="low"
                   className={`${styles.poster} ${
                     videoReady && !reducedMotion ? styles.posterHidden : ""
                   }`}
-                  data-poster-fallback={POSTER_PATH}
+                  data-poster-fallback={POSTER_TEMP}
                 />
 
                 {!reducedMotion && !isMobile ? (

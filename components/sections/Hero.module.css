@@ -25,6 +25,10 @@
   min-height: min(82vh, 820px);
 }
 
+/* Grid children default to min-width: auto which lets long words blow out
+   the track. Reset so long headlines wrap inside the column. */
+.inner > * { min-width: 0; }
+
 @media (min-width: 1200px) {
   .inner {
     /* 7 / 5 split */
@@ -39,6 +43,8 @@
   flex-direction: column;
   gap: clamp(20px, 2vw, 32px);
   max-width: 760px;
+  /* Allow flex children with long words to wrap below content width. */
+  min-width: 0;
 }
 
 .eyebrow {
@@ -202,12 +208,20 @@
   transform-style: preserve-3d;
 }
 
-/* Phone-frame variant (mobile <720px). */
+/* Phone-frame variant (mobile <720px).
+   Slightly wider + shorter than a real phone so the loop reads at thumbnail
+   size without dwarfing the rest of the column. */
 .framePhone {
-  max-width: 280px;
-  aspect-ratio: 9 / 19;
+  max-width: 240px;
+  aspect-ratio: 9 / 16;
   border-radius: 28px;
   border: 1px solid rgba(232, 196, 107, 0.22);
+  /* No top chrome on phone — give the screen a subtle notch shadow instead. */
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.06) inset,
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 20px 50px -16px rgba(0, 0, 0, 0.55),
+    0 6px 18px -6px rgba(196, 154, 53, 0.14);
 }
 
 /* Top chrome — traffic lights + URL bar. */
@@ -328,24 +342,97 @@
 @media (max-width: 720px) {
   .inner {
     padding-top: clamp(72px, 14vw, 112px);
-    gap: 36px;
+    gap: 32px;
   }
+
+  /* Headline: scope down hard so it fits in a 280px column at 320px.
+     `.display-96` baseline is 48px; we override to a smaller floor on mobile
+     and let it grow with viewport up to its desktop clamp via vw.
+     Specificity boost (chained .h1.h1) to beat global `.display-96`. */
+  .h1.h1 {
+    max-width: none;
+    font-size: clamp(26px, 7.5vw, 38px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: auto;
+    min-width: 0;
+  }
+  .h1.h1 .h1Line {
+    white-space: normal;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    min-width: 0;
+  }
+  .h1.h1 .emWord {
+    letter-spacing: -0.01em;
+    overflow-wrap: break-word;
+  }
+
+  .subhead {
+    max-width: none;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .meta {
+    /* The mono meta line is fine at 10px but needs to wrap, not ellipsis. */
+    white-space: normal;
+    line-height: 1.6;
+  }
+
+  /* CTAs stack to full-width rows; each motion-div wrapper takes full row. */
+  .ctas {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .ctas > * {
+    flex: 0 0 auto;
+    width: 100%;
+    display: flex;
+  }
+  .ctaPrimaryWrap { width: 100%; }
+  .ctaPrimary,
+  .ctas :global(.btn-fill),
+  .ctas :global(.btn-ghost) {
+    width: 100%;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* Tap-target floor: 44pt ≈ 44px. */
+    min-height: 48px;
+  }
+  .ctaTertiary {
+    width: 100%;
+    text-align: left;
+    margin-left: 0;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Navy stage: tighter padding, contained height so the phone-frame fits. */
   .stage {
     aspect-ratio: auto;
     min-height: auto;
-    padding: 28px 16px;
+    padding: 24px 16px;
   }
-  .h1 { max-width: none; }
-  .subhead { max-width: none; }
-  .ctas { gap: 12px; }
-  .ctas > * { flex: 1 1 auto; }
-  .ctaPrimary, .ctas :global(.btn-ghost) {
-    width: 100%;
-    text-align: center;
-    display: inline-block;
+
+  .auroraWrap { opacity: 0.42; }
+}
+
+/* ── Very narrow (≤360px) — squeeze further so 320px Galaxy Fold works. */
+@media (max-width: 360px) {
+  .h1.h1 {
+    font-size: 24px;
+    letter-spacing: -0.018em;
+    line-height: 1.1;
   }
-  .ctaTertiary { width: 100%; text-align: left; }
-  .auroraWrap { opacity: 0.5; }
+  .stage { padding: 20px 12px; }
+  .framePhone { max-width: 220px; }
 }
 
 /* ── Reduced motion overrides ─────────────────────────────────────────── */

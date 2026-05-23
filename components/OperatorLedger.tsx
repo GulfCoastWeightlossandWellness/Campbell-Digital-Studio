@@ -83,7 +83,7 @@ export default async function OperatorLedger({ data }: Props = {}) {
           display: grid;
           grid-template-columns: repeat(6, 1fr);
           gap: 24px;
-          align-items: center;
+          align-items: start;
           max-width: 1280px;
           margin: 0 auto;
         }
@@ -137,12 +137,52 @@ export default async function OperatorLedger({ data }: Props = {}) {
           .operator-ledger__dot { animation: none; }
         }
         @media (max-width: 720px) {
+          .operator-ledger {
+            padding: 14px 16px;
+          }
           .operator-ledger__row {
             grid-template-columns: repeat(3, 1fr);
-            row-gap: 16px;
+            column-gap: 12px;
+            row-gap: 14px;
+          }
+          /* Reserve 2 label-lines on every standard cell so the value
+             baselines align across all three columns in a row, even when
+             only one label happens to wrap. */
+          .operator-ledger__label {
+            min-height: 2.4em;
+            display: block;
           }
           .operator-ledger__cell--live {
             align-items: flex-start;
+          }
+          /* Reserve the same vertical space the standard cells use for
+             their label slot — keeps the LIVE indicator on the same
+             baseline as the values in its row instead of floating high. */
+          .operator-ledger__cell--live::before {
+            content: "";
+            display: block;
+            min-height: 2.4em;
+            font-size: 10px;
+            line-height: 1.2;
+          }
+          .operator-ledger__cell--live .operator-ledger__live-value {
+            font-size: 14px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            gap: 6px;
+            color: var(--gold-500);
+          }
+          .operator-ledger__cell--live .operator-ledger__live-label {
+            font-size: 14px;
+            line-height: 1.2;
+          }
+        }
+        @media (max-width: 360px) {
+          .operator-ledger {
+            padding: 14px 12px;
+          }
+          .operator-ledger__row {
+            column-gap: 10px;
           }
         }
       `}</style>

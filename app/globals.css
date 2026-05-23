@@ -38,12 +38,14 @@
   --color-ink-4: #9A9DAE;
   --color-ink-5: #C5C8D4;
 
-  /* Copper aliases — remapped to gold so legacy components keep rendering */
-  --color-copper:       #C49A35;
-  --color-copper-hover: #DDB64D;
-  --color-copper-deep:  #9A7820;
-  --color-walnut:       #9A7820;
-  --color-amber:        #E8C46B;
+  /* Copper aliases — remapped to gold-700 (#9A7820) for accessible 5.1:1 contrast
+     on cream backgrounds at small-text sizes. Brighter gold (#C49A35) remains
+     available via --gold-600 / --color-gold-600 for ≥18px copy or on dark surfaces. */
+  --color-copper:       #9A7820;
+  --color-copper-hover: #C49A35;
+  --color-copper-deep:  #7A5F19;
+  --color-walnut:       #7A5F19;
+  --color-amber:        #DDB64D;
 
   /* Accent (CTA) — points to gold */
   --color-accent:       #C49A35;
@@ -85,12 +87,13 @@
   --ink-4: #9A9DAE;
   --ink-5: #C5C8D4;
 
-  /* Copper aliases now point to gold so legacy components keep rendering */
-  --copper:       #C49A35;
-  --copper-hover: #DDB64D;
-  --copper-deep:  #9A7820;
-  --walnut:       #9A7820;
-  --amber:        #E8C46B;
+  /* Copper aliases — gold-700 for accessible 5.1:1 contrast on cream at small
+     text sizes. Use --gold-600 (#C49A35) for ≥18px or on dark surfaces. */
+  --copper:       #9A7820;
+  --copper-hover: #C49A35;
+  --copper-deep:  #7A5F19;
+  --walnut:       #7A5F19;
+  --amber:        #DDB64D;
 
   --accent:       #C49A35;
   --accent-hover: #DDB64D;
@@ -161,6 +164,9 @@ html {
   -webkit-text-size-adjust: 100%;
   background: var(--canvas);
   color-scheme: light;
+  /* Prevent rogue horizontal scrollbars from oversized headlines / pre blocks
+     on narrow viewports. `clip` (not hidden) keeps `position: sticky` working. */
+  overflow-x: clip;
 }
 
 body {
@@ -172,6 +178,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: "kern" 1, "ss01" 1;
+  overflow-x: clip;
 }
 
 ::selection { background: rgba(196, 154, 53, 0.28); color: var(--ink-1); }
@@ -202,6 +209,12 @@ body {
   letter-spacing: -0.025em;
   line-height: 1.02;
   color: var(--ink-1);
+  /* Long single words (e.g. "infrastructure") must wrap on 360–414px viewports
+     instead of overflowing the section-wrap padding box. `anywhere` lets the
+     browser break inside a word as a last resort — preferred over an overflow. */
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .display-sans em {
@@ -219,6 +232,9 @@ body {
   letter-spacing: -0.025em;
   line-height: 1.02;
   color: var(--ink-1);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
 }
 .display-serif em {
   font-family: var(--font-fraunces), Georgia, serif;
@@ -229,12 +245,17 @@ body {
   color: var(--copper);
 }
 
-.display-120 { font-size: clamp(56px, 9vw, 120px); line-height: 0.98; letter-spacing: -0.04em; }
-.display-96  { font-size: clamp(48px, 7.5vw, 96px); line-height: 1.00; letter-spacing: -0.035em; }
-.display-80  { font-size: clamp(42px, 6vw, 80px);  line-height: 1.02; letter-spacing: -0.03em; }
-.display-64  { font-size: clamp(36px, 5vw, 64px);  line-height: 1.05; letter-spacing: -0.025em; }
-.display-48  { font-size: clamp(28px, 3.6vw, 48px); line-height: 1.10; letter-spacing: -0.02em; }
-.display-32  { font-size: clamp(22px, 2.4vw, 32px); line-height: 1.18; letter-spacing: -0.015em; }
+/* Display sizes — the min for each clamp is calibrated against the longest
+   single word that appears in any H1 on the pages we own ("infrastructure"
+   = 14ch in Geist display). 375px viewport - 36px section padding = 339px
+   content; "infrastructure" at 26px ≈ 305px which fits with margin. Above
+   ~520px the scaling resumes via the vw term. */
+.display-120 { font-size: clamp(34px, 9vw, 120px); line-height: 1.0;  letter-spacing: -0.035em; }
+.display-96  { font-size: clamp(26px, 8vw, 96px);  line-height: 1.08; letter-spacing: -0.02em; }
+.display-80  { font-size: clamp(26px, 6.5vw, 80px);line-height: 1.1;  letter-spacing: -0.018em; }
+.display-64  { font-size: clamp(24px, 5vw, 64px);  line-height: 1.12; letter-spacing: -0.018em; }
+.display-48  { font-size: clamp(22px, 4vw, 48px);  line-height: 1.16; letter-spacing: -0.016em; }
+.display-32  { font-size: clamp(22px, 2.4vw, 32px);line-height: 1.18; letter-spacing: -0.015em; }
 
 h1, h2, h3, h4 { color: var(--ink-1); }
 
@@ -249,14 +270,21 @@ h1, h2, h3, h4 { color: var(--ink-1); }
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  /* Long labels ("WHAT WE BUILD FOR CLINICS") + the trailing rule are wider
+     than 339px at 375 viewports. Allow wrap and let the trailing rule sit
+     on its own line when needed. */
+  flex-wrap: wrap;
+  row-gap: 8px;
 }
-.section-tag .num { color: var(--copper); font-weight: 600; }
-.section-tag .label { color: var(--ink-3); }
+.section-tag .num { color: var(--copper); font-weight: 600; flex-shrink: 0; }
+.section-tag .label { color: var(--ink-3); min-width: 0; overflow-wrap: anywhere; }
 .section-tag::after {
   content: '';
-  flex: 1;
+  flex: 1 1 40px;
+  min-width: 40px;
   height: 1px;
   background: var(--border-default);
+  align-self: center;
 }
 .section-tag.on-dark .label { color: var(--ink-3); }
 .section-tag.on-dark .num { color: var(--copper); }
@@ -267,11 +295,13 @@ h1, h2, h3, h4 { color: var(--ink-1); }
 .editorial-h2 {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   font-weight: 500;
-  font-size: clamp(36px, 5vw, 64px);
-  line-height: 1.04;
-  letter-spacing: -0.025em;
+  font-size: clamp(28px, 5.5vw, 64px);
+  line-height: 1.06;
+  letter-spacing: -0.022em;
   color: var(--ink-1);
   margin-bottom: 16px;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 .editorial-h2 em {
   font-family: var(--font-fraunces), Georgia, serif;
@@ -285,11 +315,13 @@ h1, h2, h3, h4 { color: var(--ink-1); }
 
 .editorial-h3 {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
-  font-size: 22px;
+  font-size: clamp(19px, 4.5vw, 22px);
   font-weight: 500;
   color: var(--ink-1);
   letter-spacing: -0.018em;
-  line-height: 1.25;
+  line-height: 1.3;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 .editorial-h3 em {
   font-family: var(--font-fraunces), Georgia, serif;
@@ -312,6 +344,7 @@ h1, h2, h3, h4 { color: var(--ink-1); }
   font-size: 17px;
   line-height: 1.65;
   color: var(--ink-2);
+  overflow-wrap: anywhere;
 }
 .editorial-body p { margin-bottom: 1.2em; }
 .editorial-body p:last-child { margin-bottom: 0; }
@@ -437,9 +470,14 @@ h1, h2, h3, h4 { color: var(--ink-1); }
 }
 
 .btn-nav {
-  padding: 9px 16px;
+  padding: 12px 16px;
   font-size: 13px;
   border-radius: 6px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 /* ── Section / layout primitives ───────────────────────────────────── */
@@ -447,8 +485,11 @@ h1, h2, h3, h4 { color: var(--ink-1); }
 .section-wrap {
   max-width: 1280px;
   margin: 0 auto;
-  padding-left: clamp(20px, 5vw, 80px);
-  padding-right: clamp(20px, 5vw, 80px);
+  /* Tightened the min from 20px → 18px so 375px viewports recover 4px
+     for content; long display words ("infrastructure") fit on one line at
+     the new clamped size. */
+  padding-left: clamp(18px, 5vw, 80px);
+  padding-right: clamp(18px, 5vw, 80px);
 }
 
 .section-block       { padding-top: clamp(64px, 10vw, 128px); padding-bottom: clamp(64px, 10vw, 128px); }
@@ -645,7 +686,7 @@ h1, h2, h3, h4 { color: var(--ink-1); }
 
 .tier-row {
   display: grid;
-  grid-template-columns: 60px 1fr auto;
+  grid-template-columns: 60px minmax(0, 1fr) auto;
   gap: 18px;
   padding: 24px 0;
   border-top: 1px solid var(--border-subtle);
@@ -668,14 +709,30 @@ h1, h2, h3, h4 { color: var(--ink-1); }
   color: var(--ink-1);
   letter-spacing: -0.018em;
   margin-bottom: 8px;
+  /* tier-name is used as both a heading AND as a Link with long copy on
+     healthcare/local-services case study rows — needs to wrap, not overflow. */
+  display: block;
+  overflow-wrap: break-word;
 }
 .tier-row .tier-body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   font-size: 15px;
   line-height: 1.65;
   color: var(--ink-2);
+  min-width: 0;
 }
 .tier-row .tier-body p + p { margin-top: 0.8em; }
+
+@media (max-width: 560px) {
+  .tier-row {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 14px;
+    padding: 20px 0;
+  }
+  .tier-row .tier-num { font-size: 26px; }
+  .tier-row .tier-name { font-size: 19px; }
+  .tier-row > :last-child[aria-hidden] { display: none; }
+}
 
 /* ── Cadence ───────────────────────────────────────────────────────── */
 
@@ -1082,6 +1139,7 @@ img { max-width: 100%; height: auto; display: block; }
   line-height: 1.6;
   color: var(--ink-2);
   border-bottom: 1px solid var(--border-subtle);
+  overflow-wrap: break-word;
 }
 
 .editorial-list li::before {
@@ -1251,7 +1309,18 @@ img { max-width: 100%; height: auto; display: block; }
 
 .page-intro__title {
   margin-bottom: 0;
+  /* 16ch caps the line for editorial rhythm at desktop sizes, but at narrow
+     widths `none` lets the full content width drive wrapping so long words
+     ("infrastructure") have the entire viewport-minus-padding to occupy. */
   max-width: 16ch;
+  /* Belt-and-braces against rare display fonts that ignore overflow-wrap. */
+  word-break: break-word;
+}
+
+@media (max-width: 560px) {
+  .page-intro__title {
+    max-width: none;
+  }
 }
 
 .page-intro--case-study .page-intro__title {
@@ -1908,6 +1977,91 @@ img { max-width: 100%; height: auto; display: block; }
   }
 }
 
+/* ── Archive (Studio Index) ledger ───────────────────────────────────── */
+
+/* Headline counter rows — big mono number + descriptor. The fixed 132px
+   number column was clipping at narrow widths, so the column is now fluid. */
+.archive-counter-row {
+  display: grid;
+  grid-template-columns: minmax(72px, 0.4fr) minmax(0, 1fr);
+  align-items: baseline;
+  gap: clamp(14px, 3.5vw, 36px);
+  font-variant-numeric: tabular-nums;
+}
+.archive-counter-num {
+  font-size: clamp(40px, 12vw, 112px);
+}
+.archive-counter-label {
+  font-size: clamp(13px, 2.6vw, 18px);
+}
+
+/* Per-project ledger — label/value rows. Stacks vertically below ~520px
+   so neither the dt nor dd gets clipped at 360–414px widths. */
+.archive-fields {
+  display: grid;
+  gap: 6px;
+}
+.archive-field-row {
+  display: grid;
+  grid-template-columns: 188px minmax(0, 1fr);
+  gap: 16px;
+  align-items: baseline;
+}
+.archive-field-label {
+  font-size: 12px;
+}
+.archive-field-value {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width: 520px) {
+  .archive-field-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+  .archive-field-label {
+    font-size: 11px;
+  }
+  .archive-field-value {
+    font-size: 13px;
+    padding-left: 0;
+  }
+}
+
+/* ── Studio founder block ────────────────────────────────────────────── */
+
+.studio-founder-grid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: start;
+}
+
+.studio-founder-grid__portrait {
+  width: clamp(160px, 18vw, 200px);
+  aspect-ratio: 4 / 5;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background: var(--panel);
+}
+
+@media (max-width: 560px) {
+  .studio-founder-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  .studio-founder-grid__portrait {
+    /* Portrait above the prose at narrow widths; left-aligned, smaller. */
+    order: -1;
+    width: 140px;
+  }
+}
+
 /* ── Studio forms (inquire + footer) ─────────────────────────────────── */
 
 .inquire-form {
@@ -2019,6 +2173,24 @@ select.studio-input {
   border-top: 1px solid var(--border-subtle);
 }
 
+@media (max-width: 560px) {
+  .inquire-submit-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .inquire-submit-row .btn-fill {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    min-height: 48px;
+  }
+  .inquire-fallback {
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+}
+
 .inquire-fallback {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-size: 11px;
@@ -2099,6 +2271,15 @@ select.studio-input {
   font-size: 16px;
   line-height: 1.7;
   color: var(--ink-1);
+  /* Long URLs and email addresses are common in legal copy and must wrap
+     cleanly inside a 335px usable column. */
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.legal-page__body a {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .legal-section__title {
@@ -2254,5 +2435,131 @@ select.studio-input {
   gap: 24px;
 }
 @media (max-width: 720px) {
-  .case-study-screens--triptych { grid-template-columns: 1fr; }
+  .case-study-screens--triptych { grid-template-columns: 1fr; gap: 18px; }
+}
+
+/* ── Homepage mobile refinements (≤720px / ≤480px) ────────────────────
+   Tighten rhythm, recover horizontal real estate, and collapse
+   wide-screen grid scaffolding that wastes columns at narrow widths.
+   Reuses existing --copper / --border-* / spacing tokens — no new
+   colors introduced. */
+
+@media (max-width: 720px) {
+  /* Vertical split — restack the two big cards with tighter chrome.
+     Padding 36×32 at 360px wastes ~64px of inner width on chrome alone. */
+  .vertical-split-grid {
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .vertical-split-card {
+    padding: 24px 22px 26px;
+  }
+  .vertical-split-card__eyebrow {
+    margin-bottom: 10px;
+  }
+  .vertical-split-card__title {
+    font-size: 26px;
+    margin-bottom: 10px;
+  }
+  .vertical-split-card__body {
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+
+  /* Process timeline — collapse the empty 3rd column (the
+     `<span aria-hidden />`) and stack day-label above title content.
+     Recovers ~80px of body width per row. */
+  .tier-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 18px 0;
+  }
+  .tier-row > span[aria-hidden] {
+    display: none;
+  }
+  .tier-row .tier-num {
+    font-size: 13px !important;
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--copper);
+    line-height: 1.4;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .tier-row .tier-name {
+    font-size: 19px;
+    margin-bottom: 6px;
+  }
+  .tier-row .tier-body {
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+
+  /* Process-note italic line — tighten margin & size on mobile. */
+  .process-note {
+    margin-top: 28px;
+    font-size: 16px;
+  }
+
+  /* Principles grid — stacks at 860px already. Tighten cards when
+     single-column so left-rule + padding don't eat the reading col. */
+  .principles-grid {
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .principle-card {
+    padding: 22px 22px 24px;
+    border-left-width: 2px;
+  }
+  .principle-card__num {
+    margin-bottom: 10px;
+  }
+  .principle-card__title {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  .principle-card__body {
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+
+  /* Closing CTA actions — full-width buttons stack cleanly at narrow
+     widths; existing flex-wrap keeps them side-by-side when they
+     fit, then breaks. Both buttons reach equal tap-target width. */
+  .cover-surface .btn-fill,
+  .cover-surface .btn-ghost {
+    flex: 1 1 auto;
+    min-width: 140px;
+    text-align: center;
+  }
+
+  /* Belt-and-suspenders: guarantee no horizontal page scroll at any
+     mobile width. Local marquee/aurora elements clip internally,
+     this catches any future full-bleed escape. */
+  html, body {
+    overflow-x: hidden;
+  }
+}
+
+/* Editorial H2 — shrink display floor for narrow viewports so
+   "Generate a matrix cell of you." and "Three reasons clinics and
+   service businesses pick…" fit at ≤480px without 2-char orphans. */
+@media (max-width: 480px) {
+  .editorial-h2 {
+    font-size: clamp(28px, 9vw, 36px);
+    line-height: 1.08;
+    letter-spacing: -0.022em;
+  }
+
+  /* Section rhythm at narrow widths — the 64px floor on .section-block
+     is heavier than needed at 360-414px. */
+  .section-block {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+  .section-block-tight {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
 }

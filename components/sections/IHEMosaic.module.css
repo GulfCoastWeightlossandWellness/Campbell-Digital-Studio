@@ -8,6 +8,10 @@
   isolation: isolate;
   background: var(--color-canvas);
   padding-bottom: clamp(48px, 6vw, 80px);
+  /* Defensive: the marquee track is wider than the viewport. The .viewport
+     element handles its own clipping, but section-level overflow-x: clip
+     keeps any future descendant from leaking horizontal scroll on mobile. */
+  overflow-x: clip;
 }
 
 .heading {
@@ -67,14 +71,21 @@
 .track {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: clamp(140px, 14vw, 220px);
-  grid-template-rows: repeat(2, clamp(140px, 14vw, 220px));
-  gap: clamp(10px, 1vw, 16px);
-  padding: clamp(10px, 1vw, 16px);
+  grid-auto-columns: clamp(96px, 14vw, 220px);
+  grid-template-rows: repeat(2, clamp(96px, 14vw, 220px));
+  gap: clamp(8px, 1vw, 16px);
+  padding: clamp(8px, 1vw, 16px);
 
   /* Marquee animation — 60s per loop, linear, infinite. The track contains
-     a 2x duplication of the tile list; translating by -50% loops seamlessly. */
+     a 2x duplication of the tile list; translating by -50% loops seamlessly.
+     Slower (75s) on mobile so tile detail isn't a blur at narrow widths. */
   animation: ihe-marquee 60s linear infinite;
+}
+
+@media (max-width: 720px) {
+  .track {
+    animation-duration: 75s;
+  }
 }
 
 .viewport[data-paused="true"] .track {
@@ -93,8 +104,8 @@
 /* ── Tile ─────────────────────────────────────────────────────────────── */
 .tile {
   position: relative;
-  width: clamp(140px, 14vw, 220px);
-  height: clamp(140px, 14vw, 220px);
+  width: clamp(96px, 14vw, 220px);
+  height: clamp(96px, 14vw, 220px);
   border-radius: 14px;
   overflow: hidden;
   background: var(--color-panel);

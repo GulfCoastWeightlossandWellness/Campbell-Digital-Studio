@@ -129,8 +129,6 @@ const totals: LedgerField[] = [
 const monoFamily =
   "var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
 
-const fieldLabelWidth = "188px";
-
 export default function StudioIndexPage() {
   return (
     <>
@@ -140,7 +138,7 @@ export default function StudioIndexPage() {
       />
 
       <section
-        className="section-wrap"
+        className="section-wrap archive-page"
         style={{
           paddingTop: "clamp(64px, 9vw, 128px)",
           paddingBottom: "clamp(48px, 6vw, 80px)",
@@ -176,20 +174,11 @@ export default function StudioIndexPage() {
             { num: "18", label: "months" },
             { num: "1", label: "operator" },
           ].map((row) => (
-            <div
-              key={row.label}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "minmax(96px, 132px) 1fr",
-                alignItems: "baseline",
-                gap: "clamp(16px, 2.4vw, 36px)",
-                fontVariantNumeric: "tabular-nums",
-              }}
-            >
+            <div key={row.label} className="archive-counter-row">
               <span
+                className="archive-counter-num"
                 style={{
                   fontFamily: monoFamily,
-                  fontSize: "clamp(48px, 9vw, 112px)",
                   lineHeight: 1.0,
                   letterSpacing: "-0.03em",
                   color: "var(--ink-1)",
@@ -200,9 +189,9 @@ export default function StudioIndexPage() {
                 {row.num}
               </span>
               <span
+                className="archive-counter-label"
                 style={{
                   fontFamily: monoFamily,
-                  fontSize: "clamp(14px, 1.5vw, 18px)",
                   letterSpacing: "0.04em",
                   color: "var(--ink-2)",
                 }}
@@ -259,27 +248,18 @@ export default function StudioIndexPage() {
               </h2>
 
               <dl
+                className="archive-fields"
                 style={{
                   margin: 0,
-                  display: "grid",
-                  gap: "6px",
                   fontVariantNumeric: "tabular-nums",
                 }}
               >
                 {entry.fields.map((f) => (
-                  <div
-                    key={f.label}
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: `${fieldLabelWidth} 1fr`,
-                      gap: "16px",
-                      alignItems: "baseline",
-                    }}
-                  >
+                  <div key={f.label} className="archive-field-row">
                     <dt
+                      className="archive-field-label"
                       style={{
                         fontFamily: monoFamily,
-                        fontSize: "12px",
                         letterSpacing: "0.08em",
                         color: "var(--ink-2)",
                         textTransform: "uppercase",
@@ -288,13 +268,12 @@ export default function StudioIndexPage() {
                       {f.label}
                     </dt>
                     <dd
+                      className="archive-field-value"
                       style={{
                         margin: 0,
                         fontFamily: monoFamily,
-                        fontSize: "13px",
                         lineHeight: 1.55,
                         color: "var(--ink-1)",
-                        wordBreak: "break-word",
                       }}
                     >
                       {f.value}
