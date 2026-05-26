@@ -429,7 +429,7 @@ export const projects: Project[] = [
     shortName: "ACExperts",
     label: "Original Build",
     category: "HVAC · Local SEO",
-    tier: 2,
+    tier: 1,
     industry: "Local Services",
     status: "Active Retainer",
     year: "2026",

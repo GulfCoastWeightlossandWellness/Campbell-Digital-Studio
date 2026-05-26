@@ -66,7 +66,7 @@ const ENRICH: Record<
     coverImage: "/images/case-studies/covers/ihe-marketing-1-hero.png",
   },
   acexperts: {
-    tier: 2,
+    tier: 1,
     industry: "Local Services",
     year: "2025",
     coverImage: "/images/case-studies/covers/acexperts-1-hero.png",
