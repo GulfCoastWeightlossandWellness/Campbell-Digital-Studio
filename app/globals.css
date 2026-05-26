@@ -2571,3 +2571,30 @@ select.studio-input {
     padding-bottom: 40px;
   }
 }
+
+/* ── Scroll narrative (agent 1) ─────────────────────────────────────────── */
+/* InViewReveal, ScrollProgress, KineticHeadline support utilities.
+   All rules below are additive — no existing rules are modified.           */
+
+/* Ensure InViewReveal wrappers on block-level sections don't collapse
+   height (the motion div must not add inline-block behaviour). */
+.scroll-reveal-block {
+  display: block;
+  width: 100%;
+}
+
+/* KineticHeadline wrapper — inherits display from parent, no extra chrome. */
+.kinetic-headline {
+  display: contents;
+}
+
+/* Honour prefers-reduced-motion for any CSS-driven scroll animations
+   that may be added later in this block. Motion's useReducedMotion hook
+   handles JS animations; this covers any CSS fallbacks. */
+@media (prefers-reduced-motion: reduce) {
+  /* ScrollProgress bar: already returns null from the component,
+     but belt-and-braces hide it via CSS if it ever renders. */
+  [data-scroll-progress] {
+    display: none !important;
+  }
+}

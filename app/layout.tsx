@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import Analytics from "@/components/Analytics";
+import ScrollProgress from "@/components/scroll/ScrollProgress";
 import { siteConfig, absoluteUrl } from "@/lib/site-config";
 
 const fraunces = Fraunces({
@@ -106,6 +107,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
+        <ScrollProgress />
         <Analytics />
         <Header />
         <main id="main-content" tabIndex={-1}>{children}</main>

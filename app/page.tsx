@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getProjectBySlug } from "@/lib/projects";
+import InViewReveal from "@/components/scroll/InViewReveal";
+import KineticHeadline from "@/components/scroll/KineticHeadline";
 import SectionTag from "@/components/editorial/SectionTag";
 import EditorialH2 from "@/components/editorial/EditorialH2";
 import FaqSection from "@/components/sections/FaqSection";
@@ -84,7 +86,9 @@ export default function HomePage() {
 
       {/* § 02 + § 03 + § 04 — Featured work (3 anchors: Air Solutions, Revitalize, ACExperts) */}
       {revitalize && airSolutions && acexperts ? (
-        <FeaturedWorkPreview projects={[airSolutions, revitalize, acexperts]} sectionNum="02" />
+        <InViewReveal>
+          <FeaturedWorkPreview projects={[airSolutions, revitalize, acexperts]} sectionNum="02" />
+        </InViewReveal>
       ) : null}
 
       {/* § 03.5 — IHE 146-app mosaic band */}
@@ -117,7 +121,9 @@ export default function HomePage() {
       </section>
 
       {/* § 04.5 — Live Matrix Generator (the marquee tech demo) */}
-      <MatrixDemo cities={[...CITIES]} services={[...SERVICES]} />
+      <InViewReveal delay={100}>
+        <MatrixDemo cities={[...CITIES]} services={[...SERVICES]} />
+      </InViewReveal>
 
       {/* § 05 — Selected clients (real-color wordmarks) */}
       <SelectedClientsRow />
@@ -125,18 +131,22 @@ export default function HomePage() {
       {/* § 06 — Studio principles (3 cards) */}
       <section className="section-wrap section-block">
         <SectionTag num="06" label="Why this studio" />
-        <EditorialH2>
-          Three reasons clinics and service businesses pick<br />
-          <em>this studio over an agency.</em>
-        </EditorialH2>
+        <KineticHeadline>
+          <EditorialH2>
+            Three reasons clinics and service businesses pick<br />
+            <em>this studio over an agency.</em>
+          </EditorialH2>
+        </KineticHeadline>
 
         <div className="principles-grid">
-          {studioPrinciples.map((p) => (
-            <div key={p.n} className="principle-card">
-              <div className="principle-card__num">{p.n}</div>
-              <h3 className="principle-card__title">{p.title}</h3>
-              <p className="principle-card__body">{p.body}</p>
-            </div>
+          {studioPrinciples.map((p, i) => (
+            <InViewReveal key={p.n} delay={i * 100}>
+              <div className="principle-card">
+                <div className="principle-card__num">{p.n}</div>
+                <h3 className="principle-card__title">{p.title}</h3>
+                <p className="principle-card__body">{p.body}</p>
+              </div>
+            </InViewReveal>
           ))}
         </div>
       </section>
@@ -222,7 +232,7 @@ export default function HomePage() {
       <FaqSection sectionNum="10" />
 
       {/* § 11 — Closing CTA (dark navy stage) */}
-      <section className="cover-surface">
+      <InViewReveal as="section" className="cover-surface">
         <div className="section-wrap section-block">
           <SectionTag num="11" label="Working together" onDark />
           <EditorialH2 onDark className="reading-col">
@@ -266,7 +276,7 @@ export default function HomePage() {
             {totalClients} consented clients · {activeEngagements} active engagements · Currently shipping
           </p>
         </div>
-      </section>
+      </InViewReveal>
     </>
   );
 }
