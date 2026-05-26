@@ -2626,3 +2626,28 @@ select.studio-input {
     animation: none !important;
   }
 }
+
+/* ── Case study essay (agent 3) ─────────────────────────────────────────────
+   Additive-only global rules to support the Air Solutions bespoke essay page
+   at app/work/air-solutions/page.tsx.
+   All component-scoped rules live in components/case-study-essay/*.module.css
+   — only shared utilities and reduced-motion overrides live here.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* Ensure EssayReveal divs don't add block formatting context issues */
+.essay-reveal-block {
+  display: block;
+  width: 100%;
+}
+
+/* Honour prefers-reduced-motion for any JS-driven transitions in the essay */
+@media (prefers-reduced-motion: reduce) {
+  /* The EssayReveal component checks the matchMedia at runtime and skips
+     animations — this ensures the initial invisible state (opacity: 0)
+     is not applied either, preventing invisible content on SSR hydration. */
+  [data-essay-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
