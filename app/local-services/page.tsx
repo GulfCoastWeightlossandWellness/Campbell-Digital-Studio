@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageIntro from "@/components/editorial/PageIntro";
 import SectionTag from "@/components/editorial/SectionTag";
 import EditorialH2 from "@/components/editorial/EditorialH2";
+import MatrixFieldMount from "@/components/three/MatrixFieldMount";
 
 export const metadata: Metadata = {
   title: "Local Services — Programmatic SEO and GBP operations for trades",
@@ -66,6 +67,51 @@ export default function LocalServicesPage() {
         Digital infrastructure for{" "}
         <em>local service businesses.</em>
       </PageIntro>
+
+      {/* ── 3D Matrix Field — city × service architecture visualisation ── */}
+      {/*    aria-hidden: decorative scene, meaning lives in surrounding text */}
+      <section
+        aria-hidden="true"
+        style={{
+          background: "var(--color-ink-1, #14182A)",
+          borderTop: "1px solid rgba(196,154,53,0.15)",
+          borderBottom: "1px solid rgba(196,154,53,0.15)",
+          padding: "0",
+          height: "clamp(280px, 36vw, 480px)",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* Label: sits in corner, communicates what the scene is */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "20px",
+            left: "24px",
+            zIndex: 2,
+            color: "rgba(196,154,53,0.55)",
+            fontFamily: "var(--font-mono, monospace)",
+            fontSize: "11px",
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            pointerEvents: "none",
+          }}
+        >
+          15 cities × 9 services — 135 indexed pages
+        </div>
+        {/* Dim edge vignette so scene fades into surrounding sections */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 1,
+            background:
+              "linear-gradient(to right, #14182A 0%, transparent 12%, transparent 88%, #14182A 100%)",
+            pointerEvents: "none",
+          }}
+        />
+        <MatrixFieldMount />
+      </section>
 
       {/* ── What we build for local services ──────────────────────────── */}
       <section className="section-wrap section-block">
