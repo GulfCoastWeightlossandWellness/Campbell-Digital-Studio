@@ -15,7 +15,7 @@
  * Reduced-motion: component renders children immediately at final state.
  */
 
-import { useRef, type ElementType, type CSSProperties, type ReactNode } from "react";
+import { createElement, useRef, type CSSProperties, type ReactNode } from "react";
 import { motion, useInView, useReducedMotion } from "motion/react";
 
 // Supported HTML element tags (the subset Motion exposes directly)
@@ -66,11 +66,10 @@ export default function InViewReveal({
   // When reduced motion is preferred, render at final state immediately —
   // no animation, just the element with children visible.
   if (reducedMotion) {
-    const Tag = as as ElementType;
-    return (
-      <Tag ref={ref} className={className} style={style} id={id} {...aria}>
-        {children}
-      </Tag>
+    return createElement(
+      as,
+      { ref, className, style, id, ...aria },
+      children,
     );
   }
 
