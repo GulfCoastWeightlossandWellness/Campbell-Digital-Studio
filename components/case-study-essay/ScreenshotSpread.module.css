@@ -1,0 +1,107 @@
+.root {
+  padding-top: clamp(80px, 12vw, 144px);
+  padding-bottom: clamp(80px, 12vw, 144px);
+}
+
+.heading {
+  margin-top: 48px;
+  margin-bottom: 56px;
+}
+
+/* The spread is a full-page-width column grid for max rhythm */
+.spread {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(40px, 5vw, 72px);
+  padding-top: 8px;
+}
+
+/* Full-bleed wrapper */
+.figureWrap {
+  width: 100%;
+}
+
+/* Inset treatment — centered, narrower */
+.inset {
+  padding-left: clamp(18px, 8vw, 160px);
+  padding-right: clamp(18px, 8vw, 160px);
+}
+
+/* Full-bleed treatment */
+.full {
+  /* intentionally no padding — extends edge to edge */
+}
+
+/* The figure with magazine rotation */
+.figure {
+  margin: 0;
+  will-change: transform;
+}
+
+/* Only apply rotation on wide viewports where it looks intentional */
+@media (min-width: 860px) {
+  .figure {
+    transform: rotate(var(--rot, 0deg));
+    transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1);
+  }
+  .figure:hover {
+    transform: rotate(0deg) scale(1.005);
+  }
+}
+
+/* Image frame — drop shadow + border */
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow:
+    0 4px 12px rgba(12, 31, 61, 0.06),
+    0 20px 60px -24px rgba(12, 31, 61, 0.18);
+}
+
+/* Caption bar */
+.caption {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 14px;
+  padding-left: 4px;
+}
+
+.captionNum {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+  flex-shrink: 0;
+}
+
+.captionSep {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10px;
+  color: var(--ink-5);
+}
+
+.captionLabel {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  line-height: 1.5;
+}
+
+/* Responsive — remove rotation and inset on narrow */
+@media (max-width: 560px) {
+  .inset {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
