@@ -1373,6 +1373,14 @@ img { max-width: 100%; height: auto; display: block; }
   }
 }
 
+/* When exactly 3 featured cards render, switch to a balanced 3-column layout
+   at large viewports so no card is orphaned in a half-row by itself. */
+@media (min-width: 1120px) {
+  .featured-work-grid:has(> .featured-work-card:nth-child(3):last-child) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .featured-work-card {
   display: flex;
   flex-direction: column;
