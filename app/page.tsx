@@ -27,6 +27,7 @@ export const metadata: Metadata = {
 
 const revitalize = getProjectBySlug("revitalize");
 const airSolutions = getProjectBySlug("air-solutions");
+const acexperts = getProjectBySlug("acexperts");
 
 const studioPrinciples = [
   {
@@ -81,9 +82,9 @@ export default function HomePage() {
       {/* § 01 — Hero (split-stage with live device frame) */}
       <Hero />
 
-      {/* § 02 + § 03 — Featured work (2 anchors) */}
-      {revitalize && airSolutions ? (
-        <FeaturedWorkPreview projects={[airSolutions, revitalize]} sectionNum="02" />
+      {/* § 02 + § 03 + § 04 — Featured work (3 anchors: Air Solutions, Revitalize, ACExperts) */}
+      {revitalize && airSolutions && acexperts ? (
+        <FeaturedWorkPreview projects={[airSolutions, revitalize, acexperts]} sectionNum="02" />
       ) : null}
 
       {/* § 03.5 — IHE 146-app mosaic band */}
