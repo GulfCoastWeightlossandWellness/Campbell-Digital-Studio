@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import Analytics from "@/components/Analytics";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import { siteConfig, absoluteUrl } from "@/lib/site-config";
 
 const fraunces = Fraunces({
@@ -111,6 +112,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main-content" tabIndex={-1}>{children}</main>
         <Footer />
         <StickyMobileCTA />
+        <VercelAnalytics />
       </body>
     </html>
   );
