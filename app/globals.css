@@ -2598,3 +2598,31 @@ select.studio-input {
     display: none !important;
   }
 }
+
+/* ── MatrixDemo marquee (agent 2) ──────────────────────────────────────────
+   Supplementary global rules for the marquee upgrade.
+   All component-scoped rules live in the styled-jsx block inside
+   components/sections/MatrixDemo.tsx — only rules that need global reach
+   (e.g., :global motion targets, reduced-motion overrides) live here.
+   ─────────────────────────────────────────────────────────────────────── */
+
+/* Ensure the navy panel doesn't create unwanted horizontal scroll on mobile */
+.matrix-marquee__panel {
+  contain: layout paint;
+}
+
+/* Badge pulse animation — subtle, slow (3.5s) */
+@keyframes matrix-badge-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.55; }
+}
+.matrix-marquee__badge-dot {
+  animation: matrix-badge-pulse 3.5s ease-in-out infinite;
+}
+
+/* Reduced motion: freeze badge pulse and particles */
+@media (prefers-reduced-motion: reduce) {
+  .matrix-marquee__badge-dot {
+    animation: none !important;
+  }
+}
