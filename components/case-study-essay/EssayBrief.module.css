@@ -1,0 +1,123 @@
+.root {
+  padding-top: clamp(80px, 12vw, 144px);
+  padding-bottom: clamp(80px, 12vw, 144px);
+}
+
+.layout {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.38fr);
+  gap: clamp(48px, 6vw, 96px);
+  align-items: start;
+}
+
+/* ── Essay column ── */
+.essay {
+  max-width: 72ch;
+}
+
+.heading {
+  margin-bottom: 32px;
+}
+
+.body {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-size: clamp(17px, 1.3vw, 19px);
+  line-height: 1.72;
+  color: var(--ink-2);
+}
+.body p {
+  margin-bottom: 1.35em;
+}
+.body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Drop-cap first letter — large Fraunces serif initial */
+.dropCapPara::first-letter {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: 4.2em;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 0.78;
+  float: left;
+  margin-right: 0.08em;
+  margin-top: 0.1em;
+  color: var(--ink-1);
+  font-variation-settings: "opsz" 72;
+}
+
+/* ── Aside ── */
+.aside {
+  position: sticky;
+  top: 120px;
+}
+
+.asideInner {
+  background: var(--surface);
+  border: 1px solid var(--border-default);
+  border-top: 2px solid var(--copper);
+  border-radius: 0 0 8px 8px;
+  padding: 28px 24px 32px;
+}
+
+.asideLabel {
+  display: block;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 16px;
+}
+
+.asideQuote {
+  position: relative;
+  margin: 0;
+  padding: 0 0 0 4px;
+  border: none;
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.55;
+  color: var(--ink-1);
+  font-variation-settings: "opsz" 48;
+}
+
+.asideQuoteMark {
+  display: block;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--copper);
+  font-style: normal;
+  font-weight: 400;
+  margin-bottom: -8px;
+  font-family: var(--font-fraunces), Georgia, serif;
+}
+
+.asideDivider {
+  width: 40px;
+  height: 1px;
+  background: var(--copper);
+  margin: 20px 0;
+  opacity: 0.5;
+}
+
+.asideDetail {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-3);
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .aside {
+    position: static;
+  }
+}

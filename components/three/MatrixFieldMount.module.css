@@ -1,0 +1,54 @@
+/* ── MatrixFieldMount — scoped styles ─────────────────────────────────────
+   These styles are intentionally minimal. Layout is controlled by the
+   parent section in local-services/page.tsx.
+   ───────────────────────────────────────────────────────────────────────── */
+
+.mount {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  /* Canvas is transparent; overlay sits on the navy cover-surface */
+  border-radius: 4px;
+}
+
+/* Skeleton: a dim grid of animated dots while the bundle loads */
+.skeleton {
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(196, 154, 53, 0.08) 0%,
+      transparent 70%
+    );
+  animation: skeletonPulse 2s ease-in-out infinite;
+}
+
+@keyframes skeletonPulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.8; }
+}
+
+/* Reduced-motion: pause skeleton pulse */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    opacity: 0.5;
+  }
+}
+
+/* SVG static fallback wrapper — centers the SVG */
+.svgWrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+}
+
+.staticFallback {
+  max-width: 90%;
+  max-height: 90%;
+}

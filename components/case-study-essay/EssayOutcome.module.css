@@ -1,0 +1,85 @@
+.root {
+  padding-top: clamp(80px, 12vw, 144px);
+  padding-bottom: clamp(80px, 12vw, 144px);
+}
+
+.heading {
+  margin-top: 48px;
+  margin-bottom: 56px;
+}
+
+/* Refined data grid */
+.dataGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--border-default);
+  border-left: 1px solid var(--border-default);
+}
+
+.dataCell {
+  padding: 32px 28px 36px;
+  border-right: 1px solid var(--border-default);
+  border-bottom: 1px solid var(--border-default);
+  position: relative;
+}
+
+/* Gold top rule on each cell */
+.cellSep {
+  width: 32px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--copper), transparent);
+  margin-bottom: 16px;
+}
+
+.cellLabel {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.cellValue {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(18px, 1.8vw, 24px);
+  color: var(--ink-1);
+  line-height: 1.2;
+  letter-spacing: -0.018em;
+  font-variation-settings: "opsz" 18;
+}
+
+/* Measurement note */
+.measureNote {
+  margin-top: 32px;
+}
+
+.noteText {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .dataGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .dataGrid {
+    grid-template-columns: 1fr;
+  }
+  .dataCell {
+    padding: 24px 20px 28px;
+  }
+}
