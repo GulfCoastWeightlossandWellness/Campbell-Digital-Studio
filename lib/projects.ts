@@ -130,11 +130,11 @@ export const projects: Project[] = [
       "Gives Air Solutions the strongest technical local-search platform in Baldwin County HVAC. Edge markets where no competitor has a single dedicated page now have their own city × service pages. The content engine compounds: every post that indexes adds an authority signal Google reads as active business, on a publishing cadence competitors cannot match.",
     screenshotLabels: [
       "Homepage hero — Heating & Cooling, Done Right",
-      "HVAC services hub",
-      "City coverage across Baldwin County",
+      "3D AC Explorer — Three.js component tool",
+      "Per-city service coverage — Gulf Shores",
       "Four interactive tools — gated discovery",
       "Native blog engine — weekday drip",
-      "Reviews + GBP automation",
+      "282+ five-star reviews + GBP automation",
     ],
     screenshotImages: [
       "/images/case-studies/covers/air-solutions-live-1-hero.png",
@@ -146,11 +146,11 @@ export const projects: Project[] = [
     ],
     screenshots: [
       { src: "/images/case-studies/covers/air-solutions-live-1-hero.png", label: "Homepage hero — Heating & Cooling, Done Right" },
-      { src: "/images/case-studies/covers/air-solutions-live-2-services.png", label: "HVAC services hub" },
-      { src: "/images/case-studies/covers/air-solutions-live-3-cities.png", label: "City coverage across Baldwin County" },
+      { src: "/images/case-studies/covers/air-solutions-live-2-services.png", label: "3D AC Explorer — Three.js component tool" },
+      { src: "/images/case-studies/covers/air-solutions-live-3-cities.png", label: "Per-city service coverage — Gulf Shores" },
       { src: "/images/case-studies/covers/air-solutions-live-4-tools.png", label: "Four interactive tools — gated discovery" },
       { src: "/images/case-studies/covers/air-solutions-live-5-blog.png", label: "Native blog engine — weekday drip" },
-      { src: "/images/case-studies/covers/air-solutions-live-6-reviews.png", label: "Reviews + GBP automation" },
+      { src: "/images/case-studies/covers/air-solutions-live-6-reviews.png", label: "282+ five-star reviews + GBP automation" },
     ],
     metaGrid: [
       { label: "Sector", value: "HVAC · Local Services" },
