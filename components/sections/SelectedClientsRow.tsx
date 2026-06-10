@@ -56,7 +56,7 @@ const CLIENTS: ClientMark[] = [
     // Revitalize wellness blue.
     color: "#1E6B7A",
     caseStudySlug: "revitalize",
-    href: "http://revitalizemedicalclinic.com/",
+    href: "https://www.revitalizemedicalclinic.com/",
   },
   {
     id: "ihe",
@@ -69,14 +69,14 @@ const CLIENTS: ClientMark[] = [
     id: "acexperts",
     wordmark: "ACExperts251",
     color: "#0E6BA8",
-    href: "https://acexperts251.com",
+    href: "https://www.acexperts251.com/",
   },
   {
     id: "collective",
     wordmark: "Collective Counseling",
     // Soft sage from Calli's brand.
     color: "#5A7A5A",
-    href: "https://collectivecounselingdaphne.com",
+    href: "https://www.collectivecounselingdaphne.com/",
   },
   {
     id: "blessed",

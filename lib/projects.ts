@@ -271,7 +271,7 @@ export const projects: Project[] = [
       "Migrated a two-clinic medspa, a supplement brand, a published book, and a coaching institute into one 50-route Next.js ecosystem.",
     summary:
       "Revitalize is a multi-location medical aesthetics, hormone, and weight-management practice operating two clinics in Columbus and Warner Robins, Georgia. The build replaced a template medspa site with a clinical platform spanning 72 page.tsx routes, 18 service pages, two-location SEO, an interactive hormone health assessment, a searchable Learning Library, and JaneApp booking flows per location — and connected three additional businesses (a supplement shop, a published book, and a coaching institute) under one brand system.",
-    liveUrl: "http://revitalizemedicalclinic.com/",
+    liveUrl: "https://www.revitalizemedicalclinic.com/",
     tags: ["Healthcare", "Multi-Location", "Medspa", "Next.js"],
     features: [
       "Main clinic platform — 72 page.tsx routes across the practice",
@@ -521,7 +521,7 @@ export const projects: Project[] = [
       "Shipped an 8-city × 7-service HVAC build with three interactive tools, Lighthouse CI, and Sheets-backed lead capture.",
     summary:
       "ACExperts251 needed a website that matched the quality of their work and gave homeowners every reason to call over a competitor. The result is a full-stack Next.js application with structured service and city pages, three interactive diagnostic tools, API-backed form handling, and a live Google Reviews integration.",
-    liveUrl: "https://acexperts251.com",
+    liveUrl: "https://www.acexperts251.com/",
     tags: ["HVAC", "Local SEO", "Interactive Tools"],
     features: [
       "7 dedicated service pages with dynamic routing",
@@ -600,7 +600,7 @@ export const projects: Project[] = [
       "Therapy practice site with a dedicated adult-ADHD-testing landing page and Daphne-local SEO.",
     summary:
       "Collective Counseling needed a site that communicated professionalism and approachability in equal measure — helping prospective clients understand services, know what to expect, and feel safe enough to reach out. A lean, semantic multi-page build was the right choice: fast, focused, and built to rank for the specific service terms that matter most.",
-    liveUrl: "https://collectivecounselingdaphne.com",
+    liveUrl: "https://www.collectivecounselingdaphne.com/",
     tags: ["Therapy", "ADHD Testing", "Local SEO"],
     features: [
       "Multi-page architecture — homepage, therapy, ADHD testing, addiction counseling",

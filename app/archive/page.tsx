@@ -95,7 +95,7 @@ const ledger: LedgerEntry[] = [
   {
     name: "IHE PRODUCT DASHBOARD",
     fields: [
-      { label: "URL", value: "app.interactivehealtheducation.com" },
+      { label: "URL", value: "dashboard.interactivehealtheducation.com" },
       { label: "Routes", value: "146 patient-education apps + dashboard" },
       { label: "Schema types", value: "n/a (authenticated product surface)" },
       { label: "Stack", value: "Next.js 16 · React 19 · TypeScript · Tailwind v4 · Vercel" },
