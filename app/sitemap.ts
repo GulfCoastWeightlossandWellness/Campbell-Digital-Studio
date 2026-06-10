@@ -18,6 +18,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/studio"), lastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/notes"), lastModified, changeFrequency: "monthly", priority: 0.6 },
     { url: absoluteUrl("/inquire"), lastModified, changeFrequency: "monthly", priority: 0.8 },
+    // Legal pages are live, indexable, and self-canonical — include them so
+    // crawlers don't treat them as orphaned (linked only from the footer).
+    { url: absoluteUrl("/privacy"), lastModified, changeFrequency: "yearly", priority: 0.3 },
+    { url: absoluteUrl("/terms"), lastModified, changeFrequency: "yearly", priority: 0.3 },
   ];
 
   if (siteConfig.calUsername) {
@@ -31,14 +35,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Only featured projects render at /work/[slug]; the others 308-redirect to /work.
   // Keep the sitemap aligned with that rule: never submit a URL that redirects.
+  // New featured projects (e.g. Pro 1 Painters) appear here automatically the
+  // moment they're added to lib/projects.ts with `featured: true`.
   const projectRoutes: MetadataRoute.Sitemap = projects
     .filter((p) => p.featured)
-    .map((p) => ({
-      url: absoluteUrl(`/work/${p.slug}`),
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    }));
+    .map((p) => {
+      const coverImage = p.coverImage ?? p.screenshots?.[0]?.src;
+      return {
+        url: absoluteUrl(`/work/${p.slug}`),
+        lastModified,
+        changeFrequency: "monthly" as const,
+        priority: 0.8,
+        // Image sitemap entry — absolute URL to the case-study cover so the
+        // hero captures get crawled for Google Images. `images` is supported
+        // by MetadataRoute.Sitemap in this Next version (string[] of locs).
+        ...(coverImage ? { images: [absoluteUrl(coverImage)] } : {}),
+      };
+    });
 
   return [...staticRoutes, ...projectRoutes];
 }

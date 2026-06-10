@@ -96,8 +96,9 @@ const codeReceiptSnippet = `export function allCrossPagePairs(): { city: string;
   );
 }
 
-// Result: 21 cities × 10 services = 210 prerendered pages
-// generateStaticParams() returns all 210 at build time
+// Air Solutions: a city × service matrix across Baldwin County —
+// part of a 345-page platform, live on the sitemap (2026).
+// generateStaticParams() prerenders every cell at build time.
 // Each page composes from real local data (NOAA climate, Census housing,
 // utility rebate territory, FEMA flood zone) and unique prose
 `;
@@ -280,8 +281,8 @@ export default async function StudioPage() {
         </EditorialH2>
 
         <p className="reading-col editorial-body" style={{ marginTop: "24px" }}>
-          A small, sanitized excerpt from the matrix generator that produces Air Solutions&apos; 135
-          city × service pages. Rendered with Shiki at build time.
+          A small, sanitized excerpt from the matrix generator behind Air Solutions&apos;
+          345-page platform. Rendered with Shiki at build time.
         </p>
 
         <div style={{ marginTop: "16px", maxWidth: "760px" }}>

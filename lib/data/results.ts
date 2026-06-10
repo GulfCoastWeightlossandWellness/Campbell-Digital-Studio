@@ -39,15 +39,15 @@ export const caseStudyResults: Record<string, CaseStudyResult[]> = {
   "air-solutions": [
     {
       label: "Routes shipped",
-      value: "159",
-      detail: "15 cities × 9 services + service/city/seasonal hubs + tools",
-      capturedAt: "2026-05",
+      value: "345",
+      detail: "live sitemap, 2026-06-09",
+      capturedAt: "2026-06-09",
     },
     {
       label: "Programmatic matrix",
-      value: "15 × 9",
+      value: "City × service",
       detail: "Every Baldwin County city × every HVAC service, individually routed",
-      capturedAt: "2026-05",
+      capturedAt: "2026-06",
     },
     {
       label: "Custom interactive tools",
@@ -66,14 +66,49 @@ export const caseStudyResults: Record<string, CaseStudyResult[]> = {
     },
     {
       label: "GBP API automation",
-      value: "Filed",
-      detail: "Case 9-5827000041281 · review window open",
-      capturedAt: "2026-05-19",
+      value: "Live",
+      detail: "Programmatic posts, photo upload, and review-response drafting",
+      capturedAt: "2026-06",
     },
     {
       label: "Local Falcon SoLV (post-launch)",
       value: "Day 90 report",
       detail: "Tracking dashboard captures GSC + GA4 + Local Falcon at 30/60/90",
+      pending: true,
+    },
+  ],
+  "pro-1-painters": [
+    {
+      label: "Pages",
+      value: "424",
+      detail: "live sitemap, 2026-06-09",
+      capturedAt: "2026-06-09",
+    },
+    {
+      label: "AI Color Visualizer",
+      value: "On-device",
+      detail: "In-browser segment + recolor at /tools/color-visualizer — private, instant, $0",
+    },
+    {
+      label: "Blog engine",
+      value: "521 posts / 2-yr drip",
+      detail: "Native Mon–Fri publishing on Vercel cron, no CMS dependency",
+    },
+    {
+      label: "GBP",
+      value: "2 profiles managed",
+      detail: "Mobile + Baldwin, GBP API automation + Telegram field-photo intake",
+    },
+    {
+      label: "Migration",
+      value: "75/75 legacy URLs preserved",
+      detail: "WordPress → Next.js, DNS cutover 2026-06-07; /concrete-coatings/ 301→/floor-painting/",
+      capturedAt: "2026-06-07",
+    },
+    {
+      label: "Post-launch GSC + GA4",
+      value: "Day 90 report",
+      detail: "Tracking dashboard captures GSC + GA4 at 30/60/90",
       pending: true,
     },
   ],

@@ -38,9 +38,15 @@ const buildList = [
 const caseStudies = [
   {
     slug: "air-solutions",
-    teaser: "Shipped 159 programmatic pages for Air Solutions HVAC",
+    teaser: "Migrated Air Solutions HVAC to a 345-page programmatic platform",
     detail:
-      "15 Baldwin County cities × 9 HVAC services = 135 intersection pages, plus a 3D AC Explorer, a typed diagnostic quiz, a Repair-vs-Replace ROI calculator, and a 4-tier NWS-aware banner system.",
+      "A city × service matrix across Baldwin County now live at airsolutionspros.com — 345 pages, a native blog engine on a weekday drip, a 3D AC Explorer, a typed diagnostic quiz, a Repair-vs-Replace ROI calculator, and a 4-tier NWS-aware banner system.",
+  },
+  {
+    slug: "pro-1-painters",
+    teaser: "Rebuilt Pro 1 Painters off WordPress into a 424-page Next.js platform",
+    detail:
+      "A two-location painting brand across Mobile and Baldwin County — interior, exterior, cabinet, and floor painting — plus an on-device AI Color Visualizer that repaints a room or exterior straight from a photo in the browser. Both Google Business Profiles managed.",
   },
   {
     slug: "acexperts",
@@ -97,7 +103,7 @@ export default function LocalServicesPage() {
             pointerEvents: "none",
           }}
         >
-          15 cities × 9 services — 135 indexed pages
+          City × service across Baldwin County — 345 indexed pages
         </div>
         {/* Dim edge vignette so scene fades into surrounding sections */}
         <div
@@ -142,8 +148,8 @@ export default function LocalServicesPage() {
         <div className="section-wrap section-block">
           <SectionTag num="02" label="Shipped for local services" />
           <EditorialH2>
-            Three local-service builds,<br />
-            <em>currently running.</em>
+            Four local-service builds,<br />
+            <em>shipped and running.</em>
           </EditorialH2>
 
           <div style={{ marginTop: "48px" }}>

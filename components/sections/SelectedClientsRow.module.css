@@ -6,11 +6,14 @@
   background: var(--color-canvas);
 }
 
+/* Flex-wrap row so any count of wordmarks (currently 7) flows on one line on
+   wide screens and wraps cleanly below — no orphaned grid cell. */
 .row {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: clamp(16px, 2vw, 32px);
+  justify-content: space-between;
+  gap: clamp(18px, 2.5vw, 40px);
   list-style: none;
   margin: 0;
   padding: clamp(24px, 3vw, 40px) 0;
@@ -22,6 +25,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 1 1 auto;
   min-height: 64px;
 }
 
@@ -78,11 +82,15 @@
   display: block;
 }
 
-/* ── Responsive: collapse columns gracefully ──────────────────────────── */
+/* ── Responsive: wrap to fewer-per-row gracefully ─────────────────────── */
 @media (max-width: 960px) {
   .row {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    row-gap: 20px;
+    justify-content: center;
+    row-gap: 22px;
+    column-gap: clamp(20px, 4vw, 36px);
+  }
+  .cell {
+    flex: 0 1 auto;
   }
   .wordmark {
     font-size: 13px;
@@ -91,6 +99,6 @@
 
 @media (max-width: 480px) {
   .row {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 22px;
   }
 }

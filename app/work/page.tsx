@@ -41,6 +41,12 @@ const ENRICH: Record<
     year: "2026",
     coverImage: "/images/case-studies/covers/air-solutions-1-hero.png",
   },
+  "pro-1-painters": {
+    tier: 1,
+    industry: "Local Services",
+    year: "2026",
+    coverImage: "/images/case-studies/covers/pro-1-1-hero.png",
+  },
   revitalize: {
     tier: 1,
     industry: "Healthcare",
@@ -159,9 +165,12 @@ export default function WorkPage() {
     () => new Set(allEnriched.map((p) => p.industry)).size,
     [allEnriched],
   );
-  // Active retainers — known from memory (Air Solutions, Revitalize, IHE, ACExperts).
-  // Hard-coded because the project shape doesn't carry retainer status yet.
-  const activeRetainers = 4;
+  // Active retainers — derived from the registry's `status` field so the count
+  // tracks the real lineup instead of a hand-maintained constant.
+  const activeRetainers = useMemo(
+    () => allEnriched.filter((p) => p.status === "Active Retainer").length,
+    [allEnriched],
+  );
 
   const filtered = useMemo(() => {
     if (activeFilter === "all") return allEnriched;
@@ -364,15 +373,15 @@ export default function WorkPage() {
               marginBottom: 16,
             }}
           >
-            View the studio&apos;s full index — 330+ pages, {totalCount} sites,
+            View the studio&apos;s full index — 1,000+ pages, {totalCount} sites,
             18 months.
           </p>
           <Link
-            href="/index"
+            href="/archive"
             className="editorial-link arrow-link mono"
             style={{ fontSize: 13 }}
           >
-            /index <span className="arrow" aria-hidden>→</span>
+            /archive <span className="arrow" aria-hidden>→</span>
           </Link>
         </div>
       </section>

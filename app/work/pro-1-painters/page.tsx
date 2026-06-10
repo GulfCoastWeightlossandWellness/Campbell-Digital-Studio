@@ -7,26 +7,26 @@ import { siteConfig } from "@/lib/site-config";
 // Essay sub-components
 import EssayHero from "@/components/case-study-essay/EssayHero";
 import EssayBrief from "@/components/case-study-essay/EssayBrief";
-import ArchitectureDiagram from "@/components/case-study-essay/ArchitectureDiagram";
+import ArchitectureDiagramPro1 from "@/components/case-study-essay/ArchitectureDiagramPro1";
 import FeaturesGrid from "@/components/case-study-essay/FeaturesGrid";
 import ScreenshotSpread from "@/components/case-study-essay/ScreenshotSpread";
 import EssayWhyItWorks from "@/components/case-study-essay/EssayWhyItWorks";
-import EssayOutcome from "@/components/case-study-essay/EssayOutcome";
+import EssayOutcomePro1 from "@/components/case-study-essay/EssayOutcomePro1";
 import EssayReveal from "@/components/case-study-essay/EssayReveal";
 import ScrollProgressRule from "@/components/case-study-essay/ScrollProgressRule";
-import CurrentlyReading from "@/components/case-study-essay/CurrentlyReading";
+import CurrentlyReadingPro1 from "@/components/case-study-essay/CurrentlyReadingPro1";
 
 export const metadata: Metadata = {
-  title: "Air Solutions Heating & Cooling — Case Study | Campbell Digital Studio",
+  title: "Pro 1 Painters — Case Study | Campbell Digital Studio",
   description:
-    "A 345-page programmatic SEO platform for an HVAC contractor in Baldwin County, Alabama — now live on airsolutionspros.com. A city × service matrix, Three.js diagnostic tool, NWS hurricane alert integration, and a 9-type Schema.org architecture.",
-  alternates: { canonical: "/work/air-solutions" },
+    "A 424-page painting platform for Mobile + Baldwin County, Alabama — an on-device AI color visualizer, interior, exterior, cabinet, and floor painting, and a 521-post native blog engine, migrated from WordPress to Next.js.",
+  alternates: { canonical: "/work/pro-1-painters" },
   openGraph: {
-    title: "Air Solutions Heating & Cooling | Campbell Digital Studio",
+    title: "Pro 1 Painters | Campbell Digital Studio",
     description:
-      "345 live pages. 4 custom interactive tools. 9 Schema.org types. Live on airsolutionspros.com — the strongest technical local-search platform in Baldwin County HVAC.",
-    url: "/work/air-solutions",
-    images: [{ url: "/images/case-studies/covers/air-solutions-live-1-hero.png" }],
+      "424 live pages. An on-device AI color visualizer. A 521-post native blog engine. A two-metro painting platform migrated from WordPress to Next.js.",
+    url: "/work/pro-1-painters",
+    images: [{ url: "/images/case-studies/covers/pro-1-1-hero.png" }],
   },
 };
 
@@ -40,19 +40,19 @@ function getBreadcrumbSchema() {
       {
         "@type": "ListItem",
         position: 3,
-        name: "Air Solutions Heating & Cooling",
-        item: `${siteConfig.url.replace(/\/$/, "")}/work/air-solutions`,
+        name: "Pro 1 Painters",
+        item: `${siteConfig.url.replace(/\/$/, "")}/work/pro-1-painters`,
       },
     ],
   };
 }
 
-export default function AirSolutionsCaseStudy() {
-  const project = getProjectBySlug("air-solutions");
+export default function Pro1PaintersCaseStudy() {
+  const project = getProjectBySlug("pro-1-painters");
   if (!project) notFound();
 
   // Prev / next navigation — wrap around the full projects array
-  const idx = projects.findIndex((p) => p.slug === "air-solutions");
+  const idx = projects.findIndex((p) => p.slug === "pro-1-painters");
   const prev = projects[(idx - 1 + projects.length) % projects.length];
   const next = projects[(idx + 1) % projects.length];
 
@@ -67,7 +67,7 @@ export default function AirSolutionsCaseStudy() {
       <ScrollProgressRule />
 
       {/* Currently reading — fixed corner indicator */}
-      <CurrentlyReading />
+      <CurrentlyReadingPro1 />
 
       {/* ── §01 Hero spread ── */}
       <EssayHero project={project} />
@@ -76,7 +76,7 @@ export default function AirSolutionsCaseStudy() {
       <EssayBrief project={project} />
 
       {/* ── §03 Architecture diagram ── */}
-      <ArchitectureDiagram />
+      <ArchitectureDiagramPro1 />
 
       {/* ── §04 What Was Built — features grid ── */}
       <FeaturesGrid features={project.features} whatIBuilt={project.whatIBuilt} />
@@ -88,7 +88,7 @@ export default function AirSolutionsCaseStudy() {
       <EssayWhyItWorks project={project} />
 
       {/* ── §07 Outcome — data grid ── */}
-      <EssayOutcome metaGrid={project.metaGrid} />
+      <EssayOutcomePro1 metaGrid={project.metaGrid} />
 
       {/* ── Closing CTA + nav ── */}
       <EssayReveal>
@@ -120,7 +120,7 @@ export default function AirSolutionsCaseStudy() {
                 style={{ marginBottom: "24px", maxWidth: "20ch" }}
               >
                 Ship a platform like this<br />
-                <em>for your market.</em>
+                <em>for your trade.</em>
               </h2>
               <p
                 style={{
@@ -132,9 +132,11 @@ export default function AirSolutionsCaseStudy() {
                   marginBottom: "32px",
                 }}
               >
-                The same programmatic SEO architecture — cities × services matrix,
-                custom interactive tools, Schema.org infrastructure — works for any
-                multi-location service business with a county-level footprint.
+                The same architecture — a multi-metro city × service footprint, a
+                native blog engine, and an interactive tool customers actually
+                use, like the on-device color visualizer that lets a homeowner
+                repaint their own room before they ever call — works for any
+                painting or trades business running more than one location.
               </p>
               <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
                 <Link href="/inquire" className="btn-fill">

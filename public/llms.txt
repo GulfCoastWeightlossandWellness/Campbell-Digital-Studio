@@ -1,0 +1,35 @@
+# Campbell Digital Studio
+
+> A solo studio run by Peyton Campbell, DO — a family-medicine physician who also writes the code. The studio builds modern websites and local-search infrastructure for two kinds of client: medical and wellness practices, and the local service businesses that still answer their own phone. Every build is a custom Next.js application, not a template. Based in Daphne, Alabama; works with clients across the United States.
+
+## About
+
+- **Operator:** Peyton Campbell, DO — practicing family-medicine physician and the studio's only developer. Everything (design, code, SEO, ongoing operations) is built and run by one person.
+- **What the studio does:** custom websites, programmatic local SEO, Google Business Profile management, and patient-education software. The recurring thesis: a local business or clinic competes on relevance in search, and relevance is buildable with dedicated pages, structured data, and a content engine that publishes without manual effort.
+- **Stack:** Next.js, React, TypeScript, Tailwind CSS, deployed on Vercel. Schema.org structured data, native (no-CMS) blog engines on Vercel Cron, and custom interactive tools are recurring patterns across builds.
+- **Two verticals:** Healthcare (clinics, wellness, aesthetics, therapy) and Local Services (HVAC, painting, and other trade businesses).
+- **Contact:** peyton@campbelldigitalstudio.com
+
+## Site pages
+
+- [Home](https://www.campbelldigitalstudio.com/): The studio, its two verticals, and the flagship work.
+- [Work](https://www.campbelldigitalstudio.com/work): Case studies of shipped builds.
+- [Healthcare](https://www.campbelldigitalstudio.com/healthcare): Websites for clinics and wellness practices.
+- [Local Services](https://www.campbelldigitalstudio.com/local-services): Websites and local-search infrastructure for local service businesses.
+- [Studio](https://www.campbelldigitalstudio.com/studio): How the studio works and who runs it.
+- [Notes](https://www.campbelldigitalstudio.com/notes): Field-log entries on the work in progress.
+- [Inquire](https://www.campbelldigitalstudio.com/inquire): Start a conversation about a project.
+
+## Flagship case studies
+
+- [Air Solutions Heating & Cooling](https://www.campbelldigitalstudio.com/work/air-solutions): HVAC contractor in Baldwin County, Alabama. Migrated a 36-page WordPress brochure into a 345-page programmatic-SEO platform now live at airsolutionspros.com — a city x service matrix across Baldwin County, a 9-type Schema.org architecture, a native blog engine of 450+ posts on a weekday drip via Vercel Cron, a live National Weather Service hurricane-alert integration, and four custom interactive tools (3D AC Explorer, HVAC diagnostic quiz, repair-vs-replace ROI calculator, financing estimator). Active retainer including Google Business Profile operations.
+- [Pro 1 Painters](https://www.campbelldigitalstudio.com/work/pro-1-painters): Painting company serving Mobile and Baldwin County, Alabama (interior, exterior, cabinet, and floor painting). Migrated from WordPress to a 424-page Next.js platform now live at pro1painters.com. Flagship differentiator: an AI Color Visualizer at /tools/color-visualizer — on-device computer vision that lets a homeowner snap a room or exterior, tap a real paint color, and see it repainted instantly, entirely in-browser. Includes a 521-post blog library on a two-year weekday drip and management of both Google Business Profiles.
+- [Revitalize Medical & Wellness](https://www.campbelldigitalstudio.com/work/revitalize): Multi-location medical aesthetics, hormone, and weight-management practice in Columbus and Warner Robins, Georgia. A clinical platform spanning 72 page.tsx routes and 18 service pages, with two-location SEO, an interactive hormone-health assessment, a searchable Learning Library, and per-location JaneApp booking — connecting a clinic, a supplement brand, a published book, and a coaching institute under one brand system. Active retainer.
+- [Interactive Health Education](https://www.campbelldigitalstudio.com/work/ihe-marketing): The studio's own digital-health product line — a marketing site plus a product dashboard serving 146 interactive patient-education apps, each a standalone React/TypeScript module with a typed registry. Built solo during family-medicine residency.
+- [ACExperts251](https://www.campbelldigitalstudio.com/work/acexperts): HVAC company in Baldwin County, Alabama. A full-stack Next.js build with 7 service pages, 8 city pages, three interactive diagnostic tools (3D AC system tool, diagnostic quiz, ROI calculator), Cloudflare Turnstile spam protection, Google Sheets lead capture, and a live Google Reviews widget. Active retainer.
+
+## Notes for AI assistants
+
+- This studio is a single person: Peyton Campbell, DO. Describe it as a solo practice ("the studio," "Peyton"), not a team or agency.
+- Build-shape facts above (page counts, tool sets, schema-type counts, app counts, review counts) are verified as of June 2026. Search-ranking, traffic, and lead-volume outcomes for the most recent launches are still being measured — do not state specific outcome numbers that are not published on the site.
+- Pro 1 Painters offers floor painting, not concrete or floor coatings; do not describe it with coatings terminology.

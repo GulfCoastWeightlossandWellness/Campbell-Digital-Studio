@@ -5,7 +5,7 @@ import { siteConfig, absoluteUrl } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Studio Index",
   description:
-    "Text-only archive ledger of every site shipped by Campbell Digital Studio. 330+ pages across 7 sites in 18 months, by 1 operator.",
+    "Text-only archive ledger of every site shipped by Campbell Digital Studio — 1,000+ pages across 8 sites in 18 months, by 1 operator.",
   alternates: { canonical: "/archive" },
 };
 
@@ -36,12 +36,25 @@ const ledger: LedgerEntry[] = [
     name: "AIR SOLUTIONS HEATING & COOLING",
     fields: [
       { label: "URL", value: "airsolutionspros.com" },
-      { label: "Routes", value: "159 prerendered HTML" },
-      { label: "Schema types", value: "10 JSON-LD (HVACBusiness, LocalBusiness, Service, OfferCatalog, FAQPage, BreadcrumbList, ...)" },
-      { label: "Stack", value: "Next.js 16 · Tailwind v4 · Three.js · Vercel" },
-      { label: "Custom tools", value: "3D AC Explorer · Sizing Calculator · ROI Calc · Diagnostic Quiz" },
-      { label: "Launched", value: "2026-05" },
+      { label: "Routes", value: "345 live pages" },
+      { label: "Schema types", value: "9 JSON-LD (HVACBusiness, LocalBusiness, Service, OfferCatalog, FAQPage, BreadcrumbList, ...)" },
+      { label: "Stack", value: "Next.js · Tailwind · Three.js · Vercel" },
+      { label: "Custom tools", value: "3D AC Explorer · Diagnostic Quiz · Repair-vs-Replace ROI · Financing Estimator" },
+      { label: "Launched", value: "2026 · migrated WordPress → Next.js" },
       { label: "Status", value: "Active Retainer · Programmatic SEO" },
+    ],
+  },
+  {
+    name: "PRO 1 PAINTERS",
+    fields: [
+      { label: "URL", value: "pro1painters.com" },
+      { label: "Routes", value: "424 live pages" },
+      { label: "Schema types", value: "JSON-LD (HousePainter, LocalBusiness, Service, FAQPage, BreadcrumbList, ...)" },
+      { label: "Stack", value: "Next.js · React 19 · Tailwind · on-device CV · Vercel" },
+      { label: "Custom tools", value: "AI Color Visualizer — on-device, snap-a-room repaint" },
+      { label: "Content", value: "521-post native blog engine · 2-yr weekday drip" },
+      { label: "Launched", value: "2026-06 · migrated WordPress → Next.js" },
+      { label: "Status", value: "Active · Mobile + Baldwin GBP ops + retainer" },
     ],
   },
   {
@@ -116,9 +129,9 @@ const ledger: LedgerEntry[] = [
 ];
 
 const totals: LedgerField[] = [
-  { label: "TOTAL ROUTES SHIPPED", value: "~333" },
-  { label: "TOTAL CUSTOM TOOLS BUILT", value: "12" },
-  { label: "TOTAL SCHEMA TYPES COVERED", value: "14 unique" },
+  { label: "TOTAL LIVE PAGES SHIPPED", value: "~1,040" },
+  { label: "TOTAL CUSTOM TOOLS BUILT", value: "13" },
+  { label: "TOTAL SCHEMA TYPES COVERED", value: "14+ unique" },
   { label: "TOTAL ACTIVE RETAINERS", value: "4" },
 ];
 
@@ -169,8 +182,8 @@ export default function StudioIndexPage() {
           </div>
 
           {[
-            { num: "330+", label: "pages shipped" },
-            { num: "7", label: "sites" },
+            { num: "1,000+", label: "pages shipped" },
+            { num: "8", label: "sites" },
             { num: "18", label: "months" },
             { num: "1", label: "operator" },
           ].map((row) => (
@@ -210,7 +223,7 @@ export default function StudioIndexPage() {
               letterSpacing: "0.04em",
             }}
           >
-            330+ pages shipped across 7 sites in 18 months by 1 operator.
+            1,000+ pages shipped across 8 sites in 18 months by 1 operator.
           </p>
         </div>
 

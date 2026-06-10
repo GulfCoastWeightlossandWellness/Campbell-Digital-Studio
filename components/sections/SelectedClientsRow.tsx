@@ -39,7 +39,16 @@ const CLIENTS: ClientMark[] = [
     // Air Solutions brand red — verified in their site.
     color: "#C8331B",
     caseStudySlug: "air-solutions",
-    href: "https://air-solutions-pros.vercel.app",
+    // Live on the real domain since the WordPress → Next.js cutover.
+    href: "https://airsolutionspros.com",
+  },
+  {
+    id: "pro-1-painters",
+    wordmark: "Pro 1 Painters",
+    // Professional painting blue — display wordmark color.
+    color: "#1F4E79",
+    caseStudySlug: "pro-1-painters",
+    href: "https://pro1painters.com",
   },
   {
     id: "revitalize",

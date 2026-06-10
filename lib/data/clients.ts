@@ -11,12 +11,12 @@
  *     "selected" rather than "single reference."
  *   - Proof bar truthful counts: use `getDisplayableClients().length` for total
  *     client count, `getActiveClients().length` for active engagements. Never
- *     hardcode "2 live client builds" — the studio has 6 consented clients and
- *     4 active engagements as of 2026-05.
+ *     hardcode "2 live client builds" — the studio has 7 consented clients and
+ *     5 active engagements as of 2026-06.
  *
  * Engagement state:
  *   - `active: true`  → currently shipping work / on retainer (Revitalize,
- *      Air Solutions, IHE, ACExperts). Counts toward "active engagements."
+ *      Air Solutions, Pro 1 Painters, IHE, ACExperts). Counts toward "active engagements."
  *   - `active: false` → shipped and complete, no current retainer (Collective,
  *      Blessed). Counts toward "clients shipped" but not "active engagements."
  */
@@ -64,8 +64,18 @@ export const clients: Client[] = [
     name: "Air Solutions Heating & Cooling",
     shortName: "Air Solutions",
     type: "HVAC · Baldwin County, AL",
-    websiteUrl: "https://air-solutions-pros.vercel.app",
+    websiteUrl: "https://airsolutionspros.com",
     caseStudySlug: "air-solutions",
+    publicConsent: true,
+    active: true,
+  },
+  {
+    id: "pro-1-painters",
+    name: "Pro 1 Painters",
+    shortName: "Pro 1 Painters",
+    type: "Painting · Mobile + Baldwin County, AL",
+    websiteUrl: "https://pro1painters.com",
+    caseStudySlug: "pro-1-painters",
     publicConsent: true,
     active: true,
   },

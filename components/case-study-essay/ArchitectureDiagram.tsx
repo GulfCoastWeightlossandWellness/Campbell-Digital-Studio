@@ -2,7 +2,7 @@ import EssayReveal from "./EssayReveal";
 import styles from "./ArchitectureDiagram.module.css";
 
 /**
- * Architecture Diagram — custom SVG + grid showing the 210-page programmatic
+ * Architecture Diagram — custom SVG + grid showing the programmatic
  * SEO matrix, 4 interactive tools, 4 seasonal pages, and 9 schema types.
  * Each "type" rendered as a distinct dot size/treatment.
  */
@@ -12,7 +12,7 @@ const SERVICES = 10;
 
 // Colors and sizes per dot type
 type DotType =
-  | "city-service"   // 210 programmatic pages — small filled square
+  | "city-service"   // programmatic matrix page — small filled square
   | "tool"           // 4 interactive tools — larger circle with ring
   | "seasonal"       // 4 seasonal pages — medium circle
   | "schema";        // 9 schema types — diamond shape
@@ -74,7 +74,7 @@ export default function ArchitectureDiagram() {
           </div>
 
           <h2 className={`editorial-h2 ${styles.heading}`}>
-            210 pages.<br />
+            345 pages.<br />
             <em>One source of truth.</em>
           </h2>
 
@@ -93,7 +93,7 @@ export default function ArchitectureDiagram() {
               viewBox={`0 0 ${svgW} ${svgH}`}
               width={svgW}
               height={svgH}
-              aria-label="Architecture diagram: 21 cities × 10 services matrix plus tools, seasonal pages, and schema types"
+              aria-label="Architecture diagram: a 21-city × service programmatic matrix plus tools, seasonal pages, and schema types"
               className={styles.svg}
             >
               {/* ── City × Service matrix ── */}
@@ -194,8 +194,8 @@ export default function ArchitectureDiagram() {
               <div className={styles.labelGroup} style={{ marginTop: 0 }}>
                 <span className={styles.legendDot} data-kind="page" aria-hidden />
                 <div>
-                  <div className={styles.labelHead}>210 programmatic pages</div>
-                  <div className={styles.labelSub}>21 cities × 10 HVAC services</div>
+                  <div className={styles.labelHead}>21 cities × services</div>
+                  <div className={styles.labelSub}>Programmatic matrix — part of 345 live pages</div>
                 </div>
               </div>
 

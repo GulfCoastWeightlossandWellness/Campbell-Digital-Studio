@@ -70,7 +70,7 @@ type Loop = {
 const LOOPS: Loop[] = [
   {
     src: "/hero-loops/air-solutions.mp4",
-    label: "Air Solutions · HVAC · 312 pages live",
+    label: "Air Solutions · HVAC · 345 pages live",
     url: "airsolutionspros.com/services/ac-repair/daphne-al",
     alt: "Air Solutions HVAC programmatic SEO matrix loop",
   },
@@ -100,7 +100,12 @@ const DISSOLVE_MS = 240;
 const MAX_TILT_DEG = 4;
 const SPRING = { stiffness: 220, damping: 28, mass: 0.6 };
 
-export default function Hero() {
+type HeroProps = {
+  /** Active-engagement count (from proofBarCounts) — keeps the meta line truthful. */
+  activeClients?: number;
+};
+
+export default function Hero({ activeClients }: HeroProps) {
   const reducedMotion = useReducedMotion();
   const [loopIdx, setLoopIdx] = useState(0);
   const [videoReady, setVideoReady] = useState(false);
@@ -238,8 +243,12 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.46, duration: 0.32 }}
           >
-            Daphne, Alabama · Solo studio · Currently shipping for 2 active
-            clients
+            Daphne, Alabama · Solo studio
+            {typeof activeClients === "number" && activeClients > 0
+              ? ` · Currently shipping for ${activeClients} active ${
+                  activeClients === 1 ? "client" : "clients"
+                }`
+              : " · Currently shipping"}
           </motion.p>
 
           <div className={styles.ctas}>
@@ -351,7 +360,7 @@ export default function Hero() {
                   alt=""
                   width={1280}
                   height={800}
-                  priority={false}
+                  loading="lazy"
                   fetchPriority="low"
                   className={`${styles.poster} ${
                     videoReady && !reducedMotion ? styles.posterHidden : ""
@@ -422,7 +431,8 @@ export default function Hero() {
                   ) : null}
                 </AnimatePresence>
 
-                {/* Cycling gold label — fades between loops. */}
+                {/* Cycling gold label — fades between loops. A live-status dot
+                    signals these are production sites, not mockups. */}
                 {!isMobile && !reducedMotion ? (
                   <AnimatePresence mode="wait">
                     <motion.div
@@ -433,11 +443,15 @@ export default function Hero() {
                       exit={{ opacity: 0 }}
                       transition={{ duration: DISSOLVE_MS / 1000 }}
                     >
+                      <span className={styles.liveDot} aria-hidden />
                       {activeLoop.label}
                     </motion.div>
                   </AnimatePresence>
                 ) : (
-                  <div className={styles.loopLabel}>{LOOPS[0].label}</div>
+                  <div className={styles.loopLabel}>
+                    <span className={styles.liveDot} aria-hidden />
+                    {LOOPS[0].label}
+                  </div>
                 )}
               </div>
             </motion.div>

@@ -27,9 +27,17 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-const revitalize = getProjectBySlug("revitalize");
-const airSolutions = getProjectBySlug("air-solutions");
-const acexperts = getProjectBySlug("acexperts");
+// Featured anchors — the two live local-services flagships lead (Air Solutions
+// migrated off WordPress to its real domain; Pro 1 Painters cut over 2026-06-07),
+// then healthcare (Revitalize) and the second HVAC build (ACExperts). Pro 1 is
+// added to the registry by the data layer; filter undefined so the section still
+// renders if a single slug is missing at build time.
+const featuredWork = [
+  getProjectBySlug("air-solutions"),
+  getProjectBySlug("pro-1-painters"),
+  getProjectBySlug("revitalize"),
+  getProjectBySlug("acexperts"),
+].filter((p): p is NonNullable<typeof p> => Boolean(p));
 
 const studioPrinciples = [
   {
@@ -45,7 +53,7 @@ const studioPrinciples = [
   {
     n: "03",
     title: "Architectures, not brochures.",
-    body: "5-page contractor sites are not the business. 210-page programmatic SEO matrices are.",
+    body: "5-page contractor sites are not the business. 300-plus-page programmatic SEO platforms are.",
   },
 ];
 
@@ -82,19 +90,20 @@ export default function HomePage() {
       />
 
       {/* § 01 — Hero (split-stage with live device frame) */}
-      <Hero />
+      <Hero activeClients={activeEngagements} />
 
-      {/* § 02 + § 03 + § 04 — Featured work (3 anchors: Air Solutions, Revitalize, ACExperts) */}
-      {revitalize && airSolutions && acexperts ? (
+      {/* § 02 — Featured work (4 anchors: Air Solutions + Pro 1 lead as the two
+          live local-services flagships, then Revitalize, then ACExperts) */}
+      {featuredWork.length > 0 ? (
         <InViewReveal>
-          <FeaturedWorkPreview projects={[airSolutions, revitalize, acexperts]} sectionNum="02" />
+          <FeaturedWorkPreview projects={featuredWork} sectionNum="02" />
         </InViewReveal>
       ) : null}
 
-      {/* § 03.5 — IHE 146-app mosaic band */}
-      <IHEMosaic />
+      {/* § 03 — IHE 146-app mosaic band */}
+      <IHEMosaic sectionNum="03" />
 
-      {/* § 03.6 — IHE demo video */}
+      {/* IHE demo video — continuation of the IHE band, intentionally tag-less */}
       <IHEDemoVideo />
 
       {/* § 04 — Vertical split */}
@@ -113,24 +122,25 @@ export default function HomePage() {
             <div className="vertical-split-card__eyebrow">If you run a local service business</div>
             <h3 className="vertical-split-card__title">Local services <em>→</em></h3>
             <p className="vertical-split-card__body">
-              210-cell city × service programmatic SEO matrices. Google Business Profile operations.
-              NWS-aware seasonal landing pages. Field-team photo intake via Telegram bot.
+              Programmatic city × service SEO matrices — 300-plus pages on the live platforms.
+              Google Business Profile operations. NWS-aware seasonal landing pages. Field-team
+              photo intake via Telegram bot.
             </p>
           </Link>
         </div>
       </section>
 
-      {/* § 04.5 — Live Matrix Generator (the marquee tech demo) */}
+      {/* § 05 — Live Matrix Generator (the marquee tech demo) */}
       <InViewReveal delay={100}>
-        <MatrixDemo cities={[...CITIES]} services={[...SERVICES]} />
+        <MatrixDemo cities={[...CITIES]} services={[...SERVICES]} sectionNum="05" />
       </InViewReveal>
 
-      {/* § 05 — Selected clients (real-color wordmarks) */}
-      <SelectedClientsRow />
+      {/* § 06 — Selected clients (real-color wordmarks) */}
+      <SelectedClientsRow sectionNum="06" />
 
-      {/* § 06 — Studio principles (3 cards) */}
+      {/* § 07 — Studio principles (3 cards) */}
       <section className="section-wrap section-block">
-        <SectionTag num="06" label="Why this studio" />
+        <SectionTag num="07" label="Why this studio" />
         <KineticHeadline>
           <EditorialH2>
             Three reasons clinics and service businesses pick<br />
@@ -151,13 +161,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* § 06.5 — Owners we've built for */}
-      <OwnersRow />
+      {/* § 08 — Owners we've built for */}
+      <OwnersRow sectionNum="08" />
 
-      {/* § 07 — Featured testimonial (renders only when real quote exists) */}
+      {/* § 09 — Featured testimonial (renders only when real quote exists) */}
       {featuredTestimonials.length > 0 ? (
         <section className="section-wrap section-block-tight">
-          <SectionTag num="07" label="Client voice" />
+          <SectionTag num="09" label="Client voice" />
           <div style={{ marginTop: "32px", display: "grid", gap: "48px" }}>
             {featuredTestimonials.slice(0, 1).map((t) => (
               <TestimonialBlock key={t.id} testimonial={t} />
@@ -177,7 +187,7 @@ export default function HomePage() {
         }}
       >
         <div className="section-wrap section-block">
-          <SectionTag num="08" label="How an engagement runs" />
+          <SectionTag num="10" label="How an engagement runs" />
           <EditorialH2>
             Day 0 to Day 30.<br />
             <em>Real days, not phases.</em>
@@ -206,7 +216,7 @@ export default function HomePage() {
 
       {/* § 09 — About (60-second version + link to /studio) */}
       <section id="about" className="section-wrap section-block" style={{ scrollMarginTop: "96px" }}>
-        <SectionTag num="09" label="About" />
+        <SectionTag num="11" label="About" />
         <EditorialH2 className="reading-col">
           Peyton Campbell, <em>DO.</em>
         </EditorialH2>
@@ -228,13 +238,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* § 10 — FAQ */}
-      <FaqSection sectionNum="10" />
+      {/* § 12 — FAQ */}
+      <FaqSection sectionNum="12" />
 
-      {/* § 11 — Closing CTA (dark navy stage) */}
+      {/* § 13 — Closing CTA (dark navy stage) */}
       <InViewReveal as="section" className="cover-surface">
         <div className="section-wrap section-block">
-          <SectionTag num="11" label="Working together" onDark />
+          <SectionTag num="13" label="Working together" onDark />
           <EditorialH2 onDark className="reading-col">
             Start a<br />
             <em>project.</em>
