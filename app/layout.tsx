@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import Analytics from "@/components/Analytics";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import ScrollProgress from "@/components/scroll/ScrollProgress";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { siteConfig, absoluteUrl } from "@/lib/site-config";
@@ -172,6 +173,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd schema={[organizationSchema, websiteSchema, personSchema]} />
         <ScrollProgress />
         <Analytics />
+        <VercelAnalytics />
         <Header />
         <main id="main-content" tabIndex={-1}>{children}</main>
         <Footer />
