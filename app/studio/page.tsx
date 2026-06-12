@@ -149,7 +149,7 @@ export default async function StudioPage() {
 
           <div className="studio-founder-grid__portrait">
             <Image
-              src="/images/founder/peyton-campbell.svg"
+              src="/images/founder/peyton-campbell.jpg"
               alt={`${siteConfig.founder.name}, ${siteConfig.founder.credential}`}
               fill
               sizes="(max-width: 720px) 160px, (max-width: 1024px) 180px, 200px"
