@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { getProjectBySlug } from "@/lib/projects";
 import InViewReveal from "@/components/scroll/InViewReveal";
 import KineticHeadline from "@/components/scroll/KineticHeadline";
@@ -217,24 +218,57 @@ export default function HomePage() {
       {/* § 09 — About (60-second version + link to /studio) */}
       <section id="about" className="section-wrap section-block" style={{ scrollMarginTop: "96px" }}>
         <SectionTag num="11" label="About" />
-        <EditorialH2 className="reading-col">
-          Peyton Campbell, <em>DO.</em>
-        </EditorialH2>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "clamp(28px, 5vw, 64px)",
+            alignItems: "flex-start",
+            marginTop: "8px",
+          }}
+        >
+          <div
+            style={{
+              position: "relative",
+              width: "clamp(150px, 22vw, 220px)",
+              aspectRatio: "4 / 5",
+              flexShrink: 0,
+              borderRadius: "8px",
+              overflow: "hidden",
+              border: "1px solid var(--border-subtle)",
+              background: "var(--panel)",
+            }}
+          >
+            <Image
+              src="/images/founder/peyton-campbell.jpg"
+              alt="Peyton Campbell, DO"
+              fill
+              sizes="(max-width: 720px) 150px, 220px"
+              style={{ objectFit: "cover" }}
+            />
+          </div>
 
-        <div className="editorial-body reading-col" style={{ marginTop: "32px" }}>
-          <p>
-            Physician in Daphne, Alabama. Developer since before medical school. I build digital
-            infrastructure for clinical practices and local service businesses — programmatic SEO
-            platforms, multi-location architectures, GBP automation pipelines. Solo, by design.
-          </p>
-          <p>
-            The clinical work keeps me grounded in what practices actually face. The development
-            work is what I do when I'm not in clinic. The combination is why my medical clients
-            trust me with their sites and why my trade clients trust me with their architectures.
-          </p>
-          <p>
-            <Link href="/studio" className="editorial-link">Full studio page →</Link>
-          </p>
+          <div style={{ flex: "1 1 360px", minWidth: 0, maxWidth: "62ch" }}>
+            <EditorialH2>
+              Peyton Campbell, <em>DO.</em>
+            </EditorialH2>
+
+            <div className="editorial-body" style={{ marginTop: "24px" }}>
+              <p>
+                Physician in Daphne, Alabama. Developer since before medical school. I build digital
+                infrastructure for clinical practices and local service businesses — programmatic SEO
+                platforms, multi-location architectures, GBP automation pipelines. Solo, by design.
+              </p>
+              <p>
+                The clinical work keeps me grounded in what practices actually face. The development
+                work is what I do when I'm not in clinic. The combination is why my medical clients
+                trust me with their sites and why my trade clients trust me with their architectures.
+              </p>
+              <p>
+                <Link href="/studio" className="editorial-link">Full studio page →</Link>
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

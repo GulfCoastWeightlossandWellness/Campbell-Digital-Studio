@@ -56,7 +56,7 @@ const OWNERS: Owner[] = [
     id: "peyton-campbell",
     name: "Peyton Campbell, DO",
     role: "Campbell Digital Studio",
-    src: "/images/external/owners/peyton-campbell.svg",
+    src: "/images/external/owners/peyton-campbell.jpg",
     alt: "Peyton Campbell, DO, Campbell Digital Studio",
   },
 ];
