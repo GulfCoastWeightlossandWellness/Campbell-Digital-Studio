@@ -19,14 +19,15 @@ export default function StudioMark({ onDark, size = "md", href = "/" }: Props) {
 
   // The transparent wordmark renders dark navy on light backgrounds (use on cream).
   // The dark-canvas wordmark renders white on navy (use on cover-surface).
+  // Both are the clean, full-bleed lockup on a transparent background:
+  //   light bg  → navy + gold ink (the primary logo)
+  //   dark bg   → white + gold ink (navy recolored to white)
   const src = onDark
-    ? "/images/brand/campbell-digital-studio-horizontal-dark.png"
+    ? "/images/brand/campbell-digital-studio-horizontal-white-transparent.png"
     : "/images/brand/campbell-digital-studio-horizontal-logo-transparent.png";
 
-  // Native aspect ratios:
-  //   transparent: 628 × 161  → ~3.9:1
-  //   dark canvas: 1024 × 682 → ~1.5:1 (logo sits inside ~60% of width with padding)
-  const aspect = onDark ? 1024 / 682 : 628 / 161;
+  // Both variants share the clean lockup aspect: 628 × 161 (~3.9:1).
+  const aspect = 628 / 161;
   const width = Math.round(height * aspect);
 
   return (
