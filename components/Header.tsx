@@ -76,9 +76,9 @@ export default function Header() {
           transition: "height 0.25s var(--ease-snappy)",
         }}
       >
-        {/* Over the dark hero (top) the logo is white; once the header turns
-            cream on scroll, switch to the navy+gold version. */}
-        <StudioMark size={scrolled ? "sm" : "md"} onDark={!scrolled} />
+        {/* Header sits over the cream hero (transparent at top, cream panel on
+            scroll) — both light backgrounds, so always the navy+gold lockup. */}
+        <StudioMark size={scrolled ? "sm" : "md"} onDark={false} />
 
         <nav aria-label="Main navigation" className="desktop-nav header-nav">
           {primaryNavLinks
