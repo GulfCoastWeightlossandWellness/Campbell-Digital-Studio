@@ -50,9 +50,9 @@ const caseStudies = [
   },
   {
     slug: "acexperts",
-    teaser: "Wired ACExperts251 lead capture to a Google Sheet the owner reads",
+    teaser: "Wired ACExperts251 lead forms to email the owner directly via Resend",
     detail:
-      "8-city × 7-service HVAC build with three interactive tools, Cloudflare Turnstile spam screening, and direct Google Sheets API lead capture — no CRM, no inbox triage tax.",
+      "8-city × 7-service HVAC build with three interactive tools, Cloudflare Turnstile spam screening, and Resend-powered lead forms that email the owner directly — no CRM, no clunky dashboard.",
   },
   {
     slug: "blessed-barbershop",

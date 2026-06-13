@@ -75,7 +75,7 @@ const ledger: LedgerEntry[] = [
       { label: "URL", value: "acexperts251.com" },
       { label: "Routes", value: "29" },
       { label: "Schema types", value: "6 JSON-LD (HVACBusiness, LocalBusiness, Service, AggregateRating, FAQPage, BreadcrumbList)" },
-      { label: "Stack", value: "Next.js · TypeScript · Three.js · Cloudflare Turnstile · Google Sheets API · Vercel" },
+      { label: "Stack", value: "Next.js · TypeScript · Three.js · Cloudflare Turnstile · Resend · Vercel" },
       { label: "Custom tools", value: "3D AC Diagnostic · Symptom Quiz · ROI Calculator" },
       { label: "Launched", value: "2025" },
       { label: "Status", value: "Active Retainer" },

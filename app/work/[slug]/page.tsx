@@ -102,7 +102,7 @@ const projectStatus: Record<string, string> = {
 const projectHosting: Record<string, string> = {
   "air-solutions": "Vercel · Vercel Cron · Cloudflare Turnstile · Resend",
   revitalize: "Vercel",
-  acexperts: "Vercel · Cloudflare Turnstile · Google Sheets API",
+  acexperts: "Vercel · Cloudflare Turnstile · Resend",
   "collective-counseling": "Vercel",
   "blessed-barbershop": "Cloudflare",
 };
