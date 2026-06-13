@@ -74,7 +74,7 @@ const ENRICH: Record<
   acexperts: {
     tier: 1,
     industry: "Local Services",
-    year: "2025",
+    year: "2026",
     coverImage: "/images/case-studies/covers/acexperts-1-hero.png",
   },
   "collective-counseling": {
