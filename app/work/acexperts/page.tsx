@@ -19,7 +19,7 @@ import {
 } from "@/components/case-study-essay/ResultCharts";
 
 export const metadata: Metadata = {
-  title: "ACExperts — Case Study | Campbell Digital Studio",
+  title: "ACExperts — Case Study",
   description:
     "A brand-new Baldwin County HVAC business went from a domain that didn't exist to 215 pages indexed, 44,759 Google impressions, #1 in the local map pack across four cities, and an $8,500 job from a single website lead — in seven weeks.",
   alternates: { canonical: "/work/acexperts" },
@@ -114,7 +114,7 @@ export default function ACExpertsCaseStudy() {
           style={{
             marginTop: "clamp(32px, 4vw, 48px)",
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+            gridTemplateColumns: "repeat(2, 1fr)",
             gap: 1,
             background: "var(--border-subtle)",
             border: "1px solid var(--border-subtle)",
