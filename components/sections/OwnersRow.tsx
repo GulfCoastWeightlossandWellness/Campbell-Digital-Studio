@@ -55,16 +55,16 @@ const OWNERS: Owner[] = [
   {
     id: "peyton-campbell",
     name: "Peyton Campbell, DO",
-    role: "Campbell Digital Studio",
+    role: "Owner & CEO · Lead Software Engineer & Online Presence Strategist",
     src: "/images/external/owners/peyton-campbell.jpg",
     alt: "Peyton Campbell, DO, Campbell Digital Studio",
   },
   {
     id: "creighton-hoercher",
     name: "Creighton Hoercher",
-    role: "Principal Engineer & Digital Strategist",
+    role: "Lead Software Engineer & Online Presence Strategist",
     src: "/images/external/owners/creighton-hoercher.jpg",
-    alt: "Creighton Hoercher, Principal Engineer & Digital Strategist at Campbell Digital Studio",
+    alt: "Creighton Hoercher, Lead Software Engineer & Online Presence Strategist at Campbell Digital Studio",
   },
 ];
 
