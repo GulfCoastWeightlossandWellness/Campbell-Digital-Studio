@@ -17,7 +17,7 @@ import ScrollProgressRule from "@/components/case-study-essay/ScrollProgressRule
 import CurrentlyReadingPro1 from "@/components/case-study-essay/CurrentlyReadingPro1";
 
 export const metadata: Metadata = {
-  title: "Pro 1 Painters — Case Study | Campbell Digital Studio",
+  title: "Pro 1 Painters — Case Study",
   description:
     "A 424-page painting platform for Mobile + Baldwin County, Alabama — an on-device AI color visualizer, interior, exterior, cabinet, and floor painting, and a 521-post native blog engine, migrated from WordPress to Next.js.",
   alternates: { canonical: "/work/pro-1-painters" },

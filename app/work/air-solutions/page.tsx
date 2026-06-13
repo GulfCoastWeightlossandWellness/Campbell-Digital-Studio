@@ -17,7 +17,7 @@ import ScrollProgressRule from "@/components/case-study-essay/ScrollProgressRule
 import CurrentlyReading from "@/components/case-study-essay/CurrentlyReading";
 
 export const metadata: Metadata = {
-  title: "Air Solutions Heating & Cooling — Case Study | Campbell Digital Studio",
+  title: "Air Solutions Heating & Cooling — Case Study",
   description:
     "A 345-page programmatic SEO platform for an HVAC contractor in Baldwin County, Alabama — now live on airsolutionspros.com. A city × service matrix, Three.js diagnostic tool, NWS hurricane alert integration, and a 9-type Schema.org architecture.",
   alternates: { canonical: "/work/air-solutions" },

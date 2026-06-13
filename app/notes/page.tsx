@@ -5,7 +5,7 @@ import SectionTag from "@/components/editorial/SectionTag";
 import EditorialH2 from "@/components/editorial/EditorialH2";
 
 export const metadata: Metadata = {
-  title: "Notes — Field log from Campbell Digital Studio",
+  title: "Notes — Field log",
   description:
     "Short field-log entries on GBP API quirks, programmatic SEO traps, and clinic intake patterns. Notes from a working studio, not a content marketing engine.",
   alternates: { canonical: "/notes" },

@@ -21,8 +21,12 @@ import { getFeaturedTestimonials } from "@/lib/data/testimonials";
 import { faqs } from "@/lib/data/faq";
 
 export const metadata: Metadata = {
-  title:
-    "Campbell Digital Studio | Digital infrastructure for clinical practices and local service businesses",
+  // `absolute` bypasses the root layout's "%s | Campbell Digital Studio" template
+  // so the brand-first home title isn't doubled ("… businesses | Campbell Digital Studio").
+  title: {
+    absolute:
+      "Campbell Digital Studio | Digital infrastructure for clinical practices and local service businesses",
+  },
   description:
     "Multi-location architectures, programmatic SEO, and Google Business Profile operations — built end-to-end by a physician who codes.",
   alternates: { canonical: "/" },

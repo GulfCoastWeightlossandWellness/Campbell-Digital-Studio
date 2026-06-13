@@ -10,7 +10,7 @@ import CodeReceipt from "@/components/sections/CodeReceipt";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Studio — Campbell Digital Studio",
+  title: "Studio",
   description:
     "Owner-operator solo studio in Daphne, Alabama. Healthcare and local-service architectures, built end-to-end by a physician with a development background. Principles, process, capabilities, and FAQ.",
   alternates: { canonical: "/studio" },
