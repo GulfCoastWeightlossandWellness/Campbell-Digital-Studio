@@ -153,6 +153,9 @@ export default function WorkPage() {
       projects
         .map(enrichProject)
         .sort((a, b) => {
+          // ACExperts leads as the flagship results story, regardless of tier/year.
+          if (a.slug === "acexperts") return -1;
+          if (b.slug === "acexperts") return 1;
           if (a.tier !== b.tier) return a.tier - b.tier;
           // newest within tier
           return b.year.localeCompare(a.year);
