@@ -59,6 +59,13 @@ const OWNERS: Owner[] = [
     src: "/images/external/owners/peyton-campbell.jpg",
     alt: "Peyton Campbell, DO, Campbell Digital Studio",
   },
+  {
+    id: "creighton-hoercher",
+    name: "Creighton Hoercher",
+    role: "Principal Engineer & Digital Strategist",
+    src: "/images/external/owners/creighton-hoercher.jpg",
+    alt: "Creighton Hoercher, Principal Engineer & Digital Strategist at Campbell Digital Studio",
+  },
 ];
 
 type Props = {
