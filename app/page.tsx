@@ -28,16 +28,16 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-// Featured anchors — the two live local-services flagships lead (Air Solutions
-// migrated off WordPress to its real domain; Pro 1 Painters cut over 2026-06-07),
-// then healthcare (Revitalize) and the second HVAC build (ACExperts). Pro 1 is
-// added to the registry by the data layer; filter undefined so the section still
-// renders if a single slug is missing at build time.
+// Featured anchors — ACExperts leads as the flagship results story (a brand-new
+// HVAC business to 215 indexed pages, ~44,800 impressions, six-city local-pack
+// rankings, and a $8,500 form lead in seven weeks). Then the two WordPress-migration
+// flagships (Air Solutions, Pro 1 Painters) and healthcare (Revitalize). Filter
+// undefined so the section still renders if a single slug is missing at build time.
 const featuredWork = [
+  getProjectBySlug("acexperts"),
   getProjectBySlug("air-solutions"),
   getProjectBySlug("pro-1-painters"),
   getProjectBySlug("revitalize"),
-  getProjectBySlug("acexperts"),
 ].filter((p): p is NonNullable<typeof p> => Boolean(p));
 
 const studioPrinciples = [

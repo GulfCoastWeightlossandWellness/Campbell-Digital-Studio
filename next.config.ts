@@ -22,7 +22,6 @@ const nextConfig: NextConfig = {
       { source: "/review", destination: "/inquire", permanent: true },
       { source: "/website-review", destination: "/inquire", permanent: true },
       { source: "/work/interactive-health-education", destination: "/work", permanent: true },
-      { source: "/work/acexperts", destination: "/work", permanent: true },
       { source: "/work/collective-counseling", destination: "/work", permanent: true },
       { source: "/work/blessed-barbershop", destination: "/work", permanent: true },
     ];

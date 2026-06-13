@@ -64,16 +64,16 @@ postcss.config.mjs     — Tailwind 4 PostCSS plugin
 |-----------------|--------|-------|
 | `/`             | root   | Long-scroll home, §01 hero → §07 closing CTA. Sections use `id="capabilities"`, `id="process"`, `id="about"` so `/about` etc. redirects can deep-link. |
 | `/work`         | root   | 5-row editorial index. Featured rows link to `/work/[slug]`; the rest open the live URL in a new tab. |
-| `/work/[slug]`  | root   | Case-study template. `generateStaticParams` only emits `slug`s where `project.featured === true` — currently `revitalize` and `air-solutions`. |
+| `/work/[slug]`  | root   | Generic case-study template. `generateStaticParams` emits `slug`s where `project.featured === true`. Bespoke folders (`/work/acexperts`, `/work/air-solutions`, `/work/pro-1-painters`) override this template for those slugs. |
 | `/inquire`      | root   | Mailto-driven inquiry page. No backend form. |
 | `/sitemap.xml`  | n/a    | Dynamically generated from `lib/projects.ts`. |
 | `/robots.txt`   | n/a    | Allow all, points at sitemap. |
 
 ## Redirects (next.config.ts)
 
-Permanent (`308`) redirects collapse the older multi-page IA into the long-scroll home and `/inquire`. The redirected paths are: `/about`, `/studio`, `/services`, `/practice`, `/method`, `/notes`, `/notes/:slug*`, `/contact`, `/review`, `/website-review`, plus the three legacy case-study slugs `/work/interactive-health-education`, `/work/acexperts`, `/work/collective-counseling`, `/work/blessed-barbershop`.
+Permanent (`308`) redirects collapse the older multi-page IA into the long-scroll home and `/inquire`. The redirected paths are: `/about`, `/studio`, `/services`, `/practice`, `/method`, `/notes`, `/notes/:slug*`, `/contact`, `/review`, `/website-review`, plus the three legacy case-study slugs `/work/interactive-health-education`, `/work/collective-counseling`, and `/work/blessed-barbershop`. (`/work/acexperts` was in this list until June 2026, when it became the flagship bespoke case study — its redirect was removed.)
 
-> **Consequence:** even though `lib/projects.ts` still contains data for `acexperts`, `collective-counseling`, and `blessed-barbershop`, those slug pages are unreachable in the browser — every request 308-redirects to `/work`. The `/work` index links those three rows directly to their **live** URLs in a new tab. This is intentional: only Revitalize and Air Solutions are presented as full case studies right now.
+> **Consequence:** `acexperts` now has a bespoke, results-led case study at `/work/acexperts` — it is the flagship and leads the `/work` index. `collective-counseling` and `blessed-barbershop` still 308-redirect to `/work`: their data remains in `lib/projects.ts` but those slug pages are unreachable, and the `/work` index links those rows directly to their **live** URLs in a new tab. Full case studies presented right now: ACExperts, Air Solutions, Pro 1 Painters, and Revitalize.
 
 ## Data layer
 

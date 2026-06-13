@@ -20,7 +20,7 @@ export default function Footer() {
           <div>
             <div className="mono-caption mono-caption--accent footer-grid__label">§ Studio</div>
             <div style={{ marginBottom: "20px", marginLeft: "-16px" }}>
-              <StudioMark onDark size="xl" />
+              <StudioMark size="xl" />
             </div>
             <p className="footer-grid__location">{siteConfig.founder.location}</p>
             <a
