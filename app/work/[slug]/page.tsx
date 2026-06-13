@@ -25,7 +25,12 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  // /work/acexperts is served by a bespoke static route (app/work/acexperts/page.tsx).
+  // Exclude it here so this generic template never also claims that path — avoids any
+  // static-vs-dynamic route ambiguity at build/deploy time.
+  return projects
+    .filter((p) => p.slug !== "acexperts")
+    .map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
