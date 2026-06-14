@@ -1,4 +1,6 @@
+import type { CSSProperties } from "react";
 import { readLedger, type LedgerData } from "@/app/api/studio-pulse/route";
+import { getLeadStats, leadStatsFloor } from "@/lib/lead-stats";
 
 /**
  * Operator's Ledger — CDS signature visual element.
@@ -29,27 +31,40 @@ type Cell = {
   isLive?: boolean;
 };
 
-function buildCells(data: LedgerData): Cell[] {
-  return [
+function buildCells(data: LedgerData, leadCount: number | null): Cell[] {
+  const cells: Cell[] = [
     { label: "Sites Shipped", value: String(data.sites_shipped) },
     { label: "Lighthouse", value: data.lighthouse_score },
     { label: "Last Deploy", value: data.last_deploy },
     { label: "Active Retainers", value: String(data.active_retainers) },
     { label: "Uptime", value: data.uptime },
-    { label: data.live ? "Live" : "Offline", value: "", isLive: true },
   ];
+  // Live client-form counter — every lead captured in the last 30 days across
+  // the fleet's live store, AI Color Visualizer submissions included. Shown
+  // only once it clears the floor so the ledger never displays a thin number.
+  if (leadCount !== null) {
+    cells.push({ label: "Forms (30d)", value: String(leadCount) });
+  }
+  cells.push({ label: data.live ? "Live" : "Offline", value: "", isLive: true });
+  return cells;
 }
 
 export default async function OperatorLedger({ data }: Props = {}) {
   const ledger = data ?? (await readLedger());
-  const cells = buildCells(ledger);
+  const leads = await getLeadStats(30);
+  const leadCount =
+    leads.configured && leads.count >= leadStatsFloor() ? leads.count : null;
+  const cells = buildCells(ledger, leadCount);
 
   return (
     <aside
       className="operator-ledger"
       aria-label="Campbell Digital Studio operator's ledger"
     >
-      <div className="operator-ledger__row">
+      <div
+        className="operator-ledger__row"
+        style={{ "--cols": String(cells.length) } as unknown as CSSProperties}
+      >
         {cells.map((cell) => (
           <div
             key={cell.label}
@@ -81,7 +96,7 @@ export default async function OperatorLedger({ data }: Props = {}) {
         }
         .operator-ledger__row {
           display: grid;
-          grid-template-columns: repeat(6, 1fr);
+          grid-template-columns: repeat(var(--cols, 6), 1fr);
           gap: 24px;
           align-items: start;
           max-width: 1280px;
